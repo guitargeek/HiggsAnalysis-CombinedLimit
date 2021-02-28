@@ -1106,8 +1106,8 @@ bool utils::freezeAllDisassociatedRooMultiPdfParameters(const RooArgSet & multiP
 
 void utils::RooAddPdfFixer::Fix(RooAddPdf & fixme) {
   RooAddPdfFixer & fixme_casted = static_cast<RooAddPdfFixer &>(fixme);
-  delete[] fixme_casted.RooAddPdf::_coefCache;
-  fixme_casted.RooAddPdf::_coefCache = new Double_t[fixme_casted.RooAddPdf::_pdfList.getSize()];
+  fixme_casted.RooAddPdf::_coefCache.clear();
+  fixme_casted.RooAddPdf::_coefCache.resize(fixme_casted.RooAddPdf::_pdfList.getSize());
 }
 
 void utils::RooAddPdfFixer::FixAll(RooWorkspace & w) {
