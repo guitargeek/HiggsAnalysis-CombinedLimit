@@ -25,8 +25,8 @@ namespace {
   };
   class RooRealVarSmart : public RooRealVar {
     public:
-      void setHashTableSize(int size) { ((RooRealVarSharedPropertiesSmart*)sharedProp())->setHashTableSize(size); }
-      int getHashTableSize() const { return ((RooRealVarSharedPropertiesSmart*)sharedProp())->getHashTableSize(); }
+      void setHashTableSize(int size) { ((RooRealVarSharedPropertiesSmart*)sharedProp().get())->setHashTableSize(size); }
+      int getHashTableSize() const { return ((RooRealVarSharedPropertiesSmart*)sharedProp().get())->getHashTableSize(); }
   };
 }
 
