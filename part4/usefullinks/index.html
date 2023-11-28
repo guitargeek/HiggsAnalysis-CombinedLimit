@@ -127,6 +127,12 @@
                         
                             
 <li >
+    <a href="../../part3/simplifiedlikelihood/">Simplified Likelihoods</a>
+</li>
+
+                        
+                            
+<li >
     <a href="../../part3/regularisation/">Unfolding & regularization</a>
 </li>
 
@@ -176,6 +182,12 @@
 </li>
 
                         
+                            
+<li >
+    <a href="../../tutorial2023/parametric_exercise/">Exercise: parametric fit</a>
+</li>
+
+                        
                         </ul>
                     </li>
                 
@@ -199,7 +211,7 @@
                         </a>
                     </li>
                     <li>
-                        <a href="https://github.com/cms-analysis/HiggsAnalysis-CombinedLimit/edit/102x/docs/part4/usefullinks.md"><i class="fab fa-github"></i> Edit on GitHub</a>
+                        <a href="https://github.com/cms-analysis/HiggsAnalysis-CombinedLimit/edit/main/docs/part4/usefullinks.md"><i class="fab fa-github"></i> Edit on GitHub</a>
                     </li>
             </ul>
         </div>
@@ -230,23 +242,23 @@
 <h1 id="useful-links-and-further-reading">Useful links and further reading</h1>
 <h3 id="tutorials-and-reading-material">Tutorials and reading material</h3>
 <p>There are several tutorials which have been run over the last few years with instructions and examples for running the combine tool.</p>
+<p>Tutorial Sessions:</p>
 <ul>
-<li>Tutorial Sessions</li>
 <li><a href="https://indico.cern.ch/event/456547/">1st tutorial 17th Nov 2015</a>.</li>
 <li><a href="https://indico.cern.ch/event/577649/#b-229590-higgs-combine-tool-mi">2nd tutorial 30th Nov 2016</a>.</li>
-<li><a href="https://indico.cern.ch/event/677948/#day-2017-11-29">3rd tutorial 29th Nov 2017</a> </li>
+<li><a href="https://indico.cern.ch/event/677948/#day-2017-11-29">3rd tutorial 29th Nov 2017</a></li>
 <li><a href="https://indico.cern.ch/event/747340/overview">4th tutorial 31st Oct 2018</a> - Latest for <code>81x-root606</code> branch.</li>
 <li><a href="https://indico.cern.ch/event/859454/overview">5th tutorial 2nd-4th Dec 2019</a></li>
-<li>
-<p><a href="https://indico.cern.ch/event/976099/overview">6th tutorial 14th-16th Dec 2020</a> - Latest for <code>102x</code> branch</p>
-</li>
-<li>
-<p>Worked examples from Higgs analyses using combine  </p>
-</li>
+<li><a href="https://indico.cern.ch/event/976099/overview">6th tutorial 14th-16th Dec 2020</a> - Latest for <code>102x</code> branch</li>
+<li><a href="https://indico.cern.ch/event/1227742/">7th tutorial 3rd Feb 2023</a> - Uses <code>113x</code> branch</li>
+</ul>
+<p>Worked examples from Higgs analyses using combine:</p>
+<ul>
 <li><a href="https://twiki.cern.ch/twiki/bin/viewauth/CMS/SWGuideCMSDataAnalysisSchool2014HiggsCombPropertiesExercise">The CMS DAS at CERN 2014</a></li>
-<li>
-<p><a href="https://twiki.cern.ch/twiki/bin/view/CMS/SWGuideCMSDataAnalysisSchoolHamburg2018LongStatisticsExercise">The CMS DAS at DESY 2018</a></p>
-</li>
+<li><a href="https://twiki.cern.ch/twiki/bin/view/CMS/SWGuideCMSDataAnalysisSchoolHamburg2018LongStatisticsExercise">The CMS DAS at DESY 2018</a></li>
+</ul>
+<p>Higgs combinations procedures</p>
+<ul>
 <li>
 <p><a href="https://twiki.cern.ch/twiki/bin/view/CMS/HiggsWG/HiggsCombinationConventions">Conventions to be used when preparing inputs for Higgs combinations</a></p>
 </li>
@@ -324,7 +336,7 @@
 </li>
 <li><em>Why does my fit not converge?</em> <ul>
 <li>There are several reasons why some fits may not converge. Often some indication can be obtained from the <code>RooFitResult</code> or status which you will see information from when using the <code>--verbose X</code> (with <span class="arithmatex"><span class="MathJax_Preview">X&gt;2</span><script type="math/tex">X>2</script></span>) option. Sometimes however, it can be that the likelihood for your data is very unusual. You can get a rough idea about what the likelihood looks like as a function of your parameters (POIs and nuisances) using <code>combineTool.py -M FastScan -w myworkspace.root</code> (use --help for options). </li>
-<li>We have  seen often that fits in combine using <code>RooCBShape</code> as a parametric function will fail. This is related to an optimisation that fails. You can try to fix the problem as described in this issue: https://github.com/cms-analysis/HiggsAnalysis-CombinedLimit/issues/347 (i.e add the option <code>--X-rtd ADDNLL_CBNLL=0</code>).</li>
+<li>We have  seen often that fits in combine using <code>RooCBShape</code> as a parametric function will fail. This is related to an optimisation that fails. You can try to fix the problem as described in this issue: <a href="https://github.com/cms-analysis/HiggsAnalysis-CombinedLimit/issues/347">issues#347</a> (i.e add the option <code>--X-rtd ADDNLL_CBNLL=0</code>).</li>
 </ul>
 </li>
 <li><em>Why does the fit/fits take so long?</em> <ul>
@@ -352,7 +364,7 @@
 </ul>
 </li>
 <li><em>What do CLs, CLs+b and CLb in the code mean?</em><ul>
-<li>The names CLs+b and CLb are rather outdated and should instead be referred to as p-values - <span class="arithmatex"><span class="MathJax_Preview">p_{\mu}</span><script type="math/tex">p_{\mu}</script></span> and <span class="arithmatex"><span class="MathJax_Preview">1-p_{b}</span><script type="math/tex">1-p_{b}</script></span>, respectively. We use the CLs (which itself is not a p-value) criterion often in High energy physics as it is designed to avoid excluding a signal model when the sensitivity is low (and protects against excluding due to underfluctuations in the data). Typically, when excluding a signal model the p-value <span class="arithmatex"><span class="MathJax_Preview">p_{\mu}</span><script type="math/tex">p_{\mu}</script></span> often refers to the p-value under the signal+background hypothesis, assuming a particular value of the signal stregth (<span class="arithmatex"><span class="MathJax_Preview">\mu</span><script type="math/tex">\mu</script></span>) while <span class="arithmatex"><span class="MathJax_Preview">p_{b}</span><script type="math/tex">p_{b}</script></span> is the p-value under the background only hypothesis. You can find more details and definitions of the CLs criterion and <span class="arithmatex"><span class="MathJax_Preview">p_{\mu}</span><script type="math/tex">p_{\mu}</script></span> and <span class="arithmatex"><span class="MathJax_Preview">p_{b}</span><script type="math/tex">p_{b}</script></span> in section 39.4.2.4 the <a href="http://pdg.lbl.gov/2016/reviews/rpp2016-rev-statistics.pdf">2016 PDG review</a>.       </li>
+<li>The names CLs+b and CLb what are found within some of the RooStats tools are rather outdated and should instead be referred to as p-values - <span class="arithmatex"><span class="MathJax_Preview">p_{\mu}</span><script type="math/tex">p_{\mu}</script></span> and <span class="arithmatex"><span class="MathJax_Preview">1-p_{b}</span><script type="math/tex">1-p_{b}</script></span>, respectively. We use the CLs (which itself is not a p-value) criterion often in High energy physics as it is designed to avoid excluding a signal model when the sensitivity is low (and protects against excluding due to underfluctuations in the data). Typically, when excluding a signal model the p-value <span class="arithmatex"><span class="MathJax_Preview">p_{\mu}</span><script type="math/tex">p_{\mu}</script></span> often refers to the p-value under the signal+background hypothesis, assuming a particular value of the signal stregth (<span class="arithmatex"><span class="MathJax_Preview">\mu</span><script type="math/tex">\mu</script></span>) while <span class="arithmatex"><span class="MathJax_Preview">p_{b}</span><script type="math/tex">p_{b}</script></span> is the p-value under the background only hypothesis. You can find more details and definitions of the CLs criterion and <span class="arithmatex"><span class="MathJax_Preview">p_{\mu}</span><script type="math/tex">p_{\mu}</script></span> and <span class="arithmatex"><span class="MathJax_Preview">p_{b}</span><script type="math/tex">p_{b}</script></span> in section 39.4.2.4 of the <a href="http://pdg.lbl.gov/2016/reviews/rpp2016-rev-statistics.pdf">2016 PDG review</a>.       </li>
 </ul>
 </li>
 </ul></div>
