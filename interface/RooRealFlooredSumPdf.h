@@ -80,8 +80,6 @@ protected:
 
 	RooListProxy _funcList;   //  List of component FUNCs
 	RooListProxy _coefList;  //  List of coefficients
-	TIterator* _funcIter;     //! Iterator over FUNC list
-	TIterator* _coefIter;    //! Iterator over coefficient list
 	Bool_t _extended;        // Allow use as extended p.d.f.
 	Bool_t _doFloor;
   Double_t _floorVal;

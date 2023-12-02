@@ -4,7 +4,6 @@
 #include <cmath>
 #include "TVectorD.h"
 #include "TMatrixD.h"
-#include "TIterator.h"
 
 
 using namespace std;
@@ -43,16 +42,13 @@ RooPiecewisePolynomial::RooPiecewisePolynomial(const char* name, const char* tit
 {
   assert((nfcn>2 && polyndof>=2) || (nfcn==2 && polyndof>=1) || (nfcn==1 && polyndof>=0));
 
-  TIterator* coefIter = parList_.createIterator();
-  RooAbsArg* func;
-  while ((func = (RooAbsArg*) coefIter->Next())) {
+  for (RooAbsArg *func : parList_) {
     if (!dynamic_cast<RooAbsReal*>(func)) {
       cerr << "RooPiecewisePolynomial::RooPiecewisePolynomial(" << GetName() << ") funcficient " << func->GetName() << " is not of type RooAbsReal" << endl;
       assert(0);
     }
     parList.add(*func);
   }
-  delete coefIter;
 }
 RooPiecewisePolynomial::RooPiecewisePolynomial(RooPiecewisePolynomial const& other, const char* name) :
   RooAbsReal(other, name),

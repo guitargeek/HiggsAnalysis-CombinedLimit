@@ -1,7 +1,6 @@
 #include "../interface/RooNCSplineCore.h" 
 #include <cmath>
 #include "TMath.h"
-#include "TIterator.h"
 #include "Riostream.h"
 
 using namespace TMath;
@@ -277,8 +276,7 @@ void RooNCSplineCore::getLeafDependents(RooRealProxy& proxy, RooArgSet& set){
   set.add(deps);
 }
 void RooNCSplineCore::addLeafDependents(RooArgSet& set){
-  TIterator* iter = set.createIterator();
-  RooAbsArg* absarg;
-  while ((absarg = (RooAbsArg*)iter->Next())){ if (dynamic_cast<RooRealVar*>(absarg)) leafDepsList.add(*absarg); }
-  delete iter;
+  for (RooAbsArg * absarg : set) {
+    if (dynamic_cast<RooRealVar*>(absarg)) leafDepsList.add(*absarg);
+  }
 }

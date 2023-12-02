@@ -175,12 +175,9 @@ Double_t RooNCSpline_1D_fast::evaluate() const{
   if (verbosity==RooNCSplineCore::kVerbose){
     cout << "RooNCSpline_1D_fast(" << GetName() << ")::evaluate = " << value << " at x = " << theXVar << endl;
     RooArgSet Xdeps; theXVar.absArg()->leafNodeServerList(&Xdeps, 0, true);
-    TIterator* iter = Xdeps.createIterator();
-    RooAbsArg* var;
-    while ((var = (RooAbsArg*)iter->Next())){
+    for (RooAbsArg * var : Xdeps) {
       cout << var->GetName() << " value = " << dynamic_cast<RooAbsReal*>(var)->getVal() << endl;
     }
-    delete iter;
     cout << endl;
   }
   return value;

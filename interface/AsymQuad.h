@@ -3,7 +3,6 @@
 
 #include "RooFit.h"
 #include "Riostream.h"
-#include "TIterator.h"
 #include "TList.h"
 #include <RooAbsReal.h>
 #include "RooRealVar.h"
@@ -38,8 +37,6 @@ protected:
   RooListProxy _coefList;  //  List of coefficients
   Double_t smoothRegion_;
   Int_t smoothAlgo_;
-  TIterator* _funcIter;     //! Iterator over FUNC list
-  TIterator* _coefIter;    //! Iterator over coefficient list
 
 private:
   Double_t interpolate(Double_t theta_, Double_t valueCenter_, Double_t valueHigh_, Double_t valueLow_) const;

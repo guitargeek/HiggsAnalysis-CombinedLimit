@@ -11,8 +11,6 @@ _coefList("coefList", "List of coefficients", this),
 smoothRegion_(0),
 smoothAlgo_(0)
 {
-  _funcIter  = _funcList.createIterator();
-  _coefIter  = _coefList.createIterator();
 }
 
 AsymQuad::AsymQuad(const char *name, const char *title, const RooArgList& inFuncList, const RooArgList& inCoefList, Double_t smoothRegion, Int_t smoothAlgo) :
@@ -28,30 +26,21 @@ smoothAlgo_(smoothAlgo)
     assert(0);
   }
 
-  TIterator* funcIter = inFuncList.createIterator();
-  RooAbsArg* func;
-  while ((func = (RooAbsArg*)funcIter->Next())) {
+  for (RooAbsArg* func : inFuncList) {
     if (!dynamic_cast<RooAbsReal*>(func)) {
       coutE(InputArguments) << "ERROR: AsymQuad::AsymQuad(" << GetName() << ") function  " << func->GetName() << " is not of type RooAbsReal" << std::endl;
       assert(0);
     }
     _funcList.add(*func);
   }
-  delete funcIter;
 
-  TIterator* coefIter = inCoefList.createIterator();
-  RooAbsArg* coef;
-  while ((coef = (RooAbsArg*)coefIter->Next())) {
+  for (RooAbsArg* coef : inCoefList) {
     if (!dynamic_cast<RooAbsReal*>(coef)) {
       coutE(InputArguments) << "ERROR: AsymQuad::AsymQuad(" << GetName() << ") coefficient " << coef->GetName() << " is not of type RooAbsReal" << std::endl;
       assert(0);
     }
     _coefList.add(*coef);
   }
-  delete coefIter;
-
-  _funcIter  = _funcList.createIterator();
-  _coefIter = _coefList.createIterator();
 }
 
 AsymQuad::AsymQuad(const AsymQuad& other, const char* name):
@@ -61,30 +50,21 @@ _coefList("!coefList", this, other._coefList),
 smoothRegion_(other.smoothRegion_),
 smoothAlgo_(other.smoothAlgo_)
 {
-  _funcIter  = _funcList.createIterator();
-  _coefIter = _coefList.createIterator();
 }
 
-AsymQuad::~AsymQuad() {
-  delete _funcIter;
-  delete _coefIter;
-}
+AsymQuad::~AsymQuad() = default;
 
 Double_t AsymQuad::evaluate() const {
-  Double_t result(0);
 
-  _funcIter->Reset();
-  _coefIter->Reset();
-  RooAbsReal* coef;
-  RooAbsReal* func = (RooAbsReal*)_funcIter->Next();
+  RooAbsReal* func = &(RooAbsReal&)_funcList[0];
 
   Double_t central = func->getVal();
-  result = central;
+  Double_t result = central;
 
-  while ((coef=(RooAbsReal*)_coefIter->Next())) {
-    Double_t coefVal = coef->getVal();
-    RooAbsReal* funcUp = (RooAbsReal*)_funcIter->Next();
-    RooAbsReal* funcDn = (RooAbsReal*)_funcIter->Next();
+  for (int iCoef = 0; iCoef < _coefList.getSize(); ++iCoef) {
+    Double_t coefVal = static_cast<RooAbsReal&>(_coefList[iCoef]).getVal();
+    RooAbsReal* funcUp = &(RooAbsReal&)_funcList[2 * iCoef + 1];
+    RooAbsReal* funcDn = &(RooAbsReal&)_funcList[2 * iCoef + 2];
     result += interpolate(coefVal, central, funcUp->getVal(), funcDn->getVal());
   }
 
