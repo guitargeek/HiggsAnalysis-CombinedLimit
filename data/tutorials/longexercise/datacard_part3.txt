@@ -24,4 +24,4 @@ lumi_13TeV                   lnN     1.025           1.025           1.025      
 norm_jetFakes                lnN     -               -               -               1.2             -               
 top_pt_ttbar_shape           shape   1               -               -               -               -               
 xsec_diboson                 lnN     -               1.05            -               -               -               
-* autoMCStats 0
+#* autoMCStats 0

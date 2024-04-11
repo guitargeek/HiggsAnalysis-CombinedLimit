@@ -36,6 +36,9 @@ std::string combineTagString = "v9.2.1";
 // 
 
 int main(int argc, char **argv) {
+  RooFit::EvalBackend::defaultValue() = RooFit::EvalBackend::Value::Cpu;
+  //RooFit::EvalBackend::defaultValue() = RooFit::EvalBackend::Value::Legacy;
+
   using namespace boost;
   namespace po = boost::program_options;
 

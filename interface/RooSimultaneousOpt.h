@@ -30,7 +30,7 @@ public:
 
   virtual ~RooSimultaneousOpt() ;
 
-  virtual RooAbsReal* createNLL(RooAbsData& data, const RooLinkedList& cmdList) ;
+  //virtual RooAbsReal* createNLL(RooAbsData& data, const RooLinkedList& cmdList) ;
 
   const RooArgList & extraConstraints() const { return _extraConstraints; }
   const RooArgList & channelMasks() const { return _channelMasks; }

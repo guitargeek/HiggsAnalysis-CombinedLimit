@@ -1,0 +1,608 @@
+
+>>> Random number generator seed is 123456
+>>> Method used is MultiDimFit
+[#1] INFO:ObjectHandling -- RooWorkspace::import(w) importing dataset data_obs
+[#1] INFO:ObjectHandling -- RooWorkspace::import(w) importing RooProdPdf::nuisancePdf
+[#1] INFO:ObjectHandling -- RooWorkspace::import(w) importing ProcessNormalization::n_exp_binsignal_region_proc_ttbar
+[#1] INFO:ObjectHandling -- RooWorkspace::import(w) importing ProcessNormalization::n_exp_binsignal_region_proc_diboson
+[#1] INFO:ObjectHandling -- RooWorkspace::import(w) importing ProcessNormalization::n_exp_binsignal_region_proc_Ztautau
+[#1] INFO:ObjectHandling -- RooWorkspace::import(w) importing ProcessNormalization::n_exp_binsignal_region_proc_jetFakes
+[#1] INFO:ObjectHandling -- RooWorkspace::import(w) importing ProcessNormalization::n_exp_binsignal_region_proc_bbHtautau
+import (datacard_part3.shapes.root,signal_region/data_obs) -> shapeBkg_data_obs_signal_region
+
+import (datacard_part3.shapes.root,signal_region/ttbar) -> shapeBkg_ttbar_signal_region
+
+import (datacard_part3.shapes.root,signal_region/diboson) -> shapeBkg_diboson_signal_region
+
+import (datacard_part3.shapes.root,signal_region/Ztautau) -> shapeBkg_Ztautau_signal_region
+
+import (datacard_part3.shapes.root,signal_region/jetFakes) -> shapeBkg_jetFakes_signal_region
+
+import (datacard_part3.shapes.root,signal_region/bbHtautau200) -> shapeSig_bbHtautau_signal_region
+
+recyling (signal_region,data_obs,) -> shapeBkg_data_obs_signal_region
+
+Created combined dataset with  18  entries, out of:
+recyling (signal_region,data_obs,) -> shapeBkg_data_obs_signal_region
+
+  bin signal_region : entries =  18
+recyling (signal_region,ttbar,) -> shapeBkg_ttbar_signal_region
+
+import (datacard_part3.shapes.root,signal_region/ttbar_CMS_eff_t_highptUp) -> shapeBkg_ttbar_signal_region_CMS_eff_t_highptUp
+
+import (datacard_part3.shapes.root,signal_region/ttbar_CMS_eff_t_highptDown) -> shapeBkg_ttbar_signal_region_CMS_eff_t_highptDown
+
+import (datacard_part3.shapes.root,signal_region/ttbar_CMS_scale_t_1prong0pi0_13TeVUp) -> shapeBkg_ttbar_signal_region_CMS_scale_t_1prong0pi0_13TeVUp
+
+import (datacard_part3.shapes.root,signal_region/ttbar_CMS_scale_t_1prong0pi0_13TeVDown) -> shapeBkg_ttbar_signal_region_CMS_scale_t_1prong0pi0_13TeVDown
+
+import (datacard_part3.shapes.root,signal_region/ttbar_CMS_scale_t_1prong1pi0_13TeVUp) -> shapeBkg_ttbar_signal_region_CMS_scale_t_1prong1pi0_13TeVUp
+
+import (datacard_part3.shapes.root,signal_region/ttbar_CMS_scale_t_1prong1pi0_13TeVDown) -> shapeBkg_ttbar_signal_region_CMS_scale_t_1prong1pi0_13TeVDown
+
+import (datacard_part3.shapes.root,signal_region/ttbar_CMS_scale_t_3prong0pi0_13TeVUp) -> shapeBkg_ttbar_signal_region_CMS_scale_t_3prong0pi0_13TeVUp
+
+import (datacard_part3.shapes.root,signal_region/ttbar_CMS_scale_t_3prong0pi0_13TeVDown) -> shapeBkg_ttbar_signal_region_CMS_scale_t_3prong0pi0_13TeVDown
+
+import (datacard_part3.shapes.root,signal_region/ttbar_top_pt_ttbar_shapeUp) -> shapeBkg_ttbar_signal_region_top_pt_ttbar_shapeUp
+
+import (datacard_part3.shapes.root,signal_region/ttbar_top_pt_ttbar_shapeDown) -> shapeBkg_ttbar_signal_region_top_pt_ttbar_shapeDown
+
+recyling (signal_region,ttbar,) -> shapeBkg_ttbar_signal_region
+
+recyling (signal_region,ttbar,CMS_eff_t_highptUp) -> shapeBkg_ttbar_signal_region_CMS_eff_t_highptUp
+
+recyling (signal_region,ttbar,CMS_eff_t_highptDown) -> shapeBkg_ttbar_signal_region_CMS_eff_t_highptDown
+
+recyling (signal_region,ttbar,CMS_scale_t_1prong0pi0_13TeVUp) -> shapeBkg_ttbar_signal_region_CMS_scale_t_1prong0pi0_13TeVUp
+
+recyling (signal_region,ttbar,CMS_scale_t_1prong0pi0_13TeVDown) -> shapeBkg_ttbar_signal_region_CMS_scale_t_1prong0pi0_13TeVDown
+
+recyling (signal_region,ttbar,CMS_scale_t_1prong1pi0_13TeVUp) -> shapeBkg_ttbar_signal_region_CMS_scale_t_1prong1pi0_13TeVUp
+
+recyling (signal_region,ttbar,CMS_scale_t_1prong1pi0_13TeVDown) -> shapeBkg_ttbar_signal_region_CMS_scale_t_1prong1pi0_13TeVDown
+
+recyling (signal_region,ttbar,CMS_scale_t_3prong0pi0_13TeVUp) -> shapeBkg_ttbar_signal_region_CMS_scale_t_3prong0pi0_13TeVUp
+
+recyling (signal_region,ttbar,CMS_scale_t_3prong0pi0_13TeVDown) -> shapeBkg_ttbar_signal_region_CMS_scale_t_3prong0pi0_13TeVDown
+
+recyling (signal_region,ttbar,top_pt_ttbar_shapeUp) -> shapeBkg_ttbar_signal_region_top_pt_ttbar_shapeUp
+
+recyling (signal_region,ttbar,top_pt_ttbar_shapeDown) -> shapeBkg_ttbar_signal_region_top_pt_ttbar_shapeDown
+
+recyling (signal_region,diboson,) -> shapeBkg_diboson_signal_region
+
+import (datacard_part3.shapes.root,signal_region/diboson_CMS_eff_t_highptUp) -> shapeBkg_diboson_signal_region_CMS_eff_t_highptUp
+
+import (datacard_part3.shapes.root,signal_region/diboson_CMS_eff_t_highptDown) -> shapeBkg_diboson_signal_region_CMS_eff_t_highptDown
+
+import (datacard_part3.shapes.root,signal_region/diboson_CMS_scale_t_1prong0pi0_13TeVUp) -> shapeBkg_diboson_signal_region_CMS_scale_t_1prong0pi0_13TeVUp
+
+import (datacard_part3.shapes.root,signal_region/diboson_CMS_scale_t_1prong0pi0_13TeVDown) -> shapeBkg_diboson_signal_region_CMS_scale_t_1prong0pi0_13TeVDown
+
+import (datacard_part3.shapes.root,signal_region/diboson_CMS_scale_t_1prong1pi0_13TeVUp) -> shapeBkg_diboson_signal_region_CMS_scale_t_1prong1pi0_13TeVUp
+
+import (datacard_part3.shapes.root,signal_region/diboson_CMS_scale_t_1prong1pi0_13TeVDown) -> shapeBkg_diboson_signal_region_CMS_scale_t_1prong1pi0_13TeVDown
+
+import (datacard_part3.shapes.root,signal_region/diboson_CMS_scale_t_3prong0pi0_13TeVUp) -> shapeBkg_diboson_signal_region_CMS_scale_t_3prong0pi0_13TeVUp
+
+import (datacard_part3.shapes.root,signal_region/diboson_CMS_scale_t_3prong0pi0_13TeVDown) -> shapeBkg_diboson_signal_region_CMS_scale_t_3prong0pi0_13TeVDown
+
+recyling (signal_region,diboson,) -> shapeBkg_diboson_signal_region
+
+recyling (signal_region,diboson,CMS_eff_t_highptUp) -> shapeBkg_diboson_signal_region_CMS_eff_t_highptUp
+
+recyling (signal_region,diboson,CMS_eff_t_highptDown) -> shapeBkg_diboson_signal_region_CMS_eff_t_highptDown
+
+recyling (signal_region,diboson,CMS_scale_t_1prong0pi0_13TeVUp) -> shapeBkg_diboson_signal_region_CMS_scale_t_1prong0pi0_13TeVUp
+
+recyling (signal_region,diboson,CMS_scale_t_1prong0pi0_13TeVDown) -> shapeBkg_diboson_signal_region_CMS_scale_t_1prong0pi0_13TeVDown
+
+recyling (signal_region,diboson,CMS_scale_t_1prong1pi0_13TeVUp) -> shapeBkg_diboson_signal_region_CMS_scale_t_1prong1pi0_13TeVUp
+
+recyling (signal_region,diboson,CMS_scale_t_1prong1pi0_13TeVDown) -> shapeBkg_diboson_signal_region_CMS_scale_t_1prong1pi0_13TeVDown
+
+recyling (signal_region,diboson,CMS_scale_t_3prong0pi0_13TeVUp) -> shapeBkg_diboson_signal_region_CMS_scale_t_3prong0pi0_13TeVUp
+
+recyling (signal_region,diboson,CMS_scale_t_3prong0pi0_13TeVDown) -> shapeBkg_diboson_signal_region_CMS_scale_t_3prong0pi0_13TeVDown
+
+recyling (signal_region,Ztautau,) -> shapeBkg_Ztautau_signal_region
+
+import (datacard_part3.shapes.root,signal_region/Ztautau_CMS_eff_t_highptUp) -> shapeBkg_Ztautau_signal_region_CMS_eff_t_highptUp
+
+import (datacard_part3.shapes.root,signal_region/Ztautau_CMS_eff_t_highptDown) -> shapeBkg_Ztautau_signal_region_CMS_eff_t_highptDown
+
+import (datacard_part3.shapes.root,signal_region/Ztautau_CMS_scale_t_1prong0pi0_13TeVUp) -> shapeBkg_Ztautau_signal_region_CMS_scale_t_1prong0pi0_13TeVUp
+
+import (datacard_part3.shapes.root,signal_region/Ztautau_CMS_scale_t_1prong0pi0_13TeVDown) -> shapeBkg_Ztautau_signal_region_CMS_scale_t_1prong0pi0_13TeVDown
+
+import (datacard_part3.shapes.root,signal_region/Ztautau_CMS_scale_t_1prong1pi0_13TeVUp) -> shapeBkg_Ztautau_signal_region_CMS_scale_t_1prong1pi0_13TeVUp
+
+import (datacard_part3.shapes.root,signal_region/Ztautau_CMS_scale_t_1prong1pi0_13TeVDown) -> shapeBkg_Ztautau_signal_region_CMS_scale_t_1prong1pi0_13TeVDown
+
+import (datacard_part3.shapes.root,signal_region/Ztautau_CMS_scale_t_3prong0pi0_13TeVUp) -> shapeBkg_Ztautau_signal_region_CMS_scale_t_3prong0pi0_13TeVUp
+
+import (datacard_part3.shapes.root,signal_region/Ztautau_CMS_scale_t_3prong0pi0_13TeVDown) -> shapeBkg_Ztautau_signal_region_CMS_scale_t_3prong0pi0_13TeVDown
+
+recyling (signal_region,Ztautau,) -> shapeBkg_Ztautau_signal_region
+
+recyling (signal_region,Ztautau,CMS_eff_t_highptUp) -> shapeBkg_Ztautau_signal_region_CMS_eff_t_highptUp
+
+recyling (signal_region,Ztautau,CMS_eff_t_highptDown) -> shapeBkg_Ztautau_signal_region_CMS_eff_t_highptDown
+
+recyling (signal_region,Ztautau,CMS_scale_t_1prong0pi0_13TeVUp) -> shapeBkg_Ztautau_signal_region_CMS_scale_t_1prong0pi0_13TeVUp
+
+recyling (signal_region,Ztautau,CMS_scale_t_1prong0pi0_13TeVDown) -> shapeBkg_Ztautau_signal_region_CMS_scale_t_1prong0pi0_13TeVDown
+
+recyling (signal_region,Ztautau,CMS_scale_t_1prong1pi0_13TeVUp) -> shapeBkg_Ztautau_signal_region_CMS_scale_t_1prong1pi0_13TeVUp
+
+recyling (signal_region,Ztautau,CMS_scale_t_1prong1pi0_13TeVDown) -> shapeBkg_Ztautau_signal_region_CMS_scale_t_1prong1pi0_13TeVDown
+
+recyling (signal_region,Ztautau,CMS_scale_t_3prong0pi0_13TeVUp) -> shapeBkg_Ztautau_signal_region_CMS_scale_t_3prong0pi0_13TeVUp
+
+[#1] INFO:ObjectHandling -- RooWorkspace::import(w) importing RooSimultaneousOpt::model_s
+[#1] INFO:ObjectHandling -- RooWorkspace::import(w) using existing copy of RooCategory::CMS_channel for import of RooSimultaneousOpt::model_s
+[#1] INFO:ObjectHandling -- RooWorkspace::import(w) importing RooProdPdf::pdf_binsignal_region
+[#1] INFO:ObjectHandling -- RooWorkspace::import(w) using existing copy of SimpleGaussianConstraint::CMS_eff_b_Pdf for import of RooSimultaneousOpt::model_s
+[#1] INFO:ObjectHandling -- RooWorkspace::import(w) using existing copy of RooRealVar::CMS_eff_b for import of RooSimultaneousOpt::model_s
+[#1] INFO:ObjectHandling -- RooWorkspace::import(w) using existing copy of RooRealVar::CMS_eff_b_In for import of RooSimultaneousOpt::model_s
+[#1] INFO:ObjectHandling -- RooWorkspace::import(w) using existing copy of RooConstVar::1 for import of RooSimultaneousOpt::model_s
+[#1] INFO:ObjectHandling -- RooWorkspace::import(w) using existing copy of SimpleGaussianConstraint::CMS_eff_t_Pdf for import of RooSimultaneousOpt::model_s
+[#1] INFO:ObjectHandling -- RooWorkspace::import(w) using existing copy of RooRealVar::CMS_eff_t for import of RooSimultaneousOpt::model_s
+[#1] INFO:ObjectHandling -- RooWorkspace::import(w) using existing copy of RooRealVar::CMS_eff_t_In for import of RooSimultaneousOpt::model_s
+[#1] INFO:ObjectHandling -- RooWorkspace::import(w) using existing copy of SimpleGaussianConstraint::CMS_eff_t_highpt_Pdf for import of RooSimultaneousOpt::model_s
+[#1] INFO:ObjectHandling -- RooWorkspace::import(w) using existing copy of RooRealVar::CMS_eff_t_highpt for import of RooSimultaneousOpt::model_s
+[#1] INFO:ObjectHandling -- RooWorkspace::import(w) using existing copy of RooRealVar::CMS_eff_t_highpt_In for import of RooSimultaneousOpt::model_s
+[#1] INFO:ObjectHandling -- RooWorkspace::import(w) using existing copy of SimpleGaussianConstraint::CMS_scale_t_1prong0pi0_13TeV_Pdf for import of RooSimultaneousOpt::model_s
+[#1] INFO:ObjectHandling -- RooWorkspace::import(w) using existing copy of RooRealVar::CMS_scale_t_1prong0pi0_13TeV for import of RooSimultaneousOpt::model_s
+[#1] INFO:ObjectHandling -- RooWorkspace::import(w) using existing copy of RooRealVar::CMS_scale_t_1prong0pi0_13TeV_In for import of RooSimultaneousOpt::model_s
+[#1] INFO:ObjectHandling -- RooWorkspace::import(w) using existing copy of SimpleGaussianConstraint::CMS_scale_t_1prong1pi0_13TeV_Pdf for import of RooSimultaneousOpt::model_s
+[#1] INFO:ObjectHandling -- RooWorkspace::import(w) using existing copy of RooRealVar::CMS_scale_t_1prong1pi0_13TeV for import of RooSimultaneousOpt::model_s
+[#1] INFO:ObjectHandling -- RooWorkspace::import(w) using existing copy of RooRealVar::CMS_scale_t_1prong1pi0_13TeV_In for import of RooSimultaneousOpt::model_s
+[#1] INFO:ObjectHandling -- RooWorkspace::import(w) using existing copy of SimpleGaussianConstraint::CMS_scale_t_3prong0pi0_13TeV_Pdf for import of RooSimultaneousOpt::model_s
+[#1] INFO:ObjectHandling -- RooWorkspace::import(w) using existing copy of RooRealVar::CMS_scale_t_3prong0pi0_13TeV for import of RooSimultaneousOpt::model_s
+[#1] INFO:ObjectHandling -- RooWorkspace::import(w) using existing copy of RooRealVar::CMS_scale_t_3prong0pi0_13TeV_In for import of RooSimultaneousOpt::model_s
+[#1] INFO:ObjectHandling -- RooWorkspace::import(w) using existing copy of SimpleGaussianConstraint::acceptance_bbH_Pdf for import of RooSimultaneousOpt::model_s
+[#1] INFO:ObjectHandling -- RooWorkspace::import(w) using existing copy of RooRealVar::acceptance_bbH for import of RooSimultaneousOpt::model_s
+[#1] INFO:ObjectHandling -- RooWorkspace::import(w) using existing copy of RooRealVar::acceptance_bbH_In for import of RooSimultaneousOpt::model_s
+[#1] INFO:ObjectHandling -- RooWorkspace::import(w) using existing copy of SimpleGaussianConstraint::lumi_13TeV_Pdf for import of RooSimultaneousOpt::model_s
+[#1] INFO:ObjectHandling -- RooWorkspace::import(w) using existing copy of RooRealVar::lumi_13TeV for import of RooSimultaneousOpt::model_s
+[#1] INFO:ObjectHandling -- RooWorkspace::import(w) using existing copy of RooRealVar::lumi_13TeV_In for import of RooSimultaneousOpt::model_s
+[#1] INFO:ObjectHandling -- RooWorkspace::import(w) using existing copy of SimpleGaussianConstraint::norm_jetFakes_Pdf for import of RooSimultaneousOpt::model_s
+[#1] INFO:ObjectHandling -- RooWorkspace::import(w) using existing copy of RooRealVar::norm_jetFakes for import of RooSimultaneousOpt::model_s
+[#1] INFO:ObjectHandling -- RooWorkspace::import(w) using existing copy of RooRealVar::norm_jetFakes_In for import of RooSimultaneousOpt::model_s
+[#1] INFO:ObjectHandling -- RooWorkspace::import(w) using existing copy of SimpleGaussianConstraint::top_pt_ttbar_shape_Pdf for import of RooSimultaneousOpt::model_s
+[#1] INFO:ObjectHandling -- RooWorkspace::import(w) using existing copy of RooRealVar::top_pt_ttbar_shape for import of RooSimultaneousOpt::model_s
+[#1] INFO:ObjectHandling -- RooWorkspace::import(w) using existing copy of RooRealVar::top_pt_ttbar_shape_In for import of RooSimultaneousOpt::model_s
+[#1] INFO:ObjectHandling -- RooWorkspace::import(w) using existing copy of SimpleGaussianConstraint::xsec_diboson_Pdf for import of RooSimultaneousOpt::model_s
+[#1] INFO:ObjectHandling -- RooWorkspace::import(w) using existing copy of RooRealVar::xsec_diboson for import of RooSimultaneousOpt::model_s
+[#1] INFO:ObjectHandling -- RooWorkspace::import(w) using existing copy of RooRealVar::xsec_diboson_In for import of RooSimultaneousOpt::model_s
+[#1] INFO:ObjectHandling -- RooWorkspace::import(w) importing RooAddPdf::pdf_binsignal_region_nuis
+[#1] INFO:ObjectHandling -- RooWorkspace::import(w) importing FastVerticalInterpHistPdf2::shapeBkg_signal_region_ttbar_morph
+[#1] INFO:ObjectHandling -- RooWorkspace::import(w) using existing copy of RooRealVar::CMS_th1x for import of RooSimultaneousOpt::model_s
+[#1] INFO:ObjectHandling -- RooWorkspace::import(w) importing RooProduct::n_exp_final_binsignal_region_proc_ttbar
+[#1] INFO:ObjectHandling -- RooWorkspace::import(w) using existing copy of ProcessNormalization::n_exp_binsignal_region_proc_ttbar for import of RooSimultaneousOpt::model_s
+[#1] INFO:ObjectHandling -- RooWorkspace::import(w) importing AsymPow::systeff_signal_region_ttbar_CMS_eff_t_highpt
+[#1] INFO:ObjectHandling -- RooWorkspace::import(w) importing RooConstVar::0.958948
+[#1] INFO:ObjectHandling -- RooWorkspace::import(w) importing RooConstVar::1.005937
+[#1] INFO:ObjectHandling -- RooWorkspace::import(w) importing AsymPow::systeff_signal_region_ttbar_CMS_scale_t_1prong0pi0_13TeV
+[#1] INFO:ObjectHandling -- RooWorkspace::import(w) importing RooConstVar::0.989630
+[#1] INFO:ObjectHandling -- RooWorkspace::import(w) importing RooConstVar::1.005220
+[#1] INFO:ObjectHandling -- RooWorkspace::import(w) importing AsymPow::systeff_signal_region_ttbar_CMS_scale_t_1prong1pi0_13TeV
+[#1] INFO:ObjectHandling -- RooWorkspace::import(w) importing RooConstVar::0.986737
+[#1] INFO:ObjectHandling -- RooWorkspace::import(w) importing RooConstVar::1.017501
+[#1] INFO:ObjectHandling -- RooWorkspace::import(w) importing AsymPow::systeff_signal_region_ttbar_CMS_scale_t_3prong0pi0_13TeV
+[#1] INFO:ObjectHandling -- RooWorkspace::import(w) importing RooConstVar::0.995627
+[#1] INFO:ObjectHandling -- RooWorkspace::import(w) importing RooConstVar::1.004658
+[#1] INFO:ObjectHandling -- RooWorkspace::import(w) importing AsymPow::systeff_signal_region_ttbar_top_pt_ttbar_shape
+[#1] INFO:ObjectHandling -- RooWorkspace::import(w) importing RooConstVar::1.087015
+[#1] INFO:ObjectHandling -- RooWorkspace::import(w) importing RooConstVar::0.930749
+[#1] INFO:ObjectHandling -- RooWorkspace::import(w) importing FastVerticalInterpHistPdf2::shapeBkg_signal_region_diboson_morph
+[#1] INFO:ObjectHandling -- RooWorkspace::import(w) importing RooProduct::n_exp_final_binsignal_region_proc_diboson
+[#1] INFO:ObjectHandling -- RooWorkspace::import(w) using existing copy of ProcessNormalization::n_exp_binsignal_region_proc_diboson for import of RooSimultaneousOpt::model_s
+[#1] INFO:ObjectHandling -- RooWorkspace::import(w) importing AsymPow::systeff_signal_region_diboson_CMS_eff_t_highpt
+[#1] INFO:ObjectHandling -- RooWorkspace::import(w) importing RooConstVar::0.951186
+[#1] INFO:ObjectHandling -- RooWorkspace::import(w) importing RooConstVar::1.007077
+[#1] INFO:ObjectHandling -- RooWorkspace::import(w) importing AsymPow::systeff_signal_region_diboson_CMS_scale_t_1prong0pi0_13TeV
+[#1] INFO:ObjectHandling -- RooWorkspace::import(w) importing RooConstVar::0.992515
+[#1] INFO:ObjectHandling -- RooWorkspace::import(w) importing RooConstVar::1.008216
+[#1] INFO:ObjectHandling -- RooWorkspace::import(w) importing AsymPow::systeff_signal_region_diboson_CMS_scale_t_1prong1pi0_13TeV
+[#1] INFO:ObjectHandling -- RooWorkspace::import(w) importing RooConstVar::0.990059
+[#1] INFO:ObjectHandling -- RooWorkspace::import(w) importing RooConstVar::1.022993
+[#1] INFO:ObjectHandling -- RooWorkspace::import(w) importing AsymPow::systeff_signal_region_diboson_CMS_scale_t_3prong0pi0_13TeV
+[#1] INFO:ObjectHandling -- RooWorkspace::import(w) importing RooConstVar::0.995388
+[#1] INFO:ObjectHandling -- RooWorkspace::import(w) importing RooConstVar::1.004263
+[#1] INFO:ObjectHandling -- RooWorkspace::import(w) importing FastVerticalInterpHistPdf2::shapeBkg_signal_region_Ztautau_morph
+[#1] INFO:ObjectHandling -- RooWorkspace::import(w) importing RooProduct::n_exp_final_binsignal_region_proc_Ztautau
+[#1] INFO:ObjectHandling -- RooWorkspace::import(w) using existing copy of ProcessNormalization::n_exp_binsignal_region_proc_Ztautau for import of RooSimultaneousOpt::model_s
+[#1] INFO:ObjectHandling -- RooWorkspace::import(w) importing AsymPow::systeff_signal_region_Ztautau_CMS_eff_t_highpt
+[#1] INFO:ObjectHandling -- RooWorkspace::import(w) importing RooConstVar::0.952472
+[#1] INFO:ObjectHandling -- RooWorkspace::import(w) importing RooConstVar::1.006893
+[#1] INFO:ObjectHandling -- RooWorkspace::import(w) importing AsymPow::systeff_signal_region_Ztautau_CMS_scale_t_1prong0pi0_13TeV
+[#1] INFO:ObjectHandling -- RooWorkspace::import(w) importing RooConstVar::0.987868
+[#1] INFO:ObjectHandling -- RooWorkspace::import(w) importing RooConstVar::1.008781
+[#1] INFO:ObjectHandling -- RooWorkspace::import(w) importing AsymPow::systeff_signal_region_Ztautau_CMS_scale_t_1prong1pi0_13TeV
+[#1] INFO:ObjectHandling -- RooWorkspace::import(w) importing RooConstVar::0.977826
+[#1] INFO:ObjectHandling -- RooWorkspace::import(w) importing RooConstVar::1.030856
+[#1] INFO:ObjectHandling -- RooWorkspace::import(w) importing AsymPow::systeff_signal_region_Ztautau_CMS_scale_t_3prong0pi0_13TeV
+[#1] INFO:ObjectHandling -- RooWorkspace::import(w) importing RooConstVar::0.994331
+[#1] INFO:ObjectHandling -- RooWorkspace::import(w) importing RooConstVar::1.005669
+[#1] INFO:ObjectHandling -- RooWorkspace::import(w) importing FastVerticalInterpHistPdf2::shapeBkg_jetFakes_signal_region_rebinPdf
+[#1] INFO:ObjectHandling -- RooWorkspace::import(w) using existing copy of ProcessNormalization::n_exp_binsignal_region_proc_jetFakes for import of RooSimultaneousOpt::model_s
+[#1] INFO:ObjectHandling -- RooWorkspace::import(w) importing FastVerticalInterpHistPdf2::shapeSig_signal_region_bbHtautau_morph
+[#1] INFO:ObjectHandling -- RooWorkspace::import(w) importing RooProduct::n_exp_final_binsignal_region_proc_bbHtautau
+[#1] INFO:ObjectHandling -- RooWorkspace::import(w) using existing copy of ProcessNormalization::n_exp_binsignal_region_proc_bbHtautau for import of RooSimultaneousOpt::model_s
+[#1] INFO:ObjectHandling -- RooWorkspace::import(w) using existing copy of RooRealVar::r for import of RooSimultaneousOpt::model_s
+[#1] INFO:ObjectHandling -- RooWorkspace::import(w) importing AsymPow::systeff_signal_region_bbHtautau_CMS_eff_t_highpt
+[#1] INFO:ObjectHandling -- RooWorkspace::import(w) importing RooConstVar::0.948992
+[#1] INFO:ObjectHandling -- RooWorkspace::import(w) importing RooConstVar::1.007395
+[#1] INFO:ObjectHandling -- RooWorkspace::import(w) importing AsymPow::systeff_signal_region_bbHtautau_CMS_scale_t_1prong0pi0_13TeV
+[#1] INFO:ObjectHandling -- RooWorkspace::import(w) importing RooConstVar::0.992816
+[#1] INFO:ObjectHandling -- RooWorkspace::import(w) importing RooConstVar::1.004586
+[#1] INFO:ObjectHandling -- RooWorkspace::import(w) importing AsymPow::systeff_signal_region_bbHtautau_CMS_scale_t_1prong1pi0_13TeV
+[#1] INFO:ObjectHandling -- RooWorkspace::import(w) importing RooConstVar::0.990518
+[#1] INFO:ObjectHandling -- RooWorkspace::import(w) importing RooConstVar::1.011356
+[#1] INFO:ObjectHandling -- RooWorkspace::import(w) importing AsymPow::systeff_signal_region_bbHtautau_CMS_scale_t_3prong0pi0_13TeV
+[#1] INFO:ObjectHandling -- RooWorkspace::import(w) importing RooConstVar::0.995390
+[#1] INFO:ObjectHandling -- RooWorkspace::import(w) importing RooConstVar::1.003613
+[#1] INFO:ObjectHandling -- RooWorkspace::import(w) importing RooProdPdf::pdfbins_binsignal_region
+
+=== Using the following for ModelConfig ===
+Observables:             RooArgSet:: = (CMS_th1x,CMS_channel)
+Parameters of Interest:  RooArgSet:: = (r)
+Nuisance Parameters:     RooArgSet:: = (CMS_eff_b,CMS_eff_t,CMS_eff_t_highpt,CMS_scale_t_1prong0pi0_13TeV,CMS_scale_t_1prong1pi0_13TeV,CMS_scale_t_3prong0pi0_13TeV,acceptance_bbH,lumi_13TeV,norm_jetFakes,top_pt_ttbar_shape,xsec_diboson)
+Global Observables:      RooArgSet:: = (CMS_eff_b_In,CMS_eff_t_In,CMS_eff_t_highpt_In,CMS_scale_t_1prong0pi0_13TeV_In,CMS_scale_t_1prong1pi0_13TeV_In,CMS_scale_t_3prong0pi0_13TeV_In,acceptance_bbH_In,lumi_13TeV_In,norm_jetFakes_In,top_pt_ttbar_shape_In,xsec_diboson_In)
+PDF:                     RooSimultaneousOpt::model_s[ indexCat=CMS_channel signal_region=pdf_binsignal_region extraConstraints=() channelMasks=() ] = [#0] ERROR:InputArguments -- RooArgSet::checkForDup: ERROR argument with name CMS_eff_t_highpt is already in this set
+[#0] ERROR:InputArguments -- RooArgSet::checkForDup: ERROR argument with name CMS_scale_t_1prong1pi0_13TeV is already in this set
+[#0] ERROR:InputArguments -- RooArgSet::checkForDup: ERROR argument with name top_pt_ttbar_shape is already in this set
+[#0] ERROR:InputArguments -- RooArgSet::checkForDup: ERROR argument with name CMS_eff_t_highpt is already in this set
+[#0] ERROR:InputArguments -- RooArgSet::checkForDup: ERROR argument with name CMS_scale_t_1prong1pi0_13TeV is already in this set
+[#0] ERROR:InputArguments -- RooArgSet::checkForDup: ERROR argument with name CMS_eff_t_highpt is already in this set
+[#0] ERROR:InputArguments -- RooArgSet::checkForDup: ERROR argument with name CMS_scale_t_1prong1pi0_13TeV is already in this set
+[#0] ERROR:InputArguments -- RooArgSet::checkForDup: ERROR argument with name CMS_eff_t_highpt is already in this set
+[#0] ERROR:InputArguments -- RooArgSet::checkForDup: ERROR argument with name CMS_scale_t_1prong1pi0_13TeV is already in this set
+0.000287829
+
+
+RooWorkspace(w) w contents
+
+variables
+---------
+(CMS_channel,CMS_eff_b,CMS_eff_b_In,CMS_eff_t,CMS_eff_t_In,CMS_eff_t_highpt,CMS_eff_t_highpt_In,CMS_scale_t_1prong0pi0_13TeV,CMS_scale_t_1prong0pi0_13TeV_In,CMS_scale_t_1prong1pi0_13TeV,CMS_scale_t_1prong1pi0_13TeV_In,CMS_scale_t_3prong0pi0_13TeV,CMS_scale_t_3prong0pi0_13TeV_In,CMS_th1x,MH,acceptance_bbH,acceptance_bbH_In,lumi_13TeV,lumi_13TeV_In,norm_jetFakes,norm_jetFakes_In,r,top_pt_ttbar_shape,top_pt_ttbar_shape_In,xsec_diboson,xsec_diboson_In)
+
+p.d.f.s
+-------
+RooSimultaneousOpt::model_s[ indexCat=CMS_channel signal_region=pdf_binsignal_region extraConstraints=() channelMasks=() ] = 0.000287829
+  RooProdPdf::pdf_binsignal_region[ CMS_eff_b_Pdf * CMS_eff_t_Pdf * CMS_eff_t_highpt_Pdf * CMS_scale_t_1prong0pi0_13TeV_Pdf * CMS_scale_t_1prong1pi0_13TeV_Pdf * CMS_scale_t_3prong0pi0_13TeV_Pdf * acceptance_bbH_Pdf * lumi_13TeV_Pdf * norm_jetFakes_Pdf * top_pt_ttbar_shape_Pdf * xsec_diboson_Pdf * pdf_binsignal_region_nuis * pdfbins_binsignal_region ] = 0.000287829
+    SimpleGaussianConstraint::CMS_eff_b_Pdf[ x=CMS_eff_b mean=CMS_eff_b_In sigma=1 ] = 1
+    SimpleGaussianConstraint::CMS_eff_t_Pdf[ x=CMS_eff_t mean=CMS_eff_t_In sigma=1 ] = 1
+    SimpleGaussianConstraint::CMS_eff_t_highpt_Pdf[ x=CMS_eff_t_highpt mean=CMS_eff_t_highpt_In sigma=1 ] = 1
+    SimpleGaussianConstraint::CMS_scale_t_1prong0pi0_13TeV_Pdf[ x=CMS_scale_t_1prong0pi0_13TeV mean=CMS_scale_t_1prong0pi0_13TeV_In sigma=1 ] = 1
+    SimpleGaussianConstraint::CMS_scale_t_1prong1pi0_13TeV_Pdf[ x=CMS_scale_t_1prong1pi0_13TeV mean=CMS_scale_t_1prong1pi0_13TeV_In sigma=1 ] = 1
+    SimpleGaussianConstraint::CMS_scale_t_3prong0pi0_13TeV_Pdf[ x=CMS_scale_t_3prong0pi0_13TeV mean=CMS_scale_t_3prong0pi0_13TeV_In sigma=1 ] = 1
+    SimpleGaussianConstraint::acceptance_bbH_Pdf[ x=acceptance_bbH mean=acceptance_bbH_In sigma=1 ] = 1
+    SimpleGaussianConstraint::lumi_13TeV_Pdf[ x=lumi_13TeV mean=lumi_13TeV_In sigma=1 ] = 1
+    SimpleGaussianConstraint::norm_jetFakes_Pdf[ x=norm_jetFakes mean=norm_jetFakes_In sigma=1 ] = 1
+    SimpleGaussianConstraint::top_pt_ttbar_shape_Pdf[ x=top_pt_ttbar_shape mean=top_pt_ttbar_shape_In sigma=1 ] = 1
+    SimpleGaussianConstraint::xsec_diboson_Pdf[ x=xsec_diboson mean=xsec_diboson_In sigma=1 ] = 1
+    RooAddPdf::pdf_binsignal_region_nuis[ n_exp_final_binsignal_region_proc_ttbar * shapeBkg_signal_region_ttbar_morph + n_exp_final_binsignal_region_proc_diboson * shapeBkg_signal_region_diboson_morph + n_exp_final_binsignal_region_proc_Ztautau * shapeBkg_signal_region_Ztautau_morph + n_exp_binsignal_region_proc_jetFakes * shapeBkg_jetFakes_signal_region_rebinPdf + n_exp_final_binsignal_region_proc_bbHtautau * shapeSig_signal_region_bbHtautau_morph ] = 0.000287829/1
+      FastVerticalInterpHistPdf2::shapeBkg_signal_region_ttbar_morph[ coefList=(CMS_eff_t_highpt,CMS_scale_t_1prong0pi0_13TeV,CMS_scale_t_1prong1pi0_13TeV,CMS_scale_t_3prong0pi0_13TeV,top_pt_ttbar_shape) x=CMS_th1x ] = 1e-09
+      RooProduct::n_exp_final_binsignal_region_proc_ttbar[ n_exp_binsignal_region_proc_ttbar * systeff_signal_region_ttbar_CMS_eff_t_highpt * systeff_signal_region_ttbar_CMS_scale_t_1prong0pi0_13TeV * systeff_signal_region_ttbar_CMS_scale_t_1prong1pi0_13TeV * systeff_signal_region_ttbar_CMS_scale_t_3prong0pi0_13TeV * systeff_signal_region_ttbar_top_pt_ttbar_shape ] = 683.017
+        ProcessNormalization::n_exp_binsignal_region_proc_ttbar[ thetaList=(CMS_eff_b,CMS_eff_t,lumi_13TeV) asymmThetaList=() otherFactorList=() ] = 683.017
+        AsymPow::systeff_signal_region_ttbar_CMS_eff_t_highpt[ kappaLow=0.958948 kappaHigh=1.005937 theta=CMS_eff_t_highpt ] = 1
+        AsymPow::systeff_signal_region_ttbar_CMS_scale_t_1prong0pi0_13TeV[ kappaLow=0.989630 kappaHigh=1.005220 theta=CMS_scale_t_1prong0pi0_13TeV ] = 1
+        AsymPow::systeff_signal_region_ttbar_CMS_scale_t_1prong1pi0_13TeV[ kappaLow=0.986737 kappaHigh=1.017501 theta=CMS_scale_t_1prong1pi0_13TeV ] = 1
+        AsymPow::systeff_signal_region_ttbar_CMS_scale_t_3prong0pi0_13TeV[ kappaLow=0.995627 kappaHigh=1.004658 theta=CMS_scale_t_3prong0pi0_13TeV ] = 1
+        AsymPow::systeff_signal_region_ttbar_top_pt_ttbar_shape[ kappaLow=1.087015 kappaHigh=0.930749 theta=top_pt_ttbar_shape ] = 1
+      FastVerticalInterpHistPdf2::shapeBkg_signal_region_diboson_morph[ coefList=(CMS_eff_t_highpt,CMS_scale_t_1prong0pi0_13TeV,CMS_scale_t_1prong1pi0_13TeV,CMS_scale_t_3prong0pi0_13TeV) x=CMS_th1x ] = 0.00228327
+      RooProduct::n_exp_final_binsignal_region_proc_diboson[ n_exp_binsignal_region_proc_diboson * systeff_signal_region_diboson_CMS_eff_t_highpt * systeff_signal_region_diboson_CMS_scale_t_1prong0pi0_13TeV * systeff_signal_region_diboson_CMS_scale_t_1prong1pi0_13TeV * systeff_signal_region_diboson_CMS_scale_t_3prong0pi0_13TeV ] = 96.5185
+        ProcessNormalization::n_exp_binsignal_region_proc_diboson[ thetaList=(CMS_eff_b,CMS_eff_t,lumi_13TeV,xsec_diboson) asymmThetaList=() otherFactorList=() ] = 96.5185
+        AsymPow::systeff_signal_region_diboson_CMS_eff_t_highpt[ kappaLow=0.951186 kappaHigh=1.007077 theta=CMS_eff_t_highpt ] = 1
+        AsymPow::systeff_signal_region_diboson_CMS_scale_t_1prong0pi0_13TeV[ kappaLow=0.992515 kappaHigh=1.008216 theta=CMS_scale_t_1prong0pi0_13TeV ] = 1
+        AsymPow::systeff_signal_region_diboson_CMS_scale_t_1prong1pi0_13TeV[ kappaLow=0.990059 kappaHigh=1.022993 theta=CMS_scale_t_1prong1pi0_13TeV ] = 1
+        AsymPow::systeff_signal_region_diboson_CMS_scale_t_3prong0pi0_13TeV[ kappaLow=0.995388 kappaHigh=1.004263 theta=CMS_scale_t_3prong0pi0_13TeV ] = 1
+      FastVerticalInterpHistPdf2::shapeBkg_signal_region_Ztautau_morph[ coefList=(CMS_eff_t_highpt,CMS_scale_t_1prong0pi0_13TeV,CMS_scale_t_1prong1pi0_13TeV,CMS_scale_t_3prong0pi0_13TeV) x=CMS_th1x ] = 0.00116425
+      RooProduct::n_exp_final_binsignal_region_proc_Ztautau[ n_exp_binsignal_region_proc_Ztautau * systeff_signal_region_Ztautau_CMS_eff_t_highpt * systeff_signal_region_Ztautau_CMS_scale_t_1prong0pi0_13TeV * systeff_signal_region_Ztautau_CMS_scale_t_1prong1pi0_13TeV * systeff_signal_region_Ztautau_CMS_scale_t_3prong0pi0_13TeV ] = 742.649
+        ProcessNormalization::n_exp_binsignal_region_proc_Ztautau[ thetaList=(CMS_eff_b,CMS_eff_t,lumi_13TeV) asymmThetaList=() otherFactorList=() ] = 742.649
+        AsymPow::systeff_signal_region_Ztautau_CMS_eff_t_highpt[ kappaLow=0.952472 kappaHigh=1.006893 theta=CMS_eff_t_highpt ] = 1
+        AsymPow::systeff_signal_region_Ztautau_CMS_scale_t_1prong0pi0_13TeV[ kappaLow=0.987868 kappaHigh=1.008781 theta=CMS_scale_t_1prong0pi0_13TeV ] = 1
+        AsymPow::systeff_signal_region_Ztautau_CMS_scale_t_1prong1pi0_13TeV[ kappaLow=0.977826 kappaHigh=1.030856 theta=CMS_scale_t_1prong1pi0_13TeV ] = 1
+        AsymPow::systeff_signal_region_Ztautau_CMS_scale_t_3prong0pi0_13TeV[ kappaLow=0.994331 kappaHigh=1.005669 theta=CMS_scale_t_3prong0pi0_13TeV ] = 1
+      FastVerticalInterpHistPdf2::shapeBkg_jetFakes_signal_region_rebinPdf[ coefList=() x=CMS_th1x ] = 1e-09
+      ProcessNormalization::n_exp_binsignal_region_proc_jetFakes[ thetaList=(norm_jetFakes) asymmThetaList=() otherFactorList=() ] = 2048.94
+      FastVerticalInterpHistPdf2::shapeSig_signal_region_bbHtautau_morph[ coefList=(CMS_eff_t_highpt,CMS_scale_t_1prong0pi0_13TeV,CMS_scale_t_1prong1pi0_13TeV,CMS_scale_t_3prong0pi0_13TeV) x=CMS_th1x ] = 1e-09
+      RooProduct::n_exp_final_binsignal_region_proc_bbHtautau[ n_exp_binsignal_region_proc_bbHtautau * systeff_signal_region_bbHtautau_CMS_eff_t_highpt * systeff_signal_region_bbHtautau_CMS_scale_t_1prong0pi0_13TeV * systeff_signal_region_bbHtautau_CMS_scale_t_1prong1pi0_13TeV * systeff_signal_region_bbHtautau_CMS_scale_t_3prong0pi0_13TeV ] = 198.521
+        ProcessNormalization::n_exp_binsignal_region_proc_bbHtautau[ thetaList=(CMS_eff_b,CMS_eff_t,acceptance_bbH,lumi_13TeV) asymmThetaList=() otherFactorList=(r) ] = 198.521
+        AsymPow::systeff_signal_region_bbHtautau_CMS_eff_t_highpt[ kappaLow=0.948992 kappaHigh=1.007395 theta=CMS_eff_t_highpt ] = 1
+        AsymPow::systeff_signal_region_bbHtautau_CMS_scale_t_1prong0pi0_13TeV[ kappaLow=0.992816 kappaHigh=1.004586 theta=CMS_scale_t_1prong0pi0_13TeV ] = 1
+        AsymPow::systeff_signal_region_bbHtautau_CMS_scale_t_1prong1pi0_13TeV[ kappaLow=0.990518 kappaHigh=1.011356 theta=CMS_scale_t_1prong1pi0_13TeV ] = 1
+        AsymPow::systeff_signal_region_bbHtautau_CMS_scale_t_3prong0pi0_13TeV[ kappaLow=0.995390 kappaHigh=1.003613 theta=CMS_scale_t_3prong0pi0_13TeV ] = 1
+    RooProdPdf::pdfbins_binsignal_region[  ] = 1
+RooProdPdf::nuisancePdf[ CMS_eff_b_Pdf * CMS_eff_t_Pdf * CMS_eff_t_highpt_Pdf * CMS_scale_t_1prong0pi0_13TeV_Pdf * CMS_scale_t_1prong1pi0_13TeV_Pdf * CMS_scale_t_3prong0pi0_13TeV_Pdf * acceptance_bbH_Pdf * lumi_13TeV_Pdf * norm_jetFakes_Pdf * top_pt_ttbar_shape_Pdf * xsec_diboson_Pdf ] = 1
+  SimpleGaussianConstraint::CMS_eff_b_Pdf[ x=CMS_eff_b mean=CMS_eff_b_In sigma=1 ] = 1
+  SimpleGaussianConstraint::CMS_eff_t_Pdf[ x=CMS_eff_t mean=CMS_eff_t_In sigma=1 ] = 1
+  SimpleGaussianConstraint::CMS_eff_t_highpt_Pdf[ x=CMS_eff_t_highpt mean=CMS_eff_t_highpt_In sigma=1 ] = 1
+  SimpleGaussianConstraint::CMS_scale_t_1prong0pi0_13TeV_Pdf[ x=CMS_scale_t_1prong0pi0_13TeV mean=CMS_scale_t_1prong0pi0_13TeV_In sigma=1 ] = 1
+  SimpleGaussianConstraint::CMS_scale_t_1prong1pi0_13TeV_Pdf[ x=CMS_scale_t_1prong1pi0_13TeV mean=CMS_scale_t_1prong1pi0_13TeV_In sigma=1 ] = 1
+  SimpleGaussianConstraint::CMS_scale_t_3prong0pi0_13TeV_Pdf[ x=CMS_scale_t_3prong0pi0_13TeV mean=CMS_scale_t_3prong0pi0_13TeV_In sigma=1 ] = 1
+  SimpleGaussianConstraint::acceptance_bbH_Pdf[ x=acceptance_bbH mean=acceptance_bbH_In sigma=1 ] = 1
+  SimpleGaussianConstraint::lumi_13TeV_Pdf[ x=lumi_13TeV mean=lumi_13TeV_In sigma=1 ] = 1
+  SimpleGaussianConstraint::norm_jetFakes_Pdf[ x=norm_jetFakes mean=norm_jetFakes_In sigma=1 ] = 1
+  SimpleGaussianConstraint::top_pt_ttbar_shape_Pdf[ x=top_pt_ttbar_shape mean=top_pt_ttbar_shape_In sigma=1 ] = 1
+  SimpleGaussianConstraint::xsec_diboson_Pdf[ x=xsec_diboson mean=xsec_diboson_In sigma=1 ] = 1
+
+datasets
+--------
+RooDataSet::data_obs(CMS_th1x,CMS_channel)
+
+named sets
+----------
+ModelConfig_GlobalObservables:(CMS_eff_b_In,CMS_eff_t_In,CMS_eff_t_highpt_In,CMS_scale_t_1prong0pi0_13TeV_In,CMS_scale_t_1prong1pi0_13TeV_In,CMS_scale_t_3prong0pi0_13TeV_In,acceptance_bbH_In,lumi_13TeV_In,norm_jetFakes_In,top_pt_ttbar_shape_In,xsec_diboson_In)
+ModelConfig_NuisParams:(CMS_eff_b,CMS_eff_t,CMS_eff_t_highpt,CMS_scale_t_1prong0pi0_13TeV,CMS_scale_t_1prong1pi0_13TeV,CMS_scale_t_3prong0pi0_13TeV,acceptance_bbH,lumi_13TeV,norm_jetFakes,top_pt_ttbar_shape,xsec_diboson)
+ModelConfig_Observables:(CMS_th1x,CMS_channel)
+ModelConfig_POI:(r)
+POI:(r)
+globalObservables:(CMS_eff_b_In,CMS_eff_t_In,CMS_eff_t_highpt_In,CMS_scale_t_1prong0pi0_13TeV_In,CMS_scale_t_1prong1pi0_13TeV_In,CMS_scale_t_3prong0pi0_13TeV_In,acceptance_bbH_In,lumi_13TeV_In,norm_jetFakes_In,top_pt_ttbar_shape_In,xsec_diboson_In)
+nuisances:(CMS_eff_b,CMS_eff_t,CMS_eff_t_highpt,CMS_scale_t_1prong0pi0_13TeV,CMS_scale_t_1prong1pi0_13TeV,CMS_scale_t_3prong0pi0_13TeV,acceptance_bbH,lumi_13TeV,norm_jetFakes,top_pt_ttbar_shape,xsec_diboson)
+observables:(CMS_th1x,CMS_channel)
+
+generic objects
+---------------
+RooStats::ModelConfig::ModelConfig
+RooArgSet::discreteParams
+
+recyling (signal_region,Ztautau,CMS_scale_t_3prong0pi0_13TeVDown) -> shapeBkg_Ztautau_signal_region_CMS_scale_t_3prong0pi0_13TeVDown
+
+recyling (signal_region,jetFakes,) -> shapeBkg_jetFakes_signal_region
+
+recyling (signal_region,jetFakes,) -> shapeBkg_jetFakes_signal_region
+
+recyling (signal_region,bbHtautau,) -> shapeSig_bbHtautau_signal_region
+
+import (datacard_part3.shapes.root,signal_region/bbHtautau200_CMS_eff_t_highptUp) -> shapeSig_bbHtautau_signal_region_CMS_eff_t_highptUp
+
+import (datacard_part3.shapes.root,signal_region/bbHtautau200_CMS_eff_t_highptDown) -> shapeSig_bbHtautau_signal_region_CMS_eff_t_highptDown
+
+import (datacard_part3.shapes.root,signal_region/bbHtautau200_CMS_scale_t_1prong0pi0_13TeVUp) -> shapeSig_bbHtautau_signal_region_CMS_scale_t_1prong0pi0_13TeVUp
+
+import (datacard_part3.shapes.root,signal_region/bbHtautau200_CMS_scale_t_1prong0pi0_13TeVDown) -> shapeSig_bbHtautau_signal_region_CMS_scale_t_1prong0pi0_13TeVDown
+
+import (datacard_part3.shapes.root,signal_region/bbHtautau200_CMS_scale_t_1prong1pi0_13TeVUp) -> shapeSig_bbHtautau_signal_region_CMS_scale_t_1prong1pi0_13TeVUp
+
+import (datacard_part3.shapes.root,signal_region/bbHtautau200_CMS_scale_t_1prong1pi0_13TeVDown) -> shapeSig_bbHtautau_signal_region_CMS_scale_t_1prong1pi0_13TeVDown
+
+import (datacard_part3.shapes.root,signal_region/bbHtautau200_CMS_scale_t_3prong0pi0_13TeVUp) -> shapeSig_bbHtautau_signal_region_CMS_scale_t_3prong0pi0_13TeVUp
+
+import (datacard_part3.shapes.root,signal_region/bbHtautau200_CMS_scale_t_3prong0pi0_13TeVDown) -> shapeSig_bbHtautau_signal_region_CMS_scale_t_3prong0pi0_13TeVDown
+
+recyling (signal_region,bbHtautau,) -> shapeSig_bbHtautau_signal_region
+
+recyling (signal_region,bbHtautau,CMS_eff_t_highptUp) -> shapeSig_bbHtautau_signal_region_CMS_eff_t_highptUp
+
+recyling (signal_region,bbHtautau,CMS_eff_t_highptDown) -> shapeSig_bbHtautau_signal_region_CMS_eff_t_highptDown
+
+recyling (signal_region,bbHtautau,CMS_scale_t_1prong0pi0_13TeVUp) -> shapeSig_bbHtautau_signal_region_CMS_scale_t_1prong0pi0_13TeVUp
+
+recyling (signal_region,bbHtautau,CMS_scale_t_1prong0pi0_13TeVDown) -> shapeSig_bbHtautau_signal_region_CMS_scale_t_1prong0pi0_13TeVDown
+
+recyling (signal_region,bbHtautau,CMS_scale_t_1prong1pi0_13TeVUp) -> shapeSig_bbHtautau_signal_region_CMS_scale_t_1prong1pi0_13TeVUp
+
+recyling (signal_region,bbHtautau,CMS_scale_t_1prong1pi0_13TeVDown) -> shapeSig_bbHtautau_signal_region_CMS_scale_t_1prong1pi0_13TeVDown
+
+recyling (signal_region,bbHtautau,CMS_scale_t_3prong0pi0_13TeVUp) -> shapeSig_bbHtautau_signal_region_CMS_scale_t_3prong0pi0_13TeVUp
+
+recyling (signal_region,bbHtautau,CMS_scale_t_3prong0pi0_13TeVDown) -> shapeSig_bbHtautau_signal_region_CMS_scale_t_3prong0pi0_13TeVDown
+
+Creating RooAddPdf pdf_binsignal_region with 5 elements
+Wrote GraphVizTree of model_s to  roostats-H4JgMq.root.dot
+Input workspace 'w': 
+
+RooWorkspace(w) w contents
+
+variables
+---------
+(CMS_channel,CMS_eff_b,CMS_eff_b_In,CMS_eff_t,CMS_eff_t_In,CMS_eff_t_highpt,CMS_eff_t_highpt_In,CMS_scale_t_1prong0pi0_13TeV,CMS_scale_t_1prong0pi0_13TeV_In,CMS_scale_t_1prong1pi0_13TeV,CMS_scale_t_1prong1pi0_13TeV_In,CMS_scale_t_3prong0pi0_13TeV,CMS_scale_t_3prong0pi0_13TeV_In,CMS_th1x,MH,acceptance_bbH,acceptance_bbH_In,lumi_13TeV,lumi_13TeV_In,norm_jetFakes,norm_jetFakes_In,r,top_pt_ttbar_shape,top_pt_ttbar_shape_In,xsec_diboson,xsec_diboson_In)
+
+p.d.f.s
+-------
+SimpleGaussianConstraint::CMS_eff_b_Pdf[ x=CMS_eff_b mean=CMS_eff_b_In sigma=1 ] = 1
+SimpleGaussianConstraint::CMS_eff_t_Pdf[ x=CMS_eff_t mean=CMS_eff_t_In sigma=1 ] = 1
+SimpleGaussianConstraint::CMS_eff_t_highpt_Pdf[ x=CMS_eff_t_highpt mean=CMS_eff_t_highpt_In sigma=1 ] = 1
+SimpleGaussianConstraint::CMS_scale_t_1prong0pi0_13TeV_Pdf[ x=CMS_scale_t_1prong0pi0_13TeV mean=CMS_scale_t_1prong0pi0_13TeV_In sigma=1 ] = 1
+SimpleGaussianConstraint::CMS_scale_t_1prong1pi0_13TeV_Pdf[ x=CMS_scale_t_1prong1pi0_13TeV mean=CMS_scale_t_1prong1pi0_13TeV_In sigma=1 ] = 1
+SimpleGaussianConstraint::CMS_scale_t_3prong0pi0_13TeV_Pdf[ x=CMS_scale_t_3prong0pi0_13TeV mean=CMS_scale_t_3prong0pi0_13TeV_In sigma=1 ] = 1
+SimpleGaussianConstraint::acceptance_bbH_Pdf[ x=acceptance_bbH mean=acceptance_bbH_In sigma=1 ] = 1
+SimpleGaussianConstraint::lumi_13TeV_Pdf[ x=lumi_13TeV mean=lumi_13TeV_In sigma=1 ] = 1
+RooSimultaneousOpt::model_s[ indexCat=CMS_channel signal_region=pdf_binsignal_region extraConstraints=() channelMasks=() ] = 0.000287829
+SimpleGaussianConstraint::norm_jetFakes_Pdf[ x=norm_jetFakes mean=norm_jetFakes_In sigma=1 ] = 1
+RooProdPdf::nuisancePdf[ CMS_eff_b_Pdf * CMS_eff_t_Pdf * CMS_eff_t_highpt_Pdf * CMS_scale_t_1prong0pi0_13TeV_Pdf * CMS_scale_t_1prong1pi0_13TeV_Pdf * CMS_scale_t_3prong0pi0_13TeV_Pdf * acceptance_bbH_Pdf * lumi_13TeV_Pdf * norm_jetFakes_Pdf * top_pt_ttbar_shape_Pdf * xsec_diboson_Pdf ] = 1
+RooProdPdf::pdf_binsignal_region[ CMS_eff_b_Pdf * CMS_eff_t_Pdf * CMS_eff_t_highpt_Pdf * CMS_scale_t_1prong0pi0_13TeV_Pdf * CMS_scale_t_1prong1pi0_13TeV_Pdf * CMS_scale_t_3prong0pi0_13TeV_Pdf * acceptance_bbH_Pdf * lumi_13TeV_Pdf * norm_jetFakes_Pdf * top_pt_ttbar_shape_Pdf * xsec_diboson_Pdf * pdf_binsignal_region_nuis * pdfbins_binsignal_region ] = 0.000287829
+RooAddPdf::pdf_binsignal_region_nuis[ n_exp_final_binsignal_region_proc_ttbar * shapeBkg_signal_region_ttbar_morph + n_exp_final_binsignal_region_proc_diboson * shapeBkg_signal_region_diboson_morph + n_exp_final_binsignal_region_proc_Ztautau * shapeBkg_signal_region_Ztautau_morph + n_exp_binsignal_region_proc_jetFakes * shapeBkg_jetFakes_signal_region_rebinPdf + n_exp_final_binsignal_region_proc_bbHtautau * shapeSig_signal_region_bbHtautau_morph ] = 0.000287829/1
+RooProdPdf::pdfbins_binsignal_region[  ] = 1
+FastVerticalInterpHistPdf2::shapeBkg_jetFakes_signal_region_rebinPdf[ coefList=() x=CMS_th1x ] = 1e-09
+FastVerticalInterpHistPdf2::shapeBkg_signal_region_Ztautau_morph[ coefList=(CMS_eff_t_highpt,CMS_scale_t_1prong0pi0_13TeV,CMS_scale_t_1prong1pi0_13TeV,CMS_scale_t_3prong0pi0_13TeV) x=CMS_th1x ] = 0.00116425
+FastVerticalInterpHistPdf2::shapeBkg_signal_region_diboson_morph[ coefList=(CMS_eff_t_highpt,CMS_scale_t_1prong0pi0_13TeV,CMS_scale_t_1prong1pi0_13TeV,CMS_scale_t_3prong0pi0_13TeV) x=CMS_th1x ] = 0.00228327
+FastVerticalInterpHistPdf2::shapeBkg_signal_region_ttbar_morph[ coefList=(CMS_eff_t_highpt,CMS_scale_t_1prong0pi0_13TeV,CMS_scale_t_1prong1pi0_13TeV,CMS_scale_t_3prong0pi0_13TeV,top_pt_ttbar_shape) x=CMS_th1x ] = 1e-09
+FastVerticalInterpHistPdf2::shapeSig_signal_region_bbHtautau_morph[ coefList=(CMS_eff_t_highpt,CMS_scale_t_1prong0pi0_13TeV,CMS_scale_t_1prong1pi0_13TeV,CMS_scale_t_3prong0pi0_13TeV) x=CMS_th1x ] = 1e-09
+SimpleGaussianConstraint::top_pt_ttbar_shape_Pdf[ x=top_pt_ttbar_shape mean=top_pt_ttbar_shape_In sigma=1 ] = 1
+SimpleGaussianConstraint::xsec_diboson_Pdf[ x=xsec_diboson mean=xsec_diboson_In sigma=1 ] = 1
+
+functions
+--------
+ProcessNormalization::n_exp_binsignal_region_proc_Ztautau[ thetaList=(CMS_eff_b,CMS_eff_t,lumi_13TeV) asymmThetaList=() otherFactorList=() ] = 742.649
+ProcessNormalization::n_exp_binsignal_region_proc_bbHtautau[ thetaList=(CMS_eff_b,CMS_eff_t,acceptance_bbH,lumi_13TeV) asymmThetaList=() otherFactorList=(r) ] = 198.521
+ProcessNormalization::n_exp_binsignal_region_proc_diboson[ thetaList=(CMS_eff_b,CMS_eff_t,lumi_13TeV,xsec_diboson) asymmThetaList=() otherFactorList=() ] = 96.5185
+ProcessNormalization::n_exp_binsignal_region_proc_jetFakes[ thetaList=(norm_jetFakes) asymmThetaList=() otherFactorList=() ] = 2048.94
+ProcessNormalization::n_exp_binsignal_region_proc_ttbar[ thetaList=(CMS_eff_b,CMS_eff_t,lumi_13TeV) asymmThetaList=() otherFactorList=() ] = 683.017
+RooProduct::n_exp_final_binsignal_region_proc_Ztautau[ n_exp_binsignal_region_proc_Ztautau * systeff_signal_region_Ztautau_CMS_eff_t_highpt * systeff_signal_region_Ztautau_CMS_scale_t_1prong0pi0_13TeV * systeff_signal_region_Ztautau_CMS_scale_t_1prong1pi0_13TeV * systeff_signal_region_Ztautau_CMS_scale_t_3prong0pi0_13TeV ] = 742.649
+RooProduct::n_exp_final_binsignal_region_proc_bbHtautau[ n_exp_binsignal_region_proc_bbHtautau * systeff_signal_region_bbHtautau_CMS_eff_t_highpt * systeff_signal_region_bbHtautau_CMS_scale_t_1prong0pi0_13TeV * systeff_signal_region_bbHtautau_CMS_scale_t_1prong1pi0_13TeV * systeff_signal_region_bbHtautau_CMS_scale_t_3prong0pi0_13TeV ] = 198.521
+RooProduct::n_exp_final_binsignal_region_proc_diboson[ n_exp_binsignal_region_proc_diboson * systeff_signal_region_diboson_CMS_eff_t_highpt * systeff_signal_region_diboson_CMS_scale_t_1prong0pi0_13TeV * systeff_signal_region_diboson_CMS_scale_t_1prong1pi0_13TeV * systeff_signal_region_diboson_CMS_scale_t_3prong0pi0_13TeV ] = 96.5185
+RooProduct::n_exp_final_binsignal_region_proc_ttbar[ n_exp_binsignal_region_proc_ttbar * systeff_signal_region_ttbar_CMS_eff_t_highpt * systeff_signal_region_ttbar_CMS_scale_t_1prong0pi0_13TeV * systeff_signal_region_ttbar_CMS_scale_t_1prong1pi0_13TeV * systeff_signal_region_ttbar_CMS_scale_t_3prong0pi0_13TeV * systeff_signal_region_ttbar_top_pt_ttbar_shape ] = 683.017
+AsymPow::systeff_signal_region_Ztautau_CMS_eff_t_highpt[ kappaLow=0.952472 kappaHigh=1.006893 theta=CMS_eff_t_highpt ] = 1
+AsymPow::systeff_signal_region_Ztautau_CMS_scale_t_1prong0pi0_13TeV[ kappaLow=0.987868 kappaHigh=1.008781 theta=CMS_scale_t_1prong0pi0_13TeV ] = 1
+AsymPow::systeff_signal_region_Ztautau_CMS_scale_t_1prong1pi0_13TeV[ kappaLow=0.977826 kappaHigh=1.030856 theta=CMS_scale_t_1prong1pi0_13TeV ] = 1
+AsymPow::systeff_signal_region_Ztautau_CMS_scale_t_3prong0pi0_13TeV[ kappaLow=0.994331 kappaHigh=1.005669 theta=CMS_scale_t_3prong0pi0_13TeV ] = 1
+AsymPow::systeff_signal_region_bbHtautau_CMS_eff_t_highpt[ kappaLow=0.948992 kappaHigh=1.007395 theta=CMS_eff_t_highpt ] = 1
+AsymPow::systeff_signal_region_bbHtautau_CMS_scale_t_1prong0pi0_13TeV[ kappaLow=0.992816 kappaHigh=1.004586 theta=CMS_scale_t_1prong0pi0_13TeV ] = 1
+AsymPow::systeff_signal_region_bbHtautau_CMS_scale_t_1prong1pi0_13TeV[ kappaLow=0.990518 kappaHigh=1.011356 theta=CMS_scale_t_1prong1pi0_13TeV ] = 1
+AsymPow::systeff_signal_region_bbHtautau_CMS_scale_t_3prong0pi0_13TeV[ kappaLow=0.995390 kappaHigh=1.003613 theta=CMS_scale_t_3prong0pi0_13TeV ] = 1
+AsymPow::systeff_signal_region_diboson_CMS_eff_t_highpt[ kappaLow=0.951186 kappaHigh=1.007077 theta=CMS_eff_t_highpt ] = 1
+AsymPow::systeff_signal_region_diboson_CMS_scale_t_1prong0pi0_13TeV[ kappaLow=0.992515 kappaHigh=1.008216 theta=CMS_scale_t_1prong0pi0_13TeV ] = 1
+AsymPow::systeff_signal_region_diboson_CMS_scale_t_1prong1pi0_13TeV[ kappaLow=0.990059 kappaHigh=1.022993 theta=CMS_scale_t_1prong1pi0_13TeV ] = 1
+AsymPow::systeff_signal_region_diboson_CMS_scale_t_3prong0pi0_13TeV[ kappaLow=0.995388 kappaHigh=1.004263 theta=CMS_scale_t_3prong0pi0_13TeV ] = 1
+AsymPow::systeff_signal_region_ttbar_CMS_eff_t_highpt[ kappaLow=0.958948 kappaHigh=1.005937 theta=CMS_eff_t_highpt ] = 1
+AsymPow::systeff_signal_region_ttbar_CMS_scale_t_1prong0pi0_13TeV[ kappaLow=0.989630 kappaHigh=1.005220 theta=CMS_scale_t_1prong0pi0_13TeV ] = 1
+AsymPow::systeff_signal_region_ttbar_CMS_scale_t_1prong1pi0_13TeV[ kappaLow=0.986737 kappaHigh=1.017501 theta=CMS_scale_t_1prong1pi0_13TeV ] = 1
+AsymPow::systeff_signal_region_ttbar_CMS_scale_t_3prong0pi0_13TeV[ kappaLow=0.995627 kappaHigh=1.004658 theta=CMS_scale_t_3prong0pi0_13TeV ] = 1
+AsymPow::systeff_signal_region_ttbar_top_pt_ttbar_shape[ kappaLow=1.087015 kappaHigh=0.930749 theta=top_pt_ttbar_shape ] = 1
+
+datasets
+--------
+RooDataSet::data_obs(CMS_th1x,CMS_channel)
+
+named sets
+----------
+ModelConfig_GlobalObservables:(CMS_eff_b_In,CMS_eff_t_In,CMS_eff_t_highpt_In,CMS_scale_t_1prong0pi0_13TeV_In,CMS_scale_t_1prong1pi0_13TeV_In,CMS_scale_t_3prong0pi0_13TeV_In,acceptance_bbH_In,lumi_13TeV_In,norm_jetFakes_In,top_pt_ttbar_shape_In,xsec_diboson_In)
+ModelConfig_NuisParams:(CMS_eff_b,CMS_eff_t,CMS_eff_t_highpt,CMS_scale_t_1prong0pi0_13TeV,CMS_scale_t_1prong1pi0_13TeV,CMS_scale_t_3prong0pi0_13TeV,acceptance_bbH,lumi_13TeV,norm_jetFakes,top_pt_ttbar_shape,xsec_diboson)
+ModelConfig_Observables:(CMS_th1x,CMS_channel)
+ModelConfig_POI:(r)
+POI:(r)
+globalObservables:(CMS_eff_b_In,CMS_eff_t_In,CMS_eff_t_highpt_In,CMS_scale_t_1prong0pi0_13TeV_In,CMS_scale_t_1prong1pi0_13TeV_In,CMS_scale_t_3prong0pi0_13TeV_In,acceptance_bbH_In,lumi_13TeV_In,norm_jetFakes_In,top_pt_ttbar_shape_In,xsec_diboson_In)
+nuisances:(CMS_eff_b,CMS_eff_t,CMS_eff_t_highpt,CMS_scale_t_1prong0pi0_13TeV,CMS_scale_t_1prong1pi0_13TeV,CMS_scale_t_3prong0pi0_13TeV,acceptance_bbH,lumi_13TeV,norm_jetFakes,top_pt_ttbar_shape,xsec_diboson)
+observables:(CMS_th1x,CMS_channel)
+
+generic objects
+---------------
+RooStats::ModelConfig::ModelConfig
+RooArgSet::discreteParams
+
+Workspace has a ModelConfig for signal called 'ModelConfig', with contents:
+
+=== Using the following for ModelConfig ===
+Observables:             RooArgSet:: = (CMS_th1x,CMS_channel)
+Parameters of Interest:  RooArgSet:: = (r)
+Nuisance Parameters:     RooArgSet:: = (CMS_eff_b,CMS_eff_t,CMS_eff_t_highpt,CMS_scale_t_1prong0pi0_13TeV,CMS_scale_t_1prong1pi0_13TeV,CMS_scale_t_3prong0pi0_13TeV,acceptance_bbH,lumi_13TeV,norm_jetFakes,top_pt_ttbar_shape,xsec_diboson)
+Global Observables:      RooArgSet:: = (CMS_eff_b_In,CMS_eff_t_In,CMS_eff_t_highpt_In,CMS_scale_t_1prong0pi0_13TeV_In,CMS_scale_t_1prong1pi0_13TeV_In,CMS_scale_t_3prong0pi0_13TeV_In,acceptance_bbH_In,lumi_13TeV_In,norm_jetFakes_In,top_pt_ttbar_shape_In,xsec_diboson_In)
+PDF:                     RooSimultaneousOpt::model_s[ indexCat=CMS_channel signal_region=pdf_binsignal_region extraConstraints=() channelMasks=() ] = 0.000287829
+
+Input ModelConfig 'ModelConfig': 
+
+=== Using the following for ModelConfig ===
+Observables:             RooArgSet:: = (CMS_th1x,CMS_channel)
+Parameters of Interest:  RooArgSet:: = (r)
+Nuisance Parameters:     RooArgSet:: = (CMS_eff_b,CMS_eff_t,CMS_eff_t_highpt,CMS_scale_t_1prong0pi0_13TeV,CMS_scale_t_1prong1pi0_13TeV,CMS_scale_t_3prong0pi0_13TeV,acceptance_bbH,lumi_13TeV,norm_jetFakes,top_pt_ttbar_shape,xsec_diboson)
+Global Observables:      RooArgSet:: = (CMS_eff_b_In,CMS_eff_t_In,CMS_eff_t_highpt_In,CMS_scale_t_1prong0pi0_13TeV_In,CMS_scale_t_1prong1pi0_13TeV_In,CMS_scale_t_3prong0pi0_13TeV_In,acceptance_bbH_In,lumi_13TeV_In,norm_jetFakes_In,top_pt_ttbar_shape_In,xsec_diboson_In)
+PDF:                     RooSimultaneousOpt::model_s[ indexCat=CMS_channel signal_region=pdf_binsignal_region extraConstraints=() channelMasks=() ] = 0.000287829
+
+Saving snapshot 'clean'
+Saved snapshot 'clean'
+ bin          CMS_th1x       CMS_channel    weight
+   0               0.5     signal_region    19.0000000
+   1               1.5     signal_region    63.0000000
+   2               2.5     signal_region   105.0000000
+   3               3.5     signal_region   275.0000000
+   4               4.5     signal_region   375.0000000
+   5               5.5     signal_region   586.0000000
+   6               6.5     signal_region   604.0000000
+   7               7.5     signal_region   465.0000000
+   8               8.5     signal_region   302.0000000
+   9               9.5     signal_region   211.0000000
+  10              10.5     signal_region   279.0000000
+  11              11.5     signal_region    76.0000000
+  12              12.5     signal_region    32.0000000
+  13              13.5     signal_region    14.0000000
+  14              14.5     signal_region     9.0000000
+  15              15.5     signal_region     1.0000000
+  16              16.5     signal_region     0.0000000
+  17              17.5     signal_region     0.0000000
+[#1] INFO:Eval -- RooRealVar::setRange(CMS_eff_b) new range named 'optimizeBoundRange' created with bounds [-7,7]
+[#1] INFO:Eval -- RooRealVar::setRange(CMS_eff_t) new range named 'optimizeBoundRange' created with bounds [-7,7]
+[#1] INFO:Eval -- RooRealVar::setRange(CMS_eff_t_highpt) new range named 'optimizeBoundRange' created with bounds [-4,4]
+[#1] INFO:Eval -- RooRealVar::setRange(CMS_scale_t_1prong0pi0_13TeV) new range named 'optimizeBoundRange' created with bounds [-4,4]
+[#1] INFO:Eval -- RooRealVar::setRange(CMS_scale_t_1prong1pi0_13TeV) new range named 'optimizeBoundRange' created with bounds [-4,4]
+[#1] INFO:Eval -- RooRealVar::setRange(CMS_scale_t_3prong0pi0_13TeV) new range named 'optimizeBoundRange' created with bounds [-4,4]
+[#1] INFO:Eval -- RooRealVar::setRange(acceptance_bbH) new range named 'optimizeBoundRange' created with bounds [-7,7]
+[#1] INFO:Eval -- RooRealVar::setRange(lumi_13TeV) new range named 'optimizeBoundRange' created with bounds [-7,7]
+[#1] INFO:Eval -- RooRealVar::setRange(norm_jetFakes) new range named 'optimizeBoundRange' created with bounds [-7,7]
+[#1] INFO:Eval -- RooRealVar::setRange(top_pt_ttbar_shape) new range named 'optimizeBoundRange' created with bounds [-4,4]
+[#1] INFO:Eval -- RooRealVar::setRange(xsec_diboson) new range named 'optimizeBoundRange' created with bounds [-7,7]
+Doing initial fit: 
+[#1] INFO:Minimization --  Including the following constraint terms in minimization: (CMS_eff_b_Pdf,CMS_eff_t_Pdf,CMS_eff_t_highpt_Pdf,CMS_scale_t_1prong0pi0_13TeV_Pdf,CMS_scale_t_1prong1pi0_13TeV_Pdf,CMS_scale_t_3prong0pi0_13TeV_Pdf,acceptance_bbH_Pdf,lumi_13TeV_Pdf,norm_jetFakes_Pdf,top_pt_ttbar_shape_Pdf,xsec_diboson_Pdf)
+[#1] INFO:Minimization -- The global observables are not defined , normalize constraints with respect to the parameters (CMS_eff_b,CMS_eff_t,CMS_eff_t_highpt,CMS_scale_t_1prong0pi0_13TeV,CMS_scale_t_1prong1pi0_13TeV,CMS_scale_t_3prong0pi0_13TeV,acceptance_bbH,lumi_13TeV,norm_jetFakes,top_pt_ttbar_shape,xsec_diboson)
+[#1] INFO:Fitting -- RooAbsPdf::fitTo(model_s) fixing normalization set for coefficient determination to observables in data
+[#1] INFO:Fitting -- using CPU computation library compiled with -mavx2
+[#1] INFO:Fitting -- RooAddition::defaultErrorLevel(nll_model_s_data_obs) Summation contains a RooNLLVar, using its error level
+do first minimization
+Minimization configured with Type=Minuit2, Algo=Migrad, strategy=1, tolerance=0.1
+[#1] INFO:Minimization -- RooAbsMinimizerFcn::setOptimizeConst: activating const optimization
+Minuit2Minimizer: Minimize with max-calls 6000 convergence for edm < 0.1 strategy 1
+Minuit2Minimizer::Minuit  - Changing default options
+             StorageLevel :               0
+Number of iterations 16
+----------> Iteration 0
+            FVAL = 3.38942255442 Edm = 37.0091264554 Nfcn = 86
+            Error matrix change = 1
+            Parameters :  p0 = 0 p1 = 0 p2 = -1 p3 = 0 p4 = 0 p5 = 0 p6 = 0 p7 = 0 p8 = 0 p9 = 1 p10 = 0 p11 = 0
+----------> Iteration 1
+            FVAL = -6.82868775986 Edm = 1.25680620255 Nfcn = 116
+            Error matrix change = 0.579859
+            Parameters :  p0 = -0.596004 p1 = -0.376833 p2 = -1.54364 p3 = -0.341903 p4 = -0.000509736 p5 = -0.19582 p6 = -0.255709 p7 = -0.651513 p8 = -0.204055 p9 = 0.771038 p10 = 0.245264 p11 = -0.114133
+----------> Iteration 2
+            FVAL = -8.05067520665 Edm = 0.357496598769 Nfcn = 142
+----------> Iteration 3
+            FVAL = -8.32032918733 Edm = 0.0768684689796 Nfcn = 168
+----------> Iteration 4
+            FVAL = -8.4205656902 Edm = 0.00729022134767 Nfcn = 194
+----------> Iteration 5
+            FVAL = -8.43479349353 Edm = 0.00120662244932 Nfcn = 220
+----------> Iteration 6
+            FVAL = -8.43681889925 Edm = 0.000366599385894 Nfcn = 246
+----------> Iteration 7
+            FVAL = -8.43853740441 Edm = 0.000464754897178 Nfcn = 272
+----------> Iteration 8
+            FVAL = -8.43982143948 Edm = 0.000287138843695 Nfcn = 298
+----------> Iteration 9
+            FVAL = -8.4410921852 Edm = 0.000555579058979 Nfcn = 324
+----------> Iteration 10
+            FVAL = -8.45194749207 Edm = 0.00452299146931 Nfcn = 352
+----------> Iteration 11
+            FVAL = -8.46507078045 Edm = 0.00118788078762 Nfcn = 378
+----------> Iteration 12
+            FVAL = -8.46826108313 Edm = 0.00104571738795 Nfcn = 404
+----------> Iteration 13
+            FVAL = -8.47290525297 Edm = 0.000310458223994 Nfcn = 430
+----------> Iteration 14
+            FVAL = -8.47325258285 Edm = 1.91316485233e-07 Nfcn = 456
+            Error matrix change = 0.109472
+            Parameters :  p0 = -0.0667652 p1 = -0.381897 p2 = -0.539112 p3 = -0.158831 p4 = -0.119775 p5 = -0.301443 p6 = -0.00027731 p7 = -0.0831356 p8 = -0.306593 p9 = 0.503012 p10 = 0.412455 p11 = 0.00574074
+----------> Iteration 15
+            FVAL = -8.47325258285 Edm = 1.9312557586e-07 Nfcn = 571
+            Error matrix change = 0
+            Parameters :  p0 = -0.0667652 p1 = -0.381897 p2 = -0.539112 p3 = -0.158831 p4 = -0.119775 p5 = -0.301443 p6 = -0.00027731 p7 = -0.0831356 p8 = -0.306593 p9 = 0.503012 p10 = 0.412455 p11 = 0.00574074
+Minuit2Minimizer : Valid minimum - status = 0
+FVAL  = -8.47325258284838156
+Edm   = 1.93125575859812026e-07
+Nfcn  = 571
+CMS_eff_b	  = -0.0667652	 +/-  0.986306
+CMS_eff_t	  = -0.381897	 +/-  0.67773
+CMS_eff_t_highpt	  = -0.539112	 +/-  0.940289
+CMS_scale_t_1prong0pi0_13TeV	  = -0.158831	 +/-  0.566211
+CMS_scale_t_1prong1pi0_13TeV	  = -0.119775	 +/-  0.440092
+CMS_scale_t_3prong0pi0_13TeV	  = -0.301443	 +/-  0.628006
+acceptance_bbH	  = -0.00027731	 +/-  0.994471
+lumi_13TeV	  = -0.0831356	 +/-  0.981758
+norm_jetFakes	  = -0.306593	 +/-  0.302703
+r	  = 0.503012	 +/-  0.366188	(limited)
+top_pt_ttbar_shape	  = 0.412455	 +/-  0.686994
+xsec_diboson	  = 0.00574074	 +/-  0.993667
+Minimization finished with status=0
+Minimization success! status=0
+Minimized in 0.040493 seconds (0.030000 CPU time)
+FINAL NLL - NLL0 VALUE = -18.58157645
+
+
+ --- MultiDimFit ---
+best fit parameter values: 
+   r :    +0.503
+Done in 0.00 min (cpu), 0.00 min (real)
+6 log messages saved to combine_logger.out
