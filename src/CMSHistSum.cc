@@ -416,34 +416,39 @@ void CMSHistSum::updateCache() const {
   }
 }
 
-void CMSHistSum::runBarlowBeeston() const {
-  if (!bb_.init) return;
-  RooAbsArg::setDirtyInhibit(true);
+void BarlowBeeston::run(double const* data, double const* valsum, double const *toterr, double const * binWidths) {
+  BarlowBeeston &bb = *this;
+  if (!bb.init) return;
 
-  const unsigned n = bb_.use.size();
+  const unsigned n = bb.use.size();
   for (unsigned j = 0; j < n; ++j) {
-    bb_.dat[j] = data_[bb_.use[j]];
-    bb_.valsum[j] = valsum_[bb_.use[j]] * cache_.GetWidth(bb_.use[j]);
-    bb_.toterr[j] = toterr_[bb_.use[j]] * cache_.GetWidth(bb_.use[j]);
+    bb.dat[j] = data[bb.use[j]];
+    bb.valsum[j] = valsum[bb.use[j]] * binWidths[bb.use[j]];
+    bb.toterr[j] = toterr[bb.use[j]] * binWidths[bb.use[j]];
   }
   // This pragma statement tells (modern) gcc that loop can be safely
   // vectorized
   #pragma GCC ivdep
   for (unsigned j = 0; j < n; ++j) {
-    bb_.b[j] = bb_.toterr[j] + (bb_.valsum[j] / bb_.toterr[j]) - bb_.gobs[j];
-    bb_.c[j] = bb_.valsum[j] - bb_.dat[j] - (bb_.valsum[j] / bb_.toterr[j]) * bb_.gobs[j];
-    bb_.tmp[j] = -0.5 * (bb_.b[j] + copysign(1.0, bb_.b[j]) * std::sqrt(bb_.b[j] * bb_.b[j] - 4. * bb_.c[j]));
-    bb_.x1[j] = bb_.tmp[j];
-    bb_.x2[j] = bb_.c[j] / bb_.tmp[j];
-    bb_.res[j] = std::max(bb_.x1[j], bb_.x2[j]);
+    bb.b[j] = bb.toterr[j] + (bb.valsum[j] / bb.toterr[j]) - bb.gobs[j];
+    bb.c[j] = bb.valsum[j] - bb.dat[j] - (bb.valsum[j] / bb.toterr[j]) * bb.gobs[j];
+    bb.tmp[j] = -0.5 * (bb.b[j] + copysign(1.0, bb.b[j]) * std::sqrt(bb.b[j] * bb.b[j] - 4. * bb.c[j]));
+    bb.x1[j] = bb.tmp[j];
+    bb.x2[j] = bb.c[j] / bb.tmp[j];
+    bb.res[j] = std::max(bb.x1[j], bb.x2[j]);
   }
+  RooAbsArg::setDirtyInhibit(true);
   for (unsigned j = 0; j < n; ++j) {
-    if (toterr_[bb_.use[j]] > 0.) bb_.push_res[j]->setVal(bb_.res[j]);
+    if (toterr[bb.use[j]] > 0.) bb.push_res[j]->setVal(bb.res[j]);
   }
   RooAbsArg::setDirtyInhibit(false);
-  for (RooAbsArg *arg : bb_.dirty_prop) {
+  for (RooAbsArg *arg : bb.dirty_prop) {
     arg->setValueDirty();
   }
+}
+
+void CMSHistSum::runBarlowBeeston() const {
+    bb_.run(data_.data(), valsum_.vec().data(), toterr_.data(), cache_.binWidths().data());
 }
 
 void CMSHistSum::setAnalyticBarlowBeeston(bool flag) const {
@@ -453,21 +458,7 @@ void CMSHistSum::setAnalyticBarlowBeeston(bool flag) const {
     for (unsigned i = 0; i < bb_.push_res.size(); ++i) {
       bb_.push_res[i]->setConstant(false);
     }
-    bb_.use.clear();
-    bb_.dat.clear();
-    bb_.valsum.clear();
-    bb_.toterr.clear();
-    bb_.err.clear();
-    bb_.b.clear();
-    bb_.c.clear();
-    bb_.tmp.clear();
-    bb_.x1.clear();
-    bb_.x2.clear();
-    bb_.res.clear();
-    bb_.gobs.clear();
-    bb_.dirty_prop.clear();
-    bb_.push_res.clear();
-    bb_.init = false;
+    bb_ = BarlowBeeston{};
   }
   if (flag && data_.size()) {
     for (unsigned j = 0; j < bintypes_.size(); ++j) {

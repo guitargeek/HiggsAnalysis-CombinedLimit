@@ -17,6 +17,9 @@ class FastTemplate {
         FastTemplate(const TH1 &other) : size_(other.GetNbinsX()), values_(size_) { CopyValues(other); }
         FastTemplate(const TH2 &other) : size_(other.GetNbinsX()*other.GetNbinsY()), values_(size_) { CopyValues(other); }
         FastTemplate(const TH3 &other) : size_(other.GetNbinsX()*other.GetNbinsY()*other.GetNbinsZ()), values_(size_) { CopyValues(other); }
+
+        AT const& vec() const { return values_; }
+
         FastTemplate & operator=(const FastTemplate &other) { 
             if (&other != this) {
                 size_ = other.size_;
@@ -123,6 +126,8 @@ class FastHisto : public FastTemplate {
 
         const T & GetEdge(unsigned int i) const { return binEdges_[i]; }
         const T & GetWidth(unsigned int i) const { return binWidths_[i]; }
+
+        const AT & binWidths() const { return binWidths_; }
 
     private:
         AT binEdges_;

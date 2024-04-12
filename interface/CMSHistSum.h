@@ -14,25 +14,27 @@
 #include "CMSHistFunc.h"
 #include "CMSHistV.h"
 
+struct BarlowBeeston {
+  void run(double const* data, double const* valsum, double const *toterr, double const * binWidths);
+
+  bool init = false;
+  std::vector<unsigned> use;
+  std::vector<double> dat;
+  std::vector<double> valsum;
+  std::vector<double> toterr;
+  std::vector<double> err;
+  std::vector<double> b;
+  std::vector<double> c;
+  std::vector<double> tmp;
+  std::vector<double> x1;
+  std::vector<double> x2;
+  std::vector<double> res;
+  std::vector<double> gobs;
+  std::set<RooAbsArg*> dirty_prop;
+  std::vector<RooRealVar*> push_res;
+};
+
 class CMSHistSum : public RooAbsReal {
-private:
-  struct BarlowBeeston {
-    bool init = false;
-    std::vector<unsigned> use;
-    std::vector<double> dat;
-    std::vector<double> valsum;
-    std::vector<double> toterr;
-    std::vector<double> err;
-    std::vector<double> b;
-    std::vector<double> c;
-    std::vector<double> tmp;
-    std::vector<double> x1;
-    std::vector<double> x2;
-    std::vector<double> res;
-    std::vector<double> gobs;
-    std::set<RooAbsArg*> dirty_prop;
-    std::vector<RooRealVar*> push_res;
-  };
 public:
 
   CMSHistSum();
