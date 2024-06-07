@@ -16,7 +16,7 @@
       
       
       <link rel="icon" href="../../logo.png">
-      <meta name="generator" content="mkdocs-1.6.0, mkdocs-material-9.5.25">
+      <meta name="generator" content="mkdocs-1.6.0, mkdocs-material-9.5.26">
     
     
       
@@ -156,7 +156,7 @@
       
     </form>
     <div class="md-search__output">
-      <div class="md-search__scrollwrap" data-md-scrollfix>
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
         <div class="md-search-result" data-md-component="search-result">
           <div class="md-search-result__meta">
             Initializing search
@@ -1701,22 +1701,21 @@ bg_others lnN    -     -     -   1.30   30% uncertainty on the rest of the backg
 </ul>
 <p>The <span style="font-variant:small-caps;">Combine</span> tool can take as input histograms saved as TH1, as RooAbsHist in a RooFit workspace (an example of how to create a RooFit workspace and save histograms is available in <a href="https://github.com/cms-analysis/HiggsAnalysis-CombinedLimit/blob/main/data/benchmarks/shapes/make_simple_shapes.cxx">github</a>), or from a pandas dataframe (<a href="https://github.com/cms-analysis/HiggsAnalysis-CombinedLimit/blob/main/data/tutorials/shapes/simple-shapes-df.txt">example</a>).</p>
 <p>The block of lines defining the mapping (first block in the datacard) contains one or more rows of the form</p>
-<ul>
-<li><em><em>shapes </em>process</em> <em>channel</em> <em>file</em> <em>histogram</em> <em>[histogram_with_systematics]</em> **</li>
-</ul>
+<pre><code>shapes process channel file histogram [histogram_with_systematics]
+</code></pre>
 <p>In this line,</p>
 <ul>
-<li><strong><em>process</em></strong> is any one the process names, or <strong>*</strong> for all processes, or <strong>data_obs</strong> for the observed data;</li>
-<li><strong><em>channel</em></strong> is any one the process names, or <strong>*</strong> for all channels;</li>
-<li><em>file</em>, <em>histogram</em> and <em>histogram_with_systematics</em> identify the names of the files and of the histograms within the file, after making some replacements (if any are found):<ul>
-<li><strong>$PROCESS</strong> is replaced with the process name (or "<strong>data_obs</strong>" for the observed data);</li>
-<li><strong>$CHANNEL</strong> is replaced with the channel name;</li>
-<li><strong>$SYSTEMATIC</strong> is replaced with the name of the systematic + (<strong>Up, Down</strong>);</li>
-<li><strong>$MASS</strong> is replaced with the chosen (Higgs boson) mass value that is passed as a command-line option when running the tool</li>
+<li><code>process</code>is any one the process names, or <code>*</code> for all processes, or <code>data_obs</code> for the observed data;</li>
+<li><code>channel</code>is any one the process names, or <code>*</code> for all channels;</li>
+<li><code>file</code>, <code>histogram</code> and <code>histogram_with_systematics</code> identify the names of the files and of the histograms within the file, after making some replacements (if any are found):<ul>
+<li><code>$PROCESS</code> is replaced with the process name (or "<code>data_obs</code>" for the observed data);</li>
+<li><code>$CHANNEL</code> is replaced with the channel name;</li>
+<li><code>$SYSTEMATIC</code> is replaced with the name of the systematic + (<code>Up</code>, <code>Down</code>);</li>
+<li><code>$MASS</code> is replaced with the chosen (Higgs boson) mass value that is passed as a command-line option when running the tool</li>
 </ul>
 </li>
 </ul>
-<p>In addition, user-defined keywords can be used. Any word in the datacard <strong>$WORD</strong> will be replaced by <strong>VALUE</strong> when including the option <code>--keyword-value WORD=VALUE</code>. This option can be repeated multiple times for multiple keywords.</p>
+<p>In addition, user-defined keywords can be used. Any word in the datacard <code>$WORD</code> will be replaced by <code>VALUE</code> when including the option <code>--keyword-value WORD=VALUE</code>. This option can be repeated multiple times for multiple keywords.</p>
 <h4 id="template-shape-uncertainties">Template shape uncertainties</h4>
 <p>Shape uncertainties can be taken into account by vertical interpolation of the histograms. The shapes (fraction of events <span class="arithmatex">\(f\)</span> in each bin) are interpolated using a spline for shifts below +/- 1σ and linearly outside of that. Specifically, for nuisance parameter values <span class="arithmatex">\(|\nu|\leq 1\)</span> </p>
 <div class="arithmatex">\[ f(\nu) = \frac{1}{2} \left( (\delta^{+}-\delta^{-})\nu + \frac{1}{8}(\delta^{+}+\delta^{-})(3\nu^6 - 10\nu^4 + 15\nu^2) \right) \]</div>
@@ -2040,7 +2039,7 @@ MB.doModel()
 <p>For large combinations with multiple channels/processes etc, the <code>.txt</code> file can get unwieldy to read through. There are some simple tools to help check and disseminate the contents of the cards. </p>
 <p>In order to get a quick view of the systematic uncertainties included in the datacard, you can use the <code>test/systematicsAnalyzer.py</code> tool. This will produce a list of the systematic uncertainties (normalization and shape), indicating what type they are, which channels/processes they affect and the size of the effect on the normalization (for shape uncertainties, this will just be the overall uncertainty on the normalization).</p>
 <p>The default output is a <code>.html</code> file that can be expanded to give more details about the effect of the systematic uncertainty for each channel/process. Add the option <code>--format brief</code> to obtain a simpler summary report direct to the terminal. An example output for the tutorial card <code>data/tutorials/shapes/simple-shapes-TH1.txt</code> is shown below.</p>
-<pre><code class="language-nohighlight">$ python test/systematicsAnalyzer.py data/tutorials/shapes/simple-shapes-TH1.txt --all -f html &gt; out.html
+<pre><code class="language-sh">python test/systematicsAnalyzer.py data/tutorials/shapes/simple-shapes-TH1.txt --all -f html &gt; out.html
 </code></pre>
 <p>This will produce the following output in html format: </p>
 <html>
@@ -2118,17 +2117,16 @@ function toggleChann(id) {
 
 <p>In case you only have a counting experiment datacard, include the option <code>--noshape</code>.</p>
 <p>If you have a datacard that uses several <code>rateParams</code> or a Physics model that includes a complicated product of normalization terms in each process, you can check the values of the normalization (and which objects in the workspace comprise them) using the <code>test/printWorkspaceNormalisations.py</code> tool. As an example, the first few blocks of output for the tutorial card <code>data/tutorials/counting/realistic-multi-channel.txt</code> are given below:</p>
+<pre><code class="language-sh">text2workspace.py data/tutorials/counting/realistic-multi-channel.txt 
+python test/printWorkspaceNormalisations.py data/tutorials/counting/realistic-multi-channel.root     
+</code></pre>
 <details>
 <summary><strong>Show example output</strong></summary>
-<pre><code>
-$ text2workspace.py data/tutorials/shapes/simple-shapes-parametric.txt -m 30
-$ python test/printWorkspaceNormalisations.py data/tutorials/counting/realistic-multi-channel.root                                                                                                           
-
----------------------------------------------------------------------------
+<pre><code>---------------------------------------------------------------------------
 ---------------------------------------------------------------------------
 Channel - mu_tau
 ---------------------------------------------------------------------------
-  Top-level normalisation for process ZTT -> n_exp_binmu_tau_proc_ZTT
+  Top-level normalisation for process ZTT -&gt; n_exp_binmu_tau_proc_ZTT
   -------------------------------------------------------------------------
 Dumping ProcessNormalization n_exp_binmu_tau_proc_ZTT @ 0x6bbb610
     nominal value: 329
@@ -2142,7 +2140,7 @@ Dumping ProcessNormalization n_exp_binmu_tau_proc_ZTT @ 0x6bbb610
   -------------------------------------------------------------------------
   default value =  329.0
 ---------------------------------------------------------------------------
-  Top-level normalisation for process QCD -> n_exp_binmu_tau_proc_QCD
+  Top-level normalisation for process QCD -&gt; n_exp_binmu_tau_proc_QCD
   -------------------------------------------------------------------------
 Dumping ProcessNormalization n_exp_binmu_tau_proc_QCD @ 0x6bbcaa0
     nominal value: 259
@@ -2154,7 +2152,7 @@ Dumping ProcessNormalization n_exp_binmu_tau_proc_QCD @ 0x6bbcaa0
   -------------------------------------------------------------------------
   default value =  259.0
 ---------------------------------------------------------------------------
-  Top-level normalisation for process higgs -> n_exp_binmu_tau_proc_higgs
+  Top-level normalisation for process higgs -&gt; n_exp_binmu_tau_proc_higgs
   -------------------------------------------------------------------------
 Dumping ProcessNormalization n_exp_binmu_tau_proc_higgs @ 0x6bc6390
     nominal value: 0.57
@@ -2172,7 +2170,7 @@ Dumping ProcessNormalization n_exp_binmu_tau_proc_higgs @ 0x6bc6390
 ---------------------------------------------------------------------------
 Channel - e_mu
 ---------------------------------------------------------------------------
-  Top-level normalisation for process ZTT -> n_exp_bine_mu_proc_ZTT
+  Top-level normalisation for process ZTT -&gt; n_exp_bine_mu_proc_ZTT
   -------------------------------------------------------------------------
 Dumping ProcessNormalization n_exp_bine_mu_proc_ZTT @ 0x6bc8910
     nominal value: 88
@@ -2189,18 +2187,16 @@ Dumping ProcessNormalization n_exp_bine_mu_proc_ZTT @ 0x6bc8910
 </details>
 <p>As you can see, for each channel, a report is given for the top-level rate object in the workspace, for each process contributing to that channel. You can also see the various terms that make up that rate. The default value is for the default parameters in the workspace (i.e when running <code>text2workspace</code>, these are the values created as default).</p>
 <p>Another example is shown below for the workspace produced from the <a href="https://github.com/cms-analysis/HiggsAnalysis-CombinedLimit/blob/main/data/tutorials/shapes/simple-shapes-parametric.txt">data/tutorials/shapes/simple-shapes-parametric.txt</a> datacard.</p>
+<pre><code class="language-sh">text2workspace.py data/tutorials/shapes/simple-shapes-parametric.txt -m 30
+python test/printWorkspaceNormalisations.py data/tutorials/shapes/simple-shapes-parametric.root -m 30
+</code></pre>
 <details>
 <summary><strong>Show example output</strong></summary>
-<pre><code>
-  text2workspace.py data/tutorials/shapes/simple-shapes-parametric.txt
-  python test/printWorkspaceNormalisations.py data/tutorials/shapes/simple-shapes-parametric.root
-  ...
-
-  ---------------------------------------------------------------------------
+<pre><code>  ---------------------------------------------------------------------------
   ---------------------------------------------------------------------------
   Channel - bin1
   ---------------------------------------------------------------------------
-    Top-level normalisation for process bkg -> n_exp_final_binbin1_proc_bkg
+    Top-level normalisation for process bkg -&gt; n_exp_final_binbin1_proc_bkg
     -------------------------------------------------------------------------
   RooProduct::n_exp_final_binbin1_proc_bkg[ n_exp_binbin1_proc_bkg * shapeBkg_bkg_bin1__norm ] = 521.163
    ... is a product, which contains  n_exp_binbin1_proc_bkg
@@ -2208,7 +2204,7 @@ Dumping ProcessNormalization n_exp_bine_mu_proc_ZTT @ 0x6bc8910
     -------------------------------------------------------------------------
     default value =  521.163204829
   ---------------------------------------------------------------------------
-    Top-level normalisation for process sig -> n_exp_binbin1_proc_sig
+    Top-level normalisation for process sig -&gt; n_exp_binbin1_proc_sig
     -------------------------------------------------------------------------
   Dumping ProcessNormalization n_exp_binbin1_proc_sig @ 0x464f700
       nominal value: 1
@@ -2318,7 +2314,7 @@ Dumping ProcessNormalization n_exp_bine_mu_proc_ZTT @ 0x6bc8910
     <script id="__config" type="application/json">{"base": "../..", "features": ["content.code.copy", "navigation.footer", "navigation.indexes", "navigation.expand", "navigation.tracking", "navigation.tabs", "navigation.tabs.sticky", "navigation.top", "search.highlight", "search.suggest", "toc.follow"], "search": "../../assets/javascripts/workers/search.b8dbb3d2.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": {"provider": "mike"}}</script>
     
     
-      <script src="../../assets/javascripts/bundle.081f42fc.min.js"></script>
+      <script src="../../assets/javascripts/bundle.ad660dcc.min.js"></script>
       
         <script src="../../javascripts/mathjax.js"></script>
       
