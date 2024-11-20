@@ -15,9 +15,12 @@
 #include <RooGaussian.h>
 #include <RooPoisson.h>
 #include <RooProduct.h>
+
+#include "RooSimultaneousOpt.h"
 #include "SimpleGaussianConstraint.h"
 #include "SimplePoissonConstraint.h"
 #include "SimpleConstraintGroup.h"
+
 #include <boost/ptr_container/ptr_vector.hpp>
 
 class RooMultiPdf;
@@ -184,7 +187,6 @@ class CachingSimNLL  : public RooAbsReal {
         void clearConstantZeroPoint() ;
         void updateZeroPoint() { clearZeroPoint(); setZeroPoint(); }
         static void forceUnoptimizedConstraints() { optimizeContraints_ = false; }
-        void setChannelMasks(RooArgList const& args);
         void setAnalyticBarlowBeeston(bool flag);
         void setHideRooCategories(bool flag) { hideRooCategories_ = flag; }
         void setHideConstants(bool flag) { hideConstants_ = flag; }
@@ -193,6 +195,12 @@ class CachingSimNLL  : public RooAbsReal {
         friend class CachingAddNLL;
         // trap this call, since we don't care about propagating it to the sub-components
         void constOptimizeTestStatistic(ConstOpCode opcode, Bool_t doAlsoTrackingOpt=kTRUE) override { }
+
+        inline bool channelMasked(std::size_t idx) const {
+           RooArgList const& masks = static_cast<RooSimultaneousOpt *>(pdfOriginal_)->channelMasks();
+           return !masks.empty() && static_cast<RooRealVar const&>(masks[idx]).getVal() != 0.0;
+        }
+
     private:
         void setup_();
         RooSimultaneous   *pdfOriginal_;
@@ -217,12 +225,12 @@ class CachingSimNLL  : public RooAbsReal {
         std::vector<double> constrainZeroPoints_;
         std::vector<double> constrainZeroPointsFast_;
         std::vector<double> constrainZeroPointsFastPoisson_;
-        std::vector<RooAbsReal*> channelMasks_;
         std::vector<bool>        internalMasks_;
         bool                     maskConstraints_;
+        bool                     pdfIsSimultaneousOpt_; // if the pdf is a RooSimultaneousOpt or not
         RooArgSet                activeParameters_, activeCatParameters_;
-        double                   maskingOffset_;     // offset to ensure that interal or constraint masking doesn't change NLL value
-        double                   maskingOffsetZero_; // and associated zero point
+        double                   maskingOffset_ = 0.0;     // offset to ensure that interal or constraint masking doesn't change NLL value
+        double                   maskingOffsetZero_ = 0.0; // and associated zero point
 };
 
 }

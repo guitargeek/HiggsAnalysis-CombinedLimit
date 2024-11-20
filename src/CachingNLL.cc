@@ -871,7 +871,8 @@ cacheutils::CachingSimNLL::CachingSimNLL(RooSimultaneous *pdf, RooAbsData *data,
     nuis_(nuis),
     params_("params","parameters",this),
     catParams_("catParams","Category parameters",this),
-    hideRooCategories_(false), hideConstants_(false), maskConstraints_(false), maskingOffset_(0), maskingOffsetZero_(0)
+    hideRooCategories_(false), hideConstants_(false), maskConstraints_(false),
+    pdfIsSimultaneousOpt_(dynamic_cast<RooSimultaneousOpt *>(pdf))
 {
     setup_();
 }
@@ -888,7 +889,8 @@ cacheutils::CachingSimNLL::CachingSimNLL(const CachingSimNLL &other, const char 
     internalMasks_(other.internalMasks_),
     maskConstraints_(other.maskConstraints_),
     maskingOffset_(other.maskingOffset_),
-    maskingOffsetZero_(other.maskingOffsetZero_)
+    maskingOffsetZero_(other.maskingOffsetZero_),
+    pdfIsSimultaneousOpt_(other.pdfIsSimultaneousOpt_)
 {
     setup_();
 }
@@ -1071,10 +1073,7 @@ cacheutils::CachingSimNLL::evaluate() const
     unsigned idx = 0;
     for (std::vector<CachingAddNLL*>::const_iterator it = pdfs_.begin(), ed = pdfs_.end(); it != ed; ++it, ++idx) {
         if (*it != 0) {
-            if (!channelMasks_.empty() && channelMasks_[idx]->getVal() != 0.) {
-                // std::cout << "Channel " << (*it)->GetName() << " will be masked as " 
-                //     << channelMasks_[idx]->GetName() << " evalutes to " 
-                //     << channelMasks_[idx]->getVal() << "\n";
+            if (channelMasked(idx)) {
                 continue;
             }
             if (!internalMasks_.empty() && !internalMasks_[idx]) {
@@ -1246,20 +1245,6 @@ void cacheutils::CachingSimNLL::clearConstantZeroPoint() {
     setValueDirty();
 }
 
-void cacheutils::CachingSimNLL::setChannelMasks(const RooArgList &args) {
-    // Here we're assuming that args has the same size and is aligned with
-    // the vector of pdfs. This should be ok because RooSimultaneousOpt does
-    // the validation when it is first given the RooArgList of masking terms,
-    // but maybe we should check here too?
-    std::vector<RooAbsReal *> vars;
-    for (int i = 0; i < args.getSize(); ++i) {
-        RooAbsReal *var = dynamic_cast<RooAbsReal*>(args.at(i));
-        if (!var) return;
-        vars.push_back(var);
-    }
-    channelMasks_ = vars;
-}
-
 void cacheutils::CachingSimNLL::setAnalyticBarlowBeeston(bool flag) {
    /*
       if (flag) {
@@ -1270,12 +1255,7 @@ void cacheutils::CachingSimNLL::setAnalyticBarlowBeeston(bool flag) {
     */
     for (int ib = 0, nb = pdfs_.size(); ib < nb; ++ib) {
         // If channel is masked we must always make sure analytic minimisation is off
-        if (!channelMasks_.empty() && channelMasks_[ib]->getVal() != 0.) {
-            pdfs_[ib]->setAnalyticBarlowBeeston(false);
-        } else {
-            pdfs_[ib]->setAnalyticBarlowBeeston(flag);
-
-        }
+        pdfs_[ib]->setAnalyticBarlowBeeston(flag && !channelMasked(ib));
     }
 }
 

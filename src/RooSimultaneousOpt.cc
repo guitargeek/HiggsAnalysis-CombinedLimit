@@ -27,7 +27,6 @@ RooSimultaneousOpt::createNLLImpl(RooAbsData& data, const RooLinkedList& cmdList
     pc.defineSet("cPars","Constrain",0,0);
     RooArgSet *cPars = pc.getSet("cPars");
     auto nll =  std::make_unique<cacheutils::CachingSimNLL>(this, &data, cPars);
-    nll->setChannelMasks(this->channelMasks());
 #if ROOT_VERSION_CODE < ROOT_VERSION(6,30,0)
     return nll.release();
 #else
