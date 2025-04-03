@@ -3,12 +3,10 @@
 #include <TString.h>
 #include <TFile.h>
 #include <boost/program_options.hpp>
-#include <boost/filesystem.hpp>
+#include <filesystem>
 #include "RooArgSet.h"
 #include "RooAbsReal.h"
 #include "RooRealVar.h"
-#include <boost/algorithm/string/split.hpp>
-#include <boost/algorithm/string/classification.hpp>
 
 class TDirectory;
 class TTree;
@@ -44,7 +42,7 @@ namespace {
                  unlink(file.c_str());  // FIXME, we should check that the file deleted safely but currently when running HybridNew, we get a status of -1 even though the file is in fact removed?!
 		 //if (unlink(file.c_str()) == -1) std::cerr << "Failed to delete temporary file " << file << ": " << strerror(errno) << std::endl;
               }
-              if (!path.empty()) {  boost::filesystem::remove_all(path); }
+              if (!path.empty()) {  std::filesystem::remove_all(path); }
         }
     };
 }

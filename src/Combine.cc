@@ -45,10 +45,8 @@
 #include <RooStats/RooStatsUtils.h>
 #include <RooStats/ModelConfig.h>
 
-#include <boost/filesystem.hpp>
 #include <boost/program_options.hpp>
-#include <boost/algorithm/string/predicate.hpp>
-#include <boost/algorithm/string.hpp> 
+#include <filesystem>
 #include <regex>
 
 #include "../interface/LimitAlgo.h"
@@ -214,6 +212,18 @@ void Combine::applyOptions(const boost::program_options::variables_map &vm) {
   makeToyGenSnapshot_ = (method == "FitDiagnostics" && !vm.count("justFit"));
 }
 
+namespace {
+  std::string removeDuplicateCommas(std::string const& input) {
+    std::string output;
+    for (std::size_t i = 0; i < input.size(); ++i) {
+      if (i > 0 && input[i] == ',' && input[i] == input[i - 1])
+        continue;
+      output += input[i];
+    }
+    return output;
+  }
+}  // namespace
+
 std::string Combine::parseRegex(std::string instr, const RooArgSet *nuisances, RooWorkspace *w) {
   // expand regexps inside the "rgx{}" option
   while (instr.find("rgx{") != std::string::npos) {          
@@ -235,7 +245,7 @@ std::string Combine::parseRegex(std::string instr, const RooArgSet *nuisances, R
     }
 
     instr = prestr+matchingParams+poststr;
-    instr = boost::replace_all_copy(instr, ",,", ","); 
+    instr = removeDuplicateCommas(instr);
   }
 
   // expand regexps inside the "var{}" option        
@@ -262,7 +272,7 @@ std::string Combine::parseRegex(std::string instr, const RooArgSet *nuisances, R
     }
 
     instr = prestr+matchingParams+poststr;
-    instr = boost::replace_all_copy(instr, ",,", ","); 
+    instr = removeDuplicateCommas(instr);
   }
 
   return instr;
@@ -322,7 +332,7 @@ void Combine::run(TString hlfFile, const std::string &dataset, double &limit, do
 
   bool isTextDatacard = false, isBinary = hlfFile.EndsWith(".root");
   TString fileToLoad = ((hlfFile[0] == '/' || hlfFile.Contains("://")) ? hlfFile : pwd+"/"+hlfFile);
-  if (!(fileToLoad.Contains("://") && isBinary) && !boost::filesystem::exists(fileToLoad.Data())) throw std::invalid_argument(("File "+fileToLoad+" does not exist").Data());
+  if (!(fileToLoad.Contains("://") && isBinary) && !std::filesystem::exists(fileToLoad.Data())) throw std::invalid_argument(("File "+fileToLoad+" does not exist").Data());
   if (hlfFile.EndsWith(".hlf") || isBinary) {
     // nothing to do
   } else {
@@ -341,7 +351,7 @@ void Combine::run(TString hlfFile, const std::string &dataset, double &limit, do
     //-- Binary mode: new default 
     int status = gSystem->Exec("text2workspace.py "+options+" '"+txtFile+"' -b -o "+tmpFile+".root "+textToWorkspaceString_); 
     isBinary = true; fileToLoad = tmpFile+".root";
-    if (status != 0 || !boost::filesystem::exists(fileToLoad.Data())) {
+    if (status != 0 || !std::filesystem::exists(fileToLoad.Data())) {
         throw std::invalid_argument("Failed to convert the input datacard from LandS to RooStats format. The lines above probably contain more information about the error.");
     }
     garbageCollect.file = fileToLoad;
@@ -415,11 +425,9 @@ void Combine::run(TString hlfFile, const std::string &dataset, double &limit, do
 
         if (defineBackgroundOnlyModelParameterExpression_ != "") {
           std::cerr << "Will make one from the signal ModelConfig " << modelConfigName_ << " setting " << std::endl;
-	  vector<string> SetParameterExpressionList;
-	  boost::split(SetParameterExpressionList, defineBackgroundOnlyModelParameterExpression_, boost::is_any_of(","));
+	  vector<string> SetParameterExpressionList = Utils::split(defineBackgroundOnlyModelParameterExpression_, ",");
 	  for (UInt_t p = 0; p < SetParameterExpressionList.size(); ++p) {
-	    vector<string> SetParameterExpression;
-	    boost::split(SetParameterExpression, SetParameterExpressionList[p], boost::is_any_of("="));
+	    vector<string> SetParameterExpression = Utils::split(SetParameterExpressionList[p], "=");
 	    if (SetParameterExpression.size() != 2) {
 		  std::cout << "Error parsing background model parameter expression : " << SetParameterExpressionList[p] << endl;
 	    } else {
@@ -610,8 +618,7 @@ void Combine::run(TString hlfFile, const std::string &dataset, double &limit, do
       if (floatNuisances_=="all") {
           toFloat.add(*nuisances);
       } else {
-          std::vector<std::string> nuisToFloat;
-          boost::split(nuisToFloat, floatNuisances_, boost::is_any_of(","), boost::token_compress_on);
+          std::vector<std::string> nuisToFloat = Utils::split(floatNuisances_, "n");
           for (int k=0; k<(int)nuisToFloat.size(); k++) {
               if (nuisToFloat[k]=="") continue;
               else if(nuisToFloat[k]=="all") {
@@ -644,8 +651,7 @@ void Combine::run(TString hlfFile, const std::string &dataset, double &limit, do
       if (freezeNuisances_=="allConstrainedNuisances") {
           toFreeze.add(*nuisances);
       } else {
-          std::vector<std::string> nuisToFreeze;
-          boost::split(nuisToFreeze, freezeNuisances_, boost::is_any_of(","), boost::token_compress_on);
+          std::vector<std::string> nuisToFreeze = Utils::split(freezeNuisances_, ",");
           for (int k=0; k<(int)nuisToFreeze.size(); k++) {
               if (nuisToFreeze[k]=="") continue;
               else if(nuisToFreeze[k]=="allConstrainedNuisances") {
@@ -679,11 +685,10 @@ void Combine::run(TString hlfFile, const std::string &dataset, double &limit, do
   }
 
   if (freezeNuisanceGroups_ != "") {
-      std::vector<string> nuisanceGroups;
-      boost::algorithm::split(nuisanceGroups,freezeNuisanceGroups_,boost::algorithm::is_any_of(","));
+      std::vector<string> nuisanceGroups = Utils::split(freezeNuisanceGroups_, ",");
       for (std::vector<string>::iterator ng_it=nuisanceGroups.begin();ng_it!=nuisanceGroups.end();ng_it++){
         bool freeze_complement=false;
-      	if (boost::algorithm::starts_with((*ng_it),"^")){
+      	if (Utils::starts_with(*ng_it,"^")){
           freeze_complement=true;
           (*ng_it).erase(0,1);
         } 
@@ -716,8 +721,7 @@ void Combine::run(TString hlfFile, const std::string &dataset, double &limit, do
   }
 
   if (freezeWithAttributes_ != "") {
-    std::vector<string> nuisanceAttrs;
-    boost::algorithm::split(nuisanceAttrs,freezeWithAttributes_,boost::algorithm::is_any_of(","));
+    std::vector<string> nuisanceAttrs = Utils::split(freezeWithAttributes_, ",");
     for (auto const& attr : nuisanceAttrs) {
       RooArgSet toFreeze;
       if (nuisances) {
@@ -842,11 +846,9 @@ void Combine::run(TString hlfFile, const std::string &dataset, double &limit, do
       // Was r also specified in --setPhysicsModelParameters?
       bool rInParamExp = false;
       if (setPhysicsModelParameterExpression_ != "") {
-        vector<string> SetParameterExpressionList;
-        boost::split(SetParameterExpressionList, setPhysicsModelParameterExpression_, boost::is_any_of(","));
+        vector<string> SetParameterExpressionList = Utils::split(setPhysicsModelParameterExpression_, ",");
         for (UInt_t p = 0; p < SetParameterExpressionList.size(); ++p) {
-          vector<string> SetParameterExpression;
-          boost::split(SetParameterExpression, SetParameterExpressionList[p], boost::is_any_of("="));
+          vector<string> SetParameterExpression = Utils::split(SetParameterExpressionList[p], "=");
           if (SetParameterExpression.size() == 2 && SetParameterExpression[0] == "r") {
             rInParamExp = true;
             break;
@@ -1227,7 +1229,7 @@ void Combine::addBranches(const std::string& trackString, RooWorkspace* w, std::
     std::stringstream ss(trackString);
     std::string token;
     while(std::getline(ss,token,',')) {
-      if (boost::starts_with(token, "rgx{") && boost::ends_with(token, "}")) {
+      if (Utils::starts_with(token, "rgx{") && token.back() == '}') {
           std::string reg_esp = token.substr(4, token.size()-5);
           std::cout<<"interpreting "<<reg_esp<<" as regex "<<std::endl;
           std::regex rgx( reg_esp, std::regex::ECMAScript);
