@@ -125,6 +125,22 @@ void configureCascadeMinimizerState(RooWorkspace &ws, RooStats::ModelConfig &mc)
 
 int main(int argc, char **argv) {
   CascadeMinimizer::initOptions();
+  runtimedef::set("OPTIMIZE_BOUNDS", 1);
+  runtimedef::set("ADDNLL_RECURSIVE", 1);
+  runtimedef::set("ADDNLL_GAUSSNLL", 1);
+  runtimedef::set("ADDNLL_HISTNLL", 1);
+  runtimedef::set("ADDNLL_CBNLL", 1);
+  runtimedef::set("TMCSO_AdaptivePseudoAsimov", 1);
+  runtimedef::set("MINIMIZER_optimizeConst", 2);
+  runtimedef::set("MINIMIZER_rooFitOffset", 1);
+  runtimedef::set("ADDNLL_ROOREALSUM_FACTOR", 1);
+  runtimedef::set("ADDNLL_ROOREALSUM_NONORM", 1);
+  runtimedef::set("ADDNLL_ROOREALSUM_BASICINT", 1);
+  runtimedef::set("ADDNLL_ROOREALSUM_KEEPZEROS", 1);
+  runtimedef::set("ADDNLL_PRODNLL", 1);
+  runtimedef::set("ADDNLL_HFNLL", 1);
+  runtimedef::set("ADDNLL_HISTFUNCNLL", 1);
+  runtimedef::set("ADDNLL_ROOREALSUM_CHEAPPROD", 1);
 
   if (argc < 2) {
     printUsage(argv[0]);
@@ -175,6 +191,7 @@ int main(int argc, char **argv) {
 
   RooMsgService::instance().setGlobalKillBelow(RooFit::ERROR);
   RooAbsReal::setEvalErrorLoggingMode(RooAbsReal::CountErrors);
+  RooRealVar::enableSilentClipping();
 
   const RooArgSet *poi = modelConfig->GetParametersOfInterest();
   if (!poi || poi->getSize() == 0) {
@@ -197,7 +214,7 @@ int main(int argc, char **argv) {
     constraintPtr = &constraintSet;
   }
 
-  auto nll = combineCreateNLL(*pdf, *data, constraintPtr, /*offset=*/false);
+  auto nll = combineCreateNLL(*pdf, *data, constraintPtr, /*offset=*/true);
   if (!nll) {
     std::cerr << "ERROR: combineCreateNLL returned a null pointer.\n";
     return 3;
