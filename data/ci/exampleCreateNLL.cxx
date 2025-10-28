@@ -1,4 +1,5 @@
 #include <iostream>
+#include <limits>
 #include <memory>
 #include <string>
 
@@ -7,12 +8,14 @@
 #include "RooAbsPdf.h"
 #include "RooAbsReal.h"
 #include "RooArgSet.h"
+#include "RooFitResult.h"
 #include "RooMsgService.h"
 #include "RooRealVar.h"
 #include "RooWorkspace.h"
 #include "RooStats/ModelConfig.h"
 
 #include "../../interface/Combine.h"
+#include "../../interface/CascadeMinimizer.h"
 
 namespace {
 void printUsage(const char *argv0) {
@@ -83,34 +86,61 @@ int main(int argc, char **argv) {
     return 3;
   }
 
+  const RooArgSet *poi = modelConfig->GetParametersOfInterest();
+  RooRealVar *primaryPoi = nullptr;
+  if (poi) {
+    for (RooAbsArg *arg : *poi) {
+      if (auto *var = dynamic_cast<RooRealVar *>(arg)) {
+        var->setConstant(false);
+        if (primaryPoi == nullptr)
+          primaryPoi = var;
+      }
+    }
+  }
+
   std::cout << "Initial NLL value: " << nll->getVal() << '\n';
 
-  const RooArgSet *poi = modelConfig->GetParametersOfInterest();
+  CascadeMinimizer minim(*nll, CascadeMinimizer::Constrained, primaryPoi);
+  bool minimOk = minim.minimize(/*verbose=*/0);
+  if (!minimOk) {
+    std::cerr << "ERROR: minimization failed.\n";
+    return 4;
+  }
+
+  minim.hesse(/*verbose=*/0);
+  auto fitResult = std::unique_ptr<RooFitResult>(minim.save());
+  std::cout << "Global minimum NLL: " << nll->getVal() << '\n';
+
+  if (fitResult) {
+    std::cout << "Minimizer status: " << fitResult->status()
+              << ", edm=" << fitResult->edm() << '\n';
+  }
+
   if (poi && poi->getSize() > 0) {
+    std::cout << "Best-fit POI values:\n";
     for (RooAbsArg *arg : *poi) {
       auto *poiVar = dynamic_cast<RooRealVar *>(arg);
       if (!poiVar)
         continue;
 
-      const double originalValue = poiVar->getVal();
-      std::cout << "  " << poiVar->GetName() << " = " << originalValue << " --> NLL "
-                << nll->getVal() << '\n';
-
-      if (poiVar->hasMin()) {
-        poiVar->setVal(poiVar->getMin());
-        std::cout << "  " << poiVar->GetName() << " at lower bound (" << poiVar->getMin()
-                  << ") --> NLL " << nll->getVal() << '\n';
-      }
-      if (poiVar->hasMax()) {
-        poiVar->setVal(poiVar->getMax());
-        std::cout << "  " << poiVar->GetName() << " at upper bound (" << poiVar->getMax()
-                  << ") --> NLL " << nll->getVal() << '\n';
+      const double val = poiVar->getVal();
+      double errHi = std::numeric_limits<double>::quiet_NaN();
+      double errLo = std::numeric_limits<double>::quiet_NaN();
+      if (fitResult) {
+        if (auto *fitVar = dynamic_cast<RooRealVar *>(fitResult->floatParsFinal().find(poiVar->GetName()))) {
+          errHi = fitVar->getErrorHi();
+          errLo = fitVar->getErrorLo();
+        }
       }
 
-      poiVar->setVal(originalValue);
+      std::cout << "  " << poiVar->GetName() << " = " << val;
+      if (fitResult) {
+        std::cout << " +" << errHi << " / " << errLo;
+      }
+      std::cout << '\n';
     }
   } else {
-    std::cout << "ModelConfig has no parameters of interest to scan.\n";
+    std::cout << "ModelConfig has no parameters of interest.\n";
   }
 
   std::cout << "Finished building and evaluating the NLL from workspace '" << workspaceName
