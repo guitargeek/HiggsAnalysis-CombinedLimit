@@ -39,6 +39,7 @@ bool loadSnapshotIfExists(RooWorkspace &ws, const char *name) {
 }
 
 void configureCascadeMinimizerState(RooWorkspace &ws, RooStats::ModelConfig &mc) {
+  // Adapted from https://github.com/cms-analysis/HiggsAnalysis-CombinedLimit/blob/master/src/Combine.cc#L1146-L1203
   auto &cfg = CascadeMinimizerGlobalConfigs::O();
 
   cfg.parametersOfInterest = RooArgList();
@@ -101,6 +102,7 @@ void configureCascadeMinimizerState(RooWorkspace &ws, RooStats::ModelConfig &mc)
   }
 
   if (cfg.pdfCategories.getSize() > 0) {
+    // Mirrors https://github.com/cms-analysis/HiggsAnalysis-CombinedLimit/blob/master/src/Combine.cc#L1205-L1230
     RooArgSet clients;
     utils::getClients(cfg.pdfCategories, ws.allPdfs(), clients);
     for (RooAbsArg *arg : clients) {
@@ -125,6 +127,7 @@ void configureCascadeMinimizerState(RooWorkspace &ws, RooStats::ModelConfig &mc)
 
 int main(int argc, char **argv) {
   CascadeMinimizer::initOptions();
+  // Matches https://github.com/cms-analysis/HiggsAnalysis-CombinedLimit/blob/master/bin/combine.cpp#L300-L317
   runtimedef::set("OPTIMIZE_BOUNDS", 1);
   runtimedef::set("ADDNLL_RECURSIVE", 1);
   runtimedef::set("ADDNLL_GAUSSNLL", 1);
@@ -165,6 +168,7 @@ int main(int argc, char **argv) {
     return 2;
   }
 
+  // Matches https://github.com/cms-analysis/HiggsAnalysis-CombinedLimit/blob/master/src/Combine.cc#L505-L603
   utils::check_inf_parameters(workspace->allVars(), /*verbosity=*/0);
   loadSnapshotIfExists(*workspace, "clean");
 
@@ -203,6 +207,7 @@ int main(int argc, char **argv) {
       var->setConstant(false);
   }
 
+  // Mirrors https://github.com/cms-analysis/HiggsAnalysis-CombinedLimit/blob/master/src/Combine.cc#L1146-L1230
   configureCascadeMinimizerState(*workspace, *modelConfig);
 
   const RooArgSet *nuisances = modelConfig->GetNuisanceParameters();
@@ -213,6 +218,7 @@ int main(int argc, char **argv) {
     constraintPtr = &constraintSet;
   }
 
+  // Matches https://github.com/cms-analysis/HiggsAnalysis-CombinedLimit/blob/master/src/MultiDimFit.cc#L220
   auto nll = combineCreateNLL(*pdf, *data, constraintPtr, /*offset=*/true);
   if (!nll) {
     std::cerr << "ERROR: combineCreateNLL returned a null pointer.\n";
