@@ -191,7 +191,6 @@ int main(int argc, char **argv) {
 
   RooMsgService::instance().setGlobalKillBelow(RooFit::ERROR);
   RooAbsReal::setEvalErrorLoggingMode(RooAbsReal::CountErrors);
-  RooRealVar::enableSilentClipping();
 
   const RooArgSet *poi = modelConfig->GetParametersOfInterest();
   if (!poi || poi->getSize() == 0) {
