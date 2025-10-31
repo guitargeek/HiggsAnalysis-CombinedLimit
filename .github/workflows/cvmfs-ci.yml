@@ -102,7 +102,7 @@ jobs:
             root --version
             combine --help
 
-      - name: Run Tests
+      - name: Run Tests (LCG)
         if: ${{ env.CMSSW_VERSION == '' }}
         env:
           LCG_RELEASE: ${{ matrix.LCG_RELEASE }}
@@ -111,6 +111,19 @@ jobs:
           source /cvmfs/sft.cern.ch/lcg/views/${LCG_RELEASE}/${LCG_ARCH}/setup.sh;
           ulimit -s unlimited;
           ctest --test-dir build --output-on-failure -j$(nproc);
+
+      - uses: ./.github/actions/run-in-cvmfs
+        name: Run Tests (CMSSW)
+        # CMake is not available before the AlmaLinux 9 image
+        if: ${{ matrix.IMAGE == 'cmscloud/al9-cms' }}
+        with:
+          script: |
+            mkdir build_test
+            cd build_test
+            cmake ../test
+            cmake --build . -j$(nproc)
+            cd ..
+            ctest --test-dir build_test --output-on-failure
 
       - uses: ./.github/actions/run-in-cvmfs
         name: Counting datacard

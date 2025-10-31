@@ -39,7 +39,6 @@ COMBINE_ADD_TEST(counting_datacard_from_csv
     CHECKOUT OUTPUT counting_datacard_from_csv.out OUTREF ${CMAKE_CURRENT_SOURCE_DIR}/references/counting_datacard_from_csv.out
     ENVIRONMENT PATH=${CMAKE_BINARY_DIR}/bin:$ENV{PATH} # So the combineTool.py finds the combine executable
                 PYTHONPATH=${CMAKE_BINARY_DIR}/python:$ENV{PYTHONPATH}
-                PATH=${CMAKE_BINARY_DIR}/bin:$ENV{PATH}
 )
 set_property(GLOBAL APPEND PROPERTY ALL_COMBINE_COMMANDS "combineTool.py -M MultiDimFit toy-hgg-125.root --fromfile fixed.csv >> references/counting_datacard_from_csv.out")
 
