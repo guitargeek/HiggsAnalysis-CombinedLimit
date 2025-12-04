@@ -269,11 +269,12 @@ endfunction()
 
 # Arguments:
 #   TEST_BASENAME           Base name of the test (e.g. "parametric_analysis" or "cmshistsum")
+#   TEST_CODEGEN            Test all the combine commands also with --nllbackend codegen
 #   COPY_TO_BUILDDIR        List of required files to copy (e.g. datacard and ROOT inputs)
 #   T2W_COMMAND
 #   COMBINE_COMMANDS
 function(ADD_COMBINE_TEST TEST_BASENAME)
-    cmake_parse_arguments(ARG "" "" "COPY_TO_BUILDDIR;T2W_COMMAND;COMBINE_COMMANDS" ${ARGN})
+    cmake_parse_arguments(ARG "TEST_CODEGEN" "" "COPY_TO_BUILDDIR;T2W_COMMAND;COMBINE_COMMANDS" ${ARGN})
 
   # --- text2workspace test ---
   COMBINE_ADD_TEST(${TEST_BASENAME}-text2workspace
@@ -284,11 +285,15 @@ function(ADD_COMBINE_TEST TEST_BASENAME)
 
   # Combine multiple commands into a single shell command chain
   set(_combined_command "")
+  set(_combined_command_codegen "")
   foreach(cmd IN LISTS ARG_COMBINE_COMMANDS)
       string(APPEND _combined_command "${cmd} && ")
+      string(APPEND _combined_command_codegen "${cmd} --nllbackend codegen && ")
       set_property(GLOBAL APPEND PROPERTY ALL_COMBINE_COMMANDS "${cmd} >> references/${TEST_BASENAME}.out")
+      set_property(GLOBAL APPEND PROPERTY ALL_COMBINE_COMMANDS "${cmd} --nllbackend codegen >> references/${TEST_BASENAME}-codegen.out")
   endforeach()
   string(REGEX REPLACE " && $" "" _combined_command "${_combined_command}")  # remove trailing &&
+  string(REGEX REPLACE " && $" "" _combined_command_codegen "${_combined_command_codegen}")  # remove trailing &&
 
   # --- combine test ---
   COMBINE_ADD_TEST(${TEST_BASENAME}
@@ -302,4 +307,19 @@ function(ADD_COMBINE_TEST TEST_BASENAME)
       # ERROR ${TEST_BASENAME}.err
       # ERRREF ${CMAKE_CURRENT_SOURCE_DIR}/references/${TEST_BASENAME}.err
   )
+
+  # --- combine test codegen ---
+  if(ARG_TEST_CODEGEN)
+    # When using codegen, we also need a different reference file, because fit
+    # results can be slightly different. This is because the analytic gradient
+    # and numeric gradients are not the same after all. It is up to us when
+    # creating the reference files to make sure that the results are not
+    # unreasonably different.
+    COMBINE_ADD_TEST(${TEST_BASENAME}-codegen
+        COMMAND bash -c "${_combined_command_codegen}"
+        FIXTURES_REQUIRED ${TEST_BASENAME} # requires corresponding text2workspace run
+        # We compare the output to reference files to validate the best-fit parameter values
+        CHECKOUT OUTPUT ${TEST_BASENAME}-codegen.out OUTREF ${CMAKE_CURRENT_SOURCE_DIR}/references/${TEST_BASENAME}-codegen.out
+    )
+  endif()
 endfunction()

@@ -175,6 +175,7 @@ ADD_COMBINE_TEST(parametric_analysis
     text2workspace.py datacard-3-parametric-analysis.txt --mass 125
   COMBINE_COMMANDS
     "combine -M MultiDimFit datacard-3-parametric-analysis.root --algo singles --setParameterRanges r=-2,1"
+  TEST_CODEGEN
 )
 
 #
@@ -247,6 +248,16 @@ COMBINE_ADD_TEST(template_analysis-text2workspace
     FIXTURES_SETUP template_analysis_workspace
 )
 
+# RooParametricHist
+ADD_COMBINE_TEST(RooParametricHist
+  COPY_TO_BUILDDIR
+    ${REPO}/data/ci/datacard_RooParametricHist.txt
+    ${REPO}/data/ci/shapes_RooParametricHist.root
+  T2W_COMMAND
+    text2workspace.py -P HiggsAnalysis.CombinedLimit.PhysicsModel:multiSignalModel  --PO verbose --PO "map=.*/*hcc*:r[1,-500,500]" --PO "map=.*/zcc:z[1,-5,5]" datacard_RooParametricHist.txt -o ws_RooParametricHist.root
+  COMBINE_COMMANDS
+    "combine -M MultiDimFit ws_RooParametricHist.root --algo singles"
+)
 
 if(BUILD_TESTS AND NOT DEFINED standalone_tests)
     # Build and run the testCreateNLL helper on the generated workspace
