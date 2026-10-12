@@ -1,5 +1,5 @@
 #include <stdexcept>
-#include "../interface/BayesianFlatPrior.h"
+#include "BayesianFlatPrior.h"
 #include "RooRealVar.h"
 #include "RooArgSet.h"
 #include "RooUniform.h"

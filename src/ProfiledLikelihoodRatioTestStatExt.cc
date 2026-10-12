@@ -1,11 +1,11 @@
-#include "../interface/ProfiledLikelihoodRatioTestStatExt.h"
+#include "ProfiledLikelihoodRatioTestStatExt.h"
 #include "../interface/Combine.h"
 #include "../interface/CombineUtils.h"
-#include "../interface/CascadeMinimizer.h"
-#include "../interface/CloseCoutSentry.h"
-#include "../interface/CachingNLL.h"
+#include "CascadeMinimizer.h"
+#include "CloseCoutSentry.h"
+#include "CachingNLL.h"
 #include "../interface/RooSimultaneousOpt.h"
-#include "../interface/utils.h"
+#include "utils.h"
 #include <memory>
 #include <stdexcept>
 #include <RooRealVar.h>
@@ -16,7 +16,7 @@
 #include <RooRandom.h>
 #include <Math/MinimizerOptions.h>
 #include <RooStats/RooStatsUtils.h>
-#include "../interface/ProfilingTools.h"
+#include "ProfilingTools.h"
 
 //---- Uncomment this and run with --perfCounters to get statistics of successful and failed fits
 //#define DEBUG_FIT_STATUS

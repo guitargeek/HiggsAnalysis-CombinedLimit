@@ -1,4 +1,4 @@
-#include "../interface/GoodnessOfFit.h"
+#include "GoodnessOfFit.h"
 #include <RooRealVar.h>
 #include <RooArgSet.h>
 #include <RooRandom.h>
@@ -18,12 +18,12 @@
 #include <RooCategory.h>
 #include <RooStats/ModelConfig.h>
 #include "../interface/Combine.h"
-#include "../interface/Significance.h"
-#include "../interface/CascadeMinimizer.h"
-#include "../interface/CloseCoutSentry.h"
+#include "Significance.h"
+#include "CascadeMinimizer.h"
+#include "CloseCoutSentry.h"
 #include "../interface/RooSimultaneousOpt.h"
-#include "../interface/utils.h"
-#include "../interface/CachingNLL.h"
+#include "utils.h"
+#include "CachingNLL.h"
 
 #include <ROOT/RConfig.hxx> // for ROOT_VERSION
 

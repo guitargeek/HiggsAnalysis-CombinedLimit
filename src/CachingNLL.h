@@ -15,9 +15,9 @@
 #include <RooGaussian.h>
 #include <RooPoisson.h>
 #include <RooProduct.h>
-#include "SimpleGaussianConstraint.h"
-#include "SimplePoissonConstraint.h"
-#include "SimpleConstraintGroup.h"
+#include "../interface/SimpleGaussianConstraint.h"
+#include "../interface/SimplePoissonConstraint.h"
+#include "../interface/SimpleConstraintGroup.h"
 
 class RooMultiPdf;
 class CMSHistSum;

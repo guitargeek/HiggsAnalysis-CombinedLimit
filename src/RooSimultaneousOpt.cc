@@ -1,5 +1,5 @@
 #include "../interface/RooSimultaneousOpt.h"
-#include "../interface/CachingNLL.h"
+#include "CachingNLL.h"
 #include "../interface/Combine.h"
 
 #include <RooCmdConfig.h>

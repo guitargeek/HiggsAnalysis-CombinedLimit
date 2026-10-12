@@ -52,19 +52,19 @@
 
 #include <regex>
 
-#include "../interface/LimitAlgo.h"
-#include "../interface/utils.h"
-#include "../interface/CloseCoutSentry.h"
+#include "LimitAlgo.h"
+#include "utils.h"
+#include "CloseCoutSentry.h"
 #include "../interface/RooSimultaneousOpt.h"
-#include "../interface/ToyMCSamplerOpt.h"
-#include "../interface/AsimovUtils.h"
-#include "../interface/CascadeMinimizer.h"
-#include "../interface/ProfilingTools.h"
+#include "ToyMCSamplerOpt.h"
+#include "AsimovUtils.h"
+#include "CascadeMinimizer.h"
+#include "ProfilingTools.h"
 #include "../interface/RooMultiPdfCombine.h"
 #include "../interface/CMSHistFunc.h"
 #include "../interface/CMSHistSum.h"
 
-#include "../interface/CombineLogger.h"
+#include "CombineLogger.h"
 
 using namespace RooStats;
 using namespace RooFit;

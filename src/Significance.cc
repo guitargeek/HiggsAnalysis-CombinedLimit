@@ -1,4 +1,4 @@
-#include "../interface/Significance.h"
+#include "Significance.h"
 #include "RooRealVar.h"
 #include "RooArgSet.h"
 #include "RooRandom.h"
@@ -16,10 +16,10 @@
 #include "RooStats/HypoTestResult.h"
 #include "RooStats/RooStatsUtils.h"
 #include "../interface/Combine.h"
-#include "../interface/CloseCoutSentry.h"
-#include "../interface/utils.h"
-#include "../interface/ProfiledLikelihoodRatioTestStatExt.h"
-#include "../interface/CascadeMinimizer.h"
+#include "CloseCoutSentry.h"
+#include "utils.h"
+#include "ProfiledLikelihoodRatioTestStatExt.h"
+#include "CascadeMinimizer.h"
 
 
 #include <Math/MinimizerOptions.h>

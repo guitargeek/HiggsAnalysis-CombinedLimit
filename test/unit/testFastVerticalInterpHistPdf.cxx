@@ -13,9 +13,9 @@
 #include <RooStats/RooStatsUtils.h>
 #include <RooStats/ModelConfig.h>
 #include <RooStats/RatioOfProfiledLikelihoodsTestStat.h>
-#include "HiggsAnalysis/CombinedLimit/interface/CachingNLL.h"
-#include "HiggsAnalysis/CombinedLimit/interface/utils.h"
-#include "HiggsAnalysis/CombinedLimit/interface/ProfiledLikelihoodRatioTestStatExt.h"
+#include "HiggsAnalysis/CombinedLimit/src/CachingNLL.h"
+#include "HiggsAnalysis/CombinedLimit/src/utils.h"
+#include "HiggsAnalysis/CombinedLimit/src/ProfiledLikelihoodRatioTestStatExt.h"
 #include "HiggsAnalysis/CombinedLimit/interface/VerticalInterpHistPdf.h"
 #include "HiggsAnalysis/CombinedLimit/interface/RooSimultaneousOpt.h"
 

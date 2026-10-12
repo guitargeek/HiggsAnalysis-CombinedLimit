@@ -11,7 +11,7 @@
 
 //#define TRACE_CALLS
 #ifdef TRACE_CALLS
-#include "../interface/ProfilingTools.h"
+#include "ProfilingTools.h"
 #define TRACEME()   PerfCounter::add( __PRETTY_FUNCTION__ );
 #else
 #define TRACEME() 
@@ -22,7 +22,7 @@
 #ifdef PATCH_FOR_HZZ_TEMPLATES
 #include "RooHistPdf.h"
 #include "RooDataHist.h"
-#include "../interface/utils.h"
+#include "utils.h"
 namespace {
     std::unique_ptr<TH1> safeCreateHist2D(RooAbsPdf *pdf, const RooRealVar &x, const RooRealVar &y, bool conditional) {
         if (!pdf->getAttribute("safeCreateHist2D:ok") && typeid(*pdf) == typeid(RooHistPdf)) {

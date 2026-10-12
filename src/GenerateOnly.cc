@@ -1,4 +1,4 @@
-#include "../interface/GenerateOnly.h"
+#include "GenerateOnly.h"
 #include "../interface/Combine.h"
 #include <iostream>
 

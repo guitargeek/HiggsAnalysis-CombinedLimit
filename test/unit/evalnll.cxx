@@ -8,8 +8,8 @@
 #include "RooStats/ModelConfig.h"
 #include "Math/MinimizerOptions.h"
 #include "Math/IOptions.h"
-#include "HiggsAnalysis/CombinedLimit/interface/CachingNLL.h"
-#include "HiggsAnalysis/CombinedLimit/interface/ProfilingTools.h"
+#include "HiggsAnalysis/CombinedLimit/src/CachingNLL.h"
+#include "HiggsAnalysis/CombinedLimit/src/ProfilingTools.h"
 #include "HiggsAnalysis/CombinedLimit/interface/CMSHistFunc.h"
 
 void init_rtd() {

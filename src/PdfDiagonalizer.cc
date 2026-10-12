@@ -1,4 +1,4 @@
-#include "../interface/PdfDiagonalizer.h"
+#include "PdfDiagonalizer.h"
 
 #include <cstdio>
 #include <TMatrixDSym.h>

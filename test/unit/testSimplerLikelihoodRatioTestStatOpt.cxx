@@ -14,8 +14,8 @@
 #include <RooStats/RooStatsUtils.h>
 #include <RooStats/ModelConfig.h>
 #include <RooStats/SimpleLikelihoodRatioTestStat.h>
-#include "HiggsAnalysis/CombinedLimit/interface/SimplerLikelihoodRatioTestStatExt.h"
-#include "HiggsAnalysis/CombinedLimit/interface/utils.h"
+#include "HiggsAnalysis/CombinedLimit/src/SimplerLikelihoodRatioTestStatExt.h"
+#include "HiggsAnalysis/CombinedLimit/src/utils.h"
 
 RooWorkspace *w;
 

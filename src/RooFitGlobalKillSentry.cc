@@ -1,1 +1,1 @@
-#include "../interface/RooFitGlobalKillSentry.h"
+#include "RooFitGlobalKillSentry.h"

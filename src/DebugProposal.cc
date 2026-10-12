@@ -1,6 +1,6 @@
 #include "../interface/DebugProposal.h"
 #include "../interface/Combine.h"
-#include "../interface/utils.h"
+#include "utils.h"
 #include <RooAbsData.h>
 #include <RooAbsPdf.h>
 #include <iostream>

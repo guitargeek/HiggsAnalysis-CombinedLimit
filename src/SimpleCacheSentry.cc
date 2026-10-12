@@ -1,5 +1,5 @@
 #include "../interface/SimpleCacheSentry.h"
-#include "../interface/utils.h"
+#include "utils.h"
 
 SimpleCacheSentry::SimpleCacheSentry() :  _deps("deps","deps",this)   {}
 

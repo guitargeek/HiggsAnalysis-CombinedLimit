@@ -1,6 +1,6 @@
 #include <stdexcept>
 #include <cmath>
-#include "../interface/BayesianToyMC.h"
+#include "BayesianToyMC.h"
 #include "RooRealVar.h"
 #include "RooArgSet.h"
 #include "RooUniform.h"
@@ -14,8 +14,8 @@
 #include <Math/DistFuncMathCore.h>
 
 #include "../interface/Combine.h"
-#include "../interface/CachingNLL.h"
-#include "../interface/utils.h"
+#include "CachingNLL.h"
+#include "utils.h"
 
 using namespace RooStats;
 

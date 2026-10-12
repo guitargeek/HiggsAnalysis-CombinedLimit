@@ -1,4 +1,4 @@
-#include "../interface/JacknifeQuantile.h"
+#include "JacknifeQuantile.h"
 #include <cmath>
 #include <stdexcept>
 #include <iostream>

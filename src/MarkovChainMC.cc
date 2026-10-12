@@ -1,4 +1,4 @@
-#include "../interface/MarkovChainMC.h"
+#include "MarkovChainMC.h"
 #include <stdexcept> 
 #include <cmath> 
 #include "TKey.h"
@@ -21,12 +21,12 @@ class THnSparse;
 #include "../interface/Combine.h"
 #include "../interface/TestProposal.h"
 #include "../interface/DebugProposal.h"
-#include "../interface/CloseCoutSentry.h"
-#include "../interface/RooFitGlobalKillSentry.h"
-#include "../interface/JacknifeQuantile.h"
+#include "CloseCoutSentry.h"
+#include "RooFitGlobalKillSentry.h"
+#include "JacknifeQuantile.h"
 
-#include "../interface/ProfilingTools.h"
-#include "../interface/utils.h"
+#include "ProfilingTools.h"
+#include "utils.h"
 
 using namespace RooStats;
 using namespace std;

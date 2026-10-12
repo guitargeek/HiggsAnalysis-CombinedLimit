@@ -6,8 +6,8 @@
 #include "RooMsgService.h"
 #include <dlfcn.h>
 #include <RooStats/ModelConfig.h>
-#include "../interface/CachingNLL.h"
-#include "../interface/ProfilingTools.h"
+#include "../src/CachingNLL.h"
+#include "../src/ProfilingTools.h"
 
 void (*dump_)(const char *);
 

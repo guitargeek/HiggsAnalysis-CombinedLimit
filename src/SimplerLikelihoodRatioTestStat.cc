@@ -1,1 +1,1 @@
-#include "../interface/SimplerLikelihoodRatioTestStat.h"
+#include "SimplerLikelihoodRatioTestStat.h"

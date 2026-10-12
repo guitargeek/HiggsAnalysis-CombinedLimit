@@ -1,4 +1,4 @@
-#include "../interface/CombineLogger.h"
+#include "CombineLogger.h"
 using namespace std;
 
 // counter for Logger calls

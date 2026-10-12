@@ -11,7 +11,7 @@
 
 #define CMS_RUNTIME_DEFINES
 #ifdef CMS_RUNTIME_DEFINES
-#include "HiggsAnalysis/CombinedLimit/interface/ProfilingTools.h"
+#include "HiggsAnalysis/CombinedLimit/src/ProfilingTools.h"
 void init_rtd() {
   // CMSDAS Defaults
   runtimedef::set("OPTIMIZE_BOUNDS", 1);

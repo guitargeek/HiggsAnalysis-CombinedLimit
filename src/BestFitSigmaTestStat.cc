@@ -1,6 +1,6 @@
-#include "../interface/BestFitSigmaTestStat.h"
-#include "../interface/ProfiledLikelihoodRatioTestStatExt.h"
-#include "../interface/utils.h"
+#include "BestFitSigmaTestStat.h"
+#include "ProfiledLikelihoodRatioTestStatExt.h"
+#include "utils.h"
 
 #include <RooRealVar.h>
 

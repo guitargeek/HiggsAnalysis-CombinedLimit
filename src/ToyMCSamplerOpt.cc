@@ -1,6 +1,6 @@
-#include "../interface/ToyMCSamplerOpt.h"
-#include "../interface/utils.h"
-#include "../interface/CombineLogger.h"
+#include "ToyMCSamplerOpt.h"
+#include "utils.h"
+#include "CombineLogger.h"
 #include <memory>
 #include <stdexcept>
 #include <TH1.h>
@@ -13,7 +13,7 @@
 #include <RooDataHist.h>
 #include <RooDataSet.h>
 #include <RooRandom.h>
-#include "../interface/ProfilingTools.h"
+#include "ProfilingTools.h"
 #include "RooStats/DetailedOutputAggregator.h"
 
 using namespace std;

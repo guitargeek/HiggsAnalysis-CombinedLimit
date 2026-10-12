@@ -1,7 +1,7 @@
-#include "../interface/RandStartPt.h"
+#include "RandStartPt.h"
 #include "../interface/Combine.h"
-#include "../interface/utils.h"
-#include "../interface/CascadeMinimizer.h"
+#include "utils.h"
+#include "CascadeMinimizer.h"
 
 #include <vector>
 #include <iostream>

@@ -1,4 +1,4 @@
-#include "../interface/AsimovUtils.h"
+#include "AsimovUtils.h"
 
 #include <memory>
 #include <stdexcept>
@@ -7,12 +7,12 @@
 #include <RooProdPdf.h>
 #include <RooUniform.h>
 #include <TString.h>
-#include "../interface/utils.h"
+#include "utils.h"
 #include "../interface/Combine.h"
-#include "../interface/ToyMCSamplerOpt.h"
-#include "../interface/CloseCoutSentry.h"
-#include "../interface/CascadeMinimizer.h"
-#include "../interface/CombineLogger.h"
+#include "ToyMCSamplerOpt.h"
+#include "CloseCoutSentry.h"
+#include "CascadeMinimizer.h"
+#include "CombineLogger.h"
 
 
 RooAbsData *asimovutils::asimovDatasetNominal(RooStats::ModelConfig *mc, double poiValue, int verbose) {

@@ -1,8 +1,8 @@
 #ifndef HiggsAnalysis_CombinedLimit_RandStartPt_h
 #define HiggsAnalysis_CombinedLimit_RandStartPt_h
 
-#include "../interface/CascadeMinimizer.h"
-#include "../interface/MultiDimFit.h"
+#include "CascadeMinimizer.h"
+#include "MultiDimFit.h"
 
 #include <vector>
 #include <string>

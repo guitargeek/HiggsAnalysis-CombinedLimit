@@ -1,5 +1,5 @@
-#include "../interface/ProfiledLikelihoodRatioTestStat.h"
-#include "../interface/CloseCoutSentry.h"
+#include "ProfiledLikelihoodRatioTestStat.h"
+#include "CloseCoutSentry.h"
 #include <stdexcept>
 #include <RooFitResult.h>
 #include <RooRealVar.h>

@@ -1,4 +1,4 @@
-#include "../interface/VectorizedSimplePdfs.h"
+#include "VectorizedSimplePdfs.h"
 #include "RooMath.h"
 #include "vectorized.h"
 #include <RooRealVar.h>

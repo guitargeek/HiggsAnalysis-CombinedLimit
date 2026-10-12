@@ -1,5 +1,5 @@
 #include <stdexcept>
-#include "../interface/FeldmanCousins.h"
+#include "FeldmanCousins.h"
 #include "../interface/Combine.h"
 #include <RooRealVar.h>
 #include <RooArgSet.h>

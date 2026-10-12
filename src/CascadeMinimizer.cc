@@ -1,11 +1,11 @@
-#include "../interface/CascadeMinimizer.h"
-#include "../interface/ProfiledLikelihoodRatioTestStatExt.h"
-#include "../interface/CachingNLL.h"
-#include "../interface/Significance.h"
-#include "../interface/CloseCoutSentry.h"
-#include "../interface/utils.h"
-#include "../interface/ProfilingTools.h"
-#include "../interface/CombineLogger.h"
+#include "CascadeMinimizer.h"
+#include "ProfiledLikelihoodRatioTestStatExt.h"
+#include "CachingNLL.h"
+#include "Significance.h"
+#include "CloseCoutSentry.h"
+#include "utils.h"
+#include "ProfilingTools.h"
+#include "CombineLogger.h"
 
 #include <Math/MinimizerOptions.h>
 #include <Math/IOptions.h>

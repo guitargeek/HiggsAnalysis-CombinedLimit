@@ -1,4 +1,4 @@
-#include "../interface/ChannelCompatibilityCheck.h"
+#include "ChannelCompatibilityCheck.h"
 #include <TFile.h>
 #include <RooRealVar.h>
 #include <RooArgSet.h>
@@ -9,11 +9,11 @@
 #include <RooSimultaneous.h>
 #include <RooStats/ModelConfig.h>
 #include "../interface/Combine.h"
-#include "../interface/Significance.h"
-#include "../interface/CloseCoutSentry.h"
+#include "Significance.h"
+#include "CloseCoutSentry.h"
 #include "../interface/RooSimultaneousOpt.h"
-#include "../interface/utils.h"
-#include "../interface/CachingNLL.h"
+#include "utils.h"
+#include "CachingNLL.h"
 
 
 #include <Math/MinimizerOptions.h>

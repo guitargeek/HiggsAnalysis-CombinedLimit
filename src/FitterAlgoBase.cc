@@ -1,4 +1,4 @@
-#include "../interface/FitterAlgoBase.h"
+#include "FitterAlgoBase.h"
 #include <limits>
 #include <memory>
 #include <cmath>
@@ -23,16 +23,16 @@
 #include "TFile.h"
 #include <RooStats/ModelConfig.h>
 #include "../interface/Combine.h"
-#include "../interface/Significance.h"
-#include "../interface/CascadeMinimizer.h"
-#include "../interface/CloseCoutSentry.h"
-#include "../interface/utils.h"
-#include "../interface/ToyMCSamplerOpt.h"
-#include "../interface/RobustHesse.h"
+#include "Significance.h"
+#include "CascadeMinimizer.h"
+#include "CloseCoutSentry.h"
+#include "utils.h"
+#include "ToyMCSamplerOpt.h"
+#include "RobustHesse.h"
 
-#include "../interface/ProfilingTools.h"
-#include "../interface/CachingNLL.h"
-#include "../interface/CombineLogger.h"
+#include "ProfilingTools.h"
+#include "CachingNLL.h"
+#include "CombineLogger.h"
 
 #include <Math/MinimizerOptions.h>
 #include <Math/QuantFuncMathCore.h>

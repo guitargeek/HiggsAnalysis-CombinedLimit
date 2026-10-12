@@ -14,7 +14,7 @@
 #include <TMatrixDSymEigen.h>
 #include <TCanvas.h>
 #include <RooPlot.h>
-#include "../../interface/PdfDiagonalizer.h"
+#include "../../src/PdfDiagonalizer.h"
 
 void runDiago(RooWorkspace *w, RooDataSet *data, RooFitResult *result, const char *fit) {
     PdfDiagonalizer diago("eig", w, *result);

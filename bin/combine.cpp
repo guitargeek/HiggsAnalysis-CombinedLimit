@@ -13,21 +13,21 @@
 #include <string>
 #include <stdexcept>
 #include <boost/program_options.hpp>
-#include "../interface/Significance.h"
-#include "../interface/HybridNew.h"
-#include "../interface/BayesianFlatPrior.h"
-#include "../interface/BayesianToyMC.h"
-#include "../interface/MarkovChainMC.h"
-#include "../interface/FeldmanCousins.h"
-#include "../interface/FitDiagnostics.h"
-#include "../interface/AsymptoticLimits.h"
-#include "../interface/GoodnessOfFit.h"
-#include "../interface/ChannelCompatibilityCheck.h"
-#include "../interface/MultiDimFit.h"
-#include "../interface/CascadeMinimizer.h"
-#include "../interface/ProfilingTools.h"
-#include "../interface/GenerateOnly.h"
-#include "../interface/CombineLogger.h"
+#include "../src/Significance.h"
+#include "../src/HybridNew.h"
+#include "../src/BayesianFlatPrior.h"
+#include "../src/BayesianToyMC.h"
+#include "../src/MarkovChainMC.h"
+#include "../src/FeldmanCousins.h"
+#include "../src/FitDiagnostics.h"
+#include "../src/AsymptoticLimits.h"
+#include "../src/GoodnessOfFit.h"
+#include "../src/ChannelCompatibilityCheck.h"
+#include "../src/MultiDimFit.h"
+#include "../src/CascadeMinimizer.h"
+#include "../src/ProfilingTools.h"
+#include "../src/GenerateOnly.h"
+#include "../src/CombineLogger.h"
 #include <map>
 
 using namespace std;

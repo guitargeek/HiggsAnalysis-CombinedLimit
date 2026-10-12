@@ -1,6 +1,6 @@
-#include "../interface/utils.h"
+#include "utils.h"
 #include "../interface/RooSimultaneousOpt.h"
-#include "../interface/CascadeMinimizer.h"
+#include "CascadeMinimizer.h"
 
 #include <cstdio>
 #include <iostream>
@@ -39,9 +39,9 @@
 
 #include <regex>
 
-#include "../interface/CloseCoutSentry.h"
-#include "../interface/ProfilingTools.h"
-#include "../interface/CombineLogger.h"
+#include "CloseCoutSentry.h"
+#include "ProfilingTools.h"
+#include "CombineLogger.h"
 #include "../interface/RooMultiPdfCombine.h"
 
 using namespace std;

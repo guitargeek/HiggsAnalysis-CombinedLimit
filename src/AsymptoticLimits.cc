@@ -1,6 +1,6 @@
 #include <stdexcept>
 
-#include "../interface/AsymptoticLimits.h"
+#include "AsymptoticLimits.h"
 #include <RooRealVar.h>
 #include <RooArgSet.h>
 #include <RooAbsPdf.h>
@@ -10,15 +10,15 @@
 #include <RooStats/ModelConfig.h>
 #include <Math/DistFuncMathCore.h>
 #include "../interface/Combine.h"
-#include "../interface/CloseCoutSentry.h"
-#include "../interface/RooFitGlobalKillSentry.h"
-#include "../interface/ProfiledLikelihoodRatioTestStatExt.h"
-#include "../interface/ToyMCSamplerOpt.h"
-#include "../interface/Significance.h"
-#include "../interface/CascadeMinimizer.h"
-#include "../interface/utils.h"
-#include "../interface/AsimovUtils.h"
-#include "../interface/CombineLogger.h"
+#include "CloseCoutSentry.h"
+#include "RooFitGlobalKillSentry.h"
+#include "ProfiledLikelihoodRatioTestStatExt.h"
+#include "ToyMCSamplerOpt.h"
+#include "Significance.h"
+#include "CascadeMinimizer.h"
+#include "utils.h"
+#include "AsimovUtils.h"
+#include "CombineLogger.h"
 
 using namespace RooStats;
 
