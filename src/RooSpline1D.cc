@@ -8,7 +8,7 @@
 RooSpline1D::RooSpline1D(const char *name, const char *title, RooAbsReal &xvar, const char *path, const unsigned short xcol, const unsigned short ycol, const unsigned short skipLines, const char *algo) :
         RooAbsReal(name,title),
         xvar_("xvar","Variable", this, xvar),
-        x_(), y_(), type_(algo),
+         type_(algo),
         interp_(nullptr)
 {
         std::ifstream file( path, std::ios::in);

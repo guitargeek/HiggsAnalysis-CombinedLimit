@@ -272,8 +272,7 @@ FastVerticalInterpHistPdfBase::FastVerticalInterpHistPdfBase(const char *name, c
   _coefList("coefList","List of coefficients",this), // we should get shapeDirty when coefficients change
   _smoothRegion(smoothRegion),
   _smoothAlgo(smoothAlgo),
-  _init(false),
-  _morphs(), _morphParams()
+  _init(false) 
 { 
   TRACEME()
 
@@ -744,8 +743,7 @@ FastVerticalInterpHistPdf2Base::FastVerticalInterpHistPdf2Base(const char *name,
   _coefList("coefList","List of coefficients",this), // we should get shapeDirty when coefficients change
   _smoothRegion(smoothRegion),
   _smoothAlgo(smoothAlgo),
-  _initBase(false),
-  _morphs(), _morphParams()
+  _initBase(false) 
 { 
   if (inFuncList.GetSize()!=2*inCoefList.getSize()+1) {
     coutE(InputArguments) << "VerticalInterpHistPdf::VerticalInterpHistPdf(" << GetName() 
@@ -794,8 +792,7 @@ FastVerticalInterpHistPdf2Base::FastVerticalInterpHistPdf2Base(const FastVertica
   _coefList("coefList", this, other._coefList),
   _smoothRegion(other._smoothRegion),
   _smoothAlgo(other._smoothAlgo),
-  _initBase(false),
-  _morphs(), _morphParams()
+  _initBase(false) 
 {
   // Convert constructor
 }
@@ -855,8 +852,7 @@ FastVerticalInterpHistPdf2Base::initBase() const
 
 FastVerticalInterpHistPdf2::FastVerticalInterpHistPdf2(const char *name, const char *title, const RooRealVar &x, const TList & funcList, const RooArgList& coefList, Double_t smoothRegion, Int_t smoothAlgo) :
     FastVerticalInterpHistPdf2Base(name,title,x,funcList,coefList,smoothRegion,smoothAlgo),
-    _x("x","Independent variable",this,const_cast<RooRealVar&>(x)),
-    _cache(), _cacheNominal(), _cacheNominalLog()
+    _x("x","Independent variable",this,const_cast<RooRealVar&>(x)) 
 {
     initBase();
     initNominal(funcList.At(0));
@@ -881,8 +877,7 @@ FastVerticalInterpHistPdf2D2::FastVerticalInterpHistPdf2D2(const char *name, con
     FastVerticalInterpHistPdf2Base(name,title,createRooArgSet(x, y),funcList,coefList,smoothRegion,smoothAlgo),
     _x("x","Independent variable",this,const_cast<RooRealVar&>(x)),
     _y("y","Independent variable",this,const_cast<RooRealVar&>(y)),
-    _conditional(conditional),
-    _cache(), _cacheNominal(), _cacheNominalLog()
+    _conditional(conditional) 
 {
     initBase();
     initNominal(funcList.At(0));
@@ -896,8 +891,7 @@ FastVerticalInterpHistPdf2D2::FastVerticalInterpHistPdf2D2(const char *name, con
 
 FastVerticalInterpHistPdf2::FastVerticalInterpHistPdf2(const FastVerticalInterpHistPdf& other, const char* name) :
     FastVerticalInterpHistPdf2Base(other,name),
-    _x("x",this,other._x),
-    _cache(), _cacheNominal(), _cacheNominalLog()
+    _x("x",this,other._x) 
 {
     initBase();
     other.getVal(_x.arg());
@@ -912,8 +906,7 @@ FastVerticalInterpHistPdf2D2::FastVerticalInterpHistPdf2D2(const FastVerticalInt
     FastVerticalInterpHistPdf2Base(other,name),
     _x("x",this,other._x),
     _y("y",this,other._y),
-    _conditional(other._conditional),
-    _cache(), _cacheNominal(), _cacheNominalLog()
+    _conditional(other._conditional) 
 {
     initBase();
     RooArgSet normSet;

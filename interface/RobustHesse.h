@@ -15,7 +15,7 @@
 
 class RooFitResultBuilder : public RooFitResult {
  public:
-  RooFitResultBuilder() : RooFitResult(){
+  RooFitResultBuilder() {
     this->RooFitResult::setInitParList(RooArgList());
     this->RooFitResult::setConstParList(RooArgList());
   };

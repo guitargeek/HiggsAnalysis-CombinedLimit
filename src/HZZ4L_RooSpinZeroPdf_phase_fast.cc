@@ -10,7 +10,7 @@ using namespace RooFit;
 
 
 HZZ4L_RooSpinZeroPdf_phase_fast::HZZ4L_RooSpinZeroPdf_phase_fast() :
-RooAbsPdf(),
+
 fai1("fai1", "fai1", this),
 phi1("phi1", "phi1", this),
 obsList("obsList", "List of pdf observables", this),

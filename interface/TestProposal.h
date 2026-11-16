@@ -13,7 +13,7 @@ struct RooRealVar;
 class TestProposal : public RooStats::ProposalFunction {
 
    public:
-      TestProposal() : RooStats::ProposalFunction() {}
+      TestProposal() {}
       TestProposal(double divisor, const RooRealVar *alwaysStepMe=nullptr) ;
       TestProposal(double divisor, const RooArgList &alwaysStepMe) ;
 

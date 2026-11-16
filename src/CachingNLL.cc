@@ -247,7 +247,6 @@ std::pair<std::vector<Double_t> *, bool> cacheutils::ValuesCache::get()
 cacheutils::CachingPdf::CachingPdf(RooAbsReal *pdf, const RooArgSet *obs)
     : obs_(obs),
       pdfOriginal_(pdf),
-      pdfPieces_(),
       pdf_((runtimedef::get("CACHINGPDF_NOCLONE") &&
             pdfOriginal_->getAttribute("CachingPdf_NoClone"))
                ? pdfOriginal_
@@ -263,7 +262,6 @@ cacheutils::CachingPdf::CachingPdf(RooAbsReal *pdf, const RooArgSet *obs)
 cacheutils::CachingPdf::CachingPdf(const CachingPdf &other)
     : obs_(other.obs_),
       pdfOriginal_(other.pdfOriginal_),
-      pdfPieces_(),
       pdf_((runtimedef::get("CACHINGPDF_NOCLONE") &&
             other.pdfOriginal_->getAttribute("CachingPdf_NoClone"))
                ? pdfOriginal_

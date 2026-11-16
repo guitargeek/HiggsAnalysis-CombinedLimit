@@ -93,7 +93,7 @@ namespace utils {
     struct CheapValueSnapshot {
         public:
             CheapValueSnapshot() : src_(nullptr) {}
-            CheapValueSnapshot(const RooAbsCollection &src) : src_(nullptr), values_() { readFrom(src); }
+            CheapValueSnapshot(const RooAbsCollection &src) : src_(nullptr) { readFrom(src); }
             void readFrom(const RooAbsCollection &) ;
             void writeTo(const RooAbsCollection &) const ;
             void clear() { src_ = nullptr; values_.clear(); }

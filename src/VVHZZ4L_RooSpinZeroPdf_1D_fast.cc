@@ -10,7 +10,7 @@ using namespace RooFit;
 
 
 VVHZZ4L_RooSpinZeroPdf_1D_fast::VVHZZ4L_RooSpinZeroPdf_1D_fast() :
-RooAbsPdf(),
+
 fai1("fai1", "fai1", this),
 obsList("obsList", "List of pdf observables", this),
 coefList("coefList", "List of pdf components", this)

@@ -9,13 +9,9 @@
 #include "TH1F.h"
 
 RooMorphingPdf::RooMorphingPdf()
-    : masses_(std::vector<double>()),
+    : 
       can_morph_(false),
-      rebin_(TArrayI()),
-      target_axis_(TAxis()),
-      morph_axis_(TAxis()),
       init_(false),
-      cache_(FastHisto()),
       single_point_(false),
       p1_(nullptr),
       p2_(nullptr),
@@ -34,11 +30,9 @@ RooMorphingPdf::RooMorphingPdf(const char* name, const char* title,
       pdfs_(pdfs.GetName(), pdfs.GetTitle(), this),
       masses_(masses),
       can_morph_(can_morph),
-      rebin_(TArrayI()),
       target_axis_(target_axis),
       morph_axis_(morph_axis),
       init_(false),
-      cache_(FastHisto()),
       single_point_(false),
       p1_(nullptr),
       p2_(nullptr),

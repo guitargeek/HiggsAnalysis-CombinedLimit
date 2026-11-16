@@ -141,7 +141,7 @@ struct FastVerticalInterpHistPdfV;
 class FastVerticalInterpHistPdf : public FastVerticalInterpHistPdfBase {
 public:
 
-  FastVerticalInterpHistPdf() : FastVerticalInterpHistPdfBase() {}
+  FastVerticalInterpHistPdf() {}
   FastVerticalInterpHistPdf(const char *name, const char *title, const RooRealVar &x, const RooArgList& funcList, const RooArgList& coefList, Double_t smoothRegion=1., Int_t smoothAlgo=1) :
     FastVerticalInterpHistPdfBase(name,title,RooArgSet(x),funcList,coefList,smoothRegion,smoothAlgo),
     _x("x","Independent variable",this,const_cast<RooRealVar&>(x)) {}
@@ -199,7 +199,7 @@ class FastVerticalInterpHistPdfV {
 class FastVerticalInterpHistPdf2D : public FastVerticalInterpHistPdfBase {
 public:
 
-  FastVerticalInterpHistPdf2D() : FastVerticalInterpHistPdfBase() {}
+  FastVerticalInterpHistPdf2D() {}
   /// If conditional = false, the pdf is normalized integrating on (x,y). 
   /// If conditional = true, the pdf is separately normalized integrating on (y) for each specific (x) bin
   FastVerticalInterpHistPdf2D(const char *name, const char *title, const RooRealVar &x, const RooRealVar &y, bool conditional, const RooArgList& funcList, const RooArgList& coefList, Double_t smoothRegion=1., Int_t smoothAlgo=1) :
@@ -327,7 +327,7 @@ struct FastVerticalInterpHistPdf2V;
 class FastVerticalInterpHistPdf2 : public FastVerticalInterpHistPdf2Base {
 public:
 
-  FastVerticalInterpHistPdf2() : FastVerticalInterpHistPdf2Base() {}
+  FastVerticalInterpHistPdf2() {}
   FastVerticalInterpHistPdf2(const char *name, const char *title, const RooRealVar &x, const TList & funcList, const RooArgList& coefList, Double_t smoothRegion=1., Int_t smoothAlgo=1) ;
 
   FastVerticalInterpHistPdf2(const FastVerticalInterpHistPdf2& other, const char* name=nullptr) :
@@ -386,7 +386,7 @@ class FastVerticalInterpHistPdf2V {
 class FastVerticalInterpHistPdf2D2 : public FastVerticalInterpHistPdf2Base {
 public:
 
-  FastVerticalInterpHistPdf2D2() : FastVerticalInterpHistPdf2Base() {}
+  FastVerticalInterpHistPdf2D2() {}
   FastVerticalInterpHistPdf2D2(const char *name, const char *title, const RooRealVar &x, const RooRealVar &y, bool conditional, const TList & funcList, const RooArgList& coefList, Double_t smoothRegion=1., Int_t smoothAlgo=1) ;
 
   FastVerticalInterpHistPdf2D2(const FastVerticalInterpHistPdf2D2& other, const char* name=nullptr) :
@@ -430,7 +430,7 @@ private:
 class FastVerticalInterpHistPdf3D : public FastVerticalInterpHistPdfBase {
 public:
 
-  FastVerticalInterpHistPdf3D() : FastVerticalInterpHistPdfBase() {}
+  FastVerticalInterpHistPdf3D() {}
   /// If conditional = false, the pdf is normalized integrating on (x,y). 
   /// If conditional = true, the pdf is separately normalized integrating on (y) for each specific (x) bin
   FastVerticalInterpHistPdf3D(const char *name, const char *title, const RooRealVar &x, const RooRealVar &y, const RooRealVar &z, bool conditional, const RooArgList& funcList, const RooArgList& coefList, Double_t smoothRegion=1., Int_t smoothAlgo=1) :

@@ -8,7 +8,7 @@
 #include <RooStats/RooStatsUtils.h>
 
 DebugProposal::DebugProposal(RooStats::ProposalFunction *p, RooAbsPdf *pdf, RooAbsData *data, int tries) : 
-    RooStats::ProposalFunction(), prop_(p), pdf_(pdf), tries_(tries) 
+     prop_(p), pdf_(pdf), tries_(tries) 
 {
     if (pdf && data) {
         nll_ = combineCreateNLL(*pdf, *data, /*constrain=*/nullptr, /*offset=*/false);

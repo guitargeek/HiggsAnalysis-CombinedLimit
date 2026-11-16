@@ -7,7 +7,6 @@
 #include <RooStats/RooStatsUtils.h>
 
 TestProposal::TestProposal(double divisor, const RooRealVar *alwaysStepMe) : 
-    RooStats::ProposalFunction(),
     divisor_(1./divisor),
     poiDivisor_(divisor_),
     discreteModelIndicator_(nullptr)
@@ -16,7 +15,6 @@ TestProposal::TestProposal(double divisor, const RooRealVar *alwaysStepMe) :
 }
      
 TestProposal::TestProposal(double divisor, const RooArgList &alwaysStepMe) : 
-    RooStats::ProposalFunction(),
     divisor_(1./divisor),
     poiDivisor_(divisor_),
     alwaysStepMe_(alwaysStepMe),

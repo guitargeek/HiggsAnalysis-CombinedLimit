@@ -10,7 +10,7 @@ using namespace RooFit;
 
 
 HZZ4L_RooSpinZeroPdf_2D_fast::HZZ4L_RooSpinZeroPdf_2D_fast() :
-RooAbsPdf(),
+
 fai1("fai1", "fai1", this),
 fai2("fai2", "fai2", this),
 phi1("phi1", "phi1", this),

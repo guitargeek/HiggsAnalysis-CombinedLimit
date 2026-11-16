@@ -11,7 +11,7 @@ class FastTemplate {
     public:
         typedef double T;
         typedef std::vector<T> AT;
-        FastTemplate() : size_(0), values_() {}
+        FastTemplate() : size_(0) {}
         FastTemplate(unsigned int size) : size_(size), values_(size_) {}
         FastTemplate(const FastTemplate &other) : size_(other.size()), values_(other.values_) {}
         FastTemplate(const TH1 &other) : size_(other.GetNbinsX()), values_(size_) { CopyValues(other); }
@@ -82,7 +82,7 @@ class FastTemplate {
 };
 class FastHisto : public FastTemplate {
     public:
-        FastHisto() : FastTemplate(), binEdges_(), binWidths_() {}
+        FastHisto() {}
         FastHisto(const TH1 &hist) ;
         FastHisto(const FastHisto &other) ;
         FastHisto & operator=(const FastHisto &other) { 
@@ -135,7 +135,7 @@ class FastHisto : public FastTemplate {
 };
 class FastHisto2D : public FastTemplate {
     public:
-        FastHisto2D() : FastTemplate(), binX_(0), binY_(0), binEdgesX_(), binEdgesY_(), binWidths_() {}
+        FastHisto2D() : binX_(0), binY_(0) {}
         FastHisto2D(const TH2 &hist, bool normXonly=false) ;
         FastHisto2D(const FastHisto2D &other) ;
         FastHisto2D & operator=(const FastHisto2D &other) { 
@@ -191,7 +191,7 @@ class FastHisto2D : public FastTemplate {
 
 class FastHisto3D : public FastTemplate {
     public:
-        FastHisto3D() : FastTemplate(), binX_(0), binY_(0), binZ_(0),binEdgesX_(), binEdgesY_(), binEdgesZ_(), binWidths_() {}
+        FastHisto3D() : binX_(0), binY_(0), binZ_(0) {}
         FastHisto3D(const TH3 &hist, bool normXonly=false) ;
         FastHisto3D(const FastHisto3D &other) ;
         FastHisto3D & operator=(const FastHisto3D &other) { 
