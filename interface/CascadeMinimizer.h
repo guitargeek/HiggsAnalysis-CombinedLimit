@@ -115,10 +115,10 @@ class CascadeMinimizerGlobalConfigs{
 
 	private:
 	  CascadeMinimizerGlobalConfigs(){};
-	  CascadeMinimizerGlobalConfigs(const CascadeMinimizerGlobalConfigs&) {};
-	  CascadeMinimizerGlobalConfigs& operator=(const CascadeMinimizerGlobalConfigs&);
 
 	public:
+	  CascadeMinimizerGlobalConfigs(const CascadeMinimizerGlobalConfigs&) = delete;
+	  CascadeMinimizerGlobalConfigs& operator=(const CascadeMinimizerGlobalConfigs&) = delete;
 
 	  //RooCategory* x;
 	  RooArgList pdfCategories; 
