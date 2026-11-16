@@ -69,7 +69,7 @@ void CMSHistErrorPropagator::initialize() const {
   }
   unsigned nb = vfuncs_[0]->cache().size();
   vbinpars_.resize(nb);
-  if (bintypes_.size()) {
+  if (!bintypes_.empty()) {
     for (unsigned j = 0, r = 0; j < nb; ++j) {
       vbinpars_[j].resize(bintypes_[j].size(), nullptr);
       for (unsigned i = 0; i < bintypes_[j].size(); ++i) {
@@ -120,7 +120,7 @@ void CMSHistErrorPropagator::updateCache(int eval) const {
     vectorized::sqrt(valsum_.size(), &err2sum_[0], &toterr_[0]);
     cache_ = valsum_;
 
-    if (eval == 0 && bintypes_.size()) {
+    if (eval == 0 && !bintypes_.empty()) {
       for (unsigned j = 0; j < valsum_.size(); ++j) {
         if (bintypes_[j][0] == 1) {
 #if HFVERBOSE > 1
@@ -229,7 +229,7 @@ void CMSHistErrorPropagator::setAnalyticBarlowBeeston(bool flag) const {
     bb_.push_res.clear();
     bb_.init = false;
   }
-  if (flag && data_.size()) {
+  if (flag && !data_.empty()) {
     for (unsigned j = 0; j < bintypes_.size(); ++j) {
       if (bintypes_[j][0] == 1 && !vbinpars_[j][0]->isConstant()) {
         bb_.use.push_back(j);
@@ -263,7 +263,7 @@ void CMSHistErrorPropagator::setAnalyticBarlowBeeston(bool flag) const {
 
 RooArgList * CMSHistErrorPropagator::setupBinPars(double poissonThreshold) {
   RooArgList * res = new RooArgList();
-  if (bintypes_.size()) {
+  if (!bintypes_.empty()) {
     std::cout << "setupBinPars() already called for " << this->GetName() << "\n";
     return res;
   }
@@ -287,7 +287,7 @@ RooArgList * CMSHistErrorPropagator::setupBinPars(double poissonThreshold) {
       skip_idx.insert(i);
     }
   }
-  if (skipped_procs.size()) {
+  if (!skipped_procs.empty()) {
     std::cout << "Processes excluded for sums:";
     for (auto &s: skipped_procs) std::cout << " " << s;
     std::cout << "\n";
@@ -308,7 +308,7 @@ RooArgList * CMSHistErrorPropagator::setupBinPars(double poissonThreshold) {
       sub_err += std::pow(vfuncs_[i]->errors()[j] * coeffvals_[i], 2.);;
     }
     sub_err = std::sqrt(sub_err);
-    if (skipped_procs.size()) {
+    if (!skipped_procs.empty()) {
       std::cout << TString::Format("%-10i %-15f %-15f %-30s\n", j, sub_sum, sub_err, "excluding marked processes");
     }
 
@@ -462,7 +462,7 @@ void CMSHistErrorPropagator::printMultiline(std::ostream& os, Int_t contents, Bo
                     TString indent) const {
   RooAbsReal::printMultiline(os, contents, verbose, indent);
   updateCache();
-  if (bintypes_.size()) {
+  if (!bintypes_.empty()) {
     std::cout << ">> Bin types are:\n";
     for (unsigned j = 0; j < bintypes_.size(); ++j) {
       std::cout << ">> " << j << ":";

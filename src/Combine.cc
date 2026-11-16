@@ -436,7 +436,7 @@ void Combine::run(TString hlfFile, const std::string &dataset, double &limit, do
         std::cerr << "Missing background ModelConfig '" << modelConfigNameB_ << "' in workspace '" << workspaceName_ << "' in file " << fileToLoad << std::endl;
         RooCustomizer make_model_s(*mc->GetPdf(),"_model_bonly_");
 
-        if (defineBackgroundOnlyModelParameterExpression_ != "") {
+        if (!defineBackgroundOnlyModelParameterExpression_.empty()) {
           std::cerr << "Will make one from the signal ModelConfig " << modelConfigName_ << " setting " << std::endl;
 	  vector<string> SetParameterExpressionList = Utils::split(defineBackgroundOnlyModelParameterExpression_, ",");
 	  for (UInt_t p = 0; p < SetParameterExpressionList.size(); ++p) {
@@ -474,7 +474,7 @@ void Combine::run(TString hlfFile, const std::string &dataset, double &limit, do
      r->setVal(0.5*(r->getMin() + r->getMax()));
     }
 
-    if (snapshotName_ != "") {
+    if (!snapshotName_.empty()) {
       bool loaded = w->loadSnapshot(snapshotName_.c_str());
       assert(loaded);
       if (MH){
@@ -488,13 +488,13 @@ void Combine::run(TString hlfFile, const std::string &dataset, double &limit, do
       }
     }
     
-    if (setPhysicsModelParameterRangeExpression_ != "") {
+    if (!setPhysicsModelParameterRangeExpression_.empty()) {
       utils::setModelParameterRanges( setPhysicsModelParameterRangeExpression_, w->allVars());
     }
     //*********************************************
     //set physics model parameters    after loading the snapshot
     //*********************************************
-    if (setPhysicsModelParameterExpression_ != "" && !runtimedef::get("SETPARAMETERS_AFTER_NLL")) {
+    if (!setPhysicsModelParameterExpression_.empty() && !runtimedef::get("SETPARAMETERS_AFTER_NLL")) {
       RooArgSet allParams(w->allVars());
       //if (w->genobj("discreteParams")) allParams.add(*(RooArgSet*)w->genobj("discreteParams"));
       allParams.add(w->allCats());
@@ -569,7 +569,7 @@ void Combine::run(TString hlfFile, const std::string &dataset, double &limit, do
         default:
             throw std::invalid_argument("The dataset must be a name, or file:name or file:workspace:name");
     }
-    if (filename == "" || dname == ":") throw std::invalid_argument("The dataset must be a name, or file:name or file:workspace:name");
+    if (filename.empty() || dname == ":") throw std::invalid_argument("The dataset must be a name, or file:name or file:workspace:name");
     TDirectory *pwd = gDirectory;
     TFile      *file = TFile::Open(filename.c_str());
     RooAbsData *data = nullptr;
@@ -611,7 +611,7 @@ void Combine::run(TString hlfFile, const std::string &dataset, double &limit, do
       RooMsgService::instance().setGlobalKillBelow(RooFit::FATAL);
   }
 
-  if (redefineSignalPOIs_ != "") {
+  if (!redefineSignalPOIs_.empty()) {
       RooArgSet newPOIs(w->argSet(redefineSignalPOIs_.c_str()));
       for (RooAbsArg *arg : newPOIs) {
         RooRealVar *rrv = dynamic_cast<RooRealVar *>(arg);
@@ -808,7 +808,7 @@ void Combine::run(TString hlfFile, const std::string &dataset, double &limit, do
   RooRealVar *MH = w->var("MH");
   RooAbsData *dobs = w->data(dataset.c_str());
   // Generate with signal model if r or other physics model parameters are defined
-  RooAbsPdf  *genPdf = (expectSignalSet_ || setPhysicsModelParameterExpression_ != "" || !mc_bonly) ? mc->GetPdf() : (mc_bonly ? mc_bonly->GetPdf() : nullptr); 
+  RooAbsPdf  *genPdf = (expectSignalSet_ || !setPhysicsModelParameterExpression_.empty() || !mc_bonly) ? mc->GetPdf() : (mc_bonly ? mc_bonly->GetPdf() : nullptr); 
   RooRealVar *weightVar_ = nullptr; // will be needed for toy generation in some cases
   if (guessGenMode_ && genPdf && genPdf->InheritsFrom("RooSimultaneous") && (dobs != nullptr)) {
       utils::guessChannelMode(dynamic_cast<RooSimultaneous&>(*mc->GetPdf()), *dobs, verbose);
@@ -828,7 +828,7 @@ void Combine::run(TString hlfFile, const std::string &dataset, double &limit, do
     if (POI->find("r")) {
       // Was r also specified in --setPhysicsModelParameters?
       bool rInParamExp = false;
-      if (setPhysicsModelParameterExpression_ != "") {
+      if (!setPhysicsModelParameterExpression_.empty()) {
         vector<string> SetParameterExpressionList = Utils::split(setPhysicsModelParameterExpression_, ",");
         for (UInt_t p = 0; p < SetParameterExpressionList.size(); ++p) {
           vector<string> SetParameterExpression = Utils::split(SetParameterExpressionList[p], "=");
@@ -839,7 +839,7 @@ void Combine::run(TString hlfFile, const std::string &dataset, double &limit, do
         }
       }
       // Set the value of r in cases 1), 2) and 4)
-      if (expectSignalSet_ || (!expectSignalSet_ && !rInParamExp && snapshotName_=="" )) {
+      if (expectSignalSet_ || (!expectSignalSet_ && !rInParamExp && snapshotName_.empty() )) {
         ((RooRealVar*)POI->find("r"))->setVal(expectSignal_);
       }
       if (expectSignalSet_ && rInParamExp) {
@@ -863,7 +863,7 @@ void Combine::run(TString hlfFile, const std::string &dataset, double &limit, do
   }
 
   // Warn the user that they might be using funky values of POIs 
-  if (nToys!=0 && !expectSignalSet_ && setPhysicsModelParameterExpression_ == "" && !(POI->getSize()==1 && POI->find("r"))) {
+  if (nToys!=0 && !expectSignalSet_ && setPhysicsModelParameterExpression_.empty() && !(POI->getSize()==1 && POI->find("r"))) {
 	  std::cerr << "Warning! -- You haven't picked default values for the Parameters of Interest (either with --expectSignal or --setParameters) for generating toys. Combine will use the 'B-only' ModelConfig to generate, which may lead to undesired behaviour if not using the default Physics Model" << std::endl;	  
   }	
   // Ok now we're ready to go lets save a "clean snapshot" for the current parameters state
@@ -969,7 +969,7 @@ void Combine::run(TString hlfFile, const std::string &dataset, double &limit, do
     int nFloatingNonPoiParameters = utils::countFloating(allFloatingParameters); 
     if (nFloatingNonPoiParameters && !toysNoSystematics_ && (readToysFromHere == nullptr)) {
       if (nuisances == nullptr) throw std::logic_error("Running with systematic variation in toys (either generating nuisance parameters or generating auxiliary observables) enabled, but I found floating parameters (which are not POIs) and no constraint terms have been defined in the datacard. If this is fine, run again with --toysNoSystematics.");
-      nuisancePdf.reset(utils::makeNuisancePdf(expectSignal_ ||  setPhysicsModelParameterExpression_ != "" || noMCbonly_ ? *mc : *mc_bonly));
+      nuisancePdf.reset(utils::makeNuisancePdf(expectSignal_ ||  !setPhysicsModelParameterExpression_.empty() || noMCbonly_ ? *mc : *mc_bonly));
       if (toysFrequentist_) {
           if (mc->GetGlobalObservables() == nullptr) throw std::logic_error("Cannot use toysFrequentist without global observables");
           w->saveSnapshot("reallyClean", utils::returnAllVars(w));
@@ -978,7 +978,7 @@ void Combine::run(TString hlfFile, const std::string &dataset, double &limit, do
               if (dobs == nullptr) throw std::logic_error("Cannot use toysFrequentist without input dataset");
               CloseCoutSentry sentry(verbose < 3);
               //genPdf->fitTo(*dobs, RooFit::Save(1), RooFit::Minimizer("Minuit2","minimize"), RooFit::Strategy(0), RooFit::Hesse(0), RooFit::Constrain(*(expectSignal_ ?mc:mc_bonly)->GetNuisanceParameters()));	
-                std::unique_ptr<RooAbsReal> nll(genPdf->createNLL(*dobs, RooFit::Constrain(*(expectSignal_ ||  setPhysicsModelParameterExpression_ != "" || noMCbonly_ ? mc:mc_bonly)->GetNuisanceParameters()), RooFit::Extended(genPdf->canBeExtended())));
+                std::unique_ptr<RooAbsReal> nll(genPdf->createNLL(*dobs, RooFit::Constrain(*(expectSignal_ ||  !setPhysicsModelParameterExpression_.empty() || noMCbonly_ ? mc:mc_bonly)->GetNuisanceParameters()), RooFit::Extended(genPdf->canBeExtended())));
                 CascadeMinimizer minim(*nll, CascadeMinimizer::Constrained);
                 minim.setStrategy(1);
                 minim.minimize();
@@ -998,7 +998,7 @@ void Combine::run(TString hlfFile, const std::string &dataset, double &limit, do
         continue;
 
       // Reset ranges --> for likelihood scans
-      if (setPhysicsModelParameterRangeExpression_ != "") {
+      if (!setPhysicsModelParameterRangeExpression_.empty()) {
 	utils::setModelParameterRanges( setPhysicsModelParameterRangeExpression_, w->allVars());
       }
 
@@ -1211,7 +1211,7 @@ bool Combine::addDiscreteNuisances(RooWorkspace *w){
 
 template <class Var>
 void Combine::addBranches(const std::string& trackString, RooWorkspace* w, std::vector<std::pair<Var*,float>>& trackMap, const std::string& vtype) {
-  if(trackString!=""){
+  if(!trackString.empty()){
     std::stringstream ss(trackString);
     std::string token;
     while(std::getline(ss,token,',')) {

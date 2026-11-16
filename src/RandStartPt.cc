@@ -56,14 +56,14 @@ std::vector<std::vector<float>> RandStartPt::vectorOfPointsToTry (){
     // Append the random points to the vector of points to try
     float prof_start_pt_range_max = 20.0; // Default to 20 if we're not asking for custom ranges
     std::map<std::string, std::vector<float>> rand_ranges_dict;
-    if (parameterRandInitialValranges_ != "") {
+    if (!parameterRandInitialValranges_.empty()) {
         rand_ranges_dict = RandStartPt::getRangesDictFromInString(parameterRandInitialValranges_);
     }
 
     for (int pt_idx = 0; pt_idx<numrandpts_; pt_idx++){
         std::vector<float> wc_vals_vec;
         for (int prof_param_idx=0; prof_param_idx<n_prof_params; prof_param_idx++) {
-            if (parameterRandInitialValranges_ != "") {
+            if (!parameterRandInitialValranges_.empty()) {
                 if (rand_ranges_dict.find(specifiedvars_[prof_param_idx]->GetName()) != rand_ranges_dict.end()){   //if the random starting point range for this floating POI was supplied during runtime
                     float rand_range_lo = rand_ranges_dict[specifiedvars_[prof_param_idx]->GetName()][0];
                     float rand_range_hi = rand_ranges_dict[specifiedvars_[prof_param_idx]->GetName()][1];

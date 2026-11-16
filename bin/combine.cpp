@@ -191,7 +191,7 @@ int main(int argc, char **argv) {
     return 1000;
   }
 
-  if(datacard == "") {
+  if(datacard.empty()) {
     cerr << "Missing datacard file" << endl;
     cout << "Usage: combine [options]\n";
     cout << "Use combine --help to get a list of all the allowed methods and options"  << endl;
@@ -305,7 +305,7 @@ int main(int argc, char **argv) {
   }
   
   writeToysHere = test->mkdir("toys","toys"); 
-  if (toysFile != "") readToysFromHere = TFile::Open(toysFile.c_str());
+  if (!toysFile.empty()) readToysFromHere = TFile::Open(toysFile.c_str());
   
   syst = withSystematics;
   mass = iMass;

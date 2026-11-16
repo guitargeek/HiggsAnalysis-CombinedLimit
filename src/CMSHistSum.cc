@@ -226,7 +226,7 @@ void CMSHistSum::initialize() const {
 
   unsigned nb = cache_.size();
   vbinpars_.resize(nb);
-  if (bintypes_.size()) {
+  if (!bintypes_.empty()) {
     for (unsigned j = 0, r = 0; j < nb; ++j) {
       vbinpars_[j].resize(bintypes_[j].size(), nullptr);
       for (unsigned i = 0; i < bintypes_[j].size(); ++i) {
@@ -297,7 +297,7 @@ void CMSHistSum::updateMorphs() const {
   }
   int n_morphs = vmorphpars_.size();
 
-  if (vertical_prev_vals_.size() == 0) {
+  if (vertical_prev_vals_.empty()) {
     vertical_prev_vals_.resize(n_morphs);
   }
   // Loop through vmorphs
@@ -457,7 +457,7 @@ void CMSHistSum::setAnalyticBarlowBeeston(bool flag) const {
     bb_.push_res.clear();
     bb_.init = false;
   }
-  if (flag && data_.size()) {
+  if (flag && !data_.empty()) {
     for (unsigned j = 0; j < bintypes_.size(); ++j) {
       if (bintypes_[j][0] == 1 && !vbinpars_[j][0]->isConstant()) {
         bb_.use.push_back(j);
@@ -491,7 +491,7 @@ void CMSHistSum::setAnalyticBarlowBeeston(bool flag) const {
 
 RooArgList * CMSHistSum::setupBinPars(double poissonThreshold) {
   RooArgList * res = new RooArgList();
-  if (bintypes_.size()) {
+  if (!bintypes_.empty()) {
     std::cout << "setupBinPars() already called for " << this->GetName() << "\n";
     return res;
   }
@@ -516,7 +516,7 @@ RooArgList * CMSHistSum::setupBinPars(double poissonThreshold) {
       skip_idx.insert(i);
     }
   }
-  if (skipped_procs.size()) {
+  if (!skipped_procs.empty()) {
     std::cout << "Processes excluded for sums:";
     for (auto &s: skipped_procs) std::cout << " " << s;
     std::cout << "\n";
@@ -537,7 +537,7 @@ RooArgList * CMSHistSum::setupBinPars(double poissonThreshold) {
       sub_err += std::pow(vfuncstmp_[i]->errors()[j] * coeffvals_[i], 2.);;
     }
     sub_err = std::sqrt(sub_err);
-    if (skipped_procs.size()) {
+    if (!skipped_procs.empty()) {
       std::cout << TString::Format("%-10i %-15f %-15f %-30s\n", j, sub_sum, sub_err, "excluding marked processes");
     }
 
@@ -764,7 +764,7 @@ void CMSHistSum::printMultiline(std::ostream& os, Int_t contents, Bool_t verbose
                     TString indent) const {
   RooAbsReal::printMultiline(os, contents, verbose, indent);
   updateCache();
-  if (bintypes_.size()) {
+  if (!bintypes_.empty()) {
     std::cout << ">> Bin types are:\n";
     for (unsigned j = 0; j < bintypes_.size(); ++j) {
       std::cout << ">> " << j << ":";

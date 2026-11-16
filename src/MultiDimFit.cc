@@ -254,10 +254,10 @@ bool MultiDimFit::runSpecific(RooWorkspace *w, RooStats::ModelConfig *mc_s, RooS
     if (robustHesse_) {
         RobustHesse robustHesse(*nll, verbose - 1);
         robustHesse.ProtectArgSet(*mc_s->GetParametersOfInterest());
-        if (robustHesseSave_ != "") {
+        if (!robustHesseSave_.empty()) {
           robustHesse.SaveHessianToFile(robustHesseSave_);
         }
-        if (robustHesseLoad_ != "") {
+        if (!robustHesseLoad_.empty()) {
           robustHesse.LoadHessianFromFile(robustHesseLoad_);
         }
         robustHesse.hesse();
@@ -358,7 +358,7 @@ void MultiDimFit::initOnce(RooWorkspace *w, RooStats::ModelConfig *mc_s) {
         poiList_.add(*rrv);
     }
 
-    if(saveSpecifiedFuncs_!=""){
+    if(!saveSpecifiedFuncs_.empty()){
 	    char tmp[10240] ;
 	    strlcpy(tmp,saveSpecifiedFuncs_.c_str(),10240) ;
 	    char* token = strtok(tmp,",") ;
@@ -374,7 +374,7 @@ void MultiDimFit::initOnce(RooWorkspace *w, RooStats::ModelConfig *mc_s) {
 		    token = strtok(nullptr,",") ; 
 	    }
     }
-    if(saveSpecifiedIndex_!=""){
+    if(!saveSpecifiedIndex_.empty()){
 	    char tmp[10240] ;
 	    strlcpy(tmp,saveSpecifiedIndex_.c_str(),10240) ;
 	    char* token = strtok(tmp,",") ;
@@ -389,7 +389,7 @@ void MultiDimFit::initOnce(RooWorkspace *w, RooStats::ModelConfig *mc_s) {
 	    }
     }
 
-    if(saveSpecifiedNuis_!="" && withSystematics){
+    if(!saveSpecifiedNuis_.empty() && withSystematics){
 	    RooArgSet mcNuis(*mc_s->GetNuisanceParameters());
 	    if(saveSpecifiedNuis_=="all"){
 		    specifiedNuis_.clear();
@@ -602,7 +602,7 @@ void MultiDimFit::doGrid(RooWorkspace *w, RooAbsReal &nll)
     unsigned int n = poi_.size();
     //if (poi_.size() > 2) throw std::logic_error("Don't know how to do a grid with more than 2 POIs.");
     double nll0 = nll.getVal();
-    if (setParametersForGrid_ != "") {
+    if (!setParametersForGrid_.empty()) {
        RooArgSet allParams(w->allVars());
        allParams.add(w->allCats());
        utils::setModelParameters( setParametersForGrid_, allParams);
@@ -650,7 +650,7 @@ void MultiDimFit::doGrid(RooWorkspace *w, RooAbsReal &nll)
         if (verbose > 1){
             std::cout << "\nStarting n==1. The nll0 from initial fit: " << nll0 << std::endl;
         }
-        unsigned int points = pointsPerPoi.size() == 0 ? points_ : pointsPerPoi[0];
+        unsigned int points = pointsPerPoi.empty() ? points_ : pointsPerPoi[0];
         // Set seed for random points
         if (pointsRandProf_ > 0) {
             std::cout<<"\n************************************************************************************"<<std::endl;
@@ -757,7 +757,7 @@ void MultiDimFit::doGrid(RooWorkspace *w, RooAbsReal &nll)
         // get number of points per axis
         unsigned int nX;
         unsigned int nY;
-        if (pointsPerPoi.size() == 0) {
+        if (pointsPerPoi.empty()) {
             // same number of points per axis ("old" behavior)
             unsigned int sqrn = ceil(sqrt(double(points_)));
             nX = nY = sqrn;
@@ -849,7 +849,7 @@ void MultiDimFit::doGrid(RooWorkspace *w, RooAbsReal &nll)
 
         // get number of points per axis
         std::vector<int> axis_points;
-        if (pointsPerPoi.size() == 0) {
+        if (pointsPerPoi.empty()) {
             // same number of points per axis ("old" behavior)
             unsigned int rootn = ceil(TMath::Power(double(points_),double(1./n)));
             axis_points.resize(n, (int)rootn);
@@ -994,9 +994,9 @@ void MultiDimFit::doFixedPoint(RooWorkspace *w, RooAbsReal &nll)
     //for (unsigned int i = 0; i < n; ++i) {
     //        std::cout<<" Before setting fixed point "<<poiVars_[i]->GetName()<<"= "<<poiVals_[i]<<std::endl;
     //}
-    if (fixedPointPOIs_ != "") {
+    if (!fixedPointPOIs_.empty()) {
 	    utils::setModelParameters( fixedPointPOIs_, w->allVars());
-    } else if (setPhysicsModelParameterExpression_ != "") {
+    } else if (!setPhysicsModelParameterExpression_.empty()) {
             std::cout << " --fixedPointPOIs option not used, so will use the argument of --setParameters instead" << std::endl;
 	    utils::setModelParameters( setPhysicsModelParameterExpression_, w->allVars());
     }   

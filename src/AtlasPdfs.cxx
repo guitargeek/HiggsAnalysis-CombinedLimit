@@ -258,7 +258,7 @@ Double_t RooBSplineBases::evaluate() const
 //   std::cout << "In eval, _n=" << _n << ", _m=" << _m << ", _nPlusOne=" << _nPlusOne << std::endl;
 //   std::cout << "_bin=" << _bin << std::endl;
 //   std::cout << "_t_ary=" << _t_ary << std::endl;
-  if (!_t_ary.size()) buildTAry();
+  if (_t_ary.empty()) buildTAry();
 
   // Calculate and return value of spline
   //std::cout << "In RooBSplineBases::evaluate()" << std::endl;
@@ -1276,7 +1276,7 @@ RooStarMomentMorph::RooStarMomentMorph(const RooStarMomentMorph& other, const ch
   _useHorizMorph(other._useHorizMorph)
 { 
   // nref is resized in initialize, so reduce the size here
-  if (_nref.size()>0) {
+  if (!_nref.empty()) {
     _nref.resize( _nref.size()-1 );
   }
 

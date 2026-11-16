@@ -370,7 +370,7 @@ int RobustHesse::hesse() {
   unsigned ntotal = (((cVars_.size() * cVars_.size()) - cVars_.size()) / 2) + cVars_.size();
   unsigned idx = 0;
 
-  if (loadFile_ != "") {
+  if (!loadFile_.empty()) {
     TFile fin(loadFile_.c_str());
     *hessian_ = *((TMatrixDSym*)gDirectory->Get("hessian"));
   } else {
@@ -410,7 +410,7 @@ int RobustHesse::hesse() {
       }
     }
   }
-  if (saveFile_ != "") {
+  if (!saveFile_.empty()) {
     TFile fout(saveFile_.c_str(), "RECREATE");
     gDirectory->WriteObject(hessian_.get(), "hessian");
   }
@@ -480,13 +480,13 @@ int RobustHesse::hesse() {
   covariance_->Invert();
   std::cout << ">> Matrix inverted\n";
 
-  if (invalidStencilVars_.size() > 0) {
+  if (!invalidStencilVars_.empty()) {
     std::cout << ">> Note: the following parameters were dropped as their ranges are either too narrow or the parameter has no effect on the NLL:\n";
     for (auto const& par : invalidStencilVars_) {
       std::cout << "     - " << par.v->GetName() << "\n";
     }
   }
-  if (removed_pars.size() > 0) {
+  if (!removed_pars.empty()) {
     std::cout << ">> Note: the following parameters were dropped to make the covariance matrix pos-def:\n";
     for (auto const& par : removed_pars) {
       std::cout << "     - " << par << "\n";

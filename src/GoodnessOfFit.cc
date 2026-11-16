@@ -191,7 +191,7 @@ bool GoodnessOfFit::runSaturatedModel(RooWorkspace *w, RooStats::ModelConfig *mc
   auto nominal_nll = combineCreateNLL(*pdf_nominal, data, /*constrain=*/cPars, /*offset=*/false);
   auto saturated_nll = combineCreateNLL(*saturated, data, /*constrain=*/cPars, /*offset=*/false);
 
-  if (setParametersForFit_ != "") {
+  if (!setParametersForFit_.empty()) {
     utils::setModelParameters(setParametersForFit_, w->allVars());
   }
   CascadeMinimizer minimn(*nominal_nll, CascadeMinimizer::Unconstrained);
@@ -204,12 +204,12 @@ bool GoodnessOfFit::runSaturatedModel(RooWorkspace *w, RooStats::ModelConfig *mc
     simnll->clearConstantZeroPoint();
   }
 
-  if (setParametersForEval_ != "") {
+  if (!setParametersForEval_.empty()) {
     utils::setModelParameters(setParametersForEval_, w->allVars());
   }
   double nll_nominal = nominal_nll->getVal();
 
-  if (setParametersForFit_ != "") {
+  if (!setParametersForFit_.empty()) {
     utils::setModelParameters(setParametersForFit_, w->allVars());
   }
   CascadeMinimizer minims(*saturated_nll, CascadeMinimizer::Unconstrained);
@@ -219,7 +219,7 @@ bool GoodnessOfFit::runSaturatedModel(RooWorkspace *w, RooStats::ModelConfig *mc
     simnll->clearConstantZeroPoint();
   }
 
-  if (setParametersForEval_ != "") {
+  if (!setParametersForEval_.empty()) {
     utils::setModelParameters(setParametersForEval_, w->allVars());
   }
   double nll_saturated = saturated_nll->getVal();
@@ -271,7 +271,7 @@ bool GoodnessOfFit::runKSandAD(RooWorkspace *w, RooStats::ModelConfig *mc_s, Roo
   limit = 0;
 
   // now check if we have categories to deal with
-  if (binNames_.size()) {
+  if (!binNames_.empty()) {
     RooAbsCategoryLValue const &cat = sim->indexCat();    
     // Split the data using the option "true" to include empty datasets
 #if ROOT_VERSION_CODE >= ROOT_VERSION(6,37,00)

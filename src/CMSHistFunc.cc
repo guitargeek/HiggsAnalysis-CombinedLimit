@@ -320,7 +320,7 @@ void CMSHistFunc::updateCache() const {
   }
 
   if (step1 || step2) {
-    if (mcache_.size() == 0) mcache_.resize(storage_.size());
+    if (mcache_.empty()) mcache_.resize(storage_.size());
   }
 
   bool external_morph_updated = (external_morph_.getSize() && static_cast<CMSExternalMorph*>(external_morph_.at(0))->hasChanged());
@@ -557,7 +557,7 @@ void CMSHistFunc::updateCache() const {
 #endif
 
       unsigned idx = getIdx(0, global_.p1, 0, 0);
-      if (vertical_prev_vals_.size() == 0) {
+      if (vertical_prev_vals_.empty()) {
         vertical_prev_vals_.resize(vmorphs_.getSize());
       }
       if (!fast_vertical_) {
