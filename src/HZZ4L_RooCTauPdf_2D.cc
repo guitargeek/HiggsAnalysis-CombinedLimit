@@ -29,6 +29,8 @@ kd("kd", "kd", this, _kd),
 ksmd("ksmd", "ksmd", this, _ksmd),
 ctau("ctau", "ctau", this, _ctau),
 _coefList("coefList", "List of funcficients", this),
+nbins_ctau(inCoefList.getSize()),
+Integral_T(new double[nbins_ctau]),
 ctau_min(_ctau_min),
 ctau_max(_ctau_max)
 {
@@ -40,8 +42,6 @@ ctau_max(_ctau_max)
 		_coefList.add(*func);
 	}
 
-	nbins_ctau = _coefList.getSize();
-	Integral_T = new double[nbins_ctau];
 	for(int mp=0;mp<nbins_ctau;mp++) Integral_T[mp] = dynamic_cast<const RooHistFunc*>(_coefList.at(mp))->analyticalIntegral(1000);
 }
 
@@ -54,11 +54,9 @@ kd("kd", this, other.kd),
 ksmd("ksmd", this, other.ksmd),
 ctau("ctau", this, other.ctau),
 _coefList("coefList", this, other._coefList),
-ctau_min(other.ctau_min),
+nbins_ctau(_coefList.getSize()), Integral_T(new double[nbins_ctau]), ctau_min(other.ctau_min),
 ctau_max(other.ctau_max)
 {
-	nbins_ctau = _coefList.getSize();
-	Integral_T = new double[nbins_ctau];
 	for(int mp=0;mp<nbins_ctau;mp++) Integral_T[mp] = (other.Integral_T)[mp];
 }
 

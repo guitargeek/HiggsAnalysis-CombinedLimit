@@ -31,7 +31,12 @@ ClassImp(VBFHZZ4L_RooSpinZeroPdf)
    ksmd("ksmd","ksmd",this,_ksmd),
    a1("a1","a1",this,_a1),
    ai("ai","ai",this,_ai),
-  _coefList("coefList","List of funcficients",this)
+  _coefList("coefList","List of funcficients",this),
+  Integral_T1(dynamic_cast<const RooHistFunc*>(inCoefList.at(0))->analyticalIntegral(1000)),
+  Integral_T2(dynamic_cast<const RooHistFunc*>(inCoefList.at(1))->analyticalIntegral(1000)),
+  Integral_T3(dynamic_cast<const RooHistFunc*>(inCoefList.at(2))->analyticalIntegral(1000)),
+  Integral_T4(dynamic_cast<const RooHistFunc*>(inCoefList.at(3))->analyticalIntegral(1000)),
+  Integral_T5(dynamic_cast<const RooHistFunc*>(inCoefList.at(4))->analyticalIntegral(1000))
  {
   for (RooAbsArg *func : inCoefList) {
     if (!dynamic_cast<RooAbsReal*>(func)) {
@@ -41,11 +46,6 @@ ClassImp(VBFHZZ4L_RooSpinZeroPdf)
     _coefList.add(*func) ;
   }
 
-  Integral_T1 = dynamic_cast<const RooHistFunc*>(_coefList.at(0))-> analyticalIntegral(1000);
-  Integral_T2 = dynamic_cast<const RooHistFunc*>(_coefList.at(1))-> analyticalIntegral(1000);
-  Integral_T3 = dynamic_cast<const RooHistFunc*>(_coefList.at(2))-> analyticalIntegral(1000);
-  Integral_T4 = dynamic_cast<const RooHistFunc*>(_coefList.at(3))-> analyticalIntegral(1000);
-  Integral_T5 = dynamic_cast<const RooHistFunc*>(_coefList.at(4))-> analyticalIntegral(1000);
  }
 
 
@@ -56,13 +56,13 @@ ClassImp(VBFHZZ4L_RooSpinZeroPdf)
    ksmd("ksmd",this,other.ksmd),
    a1("a1",this,other.a1),
    ai("ai",this,other.ai),
-  _coefList("coefList",this,other._coefList)
+  _coefList("coefList",this,other._coefList),
+  Integral_T1(other.Integral_T1),
+  Integral_T2(other.Integral_T2),
+  Integral_T3(other.Integral_T3),
+  Integral_T4(other.Integral_T4),
+  Integral_T5(other.Integral_T5)
  {
-         Integral_T1 = other.Integral_T1;
-         Integral_T2 = other.Integral_T2;
-         Integral_T3 = other.Integral_T3;
-         Integral_T4 = other.Integral_T4;
-         Integral_T5 = other.Integral_T5;
  }
 
 

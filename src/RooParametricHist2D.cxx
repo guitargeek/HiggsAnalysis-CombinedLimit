@@ -48,12 +48,9 @@ RooParametricHist2D::RooParametricHist2D( const RooParametricHist2D& other,
     RooAbsPdf(other, name),
     x("observable_x",this,other.x),
     y("observable_y",this,other.y),
-    pars("_pars",this,other.pars)
+    pars("_pars",this,other.pars), N_bins(other.N_bins), N_bins_x(other.N_bins_x), N_bins_y(other.N_bins_y)
 {
     //std::cout << "Cloning RooParametricHist2D with name " <<other.GetName() << std::endl;
-    N_bins = other.N_bins;
-    N_bins_x = other.N_bins_x;
-    N_bins_y = other.N_bins_y;
     //sum    = other.sum;
 
     for(int i=0; i<=N_bins_x; ++i) {

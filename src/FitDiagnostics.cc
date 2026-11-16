@@ -69,8 +69,19 @@ bool        FitDiagnostics::robustHesse_ = false;
 bool        FitDiagnostics::saveWithUncertsRequested_=false;
 bool        FitDiagnostics::ignoreCovWarning_=false;
 
-
-FitDiagnostics::FitDiagnostics() : FitterAlgoBase("FitDiagnostics specific options")
+FitDiagnostics::FitDiagnostics()
+    : FitterAlgoBase("FitDiagnostics specific options"),
+      currentToy_(0),
+      nToys(0),
+      overallBins_(0),
+      fitStatus_(0),
+      numbadnll_(-1),
+      mu_(0),
+      muLoErr_(0),
+      muHiErr_(0),
+      nll_nll0_(-1),
+      nll_bonly_(-1),
+      nll_sb_(-1)
 {
     options_.add_options()
         ("minos",              	boost::program_options::value<std::string>(&minos_)->default_value(minos_), "Compute MINOS errors for: 'none', 'poi', 'all'")
@@ -98,8 +109,7 @@ FitDiagnostics::FitDiagnostics() : FitterAlgoBase("FitDiagnostics specific optio
    ;
 
     // setup a few defaults
-    currentToy_=0; nToys=0; fitStatus_=0; mu_=0; muLoErr_=0; muHiErr_=0; numbadnll_=-1; nll_nll0_=-1; nll_bonly_=-1; nll_sb_=-1;
-    overallBins_=0; overallNorms_=0,overallNuis_=0,overallCons_=0;
+    overallNorms_=0,overallNuis_=0,overallCons_=0;
 }
 
 FitDiagnostics::~FitDiagnostics(){

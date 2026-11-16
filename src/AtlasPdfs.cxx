@@ -867,14 +867,13 @@ RooParamKeysPdf::RooParamKeysPdf(const char *name, const char *title,
   _mirrorRight(mirror==MirrorRight || mirror==MirrorBoth || mirror==MirrorAsymLeftRight),
   _asymLeft(mirror==MirrorAsymLeft || mirror==MirrorAsymLeftRight || mirror==MirrorAsymBoth),
   _asymRight(mirror==MirrorAsymRight || mirror==MirrorLeftAsymRight || mirror==MirrorAsymBoth),
+  _lo(static_cast<RooRealVar &>(x).getMin()),
+  _hi(static_cast<RooRealVar &>(x).getMax()),
+  _binWidth((_hi-_lo)/(_nPoints-1)),
   _rho(rho)
 {
   // cache stuff about x
   snprintf(_varName, 128,"%s", x.GetName());
-  RooRealVar real= (RooRealVar&)(_x.arg());
-  _lo = real.getMin();
-  _hi = real.getMax();
-  _binWidth = (_hi-_lo)/(_nPoints-1);
 
   // form the lookup table
   LoadDataSet(data);
@@ -904,14 +903,13 @@ RooParamKeysPdf::RooParamKeysPdf(const char *name, const char *title,
   _mirrorRight(mirror==MirrorRight || mirror==MirrorBoth || mirror==MirrorAsymLeftRight),
   _asymLeft(mirror==MirrorAsymLeft || mirror==MirrorAsymLeftRight || mirror==MirrorAsymBoth),
   _asymRight(mirror==MirrorAsymRight || mirror==MirrorLeftAsymRight || mirror==MirrorAsymBoth),
+  _lo(static_cast<RooRealVar &>(x).getMin()),
+  _hi(static_cast<RooRealVar &>(x).getMax()),
+  _binWidth((_hi-_lo)/(_nPoints-1)),
   _rho(rho)
 {
   // cache stuff about x
   snprintf(_varName, 128,"%s", x.GetName());
-  RooRealVar real= (RooRealVar&)(_x.arg());
-  _lo = real.getMin();
-  _hi = real.getMax();
-  _binWidth = (_hi-_lo)/(_nPoints-1);
 
   // form the lookup table
   LoadDataSet(data);
@@ -930,13 +928,10 @@ RooParamKeysPdf::RooParamKeysPdf(const RooParamKeysPdf& other, const char* name)
   _nPoints(other._nPoints), _lookupTable(new Double_t[_nPoints]),
   _mirrorLeft( other._mirrorLeft ), _mirrorRight( other._mirrorRight ),
   _asymLeft(other._asymLeft), _asymRight(other._asymRight),
-  _rho( other._rho ) {
+  _lo(other._lo), _hi(other._hi), _binWidth(other._binWidth), _rho( other._rho ) {
 
   // cache stuff about x
   snprintf(_varName, 128, "%s", other._varName );
-  _lo = other._lo;
-  _hi = other._hi;
-  _binWidth = other._binWidth;
 
   // copy over data and weights... not necessary, commented out for speed ...
 //    _dataPts = new Double_t[_nEvents];

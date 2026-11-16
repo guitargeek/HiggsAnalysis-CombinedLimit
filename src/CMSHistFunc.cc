@@ -18,17 +18,16 @@
 
 bool CMSHistFunc::enable_fast_vertical_ = false;
 
-CMSHistFunc::CMSHistFunc() {
-  morph_strategy_ = 0;
-  initialized_ = false;
-  htype_ = HorizontalType::Integral;
-  mtype_ = MomentSetting::NonLinearPosFractions;
-  vtype_ = VerticalSetting::QuadLinear;
-  divide_by_width_ = true;
-  rebin_ = false;
-  vsmooth_par_ = 1.0;
-  fast_vertical_ = false;
-}
+CMSHistFunc::CMSHistFunc()
+    : morph_strategy_(0),
+      initialized_(false),
+      rebin_(false),
+      htype_(HorizontalType::Integral),
+      mtype_(MomentSetting::NonLinearPosFractions),
+      vtype_(VerticalSetting::QuadLinear),
+      divide_by_width_(true),
+      vsmooth_par_(1.0),
+      fast_vertical_(false) {}
 
 CMSHistFunc::CMSHistFunc(const char* name, const char* title, RooRealVar& x,
                          TH1 const& hist, bool divide_by_width)

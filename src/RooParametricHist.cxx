@@ -44,13 +44,16 @@ RooParametricHist::RooParametricHist(const char *name,
 
 //_____________________________________________________________________________
 RooParametricHist::RooParametricHist(const RooParametricHist& other, const char* name) :
- RooAbsPdf(other, name),x("observable",this,other.x),pars("pars",this,other.pars),_coeffList("_coeffList",this,other._coeffList)
+ RooAbsPdf(other, name),
+ x("observable",this,other.x),
+ pars("pars",this,other.pars),
+ _coeffList("_coeffList",this,other._coeffList),
+ N_bins(other.N_bins),
+ _smoothRegion(other._smoothRegion),
+ _hasMorphs(other._hasMorphs),
+ _cval(other._cval)
 {
 
-  N_bins = other.N_bins;
-  _smoothRegion=other._smoothRegion;
-  _hasMorphs=other._hasMorphs;
-  _cval = other._cval;
 
   for(int i=0; i<=N_bins; i++) {
      bins.push_back(other.bins[i]);

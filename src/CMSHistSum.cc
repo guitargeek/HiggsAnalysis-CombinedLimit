@@ -33,7 +33,7 @@ CMSHistSum::CMSHistSum(const char* name,
       morphpars_("morphpars", "", this),
       coeffpars_("coeffpars", "", this),
       binpars_("binpars", "", this),
-      n_procs_(0),
+      n_procs_(funcs.getSize()),
       n_morphs_(0),
       sentry_(TString(name) + "_sentry", ""),
       binsentry_(TString(name) + "_binsentry", ""),
@@ -42,7 +42,6 @@ CMSHistSum::CMSHistSum(const char* name,
       fast_mode_(0),
       external_morphs_("external_morphs", "", this) {
 
-  n_procs_ = funcs.getSize();
   assert(n_procs_ == coeffs.getSize());
 
   coeffpars_.add(coeffs);

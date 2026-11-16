@@ -7,10 +7,8 @@ using Eigen::VectorXd;
 
 RooSplineND::RooSplineND(const char *name, const char *title, RooArgList &vars, TTree *tree, const char *fName, double eps, bool rescale, std::string cutstring) :
   RooAbsReal(name,title),
-  vars_("vars","Variables", this)
+  vars_("vars","Variables", this), ndim_(vars.getSize()), rescaleAxis(rescale)
 {
-  rescaleAxis = rescale;
-  ndim_ = vars.getSize();
   int nentries  = tree->GetEntries();
 
   // Get Selection list
@@ -67,15 +65,16 @@ RooSplineND::RooSplineND(const char *name, const char *title, RooArgList &vars, 
 //_____________________________________________________________________________
 // Copy Constructor
 RooSplineND::RooSplineND(const RooSplineND& other, const char *name) :
- RooAbsReal(other, name),vars_("vars",this,other.vars_)
+ RooAbsReal(other, name),
+ vars_("vars",this,other.vars_),
+ ndim_(other.ndim_),
+ M_(other.M_),
+ eps_(other.eps_),
+ axis_pts_(other.axis_pts_),
+ w_mean(other.w_mean),
+ w_rms(other.w_rms)
 {
-  ndim_ = other.ndim_;
-  M_    = other.M_;
-  eps_  = other.eps_;
-  axis_pts_ = other.axis_pts_;
 
-  w_mean = other.w_mean;
-  w_rms  = other.w_rms;
 
   // STL copy constructors not so helpful :/
   std::vector<double>::const_iterator 		     w_it; 
@@ -104,12 +103,8 @@ RooSplineND::RooSplineND(const RooSplineND& other, const char *name) :
 
 RooSplineND::RooSplineND(const char *name, const char *title, const RooListProxy &vars, 
  int ndim, int M, double eps, bool rescale, std::vector<double> &w, std::map<int,std::vector<double> > &map, std::map<int,std::pair<double,double> > &rmap,double wmean, double wrms) :
- RooAbsReal(name, title),vars_("vars",this,vars)
+ RooAbsReal(name, title),vars_("vars",this,vars), ndim_(ndim), M_(M), eps_(eps), axis_pts_(TMath::Power(M_,1./ndim_))
 {
-  ndim_ = ndim;
-  M_    = M;
-  eps_  = eps;
-  axis_pts_ = TMath::Power(M_,1./ndim_);
 
   // STL copy constructors not so helpful :/
   std::vector<double>::const_iterator 		     w_it; 

@@ -896,9 +896,12 @@ FastVerticalInterpHistPdf2::FastVerticalInterpHistPdf2(const FastVerticalInterpH
     initBase();
     other.getVal(_x.arg());
     _morphs = other._morphs;
+    // can't be member initializers: other.getVal() above fills the caches that are copied here
+    // NOLINTBEGIN(cppcoreguidelines-prefer-member-initializer)
     _cache = other._cache;
     _cacheNominal = other._cacheNominal;
     _cacheNominalLog = other._cacheNominalLog;
+    // NOLINTEND(cppcoreguidelines-prefer-member-initializer)
 }
 
 
@@ -914,9 +917,12 @@ FastVerticalInterpHistPdf2D2::FastVerticalInterpHistPdf2D2(const FastVerticalInt
     normSet.add(_y.arg());
     other.getVal(normSet);
     _morphs = other._morphs;
+    // can't be member initializers: other.getVal() above fills the caches that are copied here
+    // NOLINTBEGIN(cppcoreguidelines-prefer-member-initializer)
     _cache = other._cache;
     _cacheNominal = other._cacheNominal;
     _cacheNominalLog = other._cacheNominalLog;
+    // NOLINTEND(cppcoreguidelines-prefer-member-initializer)
 }
 
 

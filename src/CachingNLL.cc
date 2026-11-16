@@ -394,7 +394,8 @@ cacheutils::CachingAddNLL::CachingAddNLL(const CachingAddNLL &other, const char 
     setData(const_cast<RooAbsData &>(*other.data_));
     setup_();
     propagateData();
-    constantZeroPoint_ = -evaluate();
+    // can't be a member initializer: evaluate() needs the data and setup from above
+    constantZeroPoint_ = -evaluate(); // NOLINT(cppcoreguidelines-prefer-member-initializer)
 }
 
 cacheutils::CachingAddNLL::~CachingAddNLL() 

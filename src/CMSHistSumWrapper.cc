@@ -5,8 +5,7 @@
 #include "RooAbsReal.h"
 
 CMSHistSumWrapper::CMSHistSumWrapper()
-    : psum_(nullptr), initialized_(false) {
-  idx_ = 0;
+    : idx_(0), psum_(nullptr), initialized_(false) {
 }
 
 CMSHistSumWrapper::CMSHistSumWrapper(const char* name, const char* title, RooAbsReal& x,
@@ -14,11 +13,10 @@ CMSHistSumWrapper::CMSHistSumWrapper(const char* name, const char* title, RooAbs
     : RooAbsReal(name, title),
       x_("x", "", this, x),
       sum_("sum", "", this, sum),
-      idx_(idx),
+      cache_(sum.cache()), idx_(idx),
       sentry_(TString(name) + "_sentry", ""),
       psum_(nullptr),
       initialized_(false) {
-  cache_ = sum.cache();
   cache_.Clear();
 }
 

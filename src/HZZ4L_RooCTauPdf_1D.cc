@@ -27,6 +27,7 @@ RooAbsPdf(name, title),
 kd("kd", "kd", this, _kd),
 ctau("ctau", "ctau", this, _ctau),
 _coefList("coefList", "List of funcficients", this),
+nbins_ctau(inCoefList.getSize()),
 ctau_min(_ctau_min),
 ctau_max(_ctau_max)
 {
@@ -38,7 +39,6 @@ ctau_max(_ctau_max)
 		_coefList.add(*func);
 	}
 
-	nbins_ctau = _coefList.getSize();
 	for(int mp=0;mp<(nbins_ctau>101 ? 101 : nbins_ctau);mp++) Integral_T[mp] = dynamic_cast<const RooHistFunc*>(_coefList.at(mp))->analyticalIntegral(1000);
 	for(int mp=nbins_ctau;mp<101;mp++) Integral_T[mp] = Integral_T[nbins_ctau-1];
 
@@ -54,10 +54,9 @@ RooAbsPdf(other, name),
 kd("kd", this, other.kd),
 ctau("ctau", this, other.ctau),
 _coefList("coefList", this, other._coefList),
-ctau_min(other.ctau_min),
+nbins_ctau(_coefList.getSize()), ctau_min(other.ctau_min),
 ctau_max(other.ctau_max)
 {
-	nbins_ctau = _coefList.getSize();
 	for(int mp=0;mp<101;mp++) Integral_T[mp] = (other.Integral_T)[mp];
 }
 

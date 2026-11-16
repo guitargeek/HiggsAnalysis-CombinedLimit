@@ -28,7 +28,16 @@ ClassImp(HZZ4L_RooSpinZeroPdf_2D)
    fai2("fai2","fai2",this,_fai2),
    phi1("phi1","phi1",this,_phi1),
    phi2("phi2","phi2",this,_phi2),
-  _coefList("coefList","List of funcficients",this) 
+  _coefList("coefList","List of funcficients",this),
+  Integral_T1(dynamic_cast<const RooHistFunc*>(inCoefList.at(0))->analyticalIntegral(1000)),
+  Integral_T2(dynamic_cast<const RooHistFunc*>(inCoefList.at(1))->analyticalIntegral(1000)),
+  Integral_T3(dynamic_cast<const RooHistFunc*>(inCoefList.at(2))->analyticalIntegral(1000)),
+  Integral_T4(dynamic_cast<const RooHistFunc*>(inCoefList.at(3))->analyticalIntegral(1000)),
+  Integral_T5(dynamic_cast<const RooHistFunc*>(inCoefList.at(4))->analyticalIntegral(1000)),
+  Integral_T6(dynamic_cast<const RooHistFunc*>(inCoefList.at(5))->analyticalIntegral(1000)),
+  Integral_T7(dynamic_cast<const RooHistFunc*>(inCoefList.at(6))->analyticalIntegral(1000)),
+  Integral_T8(dynamic_cast<const RooHistFunc*>(inCoefList.at(7))->analyticalIntegral(1000)),
+  Integral_T9(dynamic_cast<const RooHistFunc*>(inCoefList.at(8))->analyticalIntegral(1000)) 
   
  { 
   for (RooAbsArg *func : inCoefList) {
@@ -39,15 +48,6 @@ ClassImp(HZZ4L_RooSpinZeroPdf_2D)
     _coefList.add(*func) ;
   }
 
-  Integral_T1 = dynamic_cast<const RooHistFunc*>(_coefList.at(0))-> analyticalIntegral(1000);
-  Integral_T2 = dynamic_cast<const RooHistFunc*>(_coefList.at(1))-> analyticalIntegral(1000);
-  Integral_T3 = dynamic_cast<const RooHistFunc*>(_coefList.at(2))-> analyticalIntegral(1000);
-  Integral_T4 = dynamic_cast<const RooHistFunc*>(_coefList.at(3))-> analyticalIntegral(1000);
-  Integral_T5 = dynamic_cast<const RooHistFunc*>(_coefList.at(4))-> analyticalIntegral(1000);
-  Integral_T6 = dynamic_cast<const RooHistFunc*>(_coefList.at(5))-> analyticalIntegral(1000);
-  Integral_T7 = dynamic_cast<const RooHistFunc*>(_coefList.at(6))-> analyticalIntegral(1000);
-  Integral_T8 = dynamic_cast<const RooHistFunc*>(_coefList.at(7))-> analyticalIntegral(1000);
-  Integral_T9 = dynamic_cast<const RooHistFunc*>(_coefList.at(8))-> analyticalIntegral(1000);
  } 
 
 
@@ -60,18 +60,18 @@ ClassImp(HZZ4L_RooSpinZeroPdf_2D)
    fai2("fai2",this,other.fai2),
    phi1("phi1",this,other.phi1),
    phi2("phi2",this,other.phi2),
-  _coefList("coefList",this,other._coefList)
+  _coefList("coefList",this,other._coefList),
+  Integral_T1(other.Integral_T1),
+  Integral_T2(other.Integral_T2),
+  Integral_T3(other.Integral_T3),
+  Integral_T4(other.Integral_T4),
+  Integral_T5(other.Integral_T5),
+  Integral_T6(other.Integral_T6),
+  Integral_T7(other.Integral_T7),
+  Integral_T8(other.Integral_T8),
+  Integral_T9(other.Integral_T9)
 
  { 
-	 Integral_T1 = other.Integral_T1;
-	 Integral_T2 = other.Integral_T2;
-	 Integral_T3 = other.Integral_T3;
-	 Integral_T4 = other.Integral_T4;
-	 Integral_T5 = other.Integral_T5;
-	 Integral_T6 = other.Integral_T6;
-	 Integral_T7 = other.Integral_T7;
-	 Integral_T8 = other.Integral_T8;
-	 Integral_T9 = other.Integral_T9;
  } 
 
 

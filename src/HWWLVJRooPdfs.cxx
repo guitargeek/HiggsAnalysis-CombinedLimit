@@ -179,28 +179,24 @@ RooAlpha::RooAlpha(const char *name, const char *title,
                    Double_t _xmin,
                    Double_t _xmax) :
   RooAbsPdf(name,title),
-  x("x","x",this,_x),
+  xmin(_xmin), xmax(_xmax), x("x","x",this,_x),
   c("c","c",this,_c),
   offset("offset","offset",this,_offset),
   width("width","width",this,_width),
   ca("ca","ca",this,_ca),
   offseta("offseta","offseta",this,_offseta),
   widtha("widtha","widtha",this,_widtha){
-        xmin=_xmin;
-        xmax=_xmax;
 }
 
 RooAlpha::RooAlpha(const RooAlpha& other, const char* name) :
   RooAbsPdf(other,name),
-  x("x",this,other.x),
+  xmin(other.xmin), xmax(other.xmax), x("x",this,other.x),
   c("c",this,other.c),
   offset("offset",this,other.offset),
   width("width",this,other.width),
   ca("ca",this,other.ca),
   offseta("offseta",this,other.offseta),
   widtha("widtha",this,other.widtha){
-        xmin=other.xmin;
-        xmax=other.xmax;
 }
 
 double RooAlpha::evaluate() const{
@@ -222,20 +218,16 @@ RooAlphaExp::RooAlphaExp(const char *name, const char *title,
                    Double_t _xmin,
                    Double_t _xmax) :
   RooAbsPdf(name,title),
-  x("x","x",this,_x),
+  xmin(_xmin), xmax(_xmax), x("x","x",this,_x),
   c("c","c",this,_c),
   ca("ca","ca",this,_ca){
-        xmin=_xmin;
-        xmax=_xmax;
 }
 
 RooAlphaExp::RooAlphaExp(const RooAlphaExp& other, const char* name) :
   RooAbsPdf(other,name),
-  x("x",this,other.x),
+  xmin(other.xmin), xmax(other.xmax), x("x",this,other.x),
   c("c",this,other.c),
   ca("ca",this,other.ca){
-        xmin=other.xmin;
-        xmax=other.xmax;
 }
 
 double RooAlphaExp::evaluate() const{

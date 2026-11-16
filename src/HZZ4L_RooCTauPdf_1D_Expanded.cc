@@ -32,14 +32,12 @@ kd("kd", "kd", this, _kd),
 ctau("ctau", "ctau", this, _ctau),
 _funcList("funcList", "List of funcficients", this),
 _coefList("coefList", "List of coefficients", this),
-ctau_min(_ctau_min),
+nCoef(0), nFuncs(0), ctau_min(_ctau_min),
 ctau_max(_ctau_max),
 smoothRegion(smoothRegion_),
 smoothAlgo(smoothAlgo_),
 nLinearVariations(nLinearVariations_)
 {
-  nCoef=0;
-  nFuncs=0;
 
   for (RooAbsArg *coef : inCoefList) {
     if (!dynamic_cast<RooAbsReal*>(coef)) {
@@ -91,14 +89,12 @@ kd("kd", this, other.kd),
 ctau("ctau", this, other.ctau),
 _funcList("funcList", this, other._funcList),
 _coefList("coefList", this, other._coefList),
-ctau_min(other.ctau_min),
+nCoef(_coefList.getSize()), nFuncs(_funcList.getSize()), ctau_min(other.ctau_min),
 ctau_max(other.ctau_max),
 smoothRegion(other.smoothRegion),
 smoothAlgo(other.smoothAlgo),
 nLinearVariations(other.nLinearVariations)
 {
-  nCoef = _coefList.getSize();
-  nFuncs = _funcList.getSize();
   int nTrueSyst = nCoef - nLinearVariations;
   nbins_ctau = nFuncs/((2*nTrueSyst+1)*(2*nLinearVariations+1));
   for (int mp=0; mp<(9*101); mp++) Integral_T[mp] = (other.Integral_T)[mp];

@@ -10,8 +10,7 @@
 #define HFVERBOSE 0
 
 CMSHistFuncWrapper::CMSHistFuncWrapper()
-    : pfunc_(nullptr), perr_(nullptr), initialized_(false) {
-  idx_ = 0;
+    : idx_(0), pfunc_(nullptr), perr_(nullptr), initialized_(false) {
 }
 
 CMSHistFuncWrapper::CMSHistFuncWrapper(const char* name, const char* title, RooRealVar& x,
@@ -20,12 +19,11 @@ CMSHistFuncWrapper::CMSHistFuncWrapper(const char* name, const char* title, RooR
       x_("x", "", this, x),
       func_("func", "", this, func),
       err_("err", "", this, err, true, false),
-      idx_(idx),
+      cache_(func.cache()), idx_(idx),
       sentry_(TString(name) + "_sentry", ""),
       pfunc_(nullptr),
       perr_(nullptr),
       initialized_(false) {
-  cache_ = func.cache();
 }
 
 CMSHistFuncWrapper::CMSHistFuncWrapper(CMSHistFuncWrapper const& other, const char* name)

@@ -21,13 +21,14 @@
 #include "TDecompBK.h"
 #include "TMatrixDSymEigen.h"
 
-
-RobustHesse::RobustHesse(RooAbsReal &nll, unsigned verbose) : nll_(&nll), verbosity_(verbose) {
-  targetNllForStencils_ = 0.1;
-  minNllForStencils_ = 0.095;
-  maxNllForStencils_ = 0.105;
-  doRescale_ = true;
-  maxRemovalsFromHessian_ = 20;
+RobustHesse::RobustHesse(RooAbsReal& nll, unsigned verbose)
+    : nll_(&nll),
+      targetNllForStencils_(0.1),
+      minNllForStencils_(0.095),
+      maxNllForStencils_(0.105),
+      maxRemovalsFromHessian_(20),
+      doRescale_(true),
+      verbosity_(verbose) {
   initialize();
 }
 
