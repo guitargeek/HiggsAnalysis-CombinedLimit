@@ -55,15 +55,15 @@ public:
   Double_t analyticalIntegral(Int_t code, const char* rangeName=nullptr) const override;
   const RooArgList& coefList() const { return _coefList; }
 
-  double Integral_T1;
-  double Integral_T2;
-  double Integral_T3;
-  double Integral_T4;
-  double Integral_T5;
-  double Integral_T6;
-  double Integral_T7;
-  double Integral_T8;
-  double Integral_T9;
+  double Integral_T1 = 0.0;
+  double Integral_T2 = 0.0;
+  double Integral_T3 = 0.0;
+  double Integral_T4 = 0.0;
+  double Integral_T5 = 0.0;
+  double Integral_T6 = 0.0;
+  double Integral_T7 = 0.0;
+  double Integral_T8 = 0.0;
+  double Integral_T9 = 0.0;
 
 private:
 

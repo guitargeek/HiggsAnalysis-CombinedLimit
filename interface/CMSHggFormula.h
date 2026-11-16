@@ -42,7 +42,7 @@ class CMSHggFormulaA2 : public RooAbsReal {
 
  protected:
   RooRealProxy p0_;
-  double p1_;
+  double p1_ = 0.0;
   RooRealProxy p2_;
   RooRealProxy p3_;
   RooListProxy terms_;
@@ -86,7 +86,7 @@ class CMSHggFormulaB2 : public RooAbsReal {
   TObject* clone(const char* newname) const override { return new CMSHggFormulaB2(*this, newname); }
 
  protected:
-  double p0_;
+  double p0_ = 0.0;
   RooListProxy terms_;
   std::vector<double> coeffs_;
   mutable std::vector<RooAbsReal*> vterms_; //! not to be serialized
@@ -145,7 +145,7 @@ class CMSHggFormulaD2 : public RooAbsReal {
 
  protected:
   RooRealProxy p0_;
-  double p1_;
+  double p1_ = 0.0;
   Double_t evaluate() const override;
 
  private:

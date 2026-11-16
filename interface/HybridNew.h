@@ -69,7 +69,7 @@ private:
   static bool newToyMCSampler_;
   static bool rMinSet_;
   static bool rMaxSet_;
-  float mass_;
+  float mass_ = 0.0F;
   static std::string	scaleAndConfidenceSelection_; 
   static float maxProbability_;
   static float confidenceToleranceForToyScaling_;
@@ -80,7 +80,7 @@ private:
   std::unique_ptr<TGraphErrors> limitPlot_;
  
   // performance counter: remember how many toys have been thrown
-  unsigned int perf_totalToysRun_;
+  unsigned int perf_totalToysRun_ = 0U;
 
   //----- extra variables used for cross-checking the implementation of frequentist toy tossing in RooStats
   // mutable RooAbsData *realData_;
@@ -138,7 +138,7 @@ private:
 
   void useGrid();
 
-  bool doFC_;
+  bool doFC_ = false;
   
 };
 

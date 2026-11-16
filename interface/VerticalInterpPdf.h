@@ -54,7 +54,7 @@ protected:
   RooListProxy _funcList ;   //  List of component FUNCs
   RooListProxy _coefList ;  //  List of coefficients
   Double_t     _quadraticRegion = 0;
-  Int_t        _quadraticAlgo;
+  Int_t        _quadraticAlgo = 0;
 
   Double_t _pdfFloorVal = 1e-15; // PDF floor should be customizable, default is 1e-15
   Double_t _integralFloorVal = 1e-10; // PDF integral floor should be customizable, default is 1e-10

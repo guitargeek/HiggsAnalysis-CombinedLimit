@@ -52,9 +52,9 @@ private:
   /// Read chains from file instead of running them 
   static bool readChains_;
   /// Mass of the Higgs boson (goes into the name of the saved chains)
-  float mass_;
+  float mass_ = 0.0F;
   /// Number of degrees of freedom of the problem, approximately
-  int   modelNDF_;
+  int   modelNDF_ = 0;
 
   static unsigned int numberOfBins_;
   static unsigned int proposalHelperCacheSize_;

@@ -66,13 +66,13 @@ protected:
   //RooAddition sum;
   RooListProxy pars;
   RooListProxy _coeffList;
-  mutable int N_bins;
+  mutable int N_bins = 0;
   mutable std::vector<double> bins;
   mutable std::vector<double> widths;
 
   // access morphing parameters for systematic functions
-  mutable double _smoothRegion;
-  mutable bool   _hasMorphs;
+  mutable double _smoothRegion = 0.0;
+  mutable bool   _hasMorphs = false;
   mutable std::vector<std::vector <double> > _diffs;
   mutable std::vector<std::vector<double> > _sums;
 
@@ -84,7 +84,7 @@ protected:
   void initializeBins(const TH1&) const;
   //void initializeNorm();
 
-  mutable double _cval;
+  mutable double _cval = 0.0;
   void update_cval(double r){_cval=r;};
 
   inline double smoothStepFunc(double x) const {

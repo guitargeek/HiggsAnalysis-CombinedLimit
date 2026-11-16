@@ -54,12 +54,12 @@ class RobustHesse {
   }
 
   struct Var {
-    RooRealVar * v;
-    double nominal;
+    RooRealVar * v = nullptr;
+    double nominal = 0.0;
     std::vector<double> stencil;
     std::vector<double> d1coeffs;
     std::vector<double> d2coeffs;
-    double rescale;
+    double rescale = 0.0;
   };
 
   void initialize();
@@ -88,7 +88,7 @@ class RobustHesse {
 
 
   RooAbsReal * nll_;
-  double nll0_;
+  double nll0_ = 0.0;
 
   std::vector<Var> cVars_;
   std::vector<Var> invalidStencilVars_;
@@ -109,8 +109,8 @@ class RobustHesse {
   std::unique_ptr<TMatrixDSym> covariance_;
 
   std::map<std::pair<unsigned, double>, double> nllcache_;
-  unsigned nllEvals_;
-  unsigned nllEvalsCached_;
+  unsigned nllEvals_ = 0U;
+  unsigned nllEvalsCached_ = 0U;
 
   std::set<std::string> proctected_;
 

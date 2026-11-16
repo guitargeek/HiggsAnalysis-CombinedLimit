@@ -72,8 +72,8 @@ class RooAlpha : public RooAbsPdf {
 
 	inline ~RooAlpha() override { }
 
-        Double_t xmin;
-        Double_t xmax;
+        Double_t xmin = 0.0;
+        Double_t xmax = 0.0;
 
  protected:
 
@@ -110,8 +110,8 @@ class RooAlphaExp : public RooAbsPdf {
 
 		inline ~RooAlphaExp() override { }
 
-        Double_t xmin;
-        Double_t xmax;
+        Double_t xmin = 0.0;
+        Double_t xmax = 0.0;
 
 	protected:
 

@@ -71,7 +71,7 @@ protected:
   RooRealProxy x ;
   RooRealProxy turnOn ;
   RooRealProxy width ;
-  int onOff;
+  int onOff = 0;
   
   Double_t evaluate() const override ;
 
@@ -136,7 +136,7 @@ protected:
 
   RooRealProxy x ;
   mutable TH1D hist ;
-  bool interpolate ;
+  bool interpolate = false ;
   
   Double_t evaluate() const override ;
 

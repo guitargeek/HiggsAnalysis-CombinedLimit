@@ -91,8 +91,8 @@ protected:
   RooListProxy coeffpars_;
   RooListProxy binpars_;
 
-  int n_procs_;
-  int n_morphs_;
+  int n_procs_ = 0;
+  int n_morphs_ = 0;
 
   std::vector<FastTemplate> storage_;  // All nominal and vmorph templates
   std::vector<int> process_fields_; // indices for process templates in storage_
@@ -131,7 +131,7 @@ protected:
 
   mutable bool initialized_; //! not to be serialized
 
-  mutable bool analytic_bb_; //! not to be serialized
+  mutable bool analytic_bb_ = false; //! not to be serialized
 
   mutable std::vector<double> vertical_prev_vals_; //! not to be serialized
   mutable int fast_mode_; //! not to be serialized

@@ -42,7 +42,7 @@ class SimplePoissonConstraint : public RooPoisson {
 
         static RooPoisson * make(RooPoisson &c) ;
     private:
-        double logGamma_;
+        double logGamma_ = 0.0;
         void init() ;
 
         ClassDefOverride(SimplePoissonConstraint,1) // Poisson PDF with fast log

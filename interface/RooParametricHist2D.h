@@ -31,9 +31,9 @@ protected:
   RooRealProxy y;
   //RooAddition sum;
   RooListProxy pars;
-  mutable int N_bins; 
-  mutable int N_bins_x;
-  mutable int N_bins_y;
+  mutable int N_bins = 0; 
+  mutable int N_bins_x = 0;
+  mutable int N_bins_y = 0;
   mutable std::vector<double> bins_x; 
   mutable std::vector<double> bins_y;
   mutable std::vector<double> widths_x;
@@ -45,7 +45,7 @@ protected:
   Double_t evaluate() const override ;
   double getFullSum() const ;
  
-  mutable double cval;
+  mutable double cval = 0.0;
   void update_cval(double r){cval=r;};
 private:
    ClassDefOverride(RooParametricHist2D, 1) 

@@ -54,8 +54,8 @@ class CMSHistFunc : public RooAbsReal {
     bool interp_set = false;
 
     // For moment morphing
-    double mean;
-    double sigma;
+    double mean = 0.0;
+    double sigma = 0.0;
 
     bool meansig_set = false;
   };

@@ -82,12 +82,12 @@ class RooSplineND : public RooAbsReal {
 	mutable std::map<int,std::vector<double> > v_map;
 	mutable std::map<int,std::pair<double,double> > r_map;
 	
-	mutable int ndim_;
-	mutable int M_;
-	mutable double eps_;
-  	mutable double axis_pts_;
+	mutable int ndim_ = 0;
+	mutable int M_ = 0;
+	mutable double eps_ = 0.0;
+  	mutable double axis_pts_ = 0.0;
 	
-	mutable double w_mean, w_rms;
+	mutable double w_mean = 0.0, w_rms = 0.0;
 
 	void calculateWeights(std::vector<double> &);
 	double getDistSquare(int i, int j);
@@ -95,7 +95,7 @@ class RooSplineND : public RooAbsReal {
 	void   printPoint(int i) const;
 	double radialFunc(double d2, double eps, double cutoff = -1) const;
 
-	mutable bool rescaleAxis;
+	mutable bool rescaleAxis = false;
 	
 
   ClassDefOverride(RooSplineND,1) 

@@ -97,9 +97,9 @@ protected:
 
   mutable bool initialized_; //! not to be serialized
 
-  mutable int last_eval_; //! not to be serialized
+  mutable int last_eval_ = 0; //! not to be serialized
 
-  mutable bool analytic_bb_; //! not to be serialized
+  mutable bool analytic_bb_ = false; //! not to be serialized
 
   void initialize() const;
   void updateCache(int eval = 1) const;

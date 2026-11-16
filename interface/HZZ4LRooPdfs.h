@@ -737,7 +737,7 @@ protected:
 	RooRealProxy m4l ;
 	RooRealProxy mH ;
 	RooRealProxy scaleParam ;
-	Double_t widthSF ;
+	Double_t widthSF = 0.0 ;
 	
 	Double_t evaluate() const override ;
 	
@@ -845,11 +845,11 @@ class RooaDoubleCBxBW : public RooAbsPdf {
   RooRealProxy alphaR;
   RooRealProxy mean;
   RooRealProxy width;
-  unsigned nL;
-  unsigned nR;
+  unsigned nL = 0U;
+  unsigned nR = 0U;
   RooRealProxy thetaL;
   RooRealProxy thetaR;
-  bool computeActualCB;
+  bool computeActualCB = false;
 
   Double_t evaluate() const override ;
   Double_t evaluateDoubleCB() const ;
@@ -890,7 +890,7 @@ protected:
   RooRealProxy IntStr ;
   RooRealProxy WidthScl ;
 
-  Bool_t is8TeV;
+  Bool_t is8TeV = false;
 
   Double_t a_width[7][5];
   Double_t a_delta[7][5];
@@ -939,7 +939,7 @@ protected:
   RooRealProxy BRnew ;
   RooRealProxy IntStr ;
 
-  Bool_t is8TeV;
+  Bool_t is8TeV = false;
 
   Double_t a_width[7][5];
   Double_t a_delta[7][5];
@@ -988,7 +988,7 @@ protected:
   RooRealProxy KPrime ;
   RooRealProxy BRnew ;
 
-  Bool_t is8TeV;
+  Bool_t is8TeV = false;
 
   Double_t a_width[7][5];
   Double_t a_delta[7][5];
@@ -1035,7 +1035,7 @@ protected:
   RooRealProxy IntStr ;
   RooRealProxy WidthScl ;
 
-  Bool_t is8TeV;
+  Bool_t is8TeV = false;
 
   Double_t a_width[7][5];
   Double_t a_delta[7][5];
@@ -1082,7 +1082,7 @@ protected:
   RooRealProxy KPrime ;
   RooRealProxy BRnew ;
 
-  Bool_t is8TeV;
+  Bool_t is8TeV = false;
 
   Double_t a_width[7][5];
   Double_t a_delta[7][5];

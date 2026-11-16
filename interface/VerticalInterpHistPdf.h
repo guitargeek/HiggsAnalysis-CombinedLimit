@@ -43,8 +43,8 @@ protected:
   RooRealProxy   _x;
   RooListProxy _funcList ;   //  List of component FUNCs
   RooListProxy _coefList ;  //  List of coefficients
-  Double_t     _smoothRegion;
-  Int_t        _smoothAlgo;
+  Double_t     _smoothRegion = 0.0;
+  Int_t        _smoothAlgo = 0;
 
   // TH1 containing the histogram of this pdf
   mutable SimpleCacheSentry _sentry; // !not to be serialized
@@ -99,11 +99,11 @@ protected:
   RooRealProxy   _x;
   RooListProxy _funcList ;   //  List of component FUNCs
   RooListProxy _coefList ;  //  List of coefficients
-  Double_t     _smoothRegion;
-  Int_t        _smoothAlgo;
+  Double_t     _smoothRegion = 0.0;
+  Int_t        _smoothAlgo = 0;
 
   // TH1 containing the histogram of this pdf
-  mutable bool              _init; //! not to be serialized
+  mutable bool              _init = false; //! not to be serialized
   mutable SimpleCacheSentry _sentry; //! not to be serialized
 
   // For additive morphing, histograms of (fUp-f0)+(fDown-f0) and (fUp-f0)-(fDown-f0)
@@ -227,7 +227,7 @@ public:
   friend class FastVerticalInterpHistPdf2D2;
 protected:
   RooRealProxy _x, _y;
-  bool _conditional;
+  bool _conditional = false;
 
   /// Cache of the result
   mutable FastHisto2D _cache; //! not to be serialized
@@ -276,8 +276,8 @@ public:
 
 protected:
   RooListProxy _coefList ;  //  List of coefficients
-  Double_t     _smoothRegion;
-  Int_t        _smoothAlgo;
+  Double_t     _smoothRegion = 0.0;
+  Int_t        _smoothAlgo = 0;
 
   // set to true after _morphParams and _sentry are initialized 
   mutable bool _initBase;   //! not to be serialized
@@ -409,7 +409,7 @@ public:
 
 protected:
   RooRealProxy _x, _y;
-  bool _conditional;
+  bool _conditional = false;
 
   /// Cache of the result
   mutable FastHisto2D _cache; //! not to be serialized
@@ -458,7 +458,7 @@ public:
 //  friend class FastVerticalInterpHistPdf2D2;
 protected:
   RooRealProxy _x, _y, _z;
-  bool _conditional;
+  bool _conditional = false;
 
   /// Cache of the result
   mutable FastHisto3D _cache; //! not to be serialized

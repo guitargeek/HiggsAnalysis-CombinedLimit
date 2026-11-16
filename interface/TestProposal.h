@@ -45,10 +45,10 @@ class TestProposal : public RooStats::ProposalFunction {
       ClassDefOverride(TestProposal,1) // A concrete implementation of ProposalFunction, that uniformly samples the parameter space.
     
     private:
-      double divisor_, poiDivisor_;
+      double divisor_ = 0.0, poiDivisor_ = 0.0;
       RooArgList alwaysStepMe_;
 
-      RooRealVar *discreteModelIndicator_;
+      RooRealVar *discreteModelIndicator_ = nullptr;
       RooArgSet   discreteModelVars_;
       std::vector<RooArgSet> discreteModelPoints_;
 };

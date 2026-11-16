@@ -52,11 +52,11 @@ namespace HistFactory{
     //RooListProxy _controlPoints;
     std::vector<double> _tValues;
     //RooListProxy _t_ary;
-    int _m;
+    int _m = 0;
 /*     mutable double* _t_ary; //[_m] */
     RooRealProxy _t;
-    int _n;
-    int _nrClose;
+    int _n = 0;
+    int _nrClose = 0;
     //int _nPlusOne;
     //mutable double** _bin; //[_nPlusOne][_m]
     mutable std::vector<double> _t_ary;
@@ -139,10 +139,10 @@ namespace HistFactory{
 
     RooListProxy _controlPoints;
     //RooListProxy _t_ary;
-    int _m;
+    int _m = 0;
 /*     double* _t_ary; //[_m] */
 /*     RooRealProxy _t; */
-    int _n;
+    int _n = 0;
     RooListProxy _weights;
     RooRealProxy _bases;
     RooSetProxy _vars;
@@ -233,8 +233,8 @@ private:
   Double_t *_dataPts;  //[_nEvents]
   Double_t *_dataWgts; //[_nEvents]
   Double_t *_weights;  //[_nEvents]
-  Double_t _sumWgt ;
-  mutable Double_t _normVal ;
+  Double_t _sumWgt = 0.0 ;
+  mutable Double_t _normVal = 0.0 ;
   
   Int_t _nPoints;
 
@@ -248,8 +248,8 @@ private:
 
   // cached info on variable
   Char_t _varName[128];
-  Double_t _lo, _hi, _binWidth;
-  Double_t _rho;
+  Double_t _lo = 0.0, _hi = 0.0, _binWidth = 0.0;
+  Double_t _rho = 0.0;
   
   ClassDefOverride(RooParamKeysPdf,4) // One-dimensional non-parametric kernel estimation p.d.f.
 };
@@ -349,7 +349,7 @@ protected:
     mutable bool _fractionsCalculated = false;
   } ;
   mutable RooObjCacheManager _cacheMgr ; // The cache manager
-  mutable RooArgSet* _curNormSet ; //! Current normalization set
+  mutable RooArgSet* _curNormSet = nullptr ; //! Current normalization set
 
   friend class CacheElem ; // Cache needs to be able to clear _norm pointer
 

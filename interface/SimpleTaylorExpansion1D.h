@@ -33,7 +33,7 @@ class SimpleTaylorExpansion1D : public RooAbsReal {
     private:
 
         RooRealProxy x_;
-        double x0_, ci_[MaxOrder+1];
+        double x0_ = 0.0, ci_[MaxOrder+1];
 
 
   ClassDefOverride(SimpleTaylorExpansion1D,1) // Simple Taylor Expansion in 1D 

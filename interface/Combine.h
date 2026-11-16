@@ -97,16 +97,16 @@ private:
   } m_options;
 
   // statistics-related variables
-  bool unbinned_, generateBinnedWorkaround_, newGen_, guessGenMode_; 
+  bool unbinned_ = false, generateBinnedWorkaround_ = false, newGen_ = false, guessGenMode_ = false; 
   std::string genAsBinned_, genAsUnbinned_;
   float rMin_, rMax_;
   std::string prior_;
-  bool hintUsesStatOnly_;
-  bool toysNoSystematics_;
-  bool toysFrequentist_;
-  float expectSignal_;
-  bool expectSignalSet_;  // keep track of whether or not expectSignal was defaulted
-  float expectSignalMass_;
+  bool hintUsesStatOnly_ = false;
+  bool toysNoSystematics_ = false;
+  bool toysFrequentist_ = false;
+  float expectSignal_ = 0.0F;
+  bool expectSignalSet_ = false;  // keep track of whether or not expectSignal was defaulted
+  float expectSignalMass_ = 0.0F;
   std::string redefineSignalPOIs_;
   std::string freezeNuisances_;
   std::string floatNuisances_;
@@ -114,25 +114,25 @@ private:
   std::string freezeWithAttributes_;
 
   // input-output related variables
-  bool saveWorkspace_;
+  bool saveWorkspace_ = false;
   std::string workspaceName_;
   std::string snapshotName_;
   std::string modelConfigName_, modelConfigNameB_;
-  bool overrideSnapshotMass_;
-  bool validateModel_;
-  bool saveToys_;
-  double mass_;
+  bool overrideSnapshotMass_ = false;
+  bool validateModel_ = false;
+  bool saveToys_ = false;
+  double mass_ = 0.0;
 
   // implementation-related variables
-  bool compiledExpr_;
-  bool makeTempDir_;
-  bool rebuildSimPdf_;
-  bool optSimPdf_;
-  bool noMCbonly_;
-  bool noDefaultPrior_;
-  bool makeToyGenSnapshot_;
-  bool floatAllNuisances_;
-  bool freezeAllGlobalObs_;
+  bool compiledExpr_ = false;
+  bool makeTempDir_ = false;
+  bool rebuildSimPdf_ = false;
+  bool optSimPdf_ = false;
+  bool noMCbonly_ = false;
+  bool noDefaultPrior_ = false;
+  bool makeToyGenSnapshot_ = false;
+  bool floatAllNuisances_ = false;
+  bool freezeAllGlobalObs_ = false;
   std::vector<std::string> librariesToLoad_;
   std::vector<std::string> modelPoints_;
   

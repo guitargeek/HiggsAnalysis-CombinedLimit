@@ -36,7 +36,7 @@ class DebugProposal : public RooStats::ProposalFunction {
     private:
         RooStats::ProposalFunction *prop_;
         std::unique_ptr<RooAbsReal> nll_;
-        RooAbsPdf                 *pdf_;
+        RooAbsPdf                 *pdf_ = nullptr;
         RooArgSet                 params_;
         int  tries_;
         void tracePdf(RooAbsReal *pdf) ;

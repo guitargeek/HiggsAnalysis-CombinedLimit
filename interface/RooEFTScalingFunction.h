@@ -23,7 +23,7 @@ class RooEFTScalingFunction : public RooAbsReal {
         std::map<std::string,double> coeffs_;
         RooListProxy terms_;
         std::map< std::vector<RooAbsReal *>, double> vcomponents_;
-        double offset_;
+        double offset_ = 0.0;
         Double_t evaluate() const override ;
     private:
         ClassDefOverride(RooEFTScalingFunction,1)

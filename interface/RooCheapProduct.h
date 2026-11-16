@@ -15,7 +15,7 @@ class RooCheapProduct : public RooAbsReal {
     protected:
         RooListProxy terms_;
         std::vector<RooAbsReal *> vterms_; //! not to be serialized
-        double offset_;
+        double offset_ = 0.0;
         Double_t evaluate() const override ;
     private:
         ClassDefOverride(RooCheapProduct,1)

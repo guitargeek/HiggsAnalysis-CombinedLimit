@@ -30,7 +30,7 @@ class RooScaleLOSM: public RooAbsReal
     static const double mt_, mW_;
     complexD At_, Ab_, AW_;
 
-    double C_SM_;
+    double C_SM_ = 0.0;
 
   private:
 

@@ -51,10 +51,10 @@ public:
 	Double_t analyticalIntegral(Int_t code, const char* rangeName = nullptr) const override;
 	const RooArgList& coefList() const { return _coefList; }
 
-	int nbins_ctau;
-	double* Integral_T;
-	double ctau_min;
-	double ctau_max;
+	int nbins_ctau = 0;
+	double* Integral_T = nullptr;
+	double ctau_min = 0.0;
+	double ctau_max = 0.0;
 
 private:
 	int findNeighborBins() const; // Returns index_low for ctau pdfs

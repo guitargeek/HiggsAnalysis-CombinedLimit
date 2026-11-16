@@ -140,9 +140,9 @@ class CachingAddNLL : public RooAbsReal {
         void addPdfs_(RooAddPdf *addpdf, bool recursive, const RooArgList & basecoeffs) ;
         RooAbsPdf *pdf_;
         RooSetProxy params_, catParams_;
-        const RooAbsData *data_;
+        const RooAbsData *data_ = nullptr;
         std::vector<Double_t>  weights_, binWidths_;
-        double               sumWeights_;
+        double               sumWeights_ = 0.0;
         bool includeZeroWeights_;
         mutable std::vector<RooAbsReal*> coeffs_;
         mutable std::vector<std::unique_ptr<CachingPdfBase>>  pdfs_;
@@ -153,8 +153,8 @@ class CachingAddNLL : public RooAbsReal {
         mutable std::vector<CMSHistErrorPropagator const*> histErrorPropagators_;
         mutable std::vector<Double_t> partialSum_;
         mutable std::vector<Double_t> workingArea_;
-        mutable bool isRooRealSum_, fastExit_;
-        mutable int canBasicIntegrals_, basicIntegrals_;
+        mutable bool isRooRealSum_ = false, fastExit_ = false;
+        mutable int canBasicIntegrals_ = 0, basicIntegrals_ = 0;
         double zeroPoint_ = 0;
         double constantZeroPoint_ = 0; // this is arbitrary and kept constant for all the lifetime of the PDF
 };

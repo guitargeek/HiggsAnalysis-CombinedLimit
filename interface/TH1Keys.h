@@ -51,15 +51,15 @@ class TH1Keys : public TH1 {
        ClassDefOverride(TH1Keys,1)  //
 
     private:
-        Double_t    min_, max_;
-        RooRealVar *x_, *w_;
+        Double_t    min_ = 0.0, max_ = 0.0;
+        RooRealVar *x_, *w_ = nullptr;
         RooArgSet   point_;
         RooDataSet *dataset_;
         Double_t    underflow_, overflow_;
         Double_t    globalScale_;
 
 	TString          options_;
-        Double_t           rho_;
+        Double_t           rho_ = 0.0;
 
         mutable TH1 *cache_;
         mutable bool isCacheGood_;

@@ -54,15 +54,15 @@ private:
 
   static RooAbsData * asimovDataset_;
 
-  bool    hasFloatParams_;
-  bool    hasDiscreteParams_;
+  bool    hasFloatParams_ = false;
+  bool    hasDiscreteParams_ = false;
   mutable std::unique_ptr<RooArgSet>  params_;
   mutable std::unique_ptr<RooAbsReal> nllD_, nllA_; 
   //mutable std::unique_ptr<RooFitResult> fitFreeD_, fitFreeA_;
   //mutable std::unique_ptr<RooFitResult> fitFixD_,  fitFixA_;
   utils::CheapValueSnapshot fitFreeD_, fitFreeA_, fitFixD_,  fitFixA_;
 
-  mutable double                      minNllD_,  minNllA_, rBestD_;
+  mutable double                      minNllD_ = 0.0,  minNllA_ = 0.0, rBestD_ = 0.0;
   mutable RooArgSet snapGlobalObsData, snapGlobalObsAsimov;
 
   float calculateLimitFromGrid(RooRealVar *, double, double);
@@ -70,13 +70,13 @@ private:
   RooAbsData *asimovDataset(RooWorkspace *w, RooStats::ModelConfig *mc_s, RooStats::ModelConfig *mc_b, RooAbsData &data, bool overwrite=false);
   double getCLs(RooRealVar &r, double rVal, bool getAlsoExpected=false, double *limit=nullptr, double *limitErr=nullptr);
   
-  TFile *gridFile_;
-  TTree *limitsTree_;
-  double readCL_;
-  double readMU_;
-  bool doCLs_; 
+  TFile *gridFile_ = nullptr;
+  TTree *limitsTree_ = nullptr;
+  double readCL_ = 0.0;
+  double readMU_ = 0.0;
+  bool doCLs_ = false; 
 
-  bool doNonStandardAsimov_;
+  bool doNonStandardAsimov_ = false;
 
 };
 

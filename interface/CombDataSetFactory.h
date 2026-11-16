@@ -35,8 +35,8 @@ class CombDataSetFactory : public TObject {
 
     private:
         RooArgSet vars_;
-        RooCategory *cat_;
-        RooRealVar  *weight_;
+        RooCategory *cat_ = nullptr;
+        RooRealVar  *weight_ = nullptr;
         std::map<std::string, RooDataHist *> map_;
         std::map<std::string, RooDataSet *> mapUB_;
 };

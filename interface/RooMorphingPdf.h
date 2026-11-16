@@ -18,9 +18,9 @@ class RooMorphingPdf : public RooAbsPdf {
   // Store morphing parameters and allocate arrays
   // so we don't have to do it every time in ::morph
   struct MorphCache {
-    Int_t nbn;
-    Double_t xminn;
-    Double_t xmaxn;
+    Int_t nbn = 0;
+    Double_t xminn = 0.0;
+    Double_t xmaxn = 0.0;
     std::vector<Double_t> sigdis1;
     std::vector<Double_t> sigdis2;
     std::vector<Double_t> sigdisn;

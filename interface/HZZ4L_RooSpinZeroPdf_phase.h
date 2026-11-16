@@ -49,10 +49,10 @@ public:
   Double_t analyticalIntegral(Int_t code, const char* rangeName=nullptr) const override ;
   const RooArgList& coefList() const { return _coefList ; }
 
-  double Integral_T1;
-  double Integral_T2;
-  double Integral_T4;
-  double Integral_T5;
+  double Integral_T1 = 0.0;
+  double Integral_T2 = 0.0;
+  double Integral_T4 = 0.0;
+  double Integral_T5 = 0.0;
 
 private:
 

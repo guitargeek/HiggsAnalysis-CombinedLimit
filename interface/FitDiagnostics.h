@@ -57,7 +57,7 @@ protected:
   int currentToy_, nToys;
   int overallBins_,overallNorms_,overallNuis_,overallCons_;
   int fitStatus_, numbadnll_;
-  double mu_, muErr_, muLoErr_, muHiErr_, nll_nll0_, nll_bonly_, nll_sb_;
+  double mu_, muErr_ = 0.0, muLoErr_, muHiErr_, nll_nll0_, nll_bonly_, nll_sb_;
   std::unique_ptr<TFile> fitOut;
   double* globalObservables_ = nullptr;
   double* nuisanceParameters_ = nullptr;
@@ -75,13 +75,13 @@ protected:
   void setNormsFitResultTrees(const RooArgSet *, double *);
 
   struct ShapeAndNorm {
-    bool        signal;
+    bool        signal = false;
     std::string process;
     std::string channel;
     RooArgList  obs;
-    const RooAbsReal *norm;
-    const RooAbsReal  *pdf;
-    bool isfunc;
+    const RooAbsReal *norm = nullptr;
+    const RooAbsReal  *pdf = nullptr;
+    bool isfunc = false;
   };
   void setShapesFitResultTrees(std::map<std::string,ShapeAndNorm> &snm, double *);
   void getShapesAndNorms(RooAbsPdf *pdf, const RooArgSet &obs, std::map<std::string, ShapeAndNorm> &out, const std::string &channel);

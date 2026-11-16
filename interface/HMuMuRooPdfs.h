@@ -67,7 +67,7 @@ class RooExpPdf : public RooAbsPdf {
   RooRealProxy x;
   RooRealProxy a1;
   RooRealProxy m;
-  bool offset;
+  bool offset = false;
   Double_t evaluate() const override ;
   
  private:  
@@ -101,7 +101,7 @@ class RooSumTwoExpPdf : public RooAbsPdf {
   RooRealProxy a2;
   RooRealProxy f;
   RooRealProxy m;
-  bool offset;
+  bool offset = false;
   Double_t evaluate() const override ;
   
  private:  
@@ -132,7 +132,7 @@ class RooPowerLawPdf : public RooAbsPdf {
   RooRealProxy x;
   RooRealProxy a1;
   RooRealProxy m;
-  bool offset;
+  bool offset = false;
   Double_t evaluate() const override ;
 
  private:  
@@ -165,7 +165,7 @@ class RooSumTwoPowerLawPdf : public RooAbsPdf {
   RooRealProxy a2;
   RooRealProxy f;
   RooRealProxy m;
-  bool offset;
+  bool offset = false;
   Double_t evaluate() const override ;
   
  private:  

@@ -39,7 +39,7 @@ class SimpleGaussianConstraint : public RooGaussian {
         static RooGaussian * make(RooGaussian &c) ;
 
     private:
-        double scale_;
+        double scale_ = 0.0;
         void init() ;
 
         ClassDefOverride(SimpleGaussianConstraint,1) // Gaussian PDF with fast log
