@@ -153,12 +153,13 @@ std::pair<double,double> BayesianToyMC::priorPredictiveDistribution(RooStats::Mo
   std::unique_ptr<RooAbsPdf>  nonNuisancePdf; 
   if (withSystematics) {
     RooArgList constraints;
-    nonNuisancePdf.reset(utils::factorizePdf(*data.get(), *pdf, constraints));
+    RooAbsPdf *factorizedPdf = utils::factorizePdf(*data.get(), *pdf, constraints);
+    // without constraints, factorizePdf() returns the input pdf itself, which we must not take ownership of
     if (constraints.getSize() > 0) {
+        nonNuisancePdf.reset(factorizedPdf);
         nuisancePdf = std::make_unique<RooProdPdf>("nuis","",constraints);
         pdf = nonNuisancePdf.get();
-    } else { nonNuisancePdf.release();
-}
+    }
   }
   std::cout << "Factorized PDF, now creating NLL" << std::endl;
   // create NLL

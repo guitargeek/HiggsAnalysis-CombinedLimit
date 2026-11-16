@@ -890,9 +890,9 @@ cacheutils::CachingSimNLL::setup_()
     static bool verb  = runtimedef::get("ADDNLL_VERBOSE_CACHING");
 
     RooArgList constraints;
-    factorizedPdf_.reset(dynamic_cast<RooSimultaneous *>(utils::factorizePdf(*dataOriginal_->get(), *pdfclone, constraints)));
-
-    RooSimultaneous *simpdf = factorizedPdf_.get();
+    RooSimultaneous *simpdf = dynamic_cast<RooSimultaneous *>(utils::factorizePdf(*dataOriginal_->get(), *pdfclone, constraints));
+    // without constraints, factorizePdf() returns the input pdf itself, which we must not take ownership of
+    factorizedPdf_.reset(constraints.getSize() ? simpdf : nullptr);
     constrainPdfs_.clear(); 
     if (constraints.getSize()) {
         int FastConstraints = optimizeContraints_ && runtimedef::get("SIMNLL_FASTGAUSS");
@@ -974,7 +974,6 @@ cacheutils::CachingSimNLL::setup_()
         params->Print("V");
         std::cout << "Obs: " << std::endl;
         dataOriginal_->get()->Print("V");
-        factorizedPdf_.release();
         simpdf = dynamic_cast<RooSimultaneous *>(pdfclone);
     }
 

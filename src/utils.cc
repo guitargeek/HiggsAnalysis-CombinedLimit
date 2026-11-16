@@ -421,15 +421,19 @@ bool utils::checkModel(const RooStats::ModelConfig &model, bool throwOnFail) {
 
     if (model.GetNuisanceParameters() != nullptr) {
         RooArgList constraints;
-        std::unique_ptr<RooAbsPdf> factorizedPdf(utils::factorizePdf(*model.GetObservables(), *model.GetPdf(), constraints));
-        if (factorizedPdf == nullptr || factorizedPdf.get() == model.GetPdf()) {
-            factorizedPdf.release();
+        RooAbsPdf *factorizedPdf = utils::factorizePdf(*model.GetObservables(), *model.GetPdf(), constraints);
+        std::unique_ptr<RooAbsPdf> factorizedPdfOwner;
+        if (factorizedPdf == nullptr || factorizedPdf == model.GetPdf()) {
             ok = false; errors << "ERROR: have nuisance parameters, but can't factorize the pdf\n";
+        } else {
+            factorizedPdfOwner.reset(factorizedPdf);
         }
-        std::unique_ptr<RooArgSet> obsParams{getAllParameters(*factorizedPdf, *model.GetObservables())};
-        for (RooAbsArg *a : *model.GetNuisanceParameters()) {
-            if (!obsParams->contains(*a))  {
-                errors << "WARNING: model pdf does not depend on nuisace parameter " << a->GetName() << "\n";
+        if (factorizedPdf != nullptr) {
+            std::unique_ptr<RooArgSet> obsParams{getAllParameters(*factorizedPdf, *model.GetObservables())};
+            for (RooAbsArg *a : *model.GetNuisanceParameters()) {
+                if (!obsParams->contains(*a))  {
+                    errors << "WARNING: model pdf does not depend on nuisace parameter " << a->GetName() << "\n";
+                }
             }
         }
     }
