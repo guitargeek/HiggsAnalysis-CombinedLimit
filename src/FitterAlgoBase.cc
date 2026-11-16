@@ -185,7 +185,7 @@ bool FitterAlgoBase::run(RooWorkspace *w, RooStats::ModelConfig *mc_s, RooStats:
   std::unique_ptr<RooAbsData> generatedData;
   if (protectUnbinnedChannels_) {
       RooRealVar *weightVar = nullptr;
-      generator.reset(new toymcoptutils::SimPdfGenInfo(*mc_s->GetPdf(), *mc_s->GetObservables(), false));
+      generator = std::make_unique<toymcoptutils::SimPdfGenInfo>(*mc_s->GetPdf(), *mc_s->GetObservables(), false);
       generatedData.reset(generator->generateEpsilon(weightVar));
       theData = &*generatedData;
       for (int i = 0, n = data.numEntries(); i < n; ++i) {

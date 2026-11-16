@@ -366,7 +366,7 @@ int RobustHesse::hesse() {
   }
 
   // Step 2: Calculate and populate hessian
-  hessian_ = std::unique_ptr<TMatrixDSym>(new TMatrixDSym(cVars_.size()));
+  hessian_ = std::make_unique<TMatrixDSym>(cVars_.size());
   unsigned ntotal = (((cVars_.size() * cVars_.size()) - cVars_.size()) / 2) + cVars_.size();
   unsigned idx = 0;
 
@@ -475,7 +475,7 @@ int RobustHesse::hesse() {
     }
   }
 
-  covariance_ = std::unique_ptr<TMatrixDSym>(new TMatrixDSym(*hessian_));
+  covariance_ = std::make_unique<TMatrixDSym>(*hessian_);
   std::cout << ">> Inverting Hessian...\n";
   covariance_->Invert();
   std::cout << ">> Matrix inverted\n";
@@ -555,7 +555,7 @@ RooFitResult* RobustHesse::GetRooFitResult(RooFitResult const* current) const {
     rfr = new RooFitResultBuilder();
   }
 
-  auto scaled_cov = std::unique_ptr<TMatrixDSym>(new TMatrixDSym(cVars_.size() + removedFromHessianVars_.size()));
+  auto scaled_cov = std::make_unique<TMatrixDSym>(cVars_.size() + removedFromHessianVars_.size());
   RooArgList arglist("floatParsFinal");
 
   for (unsigned i = 0; i < cVars_.size(); ++i) {

@@ -1,3 +1,4 @@
+#include <memory>
 #include <stdexcept>
 #include <cstdio>
 #include <limits>
@@ -537,7 +538,7 @@ bool HybridNew::runLimit(RooWorkspace *w, RooStats::ModelConfig *mc_s, RooStats:
         done = true;
       }
   } else {
-      limitPlot_.reset(new TGraphErrors());
+      limitPlot_ = std::make_unique<TGraphErrors>();
 
       if (verbose > 0) CombineLogger::instance().log("HybridNew.cc",__LINE__,"Search for upper limit to the limit",__func__);
       for (int tries = 0; tries < 6; ++tries) {
@@ -1088,15 +1089,15 @@ std::unique_ptr<RooStats::HybridCalculator> HybridNew::create(RooWorkspace *w, R
       if (poi.getSize() == 1) pdfB = factorizedPdf_s; // in this case we can remove the arbitrary constant from the test statistics.
       if (optimizeTestStatistics_) {
           if (!mc_s->GetPdf()->canBeExtended()) {
-              setup.qvar.reset(new SimplerLikelihoodRatioTestStat(*pdfB,*factorizedPdf_s, paramsZero, params));
+              setup.qvar = std::make_unique<SimplerLikelihoodRatioTestStat>(*pdfB,*factorizedPdf_s, paramsZero, params);
           } else {
-              setup.qvar.reset(new SimplerLikelihoodRatioTestStatOpt(*mc_s->GetObservables(), *pdfB, *factorizedPdf_s, paramsZero, params, withSystematics));
+              setup.qvar = std::make_unique<SimplerLikelihoodRatioTestStatOpt>(*mc_s->GetObservables(), *pdfB, *factorizedPdf_s, paramsZero, params, withSystematics);
           }
       } else {
           //std::cerr << "ALERT: LEP test statistics without optimization not validated." << std::endl;
       	  CombineLogger::instance().log("HybridNew.cc",__LINE__,"[WARNING] LEP test statistic without optimization not yet validated.",__func__);
           RooArgSet paramsSnap; params.snapshot(paramsSnap); // needs a snapshot
-          setup.qvar.reset(new SimpleLikelihoodRatioTestStat(*pdfB,*factorizedPdf_s));
+          setup.qvar = std::make_unique<SimpleLikelihoodRatioTestStat>(*pdfB,*factorizedPdf_s);
           ((SimpleLikelihoodRatioTestStat&)*setup.qvar).SetNullParameters(paramsZero); // Null is B
           ((SimpleLikelihoodRatioTestStat&)*setup.qvar).SetAltParameters(paramsSnap);
       }
@@ -1104,10 +1105,10 @@ std::unique_ptr<RooStats::HybridCalculator> HybridNew::create(RooWorkspace *w, R
       RooAbsPdf *pdfB = factorizedPdf_b;
       if (poi.getSize() == 1) pdfB = factorizedPdf_s; // in this case we can remove the arbitrary constant from the test statistics.
       if (optimizeTestStatistics_) {
-          setup.qvar.reset(new ProfiledLikelihoodRatioTestStatOpt(*mc_s->GetObservables(), *pdfB, *mc_s->GetPdf(), mc_s->GetNuisanceParameters(), paramsZero, params));
+          setup.qvar = std::make_unique<ProfiledLikelihoodRatioTestStatOpt>(*mc_s->GetObservables(), *pdfB, *mc_s->GetPdf(), mc_s->GetNuisanceParameters(), paramsZero, params);
           ((ProfiledLikelihoodRatioTestStatOpt&)*setup.qvar).setPrintLevel(verbose);
       } else {
-          setup.qvar.reset(new RatioOfProfiledLikelihoodsTestStat(*mc_s->GetPdf(), *pdfB, setup.modelConfig.GetSnapshot()));
+          setup.qvar = std::make_unique<RatioOfProfiledLikelihoodsTestStat>(*mc_s->GetPdf(), *pdfB, setup.modelConfig.GetSnapshot());
           ((RatioOfProfiledLikelihoodsTestStat&)*setup.qvar).SetSubtractMLE(false);
       }
   } else if (testStat_ == "LHC" || testStat_ == "LHCFC" || testStat_ == "Profile") {
@@ -1119,10 +1120,10 @@ std::unique_ptr<RooStats::HybridCalculator> HybridNew::create(RooWorkspace *w, R
           if (testStat_ == "LHCFC")   side = ProfiledLikelihoodTestStatOpt::signFlipDef;
           if (testStat_ == "Profile") side = ProfiledLikelihoodTestStatOpt::twoSidedDef;
           if (workingMode_ == MakeSignificance) r->setVal(0.0);
-          setup.qvar.reset(new ProfiledLikelihoodTestStatOpt(*mc_s->GetObservables(), *mc_s->GetPdf(), mc_s->GetNuisanceParameters(),  params, poi, gobsParams,gobs, verbose, side));
+          setup.qvar = std::make_unique<ProfiledLikelihoodTestStatOpt>(*mc_s->GetObservables(), *mc_s->GetPdf(), mc_s->GetNuisanceParameters(),  params, poi, gobsParams,gobs, verbose, side);
       } else {
           std::cerr << "ALERT: LHC test statistic without optimization not validated." << std::endl;
-          setup.qvar.reset(new ProfileLikelihoodTestStat(*mc_s->GetPdf()));
+          setup.qvar = std::make_unique<ProfileLikelihoodTestStat>(*mc_s->GetPdf());
           if (testStat_ == "LHC") {
               ((ProfileLikelihoodTestStat&)*setup.qvar).SetOneSided(true);
           } else if (testStat_ == "LHCFC") {
@@ -1131,7 +1132,7 @@ std::unique_ptr<RooStats::HybridCalculator> HybridNew::create(RooWorkspace *w, R
       }
   } else if (testStat_ == "MLZ") {
       if (workingMode_ == MakeSignificance) r->setVal(0.0);
-      setup.qvar.reset(new BestFitSigmaTestStat(*mc_s->GetObservables(), *mc_s->GetPdf(), mc_s->GetNuisanceParameters(),  params, verbose));
+      setup.qvar = std::make_unique<BestFitSigmaTestStat>(*mc_s->GetObservables(), *mc_s->GetPdf(), mc_s->GetNuisanceParameters(),  params, verbose);
   }
 
   RooAbsPdf *nuisancePdf = nullptr;
@@ -1140,10 +1141,10 @@ std::unique_ptr<RooStats::HybridCalculator> HybridNew::create(RooWorkspace *w, R
     if (nuisancePdf) setup.cleanupList.addOwned(*nuisancePdf);
   }
   if (newToyMCSampler_) {
-    setup.toymcsampler.reset(new ToyMCSamplerOpt(*setup.qvar, nToys_, nuisancePdf, genNuisances_));
+    setup.toymcsampler = std::make_unique<ToyMCSamplerOpt>(*setup.qvar, nToys_, nuisancePdf, genNuisances_);
   } else {
     std::cerr << "ALERT: running with newToyMC=0 not validated." << std::endl;
-    setup.toymcsampler.reset(new ToyMCSampler(*setup.qvar, nToys_));
+    setup.toymcsampler = std::make_unique<ToyMCSampler>(*setup.qvar, nToys_);
   }
 
   if (!mc_b->GetPdf()->canBeExtended()) setup.toymcsampler->SetNEventsPerToy(1);
@@ -1628,7 +1629,7 @@ RooStats::HypoTestResult * HybridNew::readToysFromFile(const RooAbsCollection & 
         if (toy == nullptr) continue;
         if (verbose > 1) std::cout << " - " << k->GetName() << std::endl;
         if (ret == nullptr) {
-            ret.reset(new RooStats::HypoTestResult(*toy));
+            ret = std::make_unique<RooStats::HypoTestResult>(*toy);
         } else {
             ret->Append(toy);
         }
@@ -1819,7 +1820,7 @@ void HybridNew::useGrid() {
     typedef std::pair<double,double> CLs_t;
     int i = 0;
     int n = 0;
-    limitPlot_.reset(new TGraphErrors(1));
+    limitPlot_ = std::make_unique<TGraphErrors>(1);
     for (std::map<double, RooStats::HypoTestResult *>::iterator itg = grid_.begin(), edg = grid_.end(); itg != edg; ++itg, ++i) {
         //if (itg->second->TestBit(1)) continue; What was this supposed to be protecting against?
         CLs_t val(1,0);

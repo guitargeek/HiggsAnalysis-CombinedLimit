@@ -1,3 +1,4 @@
+#include <memory>
 #include <stdexcept>
 #include <cmath>
 #include "../interface/BayesianToyMC.h"
@@ -63,7 +64,7 @@ bool BayesianToyMC::run(RooWorkspace *w, RooStats::ModelConfig *mc_s, RooStats::
   
   std::unique_ptr<RooStats::ModelConfig> mc_noNuis(nullptr);
   if (!withSystematics && mc_s->GetNuisanceParameters() != nullptr) {
-    mc_noNuis.reset(new RooStats::ModelConfig(w));
+    mc_noNuis = std::make_unique<RooStats::ModelConfig>(w);
     mc_noNuis->SetPdf(*mc_s->GetPdf());
     mc_noNuis->SetObservables(*mc_s->GetObservables());
     mc_noNuis->SetParametersOfInterest(*mc_s->GetParametersOfInterest());
@@ -154,7 +155,7 @@ std::pair<double,double> BayesianToyMC::priorPredictiveDistribution(RooStats::Mo
     RooArgList constraints;
     nonNuisancePdf.reset(utils::factorizePdf(*data.get(), *pdf, constraints));
     if (constraints.getSize() > 0) {
-        nuisancePdf.reset(new RooProdPdf("nuis","",constraints));
+        nuisancePdf = std::make_unique<RooProdPdf>("nuis","",constraints);
         pdf = nonNuisancePdf.get();
     } else { nonNuisancePdf.release();
 }

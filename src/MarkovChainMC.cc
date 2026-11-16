@@ -1,4 +1,5 @@
 #include "../interface/MarkovChainMC.h"
+#include <memory>
 #include <stdexcept> 
 #include <cmath> 
 #include "TKey.h"
@@ -238,7 +239,7 @@ int MarkovChainMC::runOnce(RooWorkspace *w, RooStats::ModelConfig *mc_s, RooStat
   switch (proposalType_) {
     case UniformP:  
         if (verbose) std::cout << "Using uniform proposal" << std::endl;
-        ownedPdfProp.reset(new UniformProposal());
+        ownedPdfProp = std::make_unique<UniformProposal>();
         pdfProp = ownedPdfProp.get();
         break;
     case FitP:
@@ -254,7 +255,7 @@ int MarkovChainMC::runOnce(RooWorkspace *w, RooStats::ModelConfig *mc_s, RooStat
         pdfProp = ph.GetProposalFunction();
         break;
     case TestP:
-        ownedPdfProp.reset(new TestProposal(proposalHelperWidthRangeDivisor_, alwaysStepPoi_ ? poi : RooArgList()));
+        ownedPdfProp = std::make_unique<TestProposal>(proposalHelperWidthRangeDivisor_, alwaysStepPoi_ ? poi : RooArgList());
         if (!discreteModelPoints_.empty()) {
             discreteModelPointSets_.clear(); 
             discreteModelPointSets_.resize(discreteModelPoints_.size());

@@ -1,3 +1,4 @@
+#include <memory>
 #include <stdexcept>
 #include "../interface/BayesianFlatPrior.h"
 #include "RooRealVar.h"
@@ -43,7 +44,7 @@ bool BayesianFlatPrior::run(RooWorkspace *w, RooStats::ModelConfig *mc_s, RooSta
   double rMax = r->getMax();
   std::unique_ptr<RooStats::ModelConfig> mc_noNuis(nullptr);
   if (!withSystematics && mc_s->GetNuisanceParameters() != nullptr) {
-    mc_noNuis.reset(new RooStats::ModelConfig(w));
+    mc_noNuis = std::make_unique<RooStats::ModelConfig>(w);
     mc_noNuis->SetPdf(*mc_s->GetPdf());
     mc_noNuis->SetObservables(*mc_s->GetObservables());
     mc_noNuis->SetParametersOfInterest(*mc_s->GetParametersOfInterest());
