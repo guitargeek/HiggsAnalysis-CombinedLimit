@@ -138,7 +138,6 @@ bool GoodnessOfFit::runSaturatedModel(RooWorkspace *w, RooStats::ModelConfig *mc
       std::unique_ptr<TList> datasets(data.split(*cat, true));
 #endif
       int nbins = cat->numBins((const char *)nullptr);
-      RooArgSet newPdfs;
       TString satname = TString::Format("%s_saturated", sim->GetName());
       RooSimultaneous *satsim = (typeid(*sim) == typeid(RooSimultaneousOpt)) ? new RooSimultaneousOpt(satname, "", *cat) : new RooSimultaneous(satname, "", *cat); 
       for (int ic = 0, nc = nbins; ic < nc; ++ic) {

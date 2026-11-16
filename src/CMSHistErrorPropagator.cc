@@ -545,7 +545,6 @@ std::map<std::string, Double_t> CMSHistErrorPropagator::getProcessNorms() const 
       */
       for (int i = 0, n = clist.getSize(); i < n; ++i) {
         RooAbsReal *coeff = (RooAbsReal *) clist.at(i);
-        std::string coeffName = coeff->GetName();
         RooAbsReal* shape = (RooAbsReal*)plist.at(i);
         std::unique_ptr<RooArgSet> myobs(shape->getObservables(*x_));
         TString normProdName = TString::Format("%s", coeff->GetName());

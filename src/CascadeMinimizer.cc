@@ -397,8 +397,6 @@ bool CascadeMinimizer::hesse(int verbose ) {
    }
    if (!minimizer_) remakeMinimizer();
    minimizer_->setPrintLevel(verbose-1); // for debugging
-   std::string myType(ROOT::Math::MinimizerOptions::DefaultMinimizerType());
-   std::string myAlgo(ROOT::Math::MinimizerOptions::DefaultMinimizerAlgo());
 
    if (setZeroPoint_) {
      auto *simnll = dynamic_cast<cacheutils::SimNLLBase *>(&nll_);
