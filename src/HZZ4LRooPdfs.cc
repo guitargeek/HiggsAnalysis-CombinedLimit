@@ -3960,7 +3960,7 @@ ClassImp(RooSigPlusInt)
    TComplex Exp2 = MSquared.Exp(-(TComplex)alpha);
    TComplex Exp3 = MSquared.Exp(-xVal*(TComplex)alpha/M);
 
-   double interference = -r*sqrt(1/1-BRnew)*(1-TMath::Exp(-beta*(xVal-150.)/mH_eff))*((Exp1/(xVal-M)-Exp2/(xVal+M))*Exp3).Re();
+   double interference = -r*sqrt(1-BRnew)*(1-TMath::Exp(-beta*(xVal-150.)/mH_eff))*((Exp1/(xVal-M)-Exp2/(xVal+M))*Exp3).Re();
 
    return signal + interference;   
    
