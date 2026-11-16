@@ -1,76 +1,90 @@
-Checks: >
-  -*,
-  bugprone-*,
-  clang-diagnostic-*,
-  clang-analyzer-*,
-  cppcoreguidelines-*,
-  llvm-*,
-  misc-*,
-  modernize-*,
-  performance-*,
-  portability-*,
-  readability-*,
-  -bugprone-narrowing-conversions,
-  -bugprone-easily-swappable-parameters,
-  -bugprone-implicit-widening-of-multiplication-result,
-  -bugprone-unchecked-optional-access,
-  -misc-const-correctness,
-  -misc-unused-parameters,
-  -misc-non-private-member-variables-in-classes,
-  -misc-no-recursion,
-  -misc-use-anonymous-namespace,
-  -modernize-use-ranges,
-  -modernize-return-braced-init-list,
-  -modernize-use-trailing-return-type,
-  -readability-braces-around-statements,
-  -readability-identifier-length,
-  -readability-magic-numbers,
-  -readability-named-parameter,
-  -readability-function-cognitive-complexity,
-  -readability-implicit-bool-conversion,
-  -cppcoreguidelines-avoid-magic-numbers,
-  -clang-analyzer-cplusplus.NewDeleteLeaks,
-
+---
+Checks: -*,
+  ,boost-use-to-string,
+  ,bugprone-argument-comment,
+  ,bugprone-assert-side-effect,
+  ,bugprone-dangling-handle,
+  ,bugprone-infinite-loop,
+  ,bugprone-integer-division,
+  ,bugprone-sizeof-expression,
+  ,bugprone-string-constructor,
+  ,bugprone-string-integer-assignment,
+  ,bugprone-suspicious-semicolon,
+  ,bugprone-swapped-arguments,
+  ,bugprone-undefined-memory-manipulation,
+  ,bugprone-unused-local-non-trivial-variable,
+  ,bugprone-unused-return-value,
+  ,bugprone-use-after-move,
+  ,cppcoreguidelines-prefer-member-initializer,
+  ,cppcoreguidelines-pro-type-member-init,
+  ,misc-definitions-in-headers,
+  ,misc-redundant-expression,
+  ,misc-string-compare,
+  ,misc-throw-by-value-catch-by-reference,
+  ,misc-uniqueptr-reset-release,
+  ,misc-unused-parameters,
+  ,modernize-deprecated-headers,
+  ,modernize-make-shared,
+  ,modernize-make-unique,
+  ,modernize-use-bool-literals,
+  ,modernize-use-equals-delete,
+  ,modernize-use-nullptr,
+  ,modernize-use-override,
+  ,performance-faster-string-find,
+  ,performance-implicit-conversion-in-loop,
+  ,performance-inefficient-algorithm,
+  ,performance-inefficient-vector-operation,
+  ,performance-move-const-arg,
+  ,performance-move-constructor-init,
+  ,performance-trivially-destructible,
+  ,performance-type-promotion-in-math-fn,
+  ,readability-braces-around-statements,
+  ,readability-container-size-empty,
+  ,readability-duplicate-include,
+  ,readability-inconsistent-declaration-parameter-name,
+  ,readability-isolate-declaration,
+  ,readability-redundant-member-init,
+  ,readability-redundant-smartptr-get,
+  ,readability-redundant-string-cstr,
+  ,readability-redundant-string-init,
+  ,readability-static-definition-in-anonymous-namespace,
+  ,readability-string-compare,
+  ,readability-uniqueptr-delete-release
+WarningsAsErrors: '*'
+HeaderFilterRegex: '.*/roofit/.*'
 CheckOptions:
-  - key:             readability-identifier-naming.ClassCase
-    value:           aNy_CasE
-  - key:             readability-identifier-naming.FunctionCase
-    value:           aNy_CasE
-  - key:             readability-identifier-naming.MemberCase
-    value:           aNy_CasE
-  - key:             readability-identifier-naming.PrivateMemberPrefix
-    value:           'm_'
-  - key:             readability-identifier-naming.ProtectedMemberPrefix
-    value:           'm_'
-  - key:             readability-identifier-naming.PublicMemberPrefix
-    value:           ''
-  - key:             readability-identifier-naming.ParameterCase
-    value:           aNy_CasE
-  - key:             readability-identifier-naming.UnionCase
+  - key:             bugprone-assert-side-effect.AssertMacros
+    value:           'assert,R__ASSERT'
+  - key:             bugprone-unused-local-non-trivial-variable.IncludeTypes
+    value:           '::std::.*mutex;::std::future;::std::basic_string;::std::basic_regex;::std::basic_istringstream;::std::basic_stringstream;::std::bitset;::std::filesystem::path;::std::vector;::std::map;::TString;::RooArgSet;::RooArgList'
+  - key:             cppcoreguidelines-pro-type-member-init.IgnoreArrays
+    value:           true
+  - key:             cppcoreguidelines-pro-type-member-init.UseAssignment
+    value:           true
+  - key:             google-readability-braces-around-statements.ShortStatementLines
+    value:           '1'
+  - key:             google-readability-function-size.StatementThreshold
+    value:           '800'
+  - key:             google-readability-namespace-comments.ShortNamespaceLines
+    value:           '10'
+  - key:             google-readability-namespace-comments.SpacesBeforeComments
+    value:           '2'
+  - key:             misc-definitions-in-headers.HeaderFileExtensions
+    value:           'h,hh,hpp,hxx,icc'
+  - key:             modernize-loop-convert.MaxCopySize
+    value:           '16'
+  - key:             modernize-loop-convert.MinConfidence
+    value:           reasonable
+  - key:             modernize-loop-convert.NamingStyle
     value:           CamelCase
-  - key:             readability-identifier-naming.VariableCase
-    value:           aNy_CasE
-  - key:             readability-identifier-naming.IgnoreMainLikeFunctions
-    value:           1
-  - key:             readability-implicit-bool-conversion.AllowPointerConditions
-    value:           1
-  - key:             readability-magic-numbers.IgnorePowersOf2IntegerValues
-    value:           1
-  - key:             readability-magic-numbers.IgnoredIntegerValues
-    value:           4;8;16;
-  - key:             bugprone-argument-comment.CommentNullPtrs
-    value:           1
-  - key:             bugprone-argument-comment.CommentBoolLiterals
-    value:           1
-  - key:             bugprone-argument-comment.StrictMode
-    value:           1
-  - key:             bugprone-argument-comment.CommentIntegerLiterals
-    value:           1
-  - key:             bugprone-argument-comment.CommentUserDefinedLiterals
-    value:           1
-  - key:             bugprone-argument-comment.CommentStringLiterals
-    value:           1
-  - key:             bugprone-argument-comment.CommentFloatLiterals
-    value:           1
-  - key:             bugprone-argument-comment.CommentCharacterLiterals
-    value:           1
+  - key:             modernize-pass-by-value.IncludeStyle
+    value:           llvm
+  - key:             modernize-replace-auto-ptr.IncludeStyle
+    value:           llvm
+  - key:             modernize-use-nullptr.NullMacros
+    value:           'NULL'
+  - key:             readability-braces-around-statements.ShortStatementLines
+    value:           '2'
+  - key:             readability-redundant-member-init.IgnoreBaseInCopyConstructors
+    value:           true
+...
