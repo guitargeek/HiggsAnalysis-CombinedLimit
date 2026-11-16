@@ -80,7 +80,7 @@ bool BayesianToyMC::run(RooWorkspace *w, RooStats::ModelConfig *mc_s, RooStats::
         if (!integrationType_.empty()) bcalc.SetIntegrationType(integrationType_.c_str());
         if (numIters_) bcalc.SetNumIters(numIters_);
         if (integrationType_ == "toymc") {
-            if (nuisancePdf.get() == nullptr)  nuisancePdf.reset(utils::makeNuisancePdf(*mc_s));
+            if (nuisancePdf == nullptr)  nuisancePdf.reset(utils::makeNuisancePdf(*mc_s));
             bcalc.ForceNuisancePdf(*nuisancePdf);
             // turn off optimization of constraint terms in the NLL, otherwise
             // it does not divide properly by the nuisance pdf
@@ -88,7 +88,7 @@ bool BayesianToyMC::run(RooWorkspace *w, RooStats::ModelConfig *mc_s, RooStats::
         }
         // get the interval
         std::unique_ptr<SimpleInterval> bcInterval(bcalc.GetInterval());
-        if (bcInterval.get() == nullptr) return false;
+        if (bcInterval == nullptr) return false;
         double lim = bcInterval->UpperLimit();
         // check against bound
         if (lim >= 0.5*r->getMax()) { 
@@ -192,8 +192,8 @@ std::pair<double,double> BayesianToyMC::priorPredictiveDistribution(RooStats::Mo
         poiValues.reset(mc->GetPriorPdf()->generate(poiToGen, numIters_));
       }
       for (int i = 0; i < numIters_; ++i) {
-        if (nuisanceValues.get() != nullptr) *params = *nuisanceValues->get(i);
-        if (poiValues.get() != nullptr) *params = *poiValues->get(i);
+        if (nuisanceValues != nullptr) *params = *nuisanceValues->get(i);
+        if (poiValues != nullptr) *params = *poiValues->get(i);
         if (otherParams.getSize()) RooStats::RandomizeCollection(otherParams);
         if (verbose > 2) { std::cout << "\n\n==== POINT "<< t << ","<<i<<" ====" << std::endl; params->Print("V"); }
         double nllVal = nll->getVal();

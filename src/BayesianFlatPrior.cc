@@ -55,7 +55,7 @@ bool BayesianFlatPrior::run(RooWorkspace *w, RooStats::ModelConfig *mc_s, RooSta
     bcalc.SetLeftSideTailFraction(0);
     bcalc.SetConfidenceLevel(cl); 
     std::unique_ptr<SimpleInterval> bcInterval(bcalc.GetInterval());
-    if (bcInterval.get() == nullptr) return false;
+    if (bcInterval == nullptr) return false;
     limit = bcInterval->UpperLimit();
     if (limit >= 0.5*r->getMax()) { 
       std::cout << "Limit " << r->GetName() << " < " << limit << "; " << r->GetName() << " max < " << r->getMax() << std::endl;

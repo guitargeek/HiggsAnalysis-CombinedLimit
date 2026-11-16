@@ -985,9 +985,9 @@ void Combine::run(TString hlfFile, const std::string &dataset, double &limit, do
                 utils::setAllConstant(*mc->GetParametersOfInterest(), false); 
                 w->saveSnapshot("clean", utils::returnAllVars(w));
           }
-          if (nuisancePdf.get()) systDs = nuisancePdf->generate(*mc->GetGlobalObservables(), nToys);
+          if (nuisancePdf) systDs = nuisancePdf->generate(*mc->GetGlobalObservables(), nToys);
       } else {
-          if (nuisancePdf.get()) systDs = nuisancePdf->generate(*nuisances, nToys);
+          if (nuisancePdf) systDs = nuisancePdf->generate(*nuisances, nToys);
       } 
     }
     std::unique_ptr<RooArgSet> vars(genPdf->getVariables());

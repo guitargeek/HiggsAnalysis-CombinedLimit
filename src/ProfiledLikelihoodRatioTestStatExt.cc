@@ -409,7 +409,7 @@ bool nllutils::robustMinimize(RooAbsReal &nll, RooMinimizer &minim, int verbosit
             std::unique_ptr<RooFitResult> res(minim.save());
             //PerfCounter::add("Minimizer.save() called for false minimum"); 
             DBG(DBG_PLTestStat_main, (printf("\n  --> false minimum, status %d, cov. quality %d, edm %10.7f, nll initial % 10.4f, nll final % 10.4f, change %10.5f\n", status, res->covQual(), res->edm(), initialNll, nll.getVal(), initialNll - nll.getVal())))
-            if (pars.get() == nullptr) pars.reset(nll.getParameters((const RooArgSet*)nullptr));
+            if (pars == nullptr) pars.reset(nll.getParameters((const RooArgSet*)nullptr));
             *pars = res->floatParsInit();
             if (tries == 0) {
                 COUNT_ONE("nllutils::robustMinimize: false minimum (first try)")

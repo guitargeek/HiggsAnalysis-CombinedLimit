@@ -123,7 +123,7 @@ bool Significance::run(RooWorkspace *w, RooStats::ModelConfig *mc_s, RooStats::M
         r->setMax(rMax*(0.5+RooRandom::uniform()));
         r->setVal((0.1+0.5*RooRandom::uniform())*r->getMax()); 
         if (withSystematics) { 
-            if (nuisancePdf.get() == nullptr) nuisancePdf.reset(utils::makeNuisancePdf(*mc_s));
+            if (nuisancePdf == nullptr) nuisancePdf.reset(utils::makeNuisancePdf(*mc_s));
             RooArgSet set(*mc_s->GetNuisanceParameters()); 
             RooDataSet *randoms = nuisancePdf->generate(set, 1); 
             set = *randoms->get(0);
@@ -211,7 +211,7 @@ bool Significance::runLimit(RooWorkspace *w, RooStats::ModelConfig *mc_s, RooAbs
         }
     } else {
         plInterval.reset(plcB.GetInterval());
-        if (plInterval.get() == nullptr) break;
+        if (plInterval == nullptr) break;
         limit = lowerLimit_ ? plInterval->LowerLimit(*r) : plInterval->UpperLimit(*r);
     }
     if (limit >= 0.75*r->getMax()) { 
@@ -275,7 +275,7 @@ bool Significance::runSignificance(RooWorkspace *w, RooStats::ModelConfig *mc_s,
       limit = (q0 > 0 ? sqrt(2*q0) : (uncapped_ ? -sqrt(-2*q0) : 0));
   } else {
       std::unique_ptr<HypoTestResult> result(plcS.GetHypoTest());
-      if (result.get() == nullptr) return false;
+      if (result == nullptr) return false;
       limit = result->Significance();
       if (uncapped_ && r->getVal() < signalForSignificance_) limit = -limit;
   }

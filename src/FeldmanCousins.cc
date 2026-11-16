@@ -47,7 +47,7 @@ bool FeldmanCousins::run(RooWorkspace *w, RooStats::ModelConfig *mc_s, RooStats:
   do { 
       if (verbose > 1) std::cout << "Scan in range [" << r->getMin() << ", " << r->getMax() << "]" << std::endl;
       std::unique_ptr<RooStats::PointSetInterval> fcInterval((RooStats::PointSetInterval *)fc.GetInterval());
-      if (fcInterval.get() == nullptr) return false;
+      if (fcInterval == nullptr) return false;
       if (verbose > 1) fcInterval->GetParameterPoints()->Print("V"); 
       RooDataHist* parameterScan = (RooDataHist*) fc.GetPointsToScan();
       int found = -1; 

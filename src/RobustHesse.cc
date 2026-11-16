@@ -291,7 +291,7 @@ std::vector<double> RobustHesse::getFdCoeffs(unsigned n, std::vector<double> con
 void RobustHesse::RemoveFromHessian(std::vector<unsigned> const& ids) {
 
   std::unique_ptr<TMatrixDSym> hessian2ptr(new TMatrixDSym(cVars_.size() - ids.size()));
-  TMatrixDSym & hessian2 = *(hessian2ptr.get());
+  TMatrixDSym & hessian2 = *(hessian2ptr);
 
   unsigned inew = 0;
   unsigned jnew = 0;

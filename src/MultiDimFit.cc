@@ -203,7 +203,7 @@ bool MultiDimFit::runSpecific(RooWorkspace *w, RooStats::ModelConfig *mc_s, RooS
     if ( !skipInitialFit_){
         std::cout << "Doing initial fit: " << std::endl;
         res.reset(doFit(pdf, data, (doHesse ? poiList_ : RooArgList()), constrainCmdArg, (saveFitResult_ && !robustHesse_), 1, true, false));
-        if (!res.get()) {
+        if (!res) {
             std::cout << "\n " <<std::endl;
             std::cout << "\n ---------------------------" <<std::endl;
             std::cout << "\n WARNING: MultiDimFit failed" <<std::endl;
@@ -213,7 +213,7 @@ bool MultiDimFit::runSpecific(RooWorkspace *w, RooStats::ModelConfig *mc_s, RooS
         if (algo_ == Impact && res.get()) {
             // Set the floating parameters back to the best-fit value
             // before we write an entry into the output TTree
-            w->allVars().assignValueOnly(res.get()->floatParsFinal());
+            w->allVars().assignValueOnly(res->floatParsFinal());
         }
     } else {
         std::cout << "MultiDimFit -- Skipping initial global fit" << std::endl;
@@ -227,7 +227,7 @@ bool MultiDimFit::runSpecific(RooWorkspace *w, RooStats::ModelConfig *mc_s, RooS
         for (int i = 0, n = poi_.size(); i < n; ++i) {
             if (res.get() && doHesse ){
 	    	// (res.get())->Print("v");
-                RooAbsArg *rfloat = (res.get())->floatParsFinal().find(poi_[i].c_str());
+                RooAbsArg *rfloat = (res)->floatParsFinal().find(poi_[i].c_str());
                 if (!rfloat) {
                     rfloat = (*res).constPars().find(poi_[i].c_str());
                 }
@@ -313,14 +313,14 @@ bool MultiDimFit::runSpecific(RooWorkspace *w, RooStats::ModelConfig *mc_s, RooS
 	  }
           if(res.get() && saveFitResult_) saveResult(*res);
           break;
-        case Singles: if (res.get()) { doSingles(*res); if (saveFitResult_) {saveResult(*res);} } break;
+        case Singles: if (res) { doSingles(*res); if (saveFitResult_) {saveResult(*res);} } break;
         case Cross: doBox(*nll, cl, "box", true); break;
         case Grid: doGrid(w,*nll); break;
         case RandomPoints: doRandomPoints(w,*nll); break;
         case FixedPoint: doFixedPoint(w,*nll); break;
         case Contour2D: doContour2D(w,*nll); break;
         case Stitch2D: doStitch2D(w,*nll); break;
-        case Impact: if (res.get()) doImpact(*res, *nll); break;
+        case Impact: if (res) doImpact(*res, *nll); break;
     }
     
     Combine::toggleGlobalFillTree(false);

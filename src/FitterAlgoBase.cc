@@ -231,7 +231,7 @@ RooFitResult *FitterAlgoBase::doFit(RooAbsPdf &pdf, RooAbsData &data, RooRealVar
 
 RooFitResult *FitterAlgoBase::doFit(RooAbsPdf &pdf, RooAbsData &data, const RooArgList &rs, const RooCmdArg &constrain, bool doHesse, int ndim, bool reuseNLL, bool saveFitResult) {
     RooFitResult *ret = nullptr;
-    if (reuseNLL && nll.get() != nullptr && !forceRecreateNLL_) {
+    if (reuseNLL && nll != nullptr && !forceRecreateNLL_) {
       nll->setData(data, /*cloneData=*/false);  // reuse nll but swap out the data
     } else {
         nll.reset(); // first delete the old one, to avoid using more memory, even if temporarily
@@ -460,7 +460,7 @@ double FitterAlgoBase::findCrossing(CascadeMinimizer &minim, RooAbsReal &nll, Ro
 		return NAN; 
 	    }
             RooArgSet oldparams(checkpoint->floatParsFinal());
-            if (allpars.get() == nullptr) allpars.reset(nll.getParameters((const RooArgSet *)nullptr));
+            if (allpars == nullptr) allpars.reset(nll.getParameters((const RooArgSet *)nullptr));
             *allpars = oldparams;
             rStart -= rInc; rInc *= 0.5; 
             continue;
@@ -495,14 +495,14 @@ double FitterAlgoBase::findCrossing(CascadeMinimizer &minim, RooAbsReal &nll, Ro
             } else {
                 rInc *= 0.3;
             }
-            if (allpars.get() == nullptr) allpars.reset(nll.getParameters((const RooArgSet *)nullptr));
-            if (checkpoint.get()) {
+            if (allpars == nullptr) allpars.reset(nll.getParameters((const RooArgSet *)nullptr));
+            if (checkpoint) {
                 RooArgSet oldparams(checkpoint->floatParsFinal());
                 *allpars = oldparams;
             }
         } else if ((here-there)*(level-there) < 0 && // went wrong
                    fabs(here-there) > 0.1) {         // by more than roundoff
-            if (allpars.get() == nullptr) allpars.reset(nll.getParameters((const RooArgSet *)nullptr));
+            if (allpars == nullptr) allpars.reset(nll.getParameters((const RooArgSet *)nullptr));
             RooArgSet oldparams(checkpoint->floatParsFinal());
             *allpars = oldparams;
             rStart -= rInc; rInc *= 0.5;

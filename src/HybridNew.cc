@@ -398,7 +398,7 @@ bool HybridNew::runSignificance(RooWorkspace *w, RooStats::ModelConfig *mc_s, Ro
             if (verbose) std::cout << "\t1 - Pb = " << hcResult->CLb() << " +/- " << hcResult->CLbError() << std::endl;
         }
     }
-    if (hcResult.get() == nullptr) {
+    if (hcResult == nullptr) {
         std::cerr << "Hypotest failed" << std::endl;
         return false;
     }
@@ -467,7 +467,7 @@ bool HybridNew::runLimit(RooWorkspace *w, RooStats::ModelConfig *mc_s, RooStats:
       if (!gridFile_.empty()) {
         if (grid_.empty()) {
             std::unique_ptr<TFile> gridFile(TFile::Open(gridFile_.c_str()));
-            if (gridFile.get() == nullptr) throw std::runtime_error(("Can't open grid file "+gridFile_).c_str());
+            if (gridFile == nullptr) throw std::runtime_error(("Can't open grid file "+gridFile_).c_str());
             TDirectory *toyDir = gridFile->GetDirectory("toys");
             if (!toyDir) throw std::logic_error("Cannot use readHypoTestResult: empty toy dir in input file empty");
             readGrid(toyDir, rMinSet_ ? rMin : -99e99, rMaxSet_ ? rMax :+99e99);
@@ -853,7 +853,7 @@ std::pair<double, double> HybridNew::eval(RooWorkspace *w, RooStats::ModelConfig
     std::pair<double, double> ret = eval(*hc, rVals, adaptive, clsTarget);
 
     // add to plot
-    if (limitPlot_.get()) {
+    if (limitPlot_) {
         limitPlot_->Set(limitPlot_->GetN()+1);
         limitPlot_->SetPoint(limitPlot_->GetN()-1, ((RooAbsReal*)rVals.first())->getVal(), ret.first);
         limitPlot_->SetPointError(limitPlot_->GetN()-1, 0, ret.second);
@@ -1224,7 +1224,7 @@ std::pair<double,double>
 HybridNew::eval(RooStats::HybridCalculator &hc, const RooAbsCollection & rVals, bool adaptive, double clsTarget) {
     std::unique_ptr<HypoTestResult> hcResult(evalGeneric(hc));
     if (expectedFromGrid_) applyExpectedQuantile(*hcResult);
-    if (hcResult.get() == nullptr) {
+    if (hcResult == nullptr) {
         std::cerr << "Hypotest failed" << std::endl;
         return std::pair<double, double>(-1,-1);
     }
@@ -1509,7 +1509,7 @@ RooStats::HypoTestResult * HybridNew::evalWithFork(RooStats::HybridCalculator &h
             if (f == nullptr) throw std::runtime_error(TString::Format("Child didn't leave output file %s.%d.root", tmpfile, ich).Data());
             RooStats::HypoTestResult *res = dynamic_cast<RooStats::HypoTestResult *>(f->Get("result"));
             if (res == nullptr)  throw std::runtime_error(TString::Format("Child output file %s.%d.root is corrupted", tmpfile, ich).Data());
-            if (result.get()) result->Append(res); else result.reset(dynamic_cast<RooStats::HypoTestResult *>(res->Clone()));
+            if (result) result->Append(res); else result.reset(dynamic_cast<RooStats::HypoTestResult *>(res->Clone()));
             f->Close();
             unlink(TString::Format("%s.%d.root",    tmpfile, ich).Data());
             unlink(TString::Format("%s.%d.out.txt", tmpfile, ich).Data());
@@ -1627,14 +1627,14 @@ RooStats::HypoTestResult * HybridNew::readToysFromFile(const RooAbsCollection & 
         RooStats::HypoTestResult *toy = dynamic_cast<RooStats::HypoTestResult *>(toyDir->Get(k->GetName()));
         if (toy == nullptr) continue;
         if (verbose > 1) std::cout << " - " << k->GetName() << std::endl;
-        if (ret.get() == nullptr) {
+        if (ret == nullptr) {
             ret.reset(new RooStats::HypoTestResult(*toy));
         } else {
             ret->Append(toy);
         }
     }
 
-    if (ret.get() == nullptr) {
+    if (ret == nullptr) {
         //std::cout << "ERROR: parameter point not found in input root file.\n";
         CombineLogger::instance().log("HybridNew.cc",__LINE__,"[ERROR] Parameter point not foung in input root file!",__func__);
         rVals.Print("V");

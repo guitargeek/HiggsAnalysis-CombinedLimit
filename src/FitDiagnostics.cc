@@ -289,7 +289,7 @@ bool FitDiagnostics::runSpecific(RooWorkspace *w, RooStats::ModelConfig *mc_s, R
       }
       delete res_prefit;
     } else if (nuis) {
-      if (fitOut.get() ) fitOut->WriteTObject(nuis->snapshot(), "nuisances_prefit");
+      if (fitOut ) fitOut->WriteTObject(nuis->snapshot(), "nuisances_prefit");
     }
   // }
   if (t_prefit_) {
@@ -341,7 +341,7 @@ bool FitDiagnostics::runSpecific(RooWorkspace *w, RooStats::ModelConfig *mc_s, R
 
   if (res_b) { 
       if (verbose > 1) res_b->Print("V");
-      if (fitOut.get()) {
+      if (fitOut) {
         if (currentToy_< 1)	fitOut->WriteTObject(res_b,"fit_b");
         if (withSystematics)	{
           setFitResultTrees(mc_s->GetNuisanceParameters(),nuisanceParameters_);
@@ -403,7 +403,7 @@ bool FitDiagnostics::runSpecific(RooWorkspace *w, RooStats::ModelConfig *mc_s, R
           corr->Draw("COLZ TEXT");
           c1->Print((out_+"/covariance_fit_b.png").c_str());
           c1->SetLeftMargin(0.16);  c1->SetBottomMargin(0.13);
-          if (fitOut.get()) fitOut->WriteTObject(corr, "covariance_fit_b");
+          if (fitOut) fitOut->WriteTObject(corr, "covariance_fit_b");
       }
 
       //take the limit value from "b-only" when skipping s+b
@@ -465,7 +465,7 @@ bool FitDiagnostics::runSpecific(RooWorkspace *w, RooStats::ModelConfig *mc_s, R
       limit    = r->getVal();
       limitErr = r->getError();
       if (verbose > 1) res_s->Print("V");
-      if (fitOut.get()){
+      if (fitOut){
 	 if (currentToy_<1) fitOut->WriteTObject(res_s, "fit_s");
 
 	 if (withSystematics)	{
@@ -532,7 +532,7 @@ bool FitDiagnostics::runSpecific(RooWorkspace *w, RooStats::ModelConfig *mc_s, R
           corr->Draw("COLZ TEXT");
           c1->Print((out_+"/covariance_fit_s.png").c_str());
           c1->SetLeftMargin(0.16);  c1->SetBottomMargin(0.13);
-          if (fitOut.get() ) fitOut->WriteTObject(corr, "covariance_fit_s");
+          if (fitOut ) fitOut->WriteTObject(corr, "covariance_fit_s");
       }
   }  else {
 	fitStatus_=-1;
@@ -592,7 +592,7 @@ bool FitDiagnostics::runSpecific(RooWorkspace *w, RooStats::ModelConfig *mc_s, R
 
   if (currentToy_==nToys-1 || nToys==0 ) {
         
-        if (fitOut.get()) {	
+        if (fitOut) {	
 		fitOut->cd();
 		t_fit_sb_->Write(); t_fit_b_->Write(); t_prefit_->Write();
 		fitOut.release()->Close();

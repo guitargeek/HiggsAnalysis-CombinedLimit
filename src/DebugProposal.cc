@@ -28,7 +28,7 @@ void DebugProposal::Propose(RooArgSet& xPrime, RooArgSet& x )
    if (tries_ > 0) {  
         std::cout << "DebugProposal::Propose: x'" << std::endl; xPrime.Print("V"); 
         std::cout << "DebugProposal::Propose: x " << std::endl; x.Print("V"); 
-        if (nll_.get()) {
+        if (nll_) {
             RooStats::SetParameters(&xPrime, &params_);
             double nllXP = nll_->getVal();
             RooStats::SetParameters(&x, &params_);

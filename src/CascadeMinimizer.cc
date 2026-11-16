@@ -177,7 +177,7 @@ bool CascadeMinimizer::improve(int verbose, bool cascade, bool forceResetMinimiz
       simnllbb->setAnalyticBarlowBeeston(true);
       forceResetMinimizer = true;
     }
-    if (forceResetMinimizer || !minimizer_.get()) remakeMinimizer();
+    if (forceResetMinimizer || !minimizer_) remakeMinimizer();
     minimizer_->setPrintLevel(verbose-1);
    
     strategy_ = ROOT::Math::MinimizerOptions::DefaultStrategy(); // re-configure 
@@ -248,7 +248,7 @@ bool CascadeMinimizer::improveOnce(int verbose, bool noHesse)
     bool outcome = false;
     double tol = ROOT::Math::MinimizerOptions::DefaultTolerance();
     static int maxcalls = runtimedef::get("MINIMIZER_MaxCalls");
-    if (!minimizer_.get()) remakeMinimizer();
+    if (!minimizer_) remakeMinimizer();
 
     // freeze non active parameters if MINIMIZER_freezeDisassociatedParams enabled
     RooArgSet frozenSet = freezeDiscParams();
@@ -395,7 +395,7 @@ bool CascadeMinimizer::hesse(int verbose ) {
       minimizer_->setStrategy(strategy_);
       improveOnce(verbose - 1);
    }
-   if (!minimizer_.get()) remakeMinimizer();
+   if (!minimizer_) remakeMinimizer();
    minimizer_->setPrintLevel(verbose-1); // for debugging
    std::string myType(ROOT::Math::MinimizerOptions::DefaultMinimizerType());
    std::string myAlgo(ROOT::Math::MinimizerOptions::DefaultMinimizerAlgo());
@@ -520,7 +520,7 @@ bool CascadeMinimizer::minimize(int verbose, bool cascade)
     bool doMultipleMini = (CascadeMinimizerGlobalConfigs::O().pdfCategories.getSize()>0);
     if (runtimedef::get(std::string("MINIMIZER_skipDiscreteIterations"))) doMultipleMini=false;
     // if ( doMultipleMini ) preFit_ = 1;
-    if (!minimizer_.get()) remakeMinimizer();
+    if (!minimizer_) remakeMinimizer();
     minimizer_->setPrintLevel(verbose-2);  
     minimizer_->setStrategy(strategy_);
     

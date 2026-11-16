@@ -422,7 +422,7 @@ bool utils::checkModel(const RooStats::ModelConfig &model, bool throwOnFail) {
     if (model.GetNuisanceParameters() != nullptr) {
         RooArgList constraints;
         std::unique_ptr<RooAbsPdf> factorizedPdf(utils::factorizePdf(*model.GetObservables(), *model.GetPdf(), constraints));
-        if (factorizedPdf.get() == nullptr || factorizedPdf.get() == model.GetPdf()) {
+        if (factorizedPdf == nullptr || factorizedPdf.get() == model.GetPdf()) {
             factorizedPdf.release();
             ok = false; errors << "ERROR: have nuisance parameters, but can't factorize the pdf\n";
         }

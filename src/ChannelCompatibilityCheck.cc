@@ -110,8 +110,8 @@ bool ChannelCompatibilityCheck::runSpecific(RooWorkspace *w, RooStats::ModelConf
   double nll_freeform   = nll->getVal();
   sentry.clear();
 
-  if (result_nominal.get()  == nullptr) return false;
-  if (result_freeform.get() == nullptr) return false;
+  if (result_nominal  == nullptr) return false;
+  if (result_freeform == nullptr) return false;
 
   //double nll_nominal   = result_nominal->minNll();
   //double nll_freeform = result_freeform->minNll();
