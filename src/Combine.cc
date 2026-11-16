@@ -92,13 +92,13 @@ bool bypassFrequentistFit_ = false;
 bool g_fillTree_ = true;
 TTree *Combine::tree_ = nullptr;
 
-std::string setPhysicsModelParameterExpression_ = "";
-std::string setPhysicsModelParameterRangeExpression_ = "";
-std::string defineBackgroundOnlyModelParameterExpression_ = "";
+std::string setPhysicsModelParameterExpression_;
+std::string setPhysicsModelParameterRangeExpression_;
+std::string defineBackgroundOnlyModelParameterExpression_;
 
-std::string Combine::trackParametersNameString_="";
-std::string Combine::trackErrorsNameString_="";
-std::string Combine::textToWorkspaceString_="";
+std::string Combine::trackParametersNameString_;
+std::string Combine::trackErrorsNameString_;
+std::string Combine::textToWorkspaceString_;
 
 std::string& Combine::nllBackend() {
   static std::string nllBackend_ = "combine";

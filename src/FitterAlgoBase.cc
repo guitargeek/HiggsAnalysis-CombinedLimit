@@ -42,7 +42,7 @@
 using namespace RooStats;
 
 //std::string FitterAlgoBase::minimizerAlgo_ = "Minuit2";
-std::string FitterAlgoBase::minimizerAlgoForMinos_ = "";
+std::string FitterAlgoBase::minimizerAlgoForMinos_;
 //float       FitterAlgoBase::minimizerTolerance_ = 1e-1;
 float       FitterAlgoBase::minimizerToleranceForMinos_ = 1e-1;
 float       FitterAlgoBase::crossingTolerance_ = 1e-4;
@@ -57,8 +57,8 @@ bool        FitterAlgoBase::forceRecreateNLL_ = false;
 bool        FitterAlgoBase::saveNLL_ = false;
 bool        FitterAlgoBase::keepFailures_ = false;
 bool        FitterAlgoBase::protectUnbinnedChannels_ = false;
-std::string FitterAlgoBase::autoBoundsPOIs_ = "";
-std::string FitterAlgoBase::autoMaxPOIs_ = "";
+std::string FitterAlgoBase::autoBoundsPOIs_;
+std::string FitterAlgoBase::autoMaxPOIs_;
 double       FitterAlgoBase::nllValue_ = std::numeric_limits<double>::quiet_NaN();
 double       FitterAlgoBase::nll0Value_ = std::numeric_limits<double>::quiet_NaN();
 FitterAlgoBase::ProfilingMode FitterAlgoBase::profileMode_ = ProfileAll;

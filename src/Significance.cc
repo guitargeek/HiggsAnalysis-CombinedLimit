@@ -45,7 +45,7 @@ bool        Significance::reportPVal_ = false;
 bool        Significance::uncapped_ = false;
 float       Significance::signalForSignificance_ = 0;
 float       Significance::mass_;
-std::string Significance::plot_ = "";
+std::string Significance::plot_;
 
 Significance::Significance() :
     LimitAlgo("Significance specific options")

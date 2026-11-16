@@ -76,7 +76,7 @@ bool  HybridNew::fullBToys_ = false;
 bool  HybridNew::fullGrid_ = false;
 bool  HybridNew::saveGrid_ = false;
 bool  HybridNew::noUpdateGrid_ = false;
-std::string HybridNew::gridFile_ = "";
+std::string HybridNew::gridFile_;
 std::string HybridNew::scaleAndConfidenceSelection_ ="0.68,0.95";
 bool HybridNew::importanceSamplingNull_ = false;
 bool HybridNew::importanceSamplingAlt_  = false;
@@ -94,7 +94,7 @@ bool        HybridNew::reportPVal_ = false;
 float HybridNew::confidenceToleranceForToyScaling_ = 0.2;
 float HybridNew::maxProbability_ = 0.999;
 double HybridNew::EPS = 1e-4;
-std::string HybridNew::mode_ = "";
+std::string HybridNew::mode_;
 
 HybridNew::HybridNew() :
 LimitAlgo("HybridNew specific options") {

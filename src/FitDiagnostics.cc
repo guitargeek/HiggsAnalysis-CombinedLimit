@@ -42,16 +42,16 @@
 #include <vector>
 using namespace RooStats;
 
-std::string FitDiagnostics::name_ = "";
-std::string FitDiagnostics::massName_ = "";
-std::string FitDiagnostics::toyName_ = "";
+std::string FitDiagnostics::name_;
+std::string FitDiagnostics::massName_;
+std::string FitDiagnostics::toyName_;
 std::string FitDiagnostics::minos_ = "poi";
 std::string FitDiagnostics::out_ = ".";
 bool        FitDiagnostics::makePlots_ = false;
 float       FitDiagnostics::rebinFactor_ = 1.0;
 int         FitDiagnostics::numToysForShapes_ = 200;
 std::string FitDiagnostics::signalPdfNames_     = "shapeSig*";
-std::string FitDiagnostics::filterString_     = "";
+std::string FitDiagnostics::filterString_;
 std::string FitDiagnostics::backgroundPdfNames_ = "shapeBkg*";
 bool        FitDiagnostics::saveNormalizations_ = false;
 bool        FitDiagnostics::savePredictionsPerToy_ = false;

@@ -26,7 +26,7 @@ double AsymptoticLimits::rAbsAccuracy_ = 0.0005;
 double AsymptoticLimits::rRelAccuracy_ = 0.005;
 std::string AsymptoticLimits::what_ = "both"; 
 std::string AsymptoticLimits::rule_ = "CLs"; 
-std::string AsymptoticLimits::gridFileName_ = ""; 
+std::string AsymptoticLimits::gridFileName_; 
 bool  AsymptoticLimits::qtilde_ = true; 
 bool  AsymptoticLimits::picky_ = false; 
 bool  AsymptoticLimits::noFitAsimov_ = false; 

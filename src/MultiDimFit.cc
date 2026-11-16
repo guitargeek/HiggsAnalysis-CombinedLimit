@@ -28,9 +28,9 @@
 
 using namespace RooStats;
 
-std::string MultiDimFit::name_ = "";
-std::string MultiDimFit::massName_ = "";
-std::string MultiDimFit::toyName_ = "";
+std::string MultiDimFit::name_;
+std::string MultiDimFit::massName_;
+std::string MultiDimFit::toyName_;
 std::string MultiDimFit::out_ = ".";
 MultiDimFit::Algo MultiDimFit::algo_ = None;
 MultiDimFit::GridType MultiDimFit::gridType_ = G1x1;
@@ -42,7 +42,7 @@ float                     MultiDimFit::deltaNLL_ = 0;
 unsigned int MultiDimFit::points_ = 50;
 unsigned int MultiDimFit::firstPoint_ = 0;
 unsigned int MultiDimFit::lastPoint_  = std::numeric_limits<unsigned int>::max();
-std::string MultiDimFit::gridPoints_ = "";
+std::string MultiDimFit::gridPoints_;
 bool MultiDimFit::floatOtherPOIs_ = false;
 unsigned int MultiDimFit::nOtherFloatingPoi_ = 0;
 bool MultiDimFit::fastScan_ = false;
@@ -56,11 +56,11 @@ bool MultiDimFit::skipInitialFit_ = false;
 bool MultiDimFit::saveFitResult_ = false;
 float MultiDimFit::maxDeltaNLLForProf_ = 200;
 float MultiDimFit::autoRange_ = -1.0;
-std::string MultiDimFit::fixedPointPOIs_ = "";
+std::string MultiDimFit::fixedPointPOIs_;
 float MultiDimFit::centeredRange_ = -1.0;
 bool        MultiDimFit::robustHesse_ = false;
-std::string MultiDimFit::robustHesseLoad_ = "";
-std::string MultiDimFit::robustHesseSave_ = "";
+std::string MultiDimFit::robustHesseLoad_;
+std::string MultiDimFit::robustHesseSave_;
 int MultiDimFit::pointsRandProf_ = 0;
 int MultiDimFit::randPointsSeed_ = 0;
 std::string MultiDimFit::setParameterRandomInitialValueRanges_;

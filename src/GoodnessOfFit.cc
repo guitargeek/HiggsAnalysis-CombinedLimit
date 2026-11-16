@@ -47,8 +47,8 @@ bool        GoodnessOfFit::makePlots_ = false;
 TDirectory* GoodnessOfFit::plotDir_ = nullptr;
 std::vector<std::string>  GoodnessOfFit::binNames_;
 std::vector<float>        GoodnessOfFit::qVals_;
-std::string GoodnessOfFit::setParametersForFit_ = "";
-std::string GoodnessOfFit::setParametersForEval_ = "";
+std::string GoodnessOfFit::setParametersForFit_;
+std::string GoodnessOfFit::setParametersForEval_;
 
 GoodnessOfFit::GoodnessOfFit() :
     LimitAlgo("GoodnessOfFit specific options")
