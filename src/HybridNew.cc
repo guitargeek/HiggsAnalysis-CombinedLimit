@@ -1527,7 +1527,7 @@ RooStats::HypoTestResult * HybridNew::evalWithFork(RooStats::HybridCalculator &h
           return result.release(); // nullptr at this point
         }
         CombineLogger::instance().log("HybridNew.cc",__LINE__,std::string(Form("  I am child %d, seed %d",ich, newSeeds[ich])),__func__);
-        RooStats::HypoTestResult *hcResult = evalGeneric(hc, /*noFork=*/true);
+        RooStats::HypoTestResult *hcResult = evalGeneric(hc, /*forceNoFork=*/true);
         TFile *f = TFile::Open(TString::Format("%s.%d.root", tmpfile, ich), "RECREATE");
         f->WriteTObject(hcResult, "result");
         f->ls();

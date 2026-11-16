@@ -11,7 +11,7 @@ DebugProposal::DebugProposal(RooStats::ProposalFunction *p, RooAbsPdf *pdf, RooA
      prop_(p), pdf_(pdf), tries_(tries) 
 {
     if (pdf && data) {
-        nll_ = combineCreateNLL(*pdf, *data, /*constrain=*/nullptr, /*offset=*/false);
+        nll_ = combineCreateNLL(*pdf, *data, /*constraint=*/nullptr, /*offset=*/false);
         std::unique_ptr<RooArgSet> par{utils::getAllParameters(*pdf, *data)};
         RooStats::RemoveConstantParameters(par.get());
         params_.add(*par);

@@ -412,7 +412,7 @@ std::vector<std::pair<float,float> > AsymptoticLimits::runLimitExpected(RooWorks
     r->setError(0.1*r->getMax());
     //r->removeMax();
     
-    auto nll = combineCreateNLL(*mc_s->GetPdf(), *asimov, /*constrain=*/mc_s->GetNuisanceParameters(), /*offset=*/false);
+    auto nll = combineCreateNLL(*mc_s->GetPdf(), *asimov, /*constraint=*/mc_s->GetNuisanceParameters(), /*offset=*/false);
     CascadeMinimizer minim(*nll, CascadeMinimizer::Unconstrained, r);
     //minim.setStrategy(minimizerStrategy_);
     minim.setErrorLevel(0.5*pow(ROOT::Math::normal_quantile(1-0.5*(1-cl),1.0), 2)); // the 0.5 is because qmu is -2*NLL
