@@ -23,7 +23,9 @@ VectorizedExponential::VectorizedExponential(const RooExponential &pdf, const Ro
 }
 
 void VectorizedExponential::fill(std::vector<Double_t> &out) const {
-    Double_t xmax = x_->getMax(), xmin = x_->getMin(), lambda = lambda_->getVal();
+    Double_t xmax = x_->getMax();
+    Double_t xmin = x_->getMin();
+    Double_t lambda = lambda_->getVal();
     Double_t norm = (lambda != 0 ? (std::exp(lambda*xmax)-std::exp(lambda*xmin))/lambda  : xmax-xmin);
     out.resize(xvals_.size());
     vectorized::exponentials(xvals_.size(), lambda, norm, &xvals_[0], &out[0], &work_[0]);
@@ -45,7 +47,9 @@ VectorizedPower::VectorizedPower(const RooPower &pdf, const RooAbsData &data, bo
 }
 
 void VectorizedPower::fill(std::vector<Double_t> &out) const {
-    Double_t xmax = x_->getMax(), xmin = x_->getMin(), exponent = exponent_->getVal();
+    Double_t xmax = x_->getMax();
+    Double_t xmin = x_->getMin();
+    Double_t exponent = exponent_->getVal();
     Double_t norm;
     if (exponent == -1) norm = log(xmax) - log(xmin);
     else if (exponent == 0) norm = xmax - xmin;

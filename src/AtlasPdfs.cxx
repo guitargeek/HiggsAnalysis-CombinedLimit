@@ -987,7 +987,8 @@ RooParamKeysPdf::LoadDataSet( RooDataSet& data) {
   Double_t x1(0);
   Double_t x2(0);
 
-  Int_t i, idata=0;
+  Int_t i;
+  Int_t idata=0;
   for (i=0; i<data.numEntries(); i++) {
     const RooArgSet *values= data.get(i);
     RooRealVar real= (RooRealVar&)(values->operator[](_varName));

@@ -58,7 +58,8 @@ CMSHistV<T>::CMSHistV(const T& hpdf, const RooAbsData& data,
     nbins_ = bins.size();
     bins_.swap(bins);
     blocks_.clear();
-    int start = bins_[0], istart = 0;
+    int start = bins_[0];
+    int istart = 0;
     for (int i = 1, n = bins_.size(); i < n; ++i) {
       if (bins_[i] != bins_[i - 1] + 1) {
         blocks_.push_back(Block(istart, start, bins_[i - 1] + 1));

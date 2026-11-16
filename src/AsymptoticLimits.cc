@@ -230,9 +230,11 @@ bool AsymptoticLimits::runLimit(RooWorkspace *w, RooStats::ModelConfig *mc_s, Ro
   }
 
   double clsTarget = 1-cl;
-  double rMin = std::max<double>(0, r->getVal()), rMax = rMin + 3 * rErr;
+  double rMin = std::max<double>(0, r->getVal());
+  double rMax = rMin + 3 * rErr;
   if (strictBounds_ && rMax > r->getMax()) rMax = r->getMax();
-  double clsMax = 1, clsMin = 0;
+  double clsMax = 1;
+  double clsMin = 0;
   for (int tries = 0; tries < 5; ++tries) {
     double cls = getCLs(*r, rMax);
     if (cls == -999) { 
@@ -547,7 +549,8 @@ float AsymptoticLimits::findExpectedLimitFromCrossing(RooAbsReal &nll, RooRealVa
             if (rMax > r->getMax()) rMax = r->getMax();
             if (rMax == rMin) return rMax;
         }
-        double rCross = 0.5*(rMin+rMax), rErr = 0.5*(rMax-rMin);
+        double rCross = 0.5*(rMin+rMax);
+        double rErr = 0.5*(rMax-rMin);
         r->setVal(rCross); r->setConstant(true);
         CascadeMinimizer minim2(nll, CascadeMinimizer::Constrained);
         //minim2.setStrategy(minimizerStrategy_);
@@ -627,7 +630,8 @@ float AsymptoticLimits::findExpectedLimitFromCrossing(RooAbsReal &nll, RooRealVa
             double kappa = 0;
             // part 1: try to bracket the crossing between two points that have profiled nll above & below threshold
             double rStep = 0.05 * (rMax - r_0);
-            double r_1 = r_0, nll_1 = nll_0;
+            double r_1 = r_0;
+            double nll_1 = nll_0;
             do {
                 r_1 += rStep; 
                 if (r_1 >= r->getMax()) r->setMax(r_1*1.1);
@@ -671,11 +675,13 @@ float AsymptoticLimits::findExpectedLimitFromCrossing(RooAbsReal &nll, RooRealVa
                //   - nuisance parameters have been profiled at r_1 
                double rEps = 0.2*std::max(rRelAccuracy_*r_1, rAbsAccuracy_);
                // bisection loop to find point with the right nll_approx
-               double r_lo = std::min(r_0,r_1), r_hi = std::max(r_1,r_0);
+               double r_lo = std::min(r_0,r_1);
+               double r_hi = std::max(r_1,r_0);
                while (r_hi - r_lo > rEps) {
                    double r_2 = 0.5*(r_hi+r_lo); 
                    r->setVal(r_2);
-                   double y0 = nll.getVal(), y = y0 - kappa*std::pow(r_2-r_1,2);
+                   double y0 = nll.getVal();
+                   double y = y0 - kappa*std::pow(r_2-r_1,2);
                    if (verbose > 1) CombineLogger::instance().log("AsymptoticLimits.cc",__LINE__,std::string(Form("At %s = %f:\tdelta(nll unprof) = %.5f\tdelta(nll appr) = %.5f\tkappa=%.5f\n", r->GetName(), r_2, y0-nll0, y-nll0, kappa)),__func__);
                    if (y < threshold) { r_lo = r_2; } else { r_hi = r_2; }
                } 

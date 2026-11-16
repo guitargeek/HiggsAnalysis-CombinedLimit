@@ -232,7 +232,8 @@ void RandStartPt::doRandomStartPt2DGridScan(double &xval, double &yval, unsigned
         if (gridType == MultiDimFit::G3x3){
             bool forceProfile = !fastscan_  && std::min(fabs(deltaNLL - 1.15), fabs(deltaNLL - 2.995)) < 0.5;
             utils::CheapValueSnapshot center(*param);
-            double x0 = xval, y0 = yval;
+            double x0 = xval;
+            double y0 = yval;
             for (int i2 = -1; i2 <= +1; ++i2){
                 for (int j2 = -1; j2 <= +1; ++j2){
                     if (i2 == 0 && j2 == 0) continue;

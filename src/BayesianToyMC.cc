@@ -119,7 +119,8 @@ bool BayesianToyMC::run(RooWorkspace *w, RooStats::ModelConfig *mc_s, RooStats::
 }
 
 bool BayesianToyMC::runBayesFactor(RooWorkspace *w, RooStats::ModelConfig *mc_s, RooStats::ModelConfig *mc_b, RooAbsData &data, double &limit, double &limitErr, const double *hint) {
-    std::pair<double,double> ppS, ppB;
+    std::pair<double,double> ppS;
+    std::pair<double,double> ppB;
     double offset = std::numeric_limits<double>::quiet_NaN();
     if (twoPoints_.empty()) {
         ppS = priorPredictiveDistribution(mc_s,data,nullptr,&offset);
@@ -147,7 +148,8 @@ bool BayesianToyMC::runBayesFactor(RooWorkspace *w, RooStats::ModelConfig *mc_s,
 std::pair<double,double> BayesianToyMC::priorPredictiveDistribution(RooStats::ModelConfig *mc, RooAbsData &data, const RooArgSet *point, double *offset) {
   // factorize away nuisance pdf
   RooAbsPdf *pdf = mc->GetPdf();
-  std::unique_ptr<RooAbsPdf>  nuisancePdf, nonNuisancePdf; 
+  std::unique_ptr<RooAbsPdf>  nuisancePdf;
+  std::unique_ptr<RooAbsPdf>  nonNuisancePdf; 
   if (withSystematics) {
     RooArgList constraints;
     nonNuisancePdf.reset(utils::factorizePdf(*data.get(), *pdf, constraints));
@@ -181,7 +183,8 @@ std::pair<double,double> BayesianToyMC::priorPredictiveDistribution(RooStats::Mo
   // start running
   std::vector<double> results; double sum = 0;
   for (unsigned int t = 0; t < tries_; ++t) {
-      std::unique_ptr<RooDataSet> nuisanceValues, poiValues;
+      std::unique_ptr<RooDataSet> nuisanceValues;
+      std::unique_ptr<RooDataSet> poiValues;
       if (withSystematics) nuisanceValues.reset(nuisancePdf->generate(*mc->GetNuisanceParameters(), numIters_));
       if (poiToGen.getSize() > 0) {
         if (mc->GetPriorPdf() == nullptr) throw std::logic_error(std::string("Missing prior in model: ")+ mc->GetName());
@@ -204,7 +207,8 @@ std::pair<double,double> BayesianToyMC::priorPredictiveDistribution(RooStats::Mo
   }
   double n = results.size();
   sum /= n; 
-  double sumd = 0, sumd2 = 0;
+  double sumd = 0;
+  double sumd2 = 0;
   for (int i = 0, ni = results.size(); i < ni; ++i) {
       sumd  += results[i] - sum;
       sumd2 += std::pow(results[i] - sum,2);

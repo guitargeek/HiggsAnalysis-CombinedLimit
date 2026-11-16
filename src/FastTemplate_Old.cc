@@ -113,7 +113,8 @@ FastHisto2D::FastHisto2D(const TH2 &hist, bool normXonly) :
     binEdgesY_(hist.GetNbinsY()+1),
     binWidths_(size_)
 {
-    const TAxis *ax = hist.GetXaxis(), *ay = hist.GetYaxis();
+    const TAxis *ax = hist.GetXaxis();
+    const TAxis *ay = hist.GetYaxis();
     for (unsigned int ix = 0; ix < binX_; ++ix) {
         binEdgesX_[ix] = ax->GetBinLowEdge(ix+1);
     }
@@ -157,7 +158,8 @@ FastHisto2D::T FastHisto2D::IntegralWidth() const {
 
 void FastHisto2D::NormalizeXSlices() {
     for (unsigned int ix = 0, offs = 0; ix < binX_; ++ix, offs += binY_) {
-       T *values = & values_[offs], *widths = & binWidths_[offs];
+       T *values = & values_[offs];
+       T *widths = & binWidths_[offs];
        DefaultAccumulator<double> totalc = 0;
        for (unsigned int i = 0; i < binY_; ++i) totalc += values[i] * widths[i];
        double total = totalc.sum();
@@ -213,7 +215,9 @@ FastHisto3D::FastHisto3D(const TH3 &hist, bool normXonly) :
     binEdgesZ_(hist.GetNbinsZ()+1),
     binWidths_(size_)
 {
-    const TAxis *ax = hist.GetXaxis(), *ay = hist.GetYaxis(), *az = hist.GetZaxis();
+    const TAxis *ax = hist.GetXaxis();
+    const TAxis *ay = hist.GetYaxis();
+    const TAxis *az = hist.GetZaxis();
     for (unsigned int ix = 0; ix < binX_; ++ix) {
         binEdgesX_[ix] = ax->GetBinLowEdge(ix+1);
     }
@@ -268,7 +272,8 @@ FastHisto3D::T FastHisto3D::IntegralWidth() const {
 
 void FastHisto3D::NormalizeXSlices() {
     for (unsigned int ix = 0, offs = 0; ix < binX_; ++ix, offs += (binY_*binZ_)) {
-       T *values = & values_[offs], *widths = & binWidths_[offs];
+       T *values = & values_[offs];
+       T *widths = & binWidths_[offs];
        double total = 0;
        for (unsigned int i = 0; i < binY_; ++i) {
        	for (unsigned int j = 0; j < binZ_; ++j) {

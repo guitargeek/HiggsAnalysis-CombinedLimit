@@ -799,7 +799,8 @@ Double_t RooGaussStepBernstein::analyticalIntegral(Int_t code,
 
   const Int_t degree = _coefList.getSize() - 1; // n+1 polys of degree n
   
-  double integral_vals_hi[degree+1],integral_vals_lo[degree+1];
+  double integral_vals_hi[degree+1];
+  double integral_vals_lo[degree+1];
   for( int i = 0; i <= degree; ++i ) {
     // we stretch the upper bound by 10% to remove the turn-off of 
     // covolution

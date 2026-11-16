@@ -76,7 +76,8 @@ void VectorizedCBShape::fill(std::vector<Double_t> &out) const {
     double mean  = m0_->getVal();
     double alpha1 = alpha_->getVal();
     double n1 = n_->getVal();
-    double sigma = sigma_->getVal(), invw = 1/sigma;
+    double sigma = sigma_->getVal();
+    double invw = 1/sigma;
     double invn1 = 1.0/n1;
 
     out.resize(xvals_.size());
@@ -185,7 +186,8 @@ double VectorizedCBShape::getIntegral() const {
                 double invn1m1 = 1. / (n1-1.);
                 double leftpow = std::pow(n1invalpha1,-n1*invn1m1);
                 double left0 = width*std::exp(-0.5*alpha1*alpha1)*invn1m1;
-                double left1, left2;
+                double left1;
+                double left2;
 
                 if (xmax>(mean-alpha1*width)) left1 = n1invalpha1;
                 else left1 = std::pow( leftpow*(n1invalpha1 - alpha1 - thigh), 1.-n1);

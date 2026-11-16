@@ -70,7 +70,8 @@ bool ChannelCompatibilityCheck::runSpecific(RooWorkspace *w, RooStats::ModelConf
   TString satname = TString::Format("%s_freeform", sim->GetName());
   std::unique_ptr<RooSimultaneous> newsim((typeid(*sim) == typeid(RooSimultaneousOpt)) ? new RooSimultaneousOpt(satname, "", *cat) : new RooSimultaneous(satname, "", *cat)); 
   std::map<std::string,std::string> rs;
-  RooArgList minosVars, minosOneVar; if (runMinos_) minosOneVar.add(*r);
+  RooArgList minosVars;
+  RooArgList minosOneVar; if (runMinos_) minosOneVar.add(*r);
   for (int ic = 0, nc = nbins; ic < nc; ++ic) {
       cat->setBin(ic);
       RooAbsPdf *pdfi = sim->getPdf(cat->getLabel());

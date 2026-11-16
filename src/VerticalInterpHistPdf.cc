@@ -53,14 +53,16 @@ namespace {
                 if (y.numBins() != ybinning->numBins()) assert(0);
                 double xdelta = x.getMin() - xbinning->binLow(0);
                 double ydelta = y.getMin() - ybinning->binLow(0);
-                double * xarray = xbinning->array(),  * yarray = ybinning->array();
+                double * xarray = xbinning->array();
+                double * yarray = ybinning->array();
                 std::vector<double> xbins(xarray, xarray+(x.numBins()+1));
                 std::vector<double> ybins(yarray, yarray+(y.numBins()+1));
                 for (double &xe : xbins) xe += xdelta;
                 for (double &ye : ybins) ye += ydelta;
                 std::unique_ptr<TH1> hist(new TH2F("","",x.numBins(),&xbins[0],y.numBins(),&ybins[0]));
                 TH2F *h2d = static_cast<TH2F*>(hist.get()); h2d->SetDirectory(nullptr);
-                TAxis *xaxis = h2d->GetXaxis(), * yaxis = h2d->GetYaxis();
+                TAxis *xaxis = h2d->GetXaxis();
+                TAxis * yaxis = h2d->GetYaxis();
                 for (unsigned int id = 0, nd = dataHist.numEntries(); id < nd; ++id) {
                     const RooArgSet *point = dataHist.get(id);
                     double weight = dataHist.weight();
@@ -165,7 +167,8 @@ Double_t VerticalInterpHistPdf::evaluate() const
 #endif
 
   if (!_sentry.good()) syncTotal();
-  int nbin = _cacheTotal->GetNbinsX(), ibin = _cacheTotal->FindBin(_x);
+  int nbin = _cacheTotal->GetNbinsX();
+  int ibin = _cacheTotal->FindBin(_x);
   if (ibin < 1) ibin = 1;
   else if (ibin > nbin) ibin = nbin;
   return _cacheTotal->GetBinContent(ibin);
@@ -455,7 +458,8 @@ void FastVerticalInterpHistPdf::syncComponents(int dim) const {
     std::unique_ptr<TH1> histLo(pdfLo->createHistogram("", x, RooFit::Scaling(false)));
     histLo->SetDirectory(nullptr);
 
-    FastHisto hi(*histHi), lo(*histLo); 
+    FastHisto hi(*histHi);
+    FastHisto lo(*histLo); 
     //printf("Un-normalized templates for dimension %d: \n", dim);  hi.Dump(); lo.Dump();
     hi.Normalize(); lo.Normalize();
     //printf("Normalized templates for dimension %d: \n", dim);  hi.Dump(); lo.Dump();
@@ -477,7 +481,8 @@ void FastVerticalInterpHistPdf2D::syncComponents(int dim) const {
     histLo->SetDirectory(nullptr);
 #endif
 
-    FastHisto2D hi(dynamic_cast<TH2&>(*histHi), _conditional), lo(dynamic_cast<TH2&>(*histLo), _conditional); 
+    FastHisto2D hi(dynamic_cast<TH2&>(*histHi), _conditional);
+    FastHisto2D lo(dynamic_cast<TH2&>(*histLo), _conditional); 
     //printf("Un-normalized templates for dimension %d: \n", dim);  hi.Dump(); lo.Dump();
     if (_conditional) {
         hi.NormalizeXSlices(); lo.NormalizeXSlices();
@@ -501,7 +506,8 @@ void FastVerticalInterpHistPdf3D::syncComponents(int dim) const {
         pdfLo->createHistogram("", x, RooFit::YVar(y), RooFit::ZVar(z), cond, RooFit::Scaling(false)));
     histLo->SetDirectory(nullptr);
 
-    FastHisto3D hi(dynamic_cast<TH3&>(*histHi), _conditional), lo(dynamic_cast<TH3&>(*histLo), _conditional); 
+    FastHisto3D hi(dynamic_cast<TH3&>(*histHi), _conditional);
+    FastHisto3D lo(dynamic_cast<TH3&>(*histLo), _conditional); 
     //printf("Un-normalized templates for dimension %d: \n", dim);  hi.Dump(); lo.Dump();
     if (_conditional) {
         hi.NormalizeXSlices(); lo.NormalizeXSlices();
@@ -543,7 +549,8 @@ void FastVerticalInterpHistPdfBase::syncTotal(FastTemplate &cache, const FastTem
     // apply all morphs one by one
     for (int i = 0, ndim = _coefList.getSize(); i < ndim; ++i) {
         double x = _morphParams[i]->getVal();
-        double a = 0.5*x, b = smoothStepFunc(x);
+        double a = 0.5*x;
+        double b = smoothStepFunc(x);
         cache.Meld(_morphs[i].diff, _morphs[i].sum, a, b);    
         //printf("Merged transformation for dimension %d, x = %+5.3f, step = %.3f: \n", i, x, b);  cache.Dump();
     }
@@ -678,7 +685,8 @@ FastVerticalInterpHistPdfV::FastVerticalInterpHistPdfV(const FastVerticalInterpH
         nbins_ = bins.size();
         bins_.swap(bins);
         blocks_.clear();
-        int start = bins_[0], istart = 0;
+        int start = bins_[0];
+        int istart = 0;
         for (int i = 1, n = bins_.size(); i < n; ++i) {
             if (bins_[i] != bins_[i-1]+1) { 
                 blocks_.push_back(Block(istart,start,bins_[i-1]+1));
@@ -995,7 +1003,8 @@ void FastVerticalInterpHistPdf2D2::initNominal(TObject *templ) {
 
 
 void FastVerticalInterpHistPdf2::initComponent(int dim, TObject *thi, TObject *tlo) {
-    FastHisto hi, lo; 
+    FastHisto hi;
+    FastHisto lo; 
     TH1 *histHi = dynamic_cast<TH1*>(thi);
     TH1 *histLo = dynamic_cast<TH1*>(tlo);
     if (histHi && histLo) {
@@ -1017,7 +1026,8 @@ void FastVerticalInterpHistPdf2::initComponent(int dim, TObject *thi, TObject *t
     initMorph(_morphs[dim], _cacheNominal, lo, hi);
 }
 void FastVerticalInterpHistPdf2D2::initComponent(int dim, TObject *thi, TObject *tlo) {
-    FastHisto2D hi, lo; 
+    FastHisto2D hi;
+    FastHisto2D lo; 
     TH2 *histHi = dynamic_cast<TH2*>(thi);
     TH2 *histLo = dynamic_cast<TH2*>(tlo);
     if (histHi && histLo) {
@@ -1095,7 +1105,8 @@ void FastVerticalInterpHistPdf2Base::syncTotal(FastTemplate &cache, const FastTe
     // apply all morphs one by one
     for (int i = 0, ndim = _coefList.getSize(); i < ndim; ++i) {
         double x = _morphParams[i]->getVal();
-        double a = 0.5*x, b = smoothStepFunc(x);
+        double a = 0.5*x;
+        double b = smoothStepFunc(x);
         cache.Meld(_morphs[i].diff, _morphs[i].sum, a, b);    
         //printf("Merged transformation for dimension %d, x = %+5.3f, step = %.3f: \n", i, x, b);  cache.Dump();
     }
@@ -1197,7 +1208,8 @@ FastVerticalInterpHistPdf2V::FastVerticalInterpHistPdf2V(const FastVerticalInter
         nbins_ = bins.size();
         bins_.swap(bins);
         blocks_.clear();
-        int start = bins_[0], istart = 0;
+        int start = bins_[0];
+        int istart = 0;
         for (int i = 1, n = bins_.size(); i < n; ++i) {
             if (bins_[i] != bins_[i-1]+1) { 
                 blocks_.push_back(Block(istart,start,bins_[i-1]+1));

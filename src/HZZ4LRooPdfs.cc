@@ -98,8 +98,16 @@ namespace RooFit{
 		Double_t Width = 0;
 		Int_t i = 0;
 		Double_t closestMass = 0;
-		Double_t tmpLow1, tmpHigh1, deltaX, deltaY1, slope1;
-		Double_t deltaY2, tmpLow2, tmpHigh2, slope2, step;
+		Double_t tmpLow1;
+		Double_t tmpHigh1;
+		Double_t deltaX;
+		Double_t deltaY1;
+		Double_t slope1;
+		Double_t deltaY2;
+		Double_t tmpLow2;
+		Double_t tmpHigh2;
+		Double_t slope2;
+		Double_t step;
 		
 		// If ID is unavailable return -1
 		if(ID > 25 || ID < 0){return -1;}
@@ -185,8 +193,16 @@ double HiggsWidthSM4(int ID, double mHrequested){
   double Width = 0;
   int i = 0;
   double closestMass = 0;
-  double tmpLow1, tmpHigh1, deltaX, deltaY1, slope1;
-  double deltaY2, tmpLow2, tmpHigh2, slope2, step;
+  double tmpLow1;
+  double tmpHigh1;
+  double deltaX;
+  double deltaY1;
+  double slope1;
+  double deltaY2;
+  double tmpLow2;
+  double tmpHigh2;
+  double slope2;
+  double step;
 
 
   // If ID is unavailable return -1                                           
@@ -286,7 +302,9 @@ double HiggsWidthSM4(int ID, double mHrequested){
 	Double_t rho(Double_t r, TString proc)
 	{
 		
-		Double_t a = 0,b = 0,c = 0;
+		Double_t a = 0;
+		Double_t b = 0;
+		Double_t c = 0;
 		if(proc == "4mu"){ a=.608398; b=.06931; c=.10224;}
 		if(proc == "4e"){ a=1.901196; b=.074754; c=.091285;}
 		if(proc == "2e2mu"){ a=1.243678; b=.072587; c=.096782;}
@@ -354,7 +372,8 @@ double HiggsWidthSM4(int ID, double mHrequested){
 	Double_t Sigma(Double_t mH, TString proc)
 	{
 		
-		Double_t a = 0,b = 0;
+		Double_t a = 0;
+		Double_t b = 0;
 		
 		if(proc == "4mu")
 		{
@@ -957,7 +976,8 @@ f0("f0",this,other.f0)
 double RooBetaFunc_v2::evaluate() const 
 { 
 	
-	double mZDistribution, acceptance;
+	double mZDistribution;
+	double acceptance;
 	
 	//================= mZ Distribution =================
 	double beta= (1-(mZstar-mZ)*(mZstar-mZ)/(mZZ*mZZ))*(1-(mZstar+mZ)*(mZstar+mZ)/(mZZ*mZZ));
@@ -1019,9 +1039,30 @@ double Roo4lMasses2D_Bkg::UnitStep(double arg) const
 double Roo4lMasses2D_Bkg::evaluate() const 
 { 
 	
-	double Gamma=0, mZ=0, a0=0, a1=0, a2=0, a3=0, Gamma0=0, m0=0, f=0, f0=0;
-	double a0_bkgd=0, a1_bkgd=0, a2_bkgd=0, a3_bkgd=0, a4_bkgd=0, a5_bkgd=0, a6_bkgd=0, a7_bkgd=0;
-	double a8_bkgd=0, a9_bkgd=0, a10_bkgd=0, a11_bkgd=0, a12_bkgd=0, a13_bkgd=0;
+	double Gamma=0;
+	double mZ=0;
+	double a0=0;
+	double a1=0;
+	double a2=0;
+	double a3=0;
+	double Gamma0=0;
+	double m0=0;
+	double f=0;
+	double f0=0;
+	double a0_bkgd=0;
+	double a1_bkgd=0;
+	double a2_bkgd=0;
+	double a3_bkgd=0;
+	double a4_bkgd=0;
+	double a5_bkgd=0;
+	double a6_bkgd=0;
+	double a7_bkgd=0;
+	double a8_bkgd=0;
+	double a9_bkgd=0;
+	double a10_bkgd=0;
+	double a11_bkgd=0;
+	double a12_bkgd=0;
+	double a13_bkgd=0;
 	
 	a2 = 0.; a3 = 0.;
 	if (channelVal == 1.){
@@ -1154,7 +1195,8 @@ double Roo4lMasses2D_Bkg::evaluate() const
 	double ZZshape = (.5+.5*TMath::Erf((mZZ-a0_bkgd)/a1_bkgd))*(a3_bkgd/(1+exp((mZZ-a0_bkgd)/a2_bkgd)))+(.5+.5*TMath::Erf((mZZ-a4_bkgd)/a5_bkgd))*(a7_bkgd/(1+exp((mZZ-a4_bkgd)/a6_bkgd))+a9_bkgd/(1+exp((mZZ-a4_bkgd)/a8_bkgd)))+(.5+.5*TMath::Erf((mZZ-a10_bkgd)/a11_bkgd))*(a13_bkgd/(1+exp((mZZ-a10_bkgd)/a12_bkgd)) );
 	
 	
-	double mZDistribution, acceptance;
+	double mZDistribution;
+	double acceptance;
 	
 	//================= mZ Distribution =================
 	double beta= (1-(mZstar-mZ)*(mZstar-mZ)/(mZZ*mZZ))*(1-(mZstar+mZ)*(mZstar+mZ)/(mZZ*mZZ));
@@ -1261,9 +1303,26 @@ double Roo4lMasses2D_BkgGGZZ::UnitStep(double arg) const
 double Roo4lMasses2D_BkgGGZZ::evaluate() const 
 { 
 	
-	double Gamma=0, mZ=0, a0=0, a1=0, a2=0, a3=0, Gamma0=0, m0=0, f=0, f0=0;
-	double a0_bkgd=0, a1_bkgd=0, a2_bkgd=0, a3_bkgd=0, a4_bkgd=0, a5_bkgd=0, a6_bkgd=0, a7_bkgd=0;
-	double a8_bkgd=0, a9_bkgd=0;//, a10_bkgd=0, a11_bkgd=0, a12_bkgd=0, a13_bkgd=0;
+	double Gamma=0;
+	double mZ=0;
+	double a0=0;
+	double a1=0;
+	double a2=0;
+	double a3=0;
+	double Gamma0=0;
+	double m0=0;
+	double f=0;
+	double f0=0;
+	double a0_bkgd=0;
+	double a1_bkgd=0;
+	double a2_bkgd=0;
+	double a3_bkgd=0;
+	double a4_bkgd=0;
+	double a5_bkgd=0;
+	double a6_bkgd=0;
+	double a7_bkgd=0;
+	double a8_bkgd=0;
+	double a9_bkgd=0;//, a10_bkgd=0, a11_bkgd=0, a12_bkgd=0, a13_bkgd=0;
 	
 	a2 = 0.; a3 = 0.;
 	if (channelVal == 1.){
@@ -1341,7 +1400,8 @@ double Roo4lMasses2D_BkgGGZZ::evaluate() const
 	double ZZshape = (.5+.5*TMath::Erf((mZZ-a0_bkgd)/a1_bkgd))*(a3_bkgd/(1+exp((mZZ-a0_bkgd)/a2_bkgd)))+(.5+.5*TMath::Erf((mZZ-a4_bkgd)/a5_bkgd))*(a7_bkgd/(1+exp((mZZ-a4_bkgd)/a6_bkgd))+a9_bkgd/(1+exp((mZZ-a4_bkgd)/a8_bkgd)));
 	
 	
-	double mZDistribution, acceptance;
+	double mZDistribution;
+	double acceptance;
 	
 	//================= mZ Distribution =================
 	double beta= (1-(mZstar-mZ)*(mZstar-mZ)/(mZZ*mZZ))*(1-(mZstar+mZ)*(mZstar+mZ)/(mZZ*mZZ));
@@ -1468,7 +1528,9 @@ CBn("CBn",this,other.CBn)
 double Roo4lMasses2D::evaluate() const 
 { 
 	double mZstarDistribution;
-	double Numerator,Denominator,beta;
+	double Numerator;
+	double Denominator;
+	double beta;
 	beta = (1-(mZstar-mZ)*(mZstar-mZ)/(mZZ*mZZ))*(1-(mZstar+mZ)*(mZstar+mZ)/(mZZ*mZZ));
 	
 	if(beta<0.0) return 1e-12;
@@ -2607,8 +2669,12 @@ Double_t RooCPSHighMassGGH::interpolateMatrix(const Double_t matrix[][5] , const
   Double_t cprimes[nCPrime] = {0.2,0.4,0.6,0.8,1.0};
 
   Double_t f=0;
-  Double_t x1=0,x2=0,y1=0,y2=0;
-  Double_t dx,dy;
+  Double_t x1=0;
+  Double_t x2=0;
+  Double_t y1=0;
+  Double_t y2=0;
+  Double_t dx;
+  Double_t dy;
   // std::cout << "[RooCPSHighMassGGH::interpolateMatrix] DEBUG: declaring stepX, stepY, lowX, lowY" << std::endl; 
   Double_t stepX = masses[1]-masses[0];
   Double_t stepY = cprimes[1]-cprimes[0];
@@ -2715,8 +2781,11 @@ Double_t RooCPSHighMassGGH::getBeta(const Double_t& mass, const Double_t& cprime
 
 
 Double_t RooCPSHighMassGGH::Spline(Double_t xx) const{
-   const int fNp = 20, fKstep = 0;
-   const double fDelta = -1, fXmin = 200, fXmax = 2150;
+   const int fNp = 20;
+   const int fKstep = 0;
+   const double fDelta = -1;
+   const double fXmin = 200;
+   const double fXmax = 2150;
    const auto& coefficients = gghSplineCoefficients;
    const auto& fX = coefficients.at(0);
    const auto& fY = coefficients.at(1);
@@ -2734,7 +2803,8 @@ Double_t RooCPSHighMassGGH::Spline(Double_t xx) const{
        klow = int((xx-fXmin)/fDelta);
        if (klow < fNp-1) klow = fNp-1;
      } else {
-       int khig=fNp-1, khalf;
+       int khig=fNp-1;
+       int khalf;
        // Non equidistant knots, binary search
        while(khig-klow>1)
          if(xx>fX[khalf=(klow+khig)/2]) klow=khalf;
@@ -2862,8 +2932,12 @@ Double_t RooBWHighMassGGH::interpolateMatrix(const Double_t matrix[][5] , const 
   Double_t cprimes[nCPrime] = {0.2,0.4,0.6,0.8,1.0};
 
   Double_t f=0;
-  Double_t x1=0,x2=0,y1=0,y2=0;
-  Double_t dx,dy;
+  Double_t x1=0;
+  Double_t x2=0;
+  Double_t y1=0;
+  Double_t y2=0;
+  Double_t dx;
+  Double_t dy;
   // std::cout << "[RooBWHighMassGGH::interpolateMatrix] DEBUG: declaring stepX, stepY, lowX, lowY" << std::endl; 
   Double_t stepX = masses[1]-masses[0];
   Double_t stepY = cprimes[1]-cprimes[0];
@@ -3074,8 +3148,12 @@ Double_t RooCPSHighMassGGHNoInterf::interpolateMatrix(const Double_t matrix[][5]
   Double_t cprimes[nCPrime] = {0.2,0.4,0.6,0.8,1.0};
 
   Double_t f=0;
-  Double_t x1=0,x2=0,y1=0,y2=0;
-  Double_t dx,dy;
+  Double_t x1=0;
+  Double_t x2=0;
+  Double_t y1=0;
+  Double_t y2=0;
+  Double_t dx;
+  Double_t dy;
   Double_t stepX = masses[1]-masses[0];
   Double_t stepY = cprimes[1]-cprimes[0];
   Double_t lowX = masses[0]-stepX/2;  //Double_t highX = masses[nMass-1]+stepX/2;
@@ -3162,8 +3240,11 @@ Double_t RooCPSHighMassGGHNoInterf::getDelta(const Double_t& mass, const Double_
 
 
 Double_t RooCPSHighMassGGHNoInterf::Spline(Double_t xx) const{
-   const int fNp = 20, fKstep = 0;
-   const double fDelta = -1, fXmin = 200, fXmax = 2150;
+   const int fNp = 20;
+   const int fKstep = 0;
+   const double fDelta = -1;
+   const double fXmin = 200;
+   const double fXmax = 2150;
    const auto& coefficients = gghSplineCoefficients;
    const auto& fX = coefficients.at(0);
    const auto& fY = coefficients.at(1);
@@ -3181,7 +3262,8 @@ Double_t RooCPSHighMassGGHNoInterf::Spline(Double_t xx) const{
        klow = int((xx-fXmin)/fDelta);
        if (klow < fNp-1) klow = fNp-1;
      } else {
-       int khig=fNp-1, khalf;
+       int khig=fNp-1;
+       int khalf;
        // Non equidistant knots, binary search
        while(khig-klow>1)
          if(xx>fX[khalf=(klow+khig)/2]) klow=khalf;
@@ -3331,8 +3413,12 @@ Double_t RooCPSHighMassVBF::interpolateMatrix(const Double_t matrix[][5] , const
   Double_t cprimes[nCPrime] = {0.2,0.4,0.6,0.8,1.0};
 
   Double_t f=0;
-  Double_t x1=0,x2=0,y1=0,y2=0;
-  Double_t dx,dy;
+  Double_t x1=0;
+  Double_t x2=0;
+  Double_t y1=0;
+  Double_t y2=0;
+  Double_t dx;
+  Double_t dy;
   // std::cout << "[RooCPSHighMassVBF::interpolateMatrix] DEBUG: declaring stepX, stepY, lowX, lowY" << std::endl; 
   Double_t stepX = masses[1]-masses[0];
   Double_t stepY = cprimes[1]-cprimes[0];
@@ -3444,8 +3530,11 @@ Double_t RooCPSHighMassVBF::Spline(Double_t xx) const{
 
   if (is8TeV){
 
-    const int fNp = 17, fKstep = 0;
-    const double fDelta = -1, fXmin = 225, fXmax = 1925;
+    const int fNp = 17;
+    const int fKstep = 0;
+    const double fDelta = -1;
+    const double fXmin = 225;
+    const double fXmax = 1925;
     const auto& coefficients = vbf8TeVSplineCoefficients;
     const auto& fX = coefficients.at(0);
     const auto& fY = coefficients.at(1);
@@ -3461,7 +3550,8 @@ Double_t RooCPSHighMassVBF::Spline(Double_t xx) const{
 	klow = int((xx-fXmin)/fDelta);
 	if (klow < fNp-1) klow = fNp-1;
       } else {
-	int khig=fNp-1, khalf;
+	int khig=fNp-1;
+	int khalf;
 	// Non equidistant knots, binary search
 	while(khig-klow>1)
 	  if(xx>fX[khalf=(klow+khig)/2]) klow=khalf;
@@ -3476,8 +3566,11 @@ Double_t RooCPSHighMassVBF::Spline(Double_t xx) const{
   } 
   else{
 
-    const int fNp = 14, fKstep = 0;
-    const double fDelta = -1, fXmin = 250, fXmax = 1950;
+    const int fNp = 14;
+    const int fKstep = 0;
+    const double fDelta = -1;
+    const double fXmin = 250;
+    const double fXmax = 1950;
     const auto& coefficients = vbf7TeVSplineCoefficients;
     const auto& fX = coefficients.at(0);
     const auto& fY = coefficients.at(1);
@@ -3493,7 +3586,8 @@ Double_t RooCPSHighMassVBF::Spline(Double_t xx) const{
 	klow = int((xx-fXmin)/fDelta);
 	if (klow < fNp-1) klow = fNp-1;
       } else {
-	int khig=fNp-1, khalf;
+	int khig=fNp-1;
+	int khalf;
 	// Non equidistant knots, binary search
 	while(khig-klow>1)
 	  if(xx>fX[khalf=(klow+khig)/2]) klow=khalf;
@@ -3599,8 +3693,12 @@ Double_t RooCPSHighMassVBFNoInterf::interpolateMatrix(const Double_t matrix[][5]
   Double_t cprimes[nCPrime] = {0.2,0.4,0.6,0.8,1.0};
 
   Double_t f=0;
-  Double_t x1=0,x2=0,y1=0,y2=0;
-  Double_t dx,dy;
+  Double_t x1=0;
+  Double_t x2=0;
+  Double_t y1=0;
+  Double_t y2=0;
+  Double_t dx;
+  Double_t dy;
   Double_t stepX = masses[1]-masses[0];
   Double_t stepY = cprimes[1]-cprimes[0];
   Double_t lowX = masses[0]-stepX/2;  //Double_t highX = masses[nMass-1]+stepX/2;
@@ -3690,8 +3788,11 @@ Double_t RooCPSHighMassVBFNoInterf::Spline(Double_t xx) const{
 
   if (is8TeV){
 
-    const int fNp = 17, fKstep = 0;
-    const double fDelta = -1, fXmin = 225, fXmax = 1925;
+    const int fNp = 17;
+    const int fKstep = 0;
+    const double fDelta = -1;
+    const double fXmin = 225;
+    const double fXmax = 1925;
     const auto& coefficients = vbf8TeVSplineCoefficients;
     const auto& fX = coefficients.at(0);
     const auto& fY = coefficients.at(1);
@@ -3707,7 +3808,8 @@ Double_t RooCPSHighMassVBFNoInterf::Spline(Double_t xx) const{
 	klow = int((xx-fXmin)/fDelta);
 	if (klow < fNp-1) klow = fNp-1;
       } else {
-	int khig=fNp-1, khalf;
+	int khig=fNp-1;
+	int khalf;
 	// Non equidistant knots, binary search
 	while(khig-klow>1)
 	  if(xx>fX[khalf=(klow+khig)/2]) klow=khalf;
@@ -3722,8 +3824,11 @@ Double_t RooCPSHighMassVBFNoInterf::Spline(Double_t xx) const{
   } 
   else{
 
-    const int fNp = 14, fKstep = 0;
-    const double fDelta = -1, fXmin = 250, fXmax = 1950;
+    const int fNp = 14;
+    const int fKstep = 0;
+    const double fDelta = -1;
+    const double fXmin = 250;
+    const double fXmax = 1950;
     const auto& coefficients = vbf7TeVSplineCoefficients;
     const auto& fX = coefficients.at(0);
     const auto& fY = coefficients.at(1);
@@ -3739,7 +3844,8 @@ Double_t RooCPSHighMassVBFNoInterf::Spline(Double_t xx) const{
 	klow = int((xx-fXmin)/fDelta);
 	if (klow < fNp-1) klow = fNp-1;
       } else {
-	int khig=fNp-1, khalf;
+	int khig=fNp-1;
+	int khalf;
 	// Non equidistant knots, binary search
 	while(khig-klow>1)
 	  if(xx>fX[khalf=(klow+khig)/2]) klow=khalf;
@@ -3834,8 +3940,11 @@ ClassImp(RooSigPlusInt)
 
 
 Double_t RooSigPlusInt::Spline(Double_t xx) const{
-   const int fNp = 20, fKstep = 0;
-   const double fDelta = -1, fXmin = 200, fXmax = 2150;
+   const int fNp = 20;
+   const int fKstep = 0;
+   const double fDelta = -1;
+   const double fXmin = 200;
+   const double fXmax = 2150;
    const auto& coefficients = gghSplineCoefficients;
    const auto& fX = coefficients.at(0);
    const auto& fY = coefficients.at(1);
@@ -3853,7 +3962,8 @@ Double_t RooSigPlusInt::Spline(Double_t xx) const{
        klow = int((xx-fXmin)/fDelta);
        if (klow < fNp-1) klow = fNp-1;
      } else {
-       int khig=fNp-1, khalf;
+       int khig=fNp-1;
+       int khalf;
        // Non equidistant knots, binary search
        while(khig-klow>1)
          if(xx>fX[khalf=(klow+khig)/2]) klow=khalf;

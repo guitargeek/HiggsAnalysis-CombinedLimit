@@ -334,7 +334,9 @@ RooFitResult *FitterAlgoBase::doFit(RooAbsPdf &pdf, RooAbsData &data, const RooA
         RooRealVar &rf = dynamic_cast<RooRealVar &>(*rfloat);
 	//if (fitwasconst)rf.setConstant(false);
 	
-        double r0 = r.getVal(), rMin = r.getMin(), rMax = r.getMax();
+        double r0 = r.getVal();
+        double rMin = r.getMin();
+        double rMax = r.getMax();
 
        if (!robustFit_) {
             if (do95_) {
@@ -632,7 +634,8 @@ double FitterAlgoBase::findCrossingNew(CascadeMinimizer &minim, RooAbsReal &nll,
         //if (hiterr) continue;
 
         // now we profile
-        double yUnprof = nll.getVal(), yCorr = yUnprof - quadCorr*std::pow(rVal-rStart,2);
+        double yUnprof = nll.getVal();
+        double yCorr = yUnprof - quadCorr*std::pow(rVal-rStart,2);
         if (!minim.improve(verbose-1))  { 
 		//fprintf(sentry.trueStdOut(), "Error: minimization failed at %s = %g\n", r.GetName(), rVal); 
 		CombineLogger::instance().log("FitterAlgoBase.cc",__LINE__,std::string(Form("[ERROR] Minimization failed at %s = %g",r.GetName(), rVal)),__func__);
@@ -648,7 +651,8 @@ double FitterAlgoBase::findCrossingNew(CascadeMinimizer &minim, RooAbsReal &nll,
 
         // if on target, return best point from linear interpolation
         if (fabs(yProf - level) < minimizerTolerance_) {
-            double w0 = fabs(yProf - level), w1 = fabs(yStart - level);
+            double w0 = fabs(yProf - level);
+            double w1 = fabs(yStart - level);
             return (w1*rVal + w0*rStart)/(w0+w1);
         }
 

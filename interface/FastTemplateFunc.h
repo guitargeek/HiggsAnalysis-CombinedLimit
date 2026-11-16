@@ -141,7 +141,10 @@ public:
   }
   Double_t analyticalIntegral(Int_t code, const char* rangeName=nullptr) const override {
     if (code==0) return evaluate();
-    U xmin, xmax, ymin, ymax;
+    U xmin;
+    U xmax;
+    U ymin;
+    U ymax;
     if (code%2==0){
       RooRealVar* var = dynamic_cast<RooRealVar*>((this->obsList).at(0));
       xmin = (U)(var->getMin(rangeName));
@@ -234,7 +237,12 @@ public:
   }
   Double_t analyticalIntegral(Int_t code, const char* rangeName=nullptr) const override {
     if (code==0) return evaluate();
-    U xmin, xmax, ymin, ymax, zmin, zmax;
+    U xmin;
+    U xmax;
+    U ymin;
+    U ymax;
+    U zmin;
+    U zmax;
     if (code%2==0){
       RooRealVar* var = dynamic_cast<RooRealVar*>((this->obsList).at(0));
       xmin = (U)(var->getMin(rangeName));

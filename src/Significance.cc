@@ -92,7 +92,8 @@ Significance::MinimizerSentry::MinimizerSentry(const std::string &minimizerAlgo,
   ROOT::Math::MinimizerOptions::SetDefaultTolerance(tolerance);
   if (minimizerAlgo.find(',') != std::string::npos) {
       size_t idx = minimizerAlgo.find(',');
-      std::string type = minimizerAlgo.substr(0,idx), algo = minimizerAlgo.substr(idx+1);
+      std::string type = minimizerAlgo.substr(0,idx);
+      std::string algo = minimizerAlgo.substr(idx+1);
       if (verbose > 1) std::cout << "Set default minimizer to " << type << ", algorithm " << algo << ", tolerance " << tolerance << std::endl;
       ROOT::Math::MinimizerOptions::SetDefaultMinimizer(type.c_str(), algo.c_str());
   } else {
@@ -156,7 +157,8 @@ bool Significance::run(RooWorkspace *w, RooStats::ModelConfig *mc_s, RooStats::M
       if (nresults < tries_) continue;
       std::sort(limits.begin(), limits.end());
       double median = (nresults % 2 ? limits[nresults/2] : 0.5*(limits[nresults/2] + limits[nresults/2+1]));
-      int noutlier = 0; double spreadIn = 0, spreadOut = 0;
+      int noutlier = 0; double spreadIn = 0;
+      double spreadOut = 0;
       for (int j = 0; j < nresults; ++j) {
         double diff = fabs(limits[j]-median)/median;
         if (diff < maxRelDeviation_) { 
@@ -309,7 +311,8 @@ double Significance::upperLimitWithMinos(RooAbsPdf &pdf, RooAbsData &data, RooRe
     int minosStat = minim.minos(RooArgSet(poi));
     if (minosStat == -1) return std::numeric_limits<double>::quiet_NaN();
     std::unique_ptr<RooFitResult> res(minim.save());
-    double muhat = poi.getVal(), limit = poi.getVal() + (lowerLimit_ ? poi.getAsymErrorLo() : poi.getAsymErrorHi());
+    double muhat = poi.getVal();
+    double limit = poi.getVal() + (lowerLimit_ ? poi.getAsymErrorLo() : poi.getAsymErrorHi());
     double nll0 = nll->getVal();
     poi.setVal(limit);
     double nll2 = nll->getVal();
@@ -338,7 +341,9 @@ std::pair<double,double> Significance::upperLimitBruteForce(RooAbsPdf &pdf, RooA
     }
     std::unique_ptr<RooFitResult> start(minim.save());
     double minnll = nll->getVal();
-    double rval = poi.getVal() + (lowerLimit_ ? -3 : +3)*poi.getError(), rlow = poi.getVal(), rhigh = lowerLimit_ ? poi.getMin() : poi.getMax();
+    double rval = poi.getVal() + (lowerLimit_ ? -3 : +3)*poi.getError();
+    double rlow = poi.getVal();
+    double rhigh = lowerLimit_ ? poi.getMin() : poi.getMax();
     if (rval >= rhigh || rval <= rlow) rval = 0.5*(rlow + rhigh);
     double target = minnll + 0.5*TMath::ChisquareQuantile(cl,1);
     //minim.setPrintLevel(verbose-2);
@@ -424,8 +429,11 @@ double Significance::significanceBruteForce(RooAbsPdf &pdf, RooAbsData &data, Ro
     }
     MinimizerSentry minimizerConfig(minimizerAlgoForBF_, minimizerToleranceForBF_);
     std::unique_ptr<RooFitResult> start(minim.save());
-    double minnll = nll->getVal(), thisnll = minnll, lastnll = thisnll;
-    double rbest = poi.getVal(), rval = rbest;
+    double minnll = nll->getVal();
+    double thisnll = minnll;
+    double lastnll = thisnll;
+    double rbest = poi.getVal();
+    double rval = rbest;
     TGraph *points = nullptr;
     if (verbose) {
         printf("  %-6s  delta(NLL)\n", poi.GetName());
@@ -509,8 +517,12 @@ double Significance::significanceFromScan(RooAbsPdf &pdf, RooAbsData &data, RooR
     }
     MinimizerSentry minimizerConfig(minimizerAlgoForBF_, minimizerToleranceForBF_);
     std::unique_ptr<RooFitResult> start(minim.save());
-    double minnll = nll->getVal(), thisnll = minnll, refnll = thisnll, maxnll = thisnll;
-    double rbest = poi.getVal(), rval = rbest;
+    double minnll = nll->getVal();
+    double thisnll = minnll;
+    double refnll = thisnll;
+    double maxnll = thisnll;
+    double rbest = poi.getVal();
+    double rval = rbest;
     TGraph *points = new TGraph(steps+1); points->SetName(Form("nll_scan_%g", mass_));
     TF1    *fit    = new TF1("fit","[0]*pow(abs(x-[1]), [2])+[3]",0,poi.getMax());
     fit->SetParNames("norm","bestfit","power","offset");

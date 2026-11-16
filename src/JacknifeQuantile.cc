@@ -133,7 +133,8 @@ void QuantileCalculator::quantiles(double quantile, bool doJacknife)
     for (int j = 0; j <= m; ++j) {
         double runningSum = 0;
         double threshold  = quantile * sumw_[j];
-        int ilow = 0, ihigh = n-1;
+        int ilow = 0;
+        int ihigh = n-1;
         for (int i = 0; i < n; ++i) {
             if ((points_[i].set == j) == doJacknife) continue; // if jacknife, cut away just one piece, otherwise cut away everything else
             //std::cout << "\t\t\t" << points_[i].x << std::endl;;

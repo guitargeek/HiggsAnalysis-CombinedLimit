@@ -446,8 +446,11 @@ bool HybridNew::runLimit(RooWorkspace *w, RooStats::ModelConfig *mc_s, RooStats:
   typedef std::pair<double,double> CLs_t;
 
   double clsTarget = 1 - cl;
-  CLs_t clsMin(1,0), clsMax(0,0), clsMid(0,0);
-  double rMin = r->getMin(), rMax = r->getMax();
+  CLs_t clsMin(1,0);
+  CLs_t clsMax(0,0);
+  CLs_t clsMid(0,0);
+  double rMin = r->getMin();
+  double rMax = r->getMax();
   limit    = 0.5*(rMax + rMin);
   limitErr = 0.5*(rMax - rMin);
   bool done = false;
@@ -504,7 +507,9 @@ bool HybridNew::runLimit(RooWorkspace *w, RooStats::ModelConfig *mc_s, RooStats:
       rMin = limitPlot_->GetX()[0];
       rMax = limitPlot_->GetX()[limitPlot_->GetN()-1];
       for (int i = 0, n = limitPlot_->GetN(); i < n; ++i) {
-          double x = limitPlot_->GetX()[i], y = limitPlot_->GetY()[i], ey = limitPlot_->GetErrorY(i);
+          double x = limitPlot_->GetX()[i];
+          double y = limitPlot_->GetY()[i];
+          double ey = limitPlot_->GetErrorY(i);
           if (verbose > 0) CombineLogger::instance().log("HybridNew.cc",__LINE__,std::string(Form("  r %.2f: %s = %6.4f +/- %6.4f\n", x, CLs_ ? "CLs" : "Pmu", y, ey)),__func__);
           if (saveGrid_) { limit = x; limitErr = ey; Combine::commitPoint(false, y); }
 	  if (y-3*max(ey,0.01) >= clsTarget) { rMin = x; clsMin = CLs_t(y,ey); }
@@ -567,7 +572,9 @@ bool HybridNew::runLimit(RooWorkspace *w, RooStats::ModelConfig *mc_s, RooStats:
           // determine point by bisection or interpolation
           limit = 0.5*(rMin+rMax); limitErr = 0.5*(rMax-rMin);
           if (algo_ == "logSecant" && clsMax.first != 0 && clsMin.first != 0) {
-              double logMin = log(clsMin.first), logMax = log(clsMax.first), logTarget = log(clsTarget);
+              double logMin = log(clsMin.first);
+              double logMax = log(clsMax.first);
+              double logTarget = log(clsTarget);
               limit = rMin + (rMax-rMin) * (logTarget - logMin)/(logMax - logMin);
               if (clsMax.second != 0 && clsMin.second != 0) {
                   limitErr = hypot((logTarget-logMax) * (clsMin.second/clsMin.first), (logTarget-logMin) * (clsMax.second/clsMax.first));
@@ -607,7 +614,8 @@ bool HybridNew::runLimit(RooWorkspace *w, RooStats::ModelConfig *mc_s, RooStats:
               }
           } else {
               if (verbose > 0) CombineLogger::instance().log("HybridNew.cc",__LINE__,"Trying to move the interval edges closer",__func__);
-              double rMinBound = rMin, rMaxBound = rMax;
+              double rMinBound = rMin;
+              double rMaxBound = rMax;
               // try to reduce the size of the interval
               while (clsMin.second == 0 || fabs(rMin - limit) > limitAccuracy(limit)) {
                 rMin = 0.5 * (rMin + limit);
@@ -661,7 +669,8 @@ bool HybridNew::runLimit(RooWorkspace *w, RooStats::ModelConfig *mc_s, RooStats:
 	}
       } else {
 
-	double rMinBound, rMaxBound; expoFit.GetRange(rMinBound, rMaxBound);
+	double rMinBound;
+	double rMaxBound; expoFit.GetRange(rMinBound, rMaxBound);
 	if (verbose) {
 	    std::cout << "\n -- HybridNew, before fit -- \n";
 	    std::cout << "Limit: " << r->GetName() << " < " << limit << " +/- " << limitErr << " [" << rMinBound << ", " << rMaxBound << "]\n";
@@ -704,7 +713,8 @@ bool HybridNew::runLimit(RooWorkspace *w, RooStats::ModelConfig *mc_s, RooStats:
       if (fullGrid_) c1->SetLogy(1);
       limitPlot_->Sort();
       limitPlot_->SetLineWidth(2);
-      double xmin = r->getMin(), xmax = r->getMax();
+      double xmin = r->getMin();
+      double xmax = r->getMax();
       for (int j = 0; j < limitPlot_->GetN(); ++j) {
         if (limitPlot_->GetY()[j] > 1.4*clsTarget || limitPlot_->GetY()[j] < 0.6*clsTarget) continue;
         xmin = std::min(limitPlot_->GetX()[j], xmin);
@@ -852,7 +862,8 @@ std::unique_ptr<RooStats::HybridCalculator> HybridNew::create(RooWorkspace *w, R
   w->loadSnapshot("clean");
   // realData_ = &data;
 
-  RooArgSet  poi(*mc_s->GetParametersOfInterest()), params(poi);
+  RooArgSet  poi(*mc_s->GetParametersOfInterest());
+  RooArgSet  params(poi);
   RooRealVar *r = dynamic_cast<RooRealVar *>(poi.first());
   double rValOriginal = ((RooAbsReal*)rVals.first())->getVal();
 
@@ -898,7 +909,8 @@ std::unique_ptr<RooStats::HybridCalculator> HybridNew::create(RooWorkspace *w, R
     }
   }
 
-  utils::CheapValueSnapshot fitMu, fitZero;
+  utils::CheapValueSnapshot fitMu;
+  utils::CheapValueSnapshot fitZero;
   std::unique_ptr<RooArgSet> paramsToFit;
 
   // Count the number of floating, non POI parameters, if there are more than 0, then we would need to fit to estimate their values for the generation ...
@@ -1030,7 +1042,8 @@ std::unique_ptr<RooStats::HybridCalculator> HybridNew::create(RooWorkspace *w, R
 
   // Create pdfs without nusiances terms, can be used for LEP tests statistics and
   // for generating toys when not generating global observables
-  RooAbsPdf *factorizedPdf_s = setup.modelConfig.GetPdf(), *factorizedPdf_b = setup.modelConfig_bonly.GetPdf();
+  RooAbsPdf *factorizedPdf_s = setup.modelConfig.GetPdf();
+  RooAbsPdf *factorizedPdf_b = setup.modelConfig_bonly.GetPdf();
   if (withSystematics && optimizeProductPdf_ && !genGlobalObs_) {
         RooArgList constraints;
         RooAbsPdf *factorizedPdf_s = utils::factorizePdf(*mc_s->GetObservables(), *mc_s->GetPdf(), constraints);
@@ -1282,14 +1295,17 @@ std::pair<double,double> HybridNew::eval(const RooStats::HypoTestResult &hcres, 
     double minimizerTolerance_  = ROOT::Math::MinimizerOptions::DefaultTolerance();
 
     if (testStat_ == "LHCFC") {
-        RooStats::SamplingDistribution * bDistribution = hcres.GetNullDistribution(), * sDistribution = hcres.GetAltDistribution();
+        RooStats::SamplingDistribution * bDistribution = hcres.GetNullDistribution();
+        RooStats::SamplingDistribution * sDistribution = hcres.GetAltDistribution();
         const std::vector<Double_t> & bdist   = bDistribution->GetSamplingDistribution();
         const std::vector<Double_t> & bweight = bDistribution->GetSampleWeights();
         const std::vector<Double_t> & sdist   = sDistribution->GetSamplingDistribution();
         const std::vector<Double_t> & sweight = sDistribution->GetSampleWeights();
         Double_t data =  hcres.GetTestStatisticData();
-        std::vector<Double_t> absbdist(bdist.size()), abssdist(sdist.size());
-        std::vector<Double_t> absbweight(bweight), abssweight(sweight);
+        std::vector<Double_t> absbdist(bdist.size());
+        std::vector<Double_t> abssdist(sdist.size());
+        std::vector<Double_t> absbweight(bweight);
+        std::vector<Double_t> abssweight(sweight);
         Double_t absdata;
         if (rule_ == "FC") {
             for (int i = 0, n = absbdist.size(); i < n; ++i) absbdist[i] = fabs(bdist[i]);
@@ -1344,7 +1360,8 @@ void HybridNew::applyExpectedQuantile(RooStats::HypoTestResult &hcres) {
   }
 }
 void HybridNew::applyClsQuantile(RooStats::HypoTestResult &hcres) {
-    RooStats::SamplingDistribution * bDistribution = hcres.GetNullDistribution(), * sDistribution = hcres.GetAltDistribution();
+    RooStats::SamplingDistribution * bDistribution = hcres.GetNullDistribution();
+    RooStats::SamplingDistribution * sDistribution = hcres.GetAltDistribution();
     const std::vector<Double_t> & bdist   = bDistribution->GetSamplingDistribution();
     const std::vector<Double_t> & bweight = bDistribution->GetSampleWeights();
     const std::vector<Double_t> & sdist   = sDistribution->GetSamplingDistribution();
@@ -1355,7 +1372,8 @@ void HybridNew::applyClsQuantile(RooStats::HypoTestResult &hcres) {
     timer.Start();
     std::vector<std::pair<double,double> > bcumul; bcumul.reserve(bdist.size());
     std::vector<std::pair<double,double> > scumul; scumul.reserve(sdist.size());
-    double btot = 0, stot = 0;
+    double btot = 0;
+    double stot = 0;
     for (std::vector<Double_t>::const_iterator it = bdist.begin(), ed = bdist.end(), itw = bweight.begin(); it != ed; ++it, ++itw) {
         bcumul.push_back(std::pair<double,double>(*it, *itw));
         btot += *itw;
@@ -1364,7 +1382,9 @@ void HybridNew::applyClsQuantile(RooStats::HypoTestResult &hcres) {
         scumul.push_back(std::pair<double,double>(*it, *itw));
         stot += *itw;
     }
-    double sinv = 1.0/stot, binv = 1.0/btot, runningSum;
+    double sinv = 1.0/stot;
+    double binv = 1.0/btot;
+    double runningSum;
     // now compute integral distribution of Q(s+b data) so that we can quickly compute the CL_{s+b} for all test stats.
     std::sort(scumul.begin(), scumul.end());
     runningSum = 0;
@@ -1375,17 +1395,22 @@ void HybridNew::applyClsQuantile(RooStats::HypoTestResult &hcres) {
     std::sort(bcumul.begin(), bcumul.end());
     std::vector<std::pair<double,std::pair<double,double> > > xcumul; xcumul.reserve(bdist.size());
     runningSum = 0;
-    std::vector<std::pair<double,double> >::const_iterator sbegin = scumul.begin(), send = scumul.end();
+    std::vector<std::pair<double,double> >::const_iterator sbegin = scumul.begin();
+    std::vector<std::pair<double,double> >::const_iterator send = scumul.end();
     //int k = 0;
     for (std::vector<std::pair<double,double> >::const_reverse_iterator it = bcumul.rbegin(), ed = bcumul.rend(); it != ed; ++it) {
         runningSum += it->second;
         std::vector<std::pair<double,double> >::const_iterator match = std::upper_bound(sbegin, send, std::pair<double,double>(it->first, 0));
         if (match == send) {
             //std::cout << "Did not find match, for it->first == " << it->first << ", as back = ( " << scumul.back().first << " , " << scumul.back().second << " ) " << std::endl;
-            double pmu = (scumul.back().second > 0.5 ? 1.0 : 0.0), pb = runningSum*binv, cls = pmu / pb; //  pb := 1-Pb
+            double pmu = (scumul.back().second > 0.5 ? 1.0 : 0.0);
+            double pb = runningSum*binv;
+            double cls = pmu / pb; //  pb := 1-Pb
             xcumul.push_back(std::make_pair(CLs_ ? cls : pmu, *it));
         } else {
-            double pmu = match->second, pb = runningSum*binv, cls = pmu / pb;
+            double pmu = match->second;
+            double pb = runningSum*binv;
+            double cls = pmu / pb;
             //if ((++k) % 100 == 0) printf("At %+8.5f  1-Pb = %6.4f, Pmu = %6.4f, CLs =%7.4f\n", it->first, pb, pmu, cls);
             xcumul.push_back(std::make_pair(CLs_ ? cls : pmu, *it));
         }
@@ -1456,7 +1481,8 @@ RooStats::HypoTestResult * HybridNew::evalWithFork(RooStats::HybridCalculator &h
         if (!fork()) break; // spawn children (but only in the parent thread)
     }
     if (ich == fork_) { // if i'm the parent
-        int cstatus, ret;
+        int cstatus;
+        int ret;
         do {
             do { ret = waitpid(-1, &cstatus, 0); } while (ret == -1 && errno == EINTR);
         } while (ret != -1);
@@ -1666,7 +1692,8 @@ void HybridNew::updateGridData(RooWorkspace *w, RooStats::ModelConfig *mc_s, Roo
         std::vector<point> points; points.reserve(grid_.size());
         std::vector<CLs_t> values; values.reserve(grid_.size());
         for (point it = grid_.begin(), ed = grid_.end(); it != ed; ++it) { points.push_back(it); values.push_back(CLs_t(-99, -99)); }
-        int iMin = 0, iMax = points.size()-1;
+        int iMin = 0;
+        int iMax = points.size()-1;
         while (iMax-iMin > 3) {
             if (verbose > 1) std::cout << "Bisecting range [" << iMin << ", " << iMax << "]" << std::endl;
             int iMid = (iMin+iMax)/2;
@@ -1769,7 +1796,8 @@ std::pair<double,double> HybridNew::updateGridPoint(RooWorkspace *w, RooStats::M
 }
 void HybridNew::useGrid() {
     typedef std::pair<double,double> CLs_t;
-    int i = 0, n = 0;
+    int i = 0;
+    int n = 0;
     limitPlot_.reset(new TGraphErrors(1));
     for (std::map<double, RooStats::HypoTestResult *>::iterator itg = grid_.begin(), edg = grid_.end(); itg != edg; ++itg, ++i) {
         //if (itg->second->TestBit(1)) continue; What was this supposed to be protecting against?

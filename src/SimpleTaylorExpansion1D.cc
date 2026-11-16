@@ -33,7 +33,8 @@ SimpleTaylorExpansion1D::SimpleTaylorExpansion1D(const char *name, const char *t
             xvar.setVal(x0_ + 2*dx);
             double y2p = func.getVal();
             
-            double x11 = 0.5*(yp - ym), x12 = 0.5*(y2p - y2m);
+            double x11 = 0.5*(yp - ym);
+            double x12 = 0.5*(y2p - y2m);
             double x21 = ((yp  - ci_[0]) + ( ym - ci_[0]));
             double x22 = ((y2p - ci_[0]) + (y2m - ci_[0]));
             ci_[1] = (4*x11/3-x12/6)/dx;
@@ -64,7 +65,8 @@ TObject *SimpleTaylorExpansion1D::clone(const char *newname) const
 
 Double_t SimpleTaylorExpansion1D::evaluate() const {
     Double_t dx = x_ - x0_; 
-    Double_t ret = 0, dxn = 1;
+    Double_t ret = 0;
+    Double_t dxn = 1;
     for (unsigned int i = 0; i <= MaxOrder; ++i) {
         ret += ci_[i] * dxn;
         dxn *= dx;

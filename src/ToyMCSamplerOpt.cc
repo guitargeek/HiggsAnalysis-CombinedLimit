@@ -389,7 +389,8 @@ toymcoptutils::SimPdfGenInfo::generate(RooRealVar *&weightVar, const RooDataSet*
         }
         if (copyData_) {
             //// slower but safer solution
-            RooArgSet vars(observables_), varsPlusWeight(observables_); 
+            RooArgSet vars(observables_);
+            RooArgSet varsPlusWeight(observables_); 
             if (weightVar) varsPlusWeight.add(*weightVar);
             ret = new RooDataSet(retName, "", varsPlusWeight, RooFit::WeightVar(weightVar ? weightVar->GetName() : nullptr));
             RooAbsArg::setDirtyInhibit(true); // don't propagate dirty flags while filling histograms 
@@ -426,7 +427,8 @@ toymcoptutils::SimPdfGenInfo::generateAsimov(RooRealVar *&weightVar, int verbose
             data = pdfs_[i]->generateAsimov(weightVar,1.,verbose); 
         }
         if (copyData_) { 
-            RooArgSet vars(observables_), varsPlusWeight(observables_); varsPlusWeight.add(*weightVar);
+            RooArgSet vars(observables_);
+            RooArgSet varsPlusWeight(observables_); varsPlusWeight.add(*weightVar);
             ret = new RooDataSet(retName, "", varsPlusWeight, RooFit::WeightVar(weightVar ? weightVar->GetName() : nullptr));
             RooAbsArg::setDirtyInhibit(true); // don't propagate dirty flags while filling histograms 
             for (std::map<std::string,RooAbsData*>::iterator it = datasetPieces_.begin(), ed = datasetPieces_.end(); it != ed; ++it) {
@@ -464,7 +466,8 @@ toymcoptutils::SimPdfGenInfo::generateEpsilon(RooRealVar *&weightVar)
             data = pdfs_[i]->generateAsimov(weightVar, 1e-9); 
         }
         if (copyData_) { 
-            RooArgSet vars(observables_), varsPlusWeight(observables_); varsPlusWeight.add(*weightVar);
+            RooArgSet vars(observables_);
+            RooArgSet varsPlusWeight(observables_); varsPlusWeight.add(*weightVar);
             ret = new RooDataSet(retName, "", varsPlusWeight, RooFit::WeightVar(weightVar ? weightVar->GetName() : nullptr));
             for (std::map<std::string,RooAbsData*>::iterator it = datasetPieces_.begin(), ed = datasetPieces_.end(); it != ed; ++it) {
                 cat_->setLabel(it->first.c_str());
@@ -550,7 +553,8 @@ RooDataSet* ToyMCSamplerOpt::GetSamplingDistributionsSingleWorker(RooArgSet& par
       // TODO: change this treatment to keep track of all values so that the threshold
       // for adaptive sampling is counted for all distributions and not just the
       // first one.
-      Double_t valueFirst = -999.0, weight = 1.0;
+      Double_t valueFirst = -999.0;
+      Double_t weight = 1.0;
 
       // set variables to requested parameter point
       *allVars = *saveAll; // important for example for SimpleLikelihoodRatioTestStat

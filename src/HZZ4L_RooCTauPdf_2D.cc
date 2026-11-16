@@ -71,7 +71,8 @@ Double_t HZZ4L_RooCTauPdf_2D::interpolateBin() const{
 	int bincode = findNeighborBins();
 	double gridsize = (ctau_max-ctau_min)/(nbins_ctau-1);
 	Double_t result = 1.0e-100;
-	int lowbin,highbin;
+	int lowbin;
+	int highbin;
 	if (bincode < 0){
 		lowbin = 0; highbin = 1;
 	}
@@ -94,7 +95,8 @@ Double_t HZZ4L_RooCTauPdf_2D::interpolateIntegral() const{
 	int bincode = findNeighborBins();
 	double gridsize = (ctau_max-ctau_min)/(nbins_ctau-1);
 	Double_t result = 1.0e-100;
-	int lowbin,highbin;
+	int lowbin;
+	int highbin;
 	if (bincode < 0){
 		lowbin = 0; highbin = 1;
 	}

@@ -388,7 +388,8 @@ inline Double_t parametricMorphFunction(const int j,
   // almost certainly a faster way to do this in a vectorized way ....
   for (int i = 0; i < ndim; ++i) {
     double x = morphCoeffs[i];
-    double a = 0.5 * x, b = smoothStepFunc(x, smoothRegion);
+    double a = 0.5 * x;
+    double b = smoothStepFunc(x, smoothRegion);
     morphScale *= 1 + (1. / parVal) * a * (morphDiffs[j * nMorphs + i] + b * morphSums[j * nMorphs + i]);
   }
   return morphScale;

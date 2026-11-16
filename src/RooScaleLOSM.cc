@@ -73,7 +73,9 @@ TObject* RooScaleHGamGamLOSM::clone(const char *newname) const
 
 Double_t RooScaleHGamGamLOSM::evaluate() const
 {
-	const double ct = ct_, cb = cb_, cW = cW_;
+	const double ct = ct_;
+	const double cb = cb_;
+	const double cW = cW_;
 
 	const double C_deviated = norm(ct*At_ + cb*Ab_ + cW*AW_);
 
@@ -110,7 +112,8 @@ TObject* RooScaleHGluGluLOSM::clone(const char *newname) const
 
 Double_t RooScaleHGluGluLOSM::evaluate() const
 {
-	const double ct = ct_, cb = cb_;
+	const double ct = ct_;
+	const double cb = cb_;
 
 	const double C_deviated = norm(ct*At_ + cb*Ab_);
 
@@ -145,7 +148,10 @@ TObject* RooScaleHGamGamLOSMPlusX::clone(const char *newname) const
 
 Double_t RooScaleHGamGamLOSMPlusX::evaluate() const
 {
-	const double ct = ct_, cb = cb_, cW = cW_, X =  X_;
+	const double ct = ct_;
+	const double cb = cb_;
+	const double cW = cW_;
+	const double X =  X_;
 
 	const double C_deviated = norm(ct*At_ + cb*Ab_ + cW*AW_ + X);
 
@@ -179,7 +185,9 @@ TObject* RooScaleHGluGluLOSMPlusX::clone(const char *newname) const
 
 Double_t RooScaleHGluGluLOSMPlusX::evaluate() const
 {
-	const double ct = ct_, cb = cb_, X =  X_;
+	const double ct = ct_;
+	const double cb = cb_;
+	const double X =  X_;
 
 	const double C_deviated = norm(ct*At_ + cb*Ab_ + X);
 

@@ -17,7 +17,8 @@ RooSpline1D::RooSpline1D(const char *name, const char *title, RooAbsReal &xvar, 
         for(int lineno=0; std::getline(file, line); lineno++){
         	if(lineno<skipLines) continue;
             std::istringstream ss(line);
-            std::istream_iterator<std::string > begin(ss), end;
+            std::istream_iterator<std::string > begin(ss);
+            std::istream_iterator<std::string > end;
             std::vector<std::string> tokens(begin, end);
 
             x_.push_back(atof(tokens[xcol].c_str()));

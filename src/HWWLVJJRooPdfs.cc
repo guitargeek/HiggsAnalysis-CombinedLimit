@@ -222,7 +222,8 @@ Int_t RooPowerExpPdf::getAnalyticalIntegral(RooArgSet& allVars, RooArgSet& analV
 double ExpIntegralE(double p, double x) {
     
   // std::cout << "ExpIntegralE(" << p << "," << x << ")\n";
-  double sum(0.), term(10.);
+  double sum(0.);
+  double term(10.);
   int k(0);
   do {
     term = TMath::Exp(k*TMath::Log(x)-TMath::LnGamma(2-p+k));
@@ -486,7 +487,8 @@ Int_t RooExpPoly::getAnalyticalIntegral(RooArgSet& allVars, RooArgSet& analVars,
 Double_t RooExpPoly::analyticalIntegral(Int_t code, 
 					const char *rangeName) const {
   assert(code);
-  double coef1(0.), coef2(0.);
+  double coef1(0.);
+  double coef2(0.);
   static Double_t const rootpi(TMath::Sqrt(TMath::Pi()));
   
   Double_t val(x.max(rangeName) - x.min(rangeName));

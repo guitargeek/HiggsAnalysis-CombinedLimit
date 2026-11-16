@@ -168,7 +168,14 @@ double RooCB::evaluate() const
 
    Int_t code=0;
 
-   RooArgSet deps_x, deps_xp, deps_mean, deps_width, deps_alpha1, deps_alpha2, deps_n1, deps_n2;
+   RooArgSet deps_x;
+   RooArgSet deps_xp;
+   RooArgSet deps_mean;
+   RooArgSet deps_width;
+   RooArgSet deps_alpha1;
+   RooArgSet deps_alpha2;
+   RooArgSet deps_n1;
+   RooArgSet deps_n2;
    RooRealVar* rrv_x = dynamic_cast<RooRealVar*>(x.absArg()); if (!rrv_x && x.absArg()) x.absArg()->leafNodeServerList(&deps_x, nullptr, true);
    RooRealVar* rrv_xp = dynamic_cast<RooRealVar*>(xp.absArg()); if (!rrv_xp && xp.absArg()) xp.absArg()->leafNodeServerList(&deps_xp, nullptr, true);
    RooRealVar* rrv_mean = dynamic_cast<RooRealVar*>(mean.absArg()); if (!rrv_mean) mean.absArg()->leafNodeServerList(&deps_mean, nullptr, true);

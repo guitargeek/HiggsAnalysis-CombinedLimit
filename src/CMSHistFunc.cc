@@ -814,7 +814,8 @@ void CMSHistFunc::prepareInterpCache(Cache& c1,
 
   Int_t nx3 = 0;
   // Double_t x1, x2, x;
-  Double_t x1, x2;
+  Double_t x1;
+  Double_t x2;
   x1 = cache_.GetEdge(ix1);
   x2 = cache_.GetEdge(ix2);
 

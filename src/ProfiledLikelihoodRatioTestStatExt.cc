@@ -286,7 +286,8 @@ std::vector<Double_t> ProfiledLikelihoodTestStatOpt::Evaluate(RooAbsData& data, 
         // Prepare for constrained minimization (numerator)
         r->setVal(initialR); 
         r->setConstant(true);
-        double thisNLL = nullNLL, sign = +1.0;
+        double thisNLL = nullNLL;
+        double sign = +1.0;
     	int nfloatingpars = utils::countFloating(*(nll_->getParameters( (const RooArgSet*) nullptr)));
         if (initialR == 0 || oneSided_ != oneSidedDef || bestFitR < initialR) { 
             // must do constrained fit (if there's something to fit besides XS)

@@ -44,9 +44,12 @@ int main(int argc, char **argv) {
   gEnv->SetValue("RooFit.Banner", 0);
 
   string name;
-  string datacard, dataset, dataMapName;
+  string datacard;
+  string dataset;
+  string dataMapName;
   float iMass;
-  string whichMethod, whichHintMethod;
+  string whichMethod;
+  string whichHintMethod;
   int runToys;
   int pickToy;
   int    seed;
@@ -122,7 +125,8 @@ int main(int argc, char **argv) {
   desc.add(combiner.miscOptions());
   po::positional_options_description p;
   p.add("datacard", -1);
-  po::variables_map vm, vm0;
+  po::variables_map vm;
+  po::variables_map vm0;
  
   
   // parse the first time, using only common options and allow unregistered options 
@@ -278,7 +282,10 @@ int main(int argc, char **argv) {
 
   TFile *test = new TFile(fileName, "RECREATE"); outputFile = test;
   TTree *t = new TTree("limit", "limit");
-  int syst, iToy, iSeed, iChannel; 
+  int syst;
+  int iToy;
+  int iSeed;
+  int iChannel; 
   double mass = 0.0;
   double limit = 0.0;
   double limitErr = 0.0;

@@ -224,7 +224,8 @@ FastTemplate RooMorphingPdf::morph(FastTemplate const& hist1,
   //       Check that they make sense. If par1=par2 then we can choose any
   //       valid set of wt1,wt2 so why not take the average?
 
-  Double_t wt1, wt2;
+  Double_t wt1;
+  Double_t wt2;
   if (par2 != par1) {
     wt1 = 1. - (parinterp - par1) / (par2 - par1);
     wt2 = 1. + (parinterp - par2) / (par2 - par1);
@@ -366,7 +367,9 @@ FastTemplate RooMorphingPdf::morph(FastTemplate const& hist1,
   // ....The first interpolated point should be computed now.
 
   Int_t nx3 = 0;
-  Double_t x1, x2, x;
+  Double_t x1;
+  Double_t x2;
+  Double_t x;
   x1 = morph_axis_.GetBinLowEdge(ix1 + 1);
   x2 = morph_axis_.GetBinLowEdge(ix2 + 1);
   x = wt1 * x1 + wt2 * x2;

@@ -271,7 +271,10 @@ bool MultiDimFit::runSpecific(RooWorkspace *w, RooStats::ModelConfig *mc_s, RooS
     if (autoRange_ > 0) {
         CombineLogger::instance().log("MultiDimFit.cc",__LINE__,std::string(Form("Adjusting range of POIs to +/- %.3f standard deviations",autoRange_)),__func__);
         for (int i = 0, n = poi_.size(); i < n; ++i) {
-            double val = poiVars_[i]->getVal(), err = poiVars_[i]->getError(), min0 = poiVars_[i]->getMin(), max0 = poiVars_[i]->getMax();
+            double val = poiVars_[i]->getVal();
+            double err = poiVars_[i]->getError();
+            double min0 = poiVars_[i]->getMin();
+            double max0 = poiVars_[i]->getMax();
             double min1 = std::max(min0, val - autoRange_ * err);
             double max1 = std::min(max0, val + autoRange_ * err);
             CombineLogger::instance().log("MultiDimFit.cc",__LINE__,std::string(Form("%s: %.3f +/- %.3f [%.5f,%.5f] ==> [%.5f,%.5f] ",poi_[i].c_str(), val, err, min0, max0, min1, max1)),__func__);
@@ -281,7 +284,9 @@ bool MultiDimFit::runSpecific(RooWorkspace *w, RooStats::ModelConfig *mc_s, RooS
     if (centeredRange_ > 0) {
         CombineLogger::instance().log("MultiDimFit.cc",__LINE__,std::string(Form("Adjusting range of POIs to +/- %f",centeredRange_)),__func__);
         for (int i = 0, n = poi_.size(); i < n; ++i) {
-            double val = poiVars_[i]->getVal(), min0 = poiVars_[i]->getMin(), max0 = poiVars_[i]->getMax();
+            double val = poiVars_[i]->getVal();
+            double min0 = poiVars_[i]->getMin();
+            double max0 = poiVars_[i]->getMax();
             double min1 = std::max(min0, val - centeredRange_);
             double max1 = std::min(max0, val + centeredRange_);
             CombineLogger::instance().log("MultiDimFit.cc",__LINE__,std::string(Form("%s: %.3f [%.5f,%.5f] ==> [%.5f,%.5f] ",poi_[i].c_str(), val, min0, max0, min1, max1)),__func__);
@@ -602,7 +607,9 @@ void MultiDimFit::doGrid(RooWorkspace *w, RooAbsReal &nll)
 
     if (startFromPreFit_) w->loadSnapshot("clean");
 
-    std::vector<double> p0(n), pmin(n), pmax(n);
+    std::vector<double> p0(n);
+    std::vector<double> pmin(n);
+    std::vector<double> pmax(n);
     for (unsigned int i = 0; i < n; ++i) {
         p0[i] = poiVars_[i]->getVal();
         pmin[i] = poiVars_[i]->getMin();
@@ -745,7 +752,8 @@ void MultiDimFit::doGrid(RooWorkspace *w, RooAbsReal &nll)
         //}
 
         // get number of points per axis
-        unsigned int nX, nY;
+        unsigned int nX;
+        unsigned int nY;
         if (pointsPerPoi.size() == 0) {
             // same number of points per axis ("old" behavior)
             unsigned int sqrn = ceil(sqrt(double(points_)));
@@ -758,7 +766,10 @@ void MultiDimFit::doGrid(RooWorkspace *w, RooAbsReal &nll)
         unsigned int nTotal = nX * nY;
 
         // determine grid variables
-        double deltaX, deltaY, spacingOffsetX, spacingOffsetY;
+        double deltaX;
+        double deltaY;
+        double spacingOffsetX;
+        double spacingOffsetY;
         if (nX == 1) {
             deltaX = 0;
             spacingOffsetX = 0;
@@ -846,7 +857,8 @@ void MultiDimFit::doGrid(RooWorkspace *w, RooAbsReal &nll)
         }
         unsigned int nTotal = 1;
         for (auto p : axis_points) nTotal *= p;
-        unsigned int ipoint = 0, nprint = ceil(0.005*nTotal);
+        unsigned int ipoint = 0;
+        unsigned int nprint = ceil(0.005*nTotal);
 
         // Create permutations
         std::vector<std::vector<int> > permutations = utils::generateCombinations(axis_points);
@@ -1029,8 +1041,10 @@ void MultiDimFit::doContour2D(RooWorkspace *, RooAbsReal &nll)
 
     // make a box
     doBox(nll, cl, "box");
-    double xMin = xv->getMin("box"), xMax = xv->getMax("box");
-    double yMin = yv->getMin("box"), yMax = yv->getMax("box");
+    double xMin = xv->getMin("box");
+    double xMax = xv->getMax("box");
+    double yMin = yv->getMin("box");
+    double yMax = yv->getMax("box");
 
     verbose--; // reduce verbosity to avoid messages from findCrossing
     // ===== Get relative min/max of x for several fixed y values =====
@@ -1039,7 +1053,8 @@ void MultiDimFit::doContour2D(RooWorkspace *, RooAbsReal &nll)
         if (j < firstPoint_) continue;
         if (j > lastPoint_)  break;
         // take points uniformly spaced in polar angle in the case of a perfect circle
-        double yc = 0.5*(yMax + yMin), yr = 0.5*(yMax - yMin);
+        double yc = 0.5*(yMax + yMin);
+        double yr = 0.5*(yMax - yMin);
         yv->setVal( yc + yr * std::cos(j*M_PI/double(points_)) );
         // ===== Get the best fit x (could also do without profiling??) =====
         xv->setConstant(false);  xv->setVal(x0);
@@ -1127,7 +1142,8 @@ void MultiDimFit::doStitch2D(RooWorkspace *, RooAbsReal &nll)
 
 void MultiDimFit::doBox(RooAbsReal &nll, double cl, const char *name, bool commitPoints)  {
     unsigned int n = poi_.size();
-    double nll0 = nll.getVal(), threshold = nll0 + 0.5*ROOT::Math::chisquared_quantile_c(1-cl,n+nOtherFloatingPoi_);
+    double nll0 = nll.getVal();
+    double threshold = nll0 + 0.5*ROOT::Math::chisquared_quantile_c(1-cl,n+nOtherFloatingPoi_);
 
     std::vector<double> p0(n);
     for (unsigned int i = 0; i < n; ++i) {

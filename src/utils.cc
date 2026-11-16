@@ -74,7 +74,8 @@ RooArgList utils::factors(const RooProduct &prod) {
 #endif
 
 void utils::printRDH(RooAbsData *data) {
-  std::vector<std::string> varnames, catnames;
+  std::vector<std::string> varnames;
+  std::vector<std::string> catnames;
   const RooArgSet *b0 = data->get();
   for (RooAbsArg *a : *b0) {
     if (a->InheritsFrom("RooRealVar")) {
@@ -83,7 +84,8 @@ void utils::printRDH(RooAbsData *data) {
       catnames.push_back(a->GetName());
     }
   }
-  size_t nv = varnames.size(), nc = catnames.size();
+  size_t nv = varnames.size();
+  size_t nc = catnames.size();
   printf(" bin  ");
   for (size_t j = 0; j < nv; ++j) { printf("%16.16s  ", varnames[j].c_str()); }
   for (size_t j = 0; j < nc; ++j) { printf("%16.16s  ", catnames[j].c_str()); }
@@ -264,14 +266,16 @@ RooAbsPdf *utils::makeNuisancePdf(RooStats::ModelConfig &model, const char *name
 
 RooAbsPdf *utils::makeNuisancePdf(RooAbsPdf &pdf, const RooArgSet &observables, const char *name) { 
     //assert(&pdf);
-    RooArgList obsTerms, constraints;
+    RooArgList obsTerms;
+    RooArgList constraints;
     factorizePdf(observables, pdf, obsTerms, constraints);
     if (constraints.getSize() == 0) return nullptr;
     return new RooProdPdf(name,"", constraints);
 }
 
 RooAbsPdf *utils::makeObsOnlyPdf(RooStats::ModelConfig &model, const char *name) { 
-    RooArgList obsTerms, constraints;
+    RooArgList obsTerms;
+    RooArgList constraints;
     factorizePdf(model, *model.GetPdf(), obsTerms, constraints);
     return new RooProdPdf(name,"", obsTerms);
 }
@@ -295,7 +299,8 @@ RooAbsReal *utils::fullCloneFunc(const RooAbsReal *pdf, RooArgSet &holder, bool 
 
 RooAbsReal *utils::fullCloneFunc(const RooAbsReal *pdf, const RooArgSet &obs, RooArgSet &holder, bool cloneLeafNodes) {
   // Clone all FUNC compents by copying all branch nodes
-  RooArgSet tmp("RealBranchNodeList"), toClone;
+  RooArgSet tmp("RealBranchNodeList");
+  RooArgSet toClone;
   pdf->branchNodeServerList(&tmp);
   unsigned int nitems = tmp.getSize();
   for (RooAbsArg *a : tmp) {
@@ -899,7 +904,9 @@ void utils::createSnapshotFromString( const std::string expression, const RooArg
         ((RooRealVar*)output.first())->setVal(strtod(expression.c_str(),nullptr));
         if (errno != 0) std::invalid_argument(std::string("Error: the argument to ")+context+" is not a valid number.");
     } else {
-        std::string::size_type eqidx = 0, colidx = 0, colidx2;
+        std::string::size_type eqidx = 0;
+        std::string::size_type colidx = 0;
+        std::string::size_type colidx2;
         do {
             eqidx   = expression.find('=', colidx);
             colidx2 = expression.find(',', colidx+1);

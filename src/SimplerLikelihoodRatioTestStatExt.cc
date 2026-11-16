@@ -107,7 +107,8 @@ double SimplerLikelihoodRatioTestStatOpt::evalSimNLL(RooAbsData &data,  RooSimul
     data.setDirtyProp(false);
 
     double sum = 0.0;
-    int i, n = data.numEntries(); 
+    int i;
+    int n = data.numEntries(); 
 
     // must fetch the category, from the dataset first, if it's not empty
     RooAbsCategoryLValue *cat = nullptr;
@@ -138,8 +139,10 @@ double SimplerLikelihoodRatioTestStatOpt::evalSimNLL(RooAbsData &data,  RooSimul
 
 double SimplerLikelihoodRatioTestStatOpt::evalSimpleNLL(RooAbsData &data,  RooAbsPdf *pdf) {
     data.setDirtyProp(false);
-    double sum = 0.0, sumw = 0.0;
-    int i, n = data.numEntries(); 
+    double sum = 0.0;
+    double sumw = 0.0;
+    int i;
+    int n = data.numEntries(); 
     for (i = 0; i < n; ++i) {
         data.get(i); 
         double w = data.weight(); if (w == 0) continue;

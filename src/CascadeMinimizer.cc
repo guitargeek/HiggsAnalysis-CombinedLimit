@@ -716,7 +716,8 @@ bool CascadeMinimizer::multipleMinimize(const RooArgSet &reallyCleanParameters, 
 
 	     bool isValidCombo = true;
 	
-	     int pdfIndex=0, changedIndex = -1;
+	     int pdfIndex=0;
+	     int changedIndex = -1;
 	     // Set the current indices;
 	     std::vector<int> cit = *my_it;
 	     for (std::vector<int>::iterator it = cit.begin();
@@ -974,7 +975,9 @@ void CascadeMinimizer::applyOptions(const boost::program_options::variables_map 
 }
 
 void CascadeMinimizer::trivialMinimize(const RooAbsReal &nll, RooRealVar &r, int points) const {
-    double rMin = r.getMin(), rMax = r.getMax(), rStep = (rMax-rMin)/(points-1);
+    double rMin = r.getMin();
+    double rMax = r.getMax();
+    double rStep = (rMax-rMin)/(points-1);
     int iMin = -1; double minnll = 0;
     for (int i = 0; i < points; ++i) {
         double x = rMin + (i+0.5)*rStep;
@@ -993,7 +996,9 @@ bool CascadeMinimizer::autoBoundsOk(int verbose) {
       for (RooAbsArg *a : *pois) {
         RooRealVar *rrv = dynamic_cast<RooRealVar *>(a);
         if (rrv && !rrv->isConstant() && rrv->hasMax() && rrv->hasMin()) {
-            double val = rrv->getVal(), lo = rrv->getMin(), hi = rrv->getMax();
+            double val = rrv->getVal();
+            double lo = rrv->getMin();
+            double hi = rrv->getMax();
             if (bothBounds && val < (0.9*lo+0.1*hi)) {
                 ok = false;
                 rrv->setMin(val - (hi-val));

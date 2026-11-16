@@ -296,7 +296,8 @@ bool FitDiagnostics::runSpecific(RooWorkspace *w, RooStats::ModelConfig *mc_s, R
       resetFitResultTrees(withSystematics);
   }
  
-  RooFitResult *res_b = nullptr, *res_s = nullptr;
+  RooFitResult *res_b = nullptr;
+  RooFitResult *res_s = nullptr;
   const RooCmdArg &constCmdArg_s = withSystematics  ? RooFit::Constrain(*mc_s->GetNuisanceParameters()) : RooCmdArg{}; // use something dummy 
   //const RooCmdArg &minosCmdArg = minos_ == "poi" ?  RooFit::Minos(*mc_s->GetParametersOfInterest())   : RooFit::Minos(minos_ != "none");  //--> dont use fitTo!
   w->loadSnapshot("clean");
@@ -616,7 +617,9 @@ bool FitDiagnostics::runSpecific(RooWorkspace *w, RooStats::ModelConfig *mc_s, R
 void FitDiagnostics::getNormalizationsSimple(RooAbsPdf *pdf, const RooArgSet &obs, RooArgSet &out) {
     std::map<std::string,ShapeAndNorm> snm;
     getShapesAndNorms(pdf,obs, snm, "");
-    std::map<std::string,ShapeAndNorm>::const_iterator bg = snm.begin(), ed = snm.end(), pair; int i;
+    std::map<std::string,ShapeAndNorm>::const_iterator bg = snm.begin();
+    std::map<std::string,ShapeAndNorm>::const_iterator ed = snm.end();
+    std::map<std::string,ShapeAndNorm>::const_iterator pair; int i;
     for (pair = bg, i = 0; pair != ed; ++pair, ++i) {
         RooRealVar *val = new RooRealVar((oldNormNames_ ? pair->first : pair->second.channel+"/"+pair->second.process).c_str(), "",pair->second.norm->getVal());
         // val->setError(sumx2[i]);
@@ -746,16 +749,33 @@ void FitDiagnostics::getNormalizations(RooAbsPdf *pdf, const RooArgSet &obs, Roo
 		}
 	}
 	// now let's start with the central values
-	std::vector<double> vals(snm.size(), 0.), sumx2(snm.size(), 0.);
-	std::vector<TH1 *> shapes(snm.size(), nullptr), shapes2(snm.size(), nullptr);
-	std::vector<int> bins(snm.size(), 0), sig(snm.size(), 0);
-	std::map<std::string, TH1 *> totByCh, totByCh2, sigByCh, sigByCh2, bkgByCh, bkgByCh2,  widthByCh;
+	std::vector<double> vals(snm.size(), 0.);
+	std::vector<double> sumx2(snm.size(), 0.);
+	std::vector<TH1 *> shapes(snm.size(), nullptr);
+	std::vector<TH1 *> shapes2(snm.size(), nullptr);
+	std::vector<int> bins(snm.size(), 0);
+	std::vector<int> sig(snm.size(), 0);
+	std::map<std::string, TH1 *> totByCh;
+	std::map<std::string, TH1 *> totByCh2;
+	std::map<std::string, TH1 *> sigByCh;
+	std::map<std::string, TH1 *> sigByCh2;
+	std::map<std::string, TH1 *> bkgByCh;
+	std::map<std::string, TH1 *> bkgByCh2;
+	std::map<std::string, TH1 *> widthByCh;
 	std::map<std::string, TH2 *> totByCh2Covar;
-	std::map<std::string, double> norm_tot, norm_sig, norm_bkg;
-	std::map<std::string, double> sumx2_tot, sumx2_sig, sumx2_bkg;
-	std::map<std::string, double> diff_tot, diff_sig, diff_bkg;
+	std::map<std::string, double> norm_tot;
+	std::map<std::string, double> norm_sig;
+	std::map<std::string, double> norm_bkg;
+	std::map<std::string, double> sumx2_tot;
+	std::map<std::string, double> sumx2_sig;
+	std::map<std::string, double> sumx2_bkg;
+	std::map<std::string, double> diff_tot;
+	std::map<std::string, double> diff_sig;
+	std::map<std::string, double> diff_bkg;
 	std::vector<std::string> channel_names;
-	IT bg = snm.begin(), ed = snm.end(), pair;
+	IT bg = snm.begin();
+	IT ed = snm.end();
+	IT pair;
 	int i;
 	for (pair = bg, i = 0; pair != ed; ++pair, ++i)
 	{
@@ -888,7 +908,8 @@ void FitDiagnostics::getNormalizations(RooAbsPdf *pdf, const RooArgSet &obs, Roo
 			wdtOverall->SetBinContent(iBinOverall, widthByCh[h->first]->GetBinContent(iBin + 1));
 
 			datOverallHist->GetXaxis()->SetBinLabel(iBinOverall, label);
-			double x, y;
+			double x;
+			double y;
 			datByCh[h->first]->GetPoint(iBin, x, y);
 			datOverallHist->SetBinContent(iBinOverall, y);
 
@@ -926,7 +947,9 @@ void FitDiagnostics::getNormalizations(RooAbsPdf *pdf, const RooArgSet &obs, Roo
 		sampler.generate(ntoys);
 		std::unique_ptr<RooArgSet> params(pdf->getParameters(obs));
 		// prepare histograms for running sums
-		std::map<std::string, TH1 *> totByCh1, sigByCh1, bkgByCh1;
+		std::map<std::string, TH1 *> totByCh1;
+		std::map<std::string, TH1 *> sigByCh1;
+		std::map<std::string, TH1 *> bkgByCh1;
 		for (IH h = totByCh.begin(), eh = totByCh.end(); h != eh; ++h)
 			totByCh1[h->first] = (TH1 *)h->second->Clone();
 		for (IH h = sigByCh.begin(), eh = sigByCh.end(); h != eh; ++h)
@@ -971,7 +994,8 @@ void FitDiagnostics::getNormalizations(RooAbsPdf *pdf, const RooArgSet &obs, Roo
 			// now add up the deviations within channels in this toy 
 			for (IH h = totByCh1.begin(), eh = totByCh1.end(); h != eh; ++h)
 			{
-				TH1 *target = totByCh2[h->first], *reference = totByCh[h->first];
+				TH1 *target = totByCh2[h->first];
+				TH1 *reference = totByCh[h->first];
 				TH2 *targetCovar = totByCh2Covar[h->first];
 
 
@@ -1044,7 +1068,8 @@ void FitDiagnostics::getNormalizations(RooAbsPdf *pdf, const RooArgSet &obs, Roo
 			}
 			for (IH h = sigByCh1.begin(), eh = sigByCh1.end(); h != eh; ++h)
 			{
-				TH1 *target = sigByCh2[h->first], *reference = sigByCh[h->first];
+				TH1 *target = sigByCh2[h->first];
+				TH1 *reference = sigByCh[h->first];
 				for (int b = 1, nb = target->GetNbinsX(); b <= nb; ++b)
 				{
 					target->AddBinContent(b, std::pow(h->second->GetBinContent(b) - reference->GetBinContent(b), 2));
@@ -1052,7 +1077,8 @@ void FitDiagnostics::getNormalizations(RooAbsPdf *pdf, const RooArgSet &obs, Roo
 			}
 			for (IH h = bkgByCh1.begin(), eh = bkgByCh1.end(); h != eh; ++h)
 			{
-				TH1 *target = bkgByCh2[h->first], *reference = bkgByCh[h->first];
+				TH1 *target = bkgByCh2[h->first];
+				TH1 *reference = bkgByCh[h->first];
 				for (int b = 1, nb = target->GetNbinsX(); b <= nb; ++b)
 				{
 					target->AddBinContent(b, std::pow(h->second->GetBinContent(b) - reference->GetBinContent(b), 2));
@@ -1278,7 +1304,9 @@ void FitDiagnostics::setFitResultTrees(const RooArgSet *args, double * vals){
 
 void FitDiagnostics::setShapesFitResultTrees(std::map<std::string,ShapeAndNorm> &snm, double * vals){
     int iBinOverall = 1;	
-    std::map<std::string,ShapeAndNorm>::const_iterator bg = snm.begin(), ed = snm.end(), pair; int i;
+    std::map<std::string,ShapeAndNorm>::const_iterator bg = snm.begin();
+    std::map<std::string,ShapeAndNorm>::const_iterator ed = snm.end();
+    std::map<std::string,ShapeAndNorm>::const_iterator pair; int i;
     for (pair = bg, i = 0; pair != ed; ++pair, ++i) {  
         if (pair->second.obs.getSize() == 1) {
             RooRealVar *x = (RooRealVar*)pair->second.obs.at(0);
@@ -1367,7 +1395,9 @@ void FitDiagnostics::createFitResultTrees(const RooStats::ModelConfig &mc, bool 
          typedef std::map<std::string,ShapeAndNorm>::const_iterator IT;
          if(savePerToy){
            getShapesAndNorms(mc.GetPdf(),*mc.GetObservables(), snm, "");
-           IT bg = snm.begin(), ed = snm.end(), pair; int i;
+           IT bg = snm.begin();
+           IT ed = snm.end();
+           IT pair; int i;
            for (pair = bg, i = 0; pair != ed; ++pair, ++i) {
              RooRealVar *val = new RooRealVar(pair->first.c_str(), "", 0.);
              //val->setError(sumx2[i]);
@@ -1432,7 +1462,9 @@ void FitDiagnostics::createFitResultTrees(const RooStats::ModelConfig &mc, bool 
 
          if(savePerToy){
            count = 0;
-           IT itb = snm.begin(), ite = snm.end(), npair; int j;
+           IT itb = snm.begin();
+           IT ite = snm.end();
+           IT npair; int j;
            itb = snm.begin(), ite = snm.end();
            for (npair = itb, j = 0; npair != ite; ++npair, ++j) {
              if (npair->second.obs.getSize() == 1) {

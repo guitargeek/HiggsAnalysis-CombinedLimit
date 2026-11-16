@@ -216,7 +216,8 @@ int MarkovChainMC::runOnce(RooWorkspace *w, RooStats::ModelConfig *mc_s, RooStat
           RooRealVar *fv = dynamic_cast<RooRealVar *>(fpf.at(i));
           if (std::string(r->GetName()) == fv->GetName()) continue;
           RooRealVar *v  = w->var(fv->GetName());
-          double min = v->getMin(), max = v->getMax();
+          double min = v->getMin();
+          double max = v->getMax();
           if (fv->hasAsymError(false)) {
               min = (std::max(v->getMin(), fv->getVal() + cropNSigmas_ * fv->getAsymErrorLo()));
               max = (std::min(v->getMax(), fv->getVal() + cropNSigmas_ * fv->getAsymErrorHi()));
@@ -355,8 +356,10 @@ void MarkovChainMC::limitAndError(double &limit, double &limitErr, const std::ve
       double median = (num % 2 ? limits[num/2] : 0.5*(limits[num/2] + limits[num/2+1]));
       double iqr = limits[3*num/4] - limits[num/4];
       // determine range of plausible values
-      double min = median - iqr, max = median + iqr; 
-      int start = 0, end = num-1; 
+      double min = median - iqr;
+      double max = median + iqr; 
+      int start = 0;
+      int end = num-1; 
       while (start < end   && limits[start] < min) ++start;
       while (end   > start && limits[end]   > max) --end;
       num = end-start+1;
@@ -401,7 +404,8 @@ void MarkovChainMC::limitAndError(double &limit, double &limitErr, const std::ve
 RooStats::MarkovChain *MarkovChainMC::mergeChains(const RooArgSet &poi, const std::vector<double> &limits) const
 {
     std::vector<double> limitsSorted(limits); std::sort(limitsSorted.begin(), limitsSorted.end());
-    double lmin = limitsSorted.front(), lmax = limitsSorted.back();
+    double lmin = limitsSorted.front();
+    double lmax = limitsSorted.back();
     if (limitsSorted.size() > 5) {
         int n = limitsSorted.size();
         double lmedian = limitsSorted[n/2];
@@ -433,7 +437,8 @@ RooStats::MarkovChain *MarkovChainMC::mergeChains(const RooArgSet &poi, const st
 
 void MarkovChainMC::readChains(const RooArgSet &poi, std::vector<double> &limits)
 {
-    double mylim, myerr;
+    double mylim;
+    double myerr;
     chains_.Clear();
     chains_.SetOwner(false);
     if (!readToysFromHere) throw std::logic_error("Cannot use readChains: option toysFile not specified, or input file empty");
@@ -535,7 +540,8 @@ MarkovChainMC::stationarityTest(const RooStats::MarkovChain &chain, const RooArg
     std::vector<double> mean(nchunks, .0);
     const RooDataSet *data = chain.GetAsConstDataSet();
     const RooRealVar *r = dynamic_cast<const RooRealVar *>(data->get()->find(poi.first()->GetName()));
-    int  n = data->numEntries(), chunksize = ceil(n/double(nchunks));
+    int  n = data->numEntries();
+    int  chunksize = ceil(n/double(nchunks));
     for (int i = 0, chunk = 0; i < n; i++) {
         data->get(i);
         if (i > 0 && i % chunksize == 0) chunk++;
@@ -544,7 +550,8 @@ MarkovChainMC::stationarityTest(const RooStats::MarkovChain &chain, const RooArg
     }
     for (int c = 0; c < nchunks; ++c) { mean[c] /= entries[c]; }
 
-    std::vector<double> dists, dists25;
+    std::vector<double> dists;
+    std::vector<double> dists25;
     for (int c = 0; c < nchunks; ++c) {
         for (int c2 = 0; c2 < nchunks; ++c2) {
             if (c2 != c) dists.push_back(fabs(mean[c]-mean[c2]));
@@ -560,7 +567,8 @@ MarkovChainMC::stationarityTest(const RooStats::MarkovChain &chain, const RooArg
     //printf("Q(50) is %9.5f\n", dists25[ceil(0.50*nchunks)]);
     //printf("Tolerance set to %9.5f\n", tolerance);
     bool converged = true;
-    std::vector<int> friends(nchunks, 0), foes(nchunks, 0);
+    std::vector<int> friends(nchunks, 0);
+    std::vector<int> foes(nchunks, 0);
     for (int c = 0; c < nchunks; ++c) {
         for (int c2 = c+1; c2 < nchunks; ++c2) {
             if (c2 == c) continue;

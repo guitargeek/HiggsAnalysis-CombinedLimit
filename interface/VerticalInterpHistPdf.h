@@ -64,7 +64,8 @@ protected:
   // return a smooth function that is equal to +/-1 for |x| >= smoothRegion_ and it's null in zero
   inline double smoothStepFunc(double x) const { 
     if (fabs(x) >= _smoothRegion) return x > 0 ? +1 : -1;
-    double xnorm = x/_smoothRegion, xnorm2 = xnorm*xnorm;
+    double xnorm = x/_smoothRegion;
+    double xnorm2 = xnorm*xnorm;
     return 0.125 * xnorm * (xnorm2 * (3.*xnorm2 - 10.) + 15);
   }
 };
@@ -126,7 +127,8 @@ protected:
   // return a smooth function that is equal to +/-1 for |x| >= smoothRegion_ and it's null in zero
   inline double smoothStepFunc(double x) const { 
     if (fabs(x) >= _smoothRegion) return x > 0. ? +1. : -1.;
-    double xnorm = x/_smoothRegion, xnorm2 = xnorm*xnorm;
+    double xnorm = x/_smoothRegion;
+    double xnorm2 = xnorm*xnorm;
     return 0.125 * xnorm * (xnorm2 * (3.*xnorm2 - 10.) + 15.);
   }
 
@@ -307,7 +309,8 @@ protected:
   // return a smooth function that is equal to +/-1 for |x| >= smoothRegion_ and it's null in zero
   inline double smoothStepFunc(double x) const { 
     if (fabs(x) >= _smoothRegion) return x > 0 ? +1 : -1;
-    double xnorm = x/_smoothRegion, xnorm2 = xnorm*xnorm;
+    double xnorm = x/_smoothRegion;
+    double xnorm2 = xnorm*xnorm;
     return 0.125 * xnorm * (xnorm2 * (3.*xnorm2 - 10.) + 15);
   }
 

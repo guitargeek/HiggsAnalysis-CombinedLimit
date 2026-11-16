@@ -286,7 +286,8 @@ bool Combine::mklimit(RooWorkspace *w, RooStats::ModelConfig *mc_s, RooStats::Mo
 
   bool ret = false;
   try {
-    double hint = 0, hintErr = 0; bool hashint = false;
+    double hint = 0;
+    double hintErr = 0; bool hashint = false;
     if (hintAlgo) {
         if (hintUsesStatOnly_ ) { //&& withSystematics) {
             //withSystematics = false;
@@ -323,7 +324,9 @@ bool Combine::mklimit(RooWorkspace *w, RooStats::ModelConfig *mc_s, RooStats::Mo
 void Combine::run(TString hlfFile, const std::string &dataset, double &limit, double &limitErr, int &iToy, TTree *tree, int nToys) {
   ToCleanUp garbageCollect; // use this to close and delete temporary files
 
-  TString tmpDir = "", tmpFile = "", pwd(gSystem->pwd());
+  TString tmpDir = "";
+  TString tmpFile = "";
+  TString pwd(gSystem->pwd());
   if (makeTempDir_) { 
       tmpDir = "roostats-XXXXXX"; tmpFile = "model";
       if (mkdtemp(const_cast<char *>(tmpDir.Data())) == nullptr) {
@@ -338,7 +341,8 @@ void Combine::run(TString hlfFile, const std::string &dataset, double &limit, do
       unlink(tmpFile); // this is to be deleted, since we'll use tmpFile+".root"
   }
 
-  bool isTextDatacard = false, isBinary = hlfFile.EndsWith(".root");
+  bool isTextDatacard = false;
+  bool isBinary = hlfFile.EndsWith(".root");
   TString fileToLoad = ((hlfFile[0] == '/' || hlfFile.Contains("://")) ? hlfFile : pwd+"/"+hlfFile);
   if (!(fileToLoad.Contains("://") && isBinary) && !boost::filesystem::exists(fileToLoad.Data())) throw std::invalid_argument(("File "+fileToLoad+" does not exist").Data());
   if (hlfFile.EndsWith(".hlf") || isBinary) {
@@ -376,7 +380,8 @@ void Combine::run(TString hlfFile, const std::string &dataset, double &limit, do
 
   if (verbose <= 2) RooMsgService::instance().setGlobalKillBelow(RooFit::ERROR);
   // Load the model, but going in a temporary directory to avoid polluting the current one with garbage from 'cexpr'
-  RooWorkspace *w = nullptr; RooStats::ModelConfig *mc = nullptr, *mc_bonly = nullptr;
+  RooWorkspace *w = nullptr; RooStats::ModelConfig *mc = nullptr;
+  RooStats::ModelConfig *mc_bonly = nullptr;
 
   if (isBinary) {
     TFile *fIn = TFile::Open(fileToLoad); 
@@ -546,7 +551,9 @@ void Combine::run(TString hlfFile, const std::string &dataset, double &limit, do
   }
 
   if (dataset.find(':') != std::string::npos) {
-    std::string filename, wspname, dname;
+    std::string filename;
+    std::string wspname;
+    std::string dname;
     switch (std::count(dataset.begin(), dataset.end(), ':')) {
         case 2: // file:wsp:dataset
             filename = dataset.substr(                   0, dataset.find(':'));

@@ -30,7 +30,8 @@ TestProposal::TestProposal(double divisor, const RooArgList &alwaysStepMe) :
 void TestProposal::Propose(RooArgSet& xPrime, RooArgSet& x )
 {
    RooStats::SetParameters(&x, &xPrime);
-   int n = xPrime.getSize(), j = floor(RooRandom::uniform()*n);
+   int n = xPrime.getSize();
+   int j = floor(RooRandom::uniform()*n);
    const RooRealVar *indicatorPrime = discreteModelIndicator_ ? (RooRealVar*)xPrime.find(discreteModelIndicator_->GetName()) : nullptr;
    for (int i = 0; i < xPrime.getSize(); ++i) {
       RooRealVar* var = static_cast<RooRealVar*>(xPrime[i]);
@@ -45,7 +46,10 @@ void TestProposal::Propose(RooArgSet& xPrime, RooArgSet& x )
                 break;
             } 
         } 
-        double val = var->getVal(), max = var->getMax(), min = var->getMin(), len = max - min;
+        double val = var->getVal();
+        double max = var->getMax();
+        double min = var->getMin();
+        double len = max - min;
         val += RooRandom::gaussian() * len * divisor_;
         while (val > max) val -= len;
         while (val < min) val += len;
@@ -69,7 +73,10 @@ void TestProposal::Propose(RooArgSet& xPrime, RooArgSet& x )
                 continue;
             } 
         } 
-        double val = var->getVal(), max = var->getMax(), min = var->getMin(), len = max - min;
+        double val = var->getVal();
+        double max = var->getMax();
+        double min = var->getMin();
+        double len = max - min;
         val += RooRandom::gaussian() * len * poiDivisor_;
         while (val > max) val -= len;
         while (val < min) val += len;

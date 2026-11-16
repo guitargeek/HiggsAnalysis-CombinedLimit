@@ -530,7 +530,8 @@ cacheutils::CachingAddNLL::setup_()
             static int cheapprod = runtimedef::get("ADDNLL_ROOREALSUM_CHEAPPROD"); 
             RooProduct *prodi = nullptr;
             if (tryfactor && ((prodi = dynamic_cast<RooProduct *>(funci)) != nullptr)) {
-                RooArgList newcoeffs(*coeff), newfuncs; 
+                RooArgList newcoeffs(*coeff);
+                RooArgList newfuncs; 
                 utils::factorizeFunc(*obs, *funci, newfuncs, newcoeffs);
 
                 if (newcoeffs.getSize() > 1) {
@@ -772,7 +773,8 @@ cacheutils::CachingAddNLL::setData(RooAbsData &data, bool cloneData)
             bool all_equal = true;
             canBasicIntegrals_ = runtimedef::get("ADDNLL_ROOREALSUM_BASICINT");
             for (unsigned int ibin = 0, nbin = binWidths_.size(); ibin < nbin; ++ibin) {
-                double bc = bins.binCenter(ibin), dc = data_->get(ibin)->getRealValue(xvar->GetName());
+                double bc = bins.binCenter(ibin);
+                double dc = data_->get(ibin)->getRealValue(xvar->GetName());
                 //printf("bin %3d: center %+8.5f ( data %+8.5f , diff %+8.5f ), width %8.5f, data weight %10.5f, channel %s\n", ibin, bc, dc, std::abs(dc-bc)/bins.binWidth(ibin), bins.binWidth(ibin), data_->weight(), pdf_->GetName());
                 binWidths_[ibin] = bins.binWidth(ibin);
                 if (std::abs(bc-dc) > 1e-5*binWidths_[ibin]) {
@@ -944,9 +946,12 @@ cacheutils::CachingSimNLL::setup_()
         if (GroupConstraints > 1) {
             std::cout << "Will create " << GroupConstraints << " groups for " << constrainPdfsFast_.size() << " + " << constrainPdfsFastPoisson_.size() << " constraints." << std::endl;
             constrainPdfGroups_.resize(GroupConstraints);
-            int npois = constrainPdfsFastPoisson_.size(), ngaus = constrainPdfsFast_.size(), nitems = ngaus + npois;
+            int npois = constrainPdfsFastPoisson_.size();
+            int ngaus = constrainPdfsFast_.size();
+            int nitems = ngaus + npois;
             int nPerGroup = (nitems + GroupConstraints - 1)/GroupConstraints;
-            int ig = 0, ng = 0;
+            int ig = 0;
+            int ng = 0;
             for (auto *gaus : constrainPdfsFast_) {
                 constrainPdfGroups_[ig].add(gaus);
                 if (++ng == nPerGroup) { ++ig; ng = 0; }
@@ -1115,7 +1120,8 @@ void cacheutils::CachingSimNLL::splitWithWeights(const RooAbsData &data, const R
     RooCategory *cat = dynamic_cast<RooCategory *>(data.get()->find(splitCat.GetName()));
     if (cat == nullptr) throw std::logic_error("Error: no category");
     std::unique_ptr<RooAbsCategoryLValue> catClone((RooAbsCategoryLValue*) splitCat.Clone());
-    int nb = cat->numBins((const char *)nullptr), ne = data.numEntries();
+    int nb = cat->numBins((const char *)nullptr);
+    int ne = data.numEntries();
     RooArgSet obs(*data.get()); obs.remove(*cat, true, true);
     RooRealVar weight("_weight_","",1);
     RooArgSet obsplus(obs); obsplus.add(weight);
