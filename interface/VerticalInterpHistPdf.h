@@ -60,7 +60,7 @@ private:
 protected:
   void setupCaches() const ;
   void syncTotal() const ;
-  void syncComponent(int which) const ;
+  void syncComponent(int i) const ;
   // return a smooth function that is equal to +/-1 for |x| >= smoothRegion_ and it's null in zero
   inline double smoothStepFunc(double x) const { 
     if (fabs(x) >= _smoothRegion) return x > 0 ? +1 : -1;
@@ -358,8 +358,8 @@ protected:
   FastHisto _cacheNominalLog; 
 
   void syncTotal() const ;
-  void initNominal(TObject *nominal) ;
-  void initComponent(int which, TObject *hi, TObject *lo) ;
+  void initNominal(TObject *templ) ;
+  void initComponent(int dim, TObject *hi, TObject *lo) ;
 
 private:
   ClassDefOverride(FastVerticalInterpHistPdf2,1) // 
@@ -419,8 +419,8 @@ protected:
   FastHisto2D _cacheNominalLog; 
 
   void syncTotal() const ;
-  void initNominal(TObject *nominal) ;
-  void initComponent(int which, TObject *hi, TObject *lo) ;
+  void initNominal(TObject *templ) ;
+  void initComponent(int dim, TObject *hi, TObject *lo) ;
 
 private:
   ClassDefOverride(FastVerticalInterpHistPdf2D2,1) // 

@@ -830,7 +830,7 @@ class RooaDoubleCBxBW : public RooAbsPdf {
         unsigned _nR,
         RooAbsReal& _thetaL,
         RooAbsReal& _thetaR,
-        bool _computeActualCB
+        bool computeActualCB_
     );
   RooaDoubleCBxBW(const RooaDoubleCBxBW& other, const char* name=nullptr) ;
   TObject* clone(const char* newname) const override { return new RooaDoubleCBxBW(*this,newname); }

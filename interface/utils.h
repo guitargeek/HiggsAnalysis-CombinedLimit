@@ -28,7 +28,7 @@ namespace utils {
     void printRDH(RooAbsData *data) ;
     void printRAD(const RooAbsData *d) ;
     void printPdf(const RooAbsReal *pdf) ;
-    void printPdf(RooStats::ModelConfig &model) ;
+    void printPdf(RooStats::ModelConfig &mc) ;
     void printPdf(RooWorkspace *w, const char *pdfName) ;
     TGraphAsymmErrors * makeDataGraph(TH1 * dataHist, bool asDensity=false);
     //Make a tgraph asym errors from th1 of data
@@ -55,7 +55,7 @@ namespace utils {
     RooAbsPdf *makeNuisancePdf(RooAbsPdf &pdf, const RooArgSet &observables, const char *name="nuisancePdf") ;
 
     /// factorize a RooAbsReal
-    void factorizeFunc(const RooArgSet &observables, RooAbsReal &pdf, RooArgList &obsTerms, RooArgList &otherTerms, bool keepDuplicates = true, bool debug=false);
+    void factorizeFunc(const RooArgSet &observables, RooAbsReal &func, RooArgList &obsTerms, RooArgList &constraints, bool keepDuplicates = true, bool debug=false);
 #if ROOT_VERSION_CODE < ROOT_VERSION(6,28,0)
     /// workaround for RooProdPdf::components()
     RooArgList factors(const RooProduct &prod) ;
@@ -77,7 +77,7 @@ namespace utils {
     ///  - there are no other floating parameters except observables, nuisances and POI
     bool checkModel(const RooStats::ModelConfig &model, bool throwOnFail=false) ;
 
-    RooSimultaneous * rebuildSimPdf(const RooArgSet &observables, RooSimultaneous *pdf) ;
+    RooSimultaneous * rebuildSimPdf(const RooArgSet &observables, RooSimultaneous *sim) ;
 
     void copyAttributes(const RooAbsArg &from, RooAbsArg &to) ;
 

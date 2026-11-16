@@ -23,9 +23,9 @@ namespace vectorized {
     void exponentials(const uint32_t size, double lambda, double norm, const double* __restrict__ xvals, double * __restrict__ out, double * __restrict__ workingArea) ;
 
     // powers
-    void powers(const uint32_t size, double lambda, double norm, const double* __restrict__ xvals, double * __restrict__ out, double * __restrict__ workingArea) ;
+    void powers(const uint32_t size, double exponent, double norm, const double* __restrict__ xvals, double * __restrict__ out, double * __restrict__ workingArea) ;
 
     // dot product of two vectors 
-    double dot_product(const uint32_t size, double const * __restrict__ iarray, double const * __restrict__ iarray2) ;
+    double dot_product(const uint32_t size, double const * __restrict__ vec1, double const * __restrict__ vec2) ;
 }
 

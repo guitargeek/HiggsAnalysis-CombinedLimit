@@ -84,7 +84,7 @@ protected:
     bool isfunc;
   };
   void setShapesFitResultTrees(std::map<std::string,ShapeAndNorm> &snm, double *);
-  void getShapesAndNorms(RooAbsPdf *pdf, const RooArgSet &obs, std::map<std::string, ShapeAndNorm> &shapesAndNorms, const std::string &channel);
+  void getShapesAndNorms(RooAbsPdf *pdf, const RooArgSet &obs, std::map<std::string, ShapeAndNorm> &out, const std::string &channel);
 
   class NuisanceSampler { 
     public:

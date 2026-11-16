@@ -216,7 +216,7 @@ public:
   //Emuation of deprecated RooComplex (that used Double_t)
   typedef std::complex<Double_t> DoubleComplex_t;
 
-  static DoubleComplex_t erfi(DoubleComplex_t xval);
+  static DoubleComplex_t erfi(DoubleComplex_t z);
 protected:
 
   RooRealProxy x ;

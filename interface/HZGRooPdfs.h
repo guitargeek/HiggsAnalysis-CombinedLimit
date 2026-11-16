@@ -25,7 +25,7 @@ public:
 
   RooStepBernstein() ;
   RooStepBernstein(const char *name, const char *title,
-		   RooAbsReal& _x, RooAbsReal& _stepThresh,
+		   RooAbsReal& _x, RooAbsReal& step_thresh,
 		   const RooArgList& _coefList) ;
 
   RooStepBernstein(const RooStepBernstein& other, const char* name = nullptr);

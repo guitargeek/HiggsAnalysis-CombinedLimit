@@ -128,7 +128,7 @@ private:
   std::map<double, RooStats::HypoTestResult *> grid_;
 
   void clearGrid(); 
-  void readGrid(TDirectory *directory, double rMin, double rMax); 
+  void readGrid(TDirectory *toyDir, double rMin, double rMax); 
   void updateGridData(RooWorkspace *w, RooStats::ModelConfig *mc_s, RooStats::ModelConfig *mc_b, RooAbsData &data, bool smart, double clsTarget); 
   void updateGridDataFC(RooWorkspace *w, RooStats::ModelConfig *mc_s, RooStats::ModelConfig *mc_b, RooAbsData &data, bool smart, double clsTarget); 
   std::pair<double,double> updateGridPoint(RooWorkspace *w, RooStats::ModelConfig *mc_s, RooStats::ModelConfig *mc_b, RooAbsData &data, std::map<double, RooStats::HypoTestResult *>::iterator point);

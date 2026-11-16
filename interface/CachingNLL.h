@@ -93,7 +93,7 @@ class CachingPdf : public CachingPdfBase {
         std::vector<uint8_t> nonZeroW_;
         bool                 includeZeroWeights_ = false;
         virtual void newData_(const RooAbsData &data) ;
-        virtual void realFill_(const RooAbsData &data, std::vector<Double_t> &values) ;
+        virtual void realFill_(const RooAbsData &data, std::vector<Double_t> &vals) ;
 };
 
 template <typename PdfT, typename VPdfT> 
@@ -105,7 +105,7 @@ class OptimizedCachingPdfT : public CachingPdf {
             CachingPdf(other), vpdf_(0) {}
         ~OptimizedCachingPdfT() override { delete vpdf_; }
     protected:
-        void realFill_(const RooAbsData &data, std::vector<Double_t> &values) override ;
+        void realFill_(const RooAbsData &data, std::vector<Double_t> &vals) override ;
         void newData_(const RooAbsData &data) override ;
         VPdfT *vpdf_;
 };

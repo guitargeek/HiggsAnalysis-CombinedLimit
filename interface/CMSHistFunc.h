@@ -79,7 +79,7 @@ class CMSHistFunc : public RooAbsReal {
   CMSHistFunc();
 
   CMSHistFunc(const char* name, const char* title, RooRealVar& x,
-              TH1 const& hist, bool divideByWidth = true);
+              TH1 const& hist, bool divide_by_width = true);
 
   CMSHistFunc(CMSHistFunc const& other, const char* name = nullptr);
 

@@ -21,7 +21,7 @@ public:
   Bool_t checkObservables(const RooArgSet* nset) const override ;	
 
   Bool_t forceAnalyticalInt(const RooAbsArg&) const override { return kTRUE ; }
-  Int_t getAnalyticalIntegralWN(RooArgSet& allVars, RooArgSet& numVars, const RooArgSet* normSet, const char* rangeName=nullptr) const override ;
+  Int_t getAnalyticalIntegralWN(RooArgSet& allVars, RooArgSet& analVars, const RooArgSet* normSet, const char* rangeName=nullptr) const override ;
   Double_t analyticalIntegralWN(Int_t code, const RooArgSet* normSet, const char* rangeName=nullptr) const override ;
 
   const RooArgList& funcList() const { return _funcList ; }
@@ -59,7 +59,7 @@ protected:
   Double_t _pdfFloorVal = 1e-15; // PDF floor should be customizable, default is 1e-15
   Double_t _integralFloorVal = 1e-10; // PDF integral floor should be customizable, default is 1e-10
 
-  Double_t interpolate(Double_t coeff, Double_t central, RooAbsReal *fUp, RooAbsReal *fDown) const ; 
+  Double_t interpolate(Double_t coeff, Double_t central, RooAbsReal *fUp, RooAbsReal *fDn) const ; 
 
   bool isConditionalProdPdf(RooAbsReal *pdf) const;
   RooAbsReal* makeConditionalProdPdfIntegral(RooAbsPdf* pdf, RooArgSet const& analVars) const;
