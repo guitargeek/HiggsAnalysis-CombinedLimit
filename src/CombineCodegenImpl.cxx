@@ -278,8 +278,8 @@ void RooFit::Experimental::codegenImpl(RooPower& arg, CodegenContext& ctx) {
 }
 
 std::string RooFit::Experimental::codegenIntegralImpl(VerticalInterpPdf& arg,
-                                                      int code,
-                                                      const char* rangeName,
+                                                      int /*code*/,
+                                                      const char* /*rangeName*/,
                                                       CodegenContext& ctx) {
   return ctx.buildCall("RooFit::Detail::MathFuncs::verticalInterpPdfIntegral",
                        arg.coefList(),
@@ -293,7 +293,7 @@ std::string RooFit::Experimental::codegenIntegralImpl(VerticalInterpPdf& arg,
 }
 
 std::string RooFit::Experimental::codegenIntegralImpl(RooParametricHist& arg,
-                                                      int code,
+                                                      int /*code*/,
                                                       const char* rangeName,
                                                       CodegenContext& ctx) {
   std::vector<double> diffs_flat;

@@ -84,14 +84,14 @@ void TestProposal::Propose(RooArgSet& xPrime, RooArgSet& x )
    }
 }
 
-Bool_t TestProposal::IsSymmetric(RooArgSet& x1, RooArgSet& x2) {
+Bool_t TestProposal::IsSymmetric(RooArgSet& /*x1*/, RooArgSet& /*x2*/) {
    return true;
 }
 
 // Return the probability of proposing the point x1 given the starting
 // point x2
-Double_t TestProposal::GetProposalDensity(RooArgSet& x1,
-                                          RooArgSet& x2)
+Double_t TestProposal::GetProposalDensity(RooArgSet& /*x1*/,
+                                          RooArgSet& /*x2*/)
 {
    return 1.0; // should not be needed
 }

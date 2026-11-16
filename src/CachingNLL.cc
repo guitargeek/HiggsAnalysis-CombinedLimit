@@ -351,7 +351,7 @@ cacheutils::OptimizedCachingPdfT<PdfT,VPdfT>::newData_(const RooAbsData &data)
 
 template <typename PdfT, typename VPdfT>
 void
-cacheutils::OptimizedCachingPdfT<PdfT,VPdfT>::realFill_(const RooAbsData &data, std::vector<Double_t> &vals) 
+cacheutils::OptimizedCachingPdfT<PdfT,VPdfT>::realFill_(const RooAbsData & /*data*/, std::vector<Double_t> &vals) 
 {
     vpdf_->fill(vals);
 }
@@ -749,7 +749,7 @@ cacheutils::CachingAddNLL::clearConstantZeroPoint()
 }
 
 bool
-cacheutils::CachingAddNLL::setData(RooAbsData &data, bool cloneData)
+cacheutils::CachingAddNLL::setData(RooAbsData &data, bool /*cloneData*/)
 {
     //std::cout << "Setting data for pdf " << pdf_->GetName() << std::endl;
     //utils::printRAD(&data);
@@ -1096,7 +1096,7 @@ cacheutils::CachingSimNLL::evaluate() const
 }
 
 bool
-cacheutils::CachingSimNLL::setData(RooAbsData &data, bool cloneData)
+cacheutils::CachingSimNLL::setData(RooAbsData &data, bool /*cloneData*/)
 {
     dataOriginal_ = &data;
     //std::cout << "combined data has " << data.numEntries() << " dataset entries (sumw " << data.sumEntries() << ", weighted " << data.isWeighted() << ")" << std::endl;
@@ -1120,7 +1120,7 @@ cacheutils::CachingSimNLL::setData(RooAbsData &data, bool cloneData)
     return true;
 }
 
-void cacheutils::CachingSimNLL::splitWithWeights(const RooAbsData &data, const RooAbsCategory& splitCat, Bool_t createEmptyDataSets) {
+void cacheutils::CachingSimNLL::splitWithWeights(const RooAbsData &data, const RooAbsCategory& splitCat, Bool_t /*createEmptyDataSets*/) {
     RooCategory *cat = dynamic_cast<RooCategory *>(data.get()->find(splitCat.GetName()));
     if (cat == nullptr) throw std::logic_error("Error: no category");
     std::unique_ptr<RooAbsCategoryLValue> catClone((RooAbsCategoryLValue*) splitCat.Clone());
@@ -1257,9 +1257,9 @@ cacheutils::CachingSimNLL::getParameters(const RooArgSet* depList, Bool_t stripD
     return ret;
 }
 #else
-bool cacheutils::CachingSimNLL::getParameters(const RooArgSet* depList,
+bool cacheutils::CachingSimNLL::getParameters(const RooArgSet* /*depList*/,
                                               RooArgSet& outputSet,
-                                              bool stripDisconnected) const
+                                              bool /*stripDisconnected*/) const
 {
     if (internalMasks_.empty()) {
         outputSet.add(params_);

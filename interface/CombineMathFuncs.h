@@ -249,7 +249,7 @@ inline Double_t opInterpolate(RooArgList const& coefList, RooArgList const& func
    return ( value > 0. ? value : pdfFloorVal);
 }
 
-inline Double_t additiveInterpolate(double const* coefList, std::size_t nCoeffs, double const* funcList, std::size_t nFuncs,
+inline Double_t additiveInterpolate(double const* coefList, std::size_t nCoeffs, double const* funcList, std::size_t /*nFuncs*/,
                                   Double_t const pdfFloorVal, Double_t const quadraticRegion, Int_t const quadraticAlgo)
 {
    // Do running sum of coef/func pairs, calculate lastCoef.
@@ -265,7 +265,7 @@ inline Double_t additiveInterpolate(double const* coefList, std::size_t nCoeffs,
    return ( value > 0. ? value : pdfFloorVal);
 }
 
-inline Double_t multiplicativeInterpolate(double const* coefList, std::size_t nCoeffs, double const* funcList, std::size_t nFuncs,
+inline Double_t multiplicativeInterpolate(double const* coefList, std::size_t nCoeffs, double const* funcList, std::size_t /*nFuncs*/,
                                   Double_t const pdfFloorVal, Double_t const quadraticRegion, Int_t const quadraticAlgo)
 {
    // Do running sum of coef/func pairs, calculate lastCoef.
@@ -342,8 +342,8 @@ inline Double_t parametricHistMorphScale(const double parVal,
 
 inline Double_t parametricHistEvaluate(const int bin_i,
                                        const double* parVals,
-                                       const double* bins,
-                                       const int N_bins,
+                                       const double* /*bins*/,
+                                       const int /*N_bins*/,
                                        const double* morphCoeffs,
                                        const int nMorphs,
                                        const double* morphDiffs,

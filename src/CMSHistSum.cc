@@ -792,7 +792,7 @@ Int_t CMSHistSum::getAnalyticalIntegral(RooArgSet& allVars,
 }
 
 Double_t CMSHistSum::analyticalIntegral(Int_t code,
-                                         const char* rangeName) const {
+                                         const char* /*rangeName*/) const {
   // TODO: check how RooHistFunc handles ranges that splice bins
   switch (code) {
     case 1: {

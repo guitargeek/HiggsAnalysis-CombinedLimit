@@ -188,7 +188,7 @@ bool MarkovChainMC::run(RooWorkspace *w, RooStats::ModelConfig *mc_s, RooStats::
   }
   return true;
 }
-int MarkovChainMC::runOnce(RooWorkspace *w, RooStats::ModelConfig *mc_s, RooStats::ModelConfig *mc_b, RooAbsData &data, double &limit, double &limitErr, const double *hint) const {
+int MarkovChainMC::runOnce(RooWorkspace *w, RooStats::ModelConfig *mc_s, RooStats::ModelConfig * /*mc_b*/, RooAbsData &data, double &limit, double & /*limitErr*/, const double *hint) const {
   RooArgList poi(*mc_s->GetParametersOfInterest());
   RooRealVar *r = dynamic_cast<RooRealVar *>(poi.first());
 
@@ -468,7 +468,7 @@ void MarkovChainMC::readChains(const RooArgSet &poi, std::vector<double> &limits
 }
 
 void 
-MarkovChainMC::limitFromChain(double &limit, double &limitErr, const RooArgSet &poi, RooStats::MarkovChain &chain, int burnInSteps) 
+MarkovChainMC::limitFromChain(double &limit, double & /*limitErr*/, const RooArgSet &poi, RooStats::MarkovChain &chain, int burnInSteps) 
 {
     if (burnInSteps < 0) {
         if (adaptiveBurnIn_) burnInSteps = guessBurnInSteps(chain);

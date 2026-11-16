@@ -96,7 +96,7 @@ Int_t CMSHistFuncWrapper::getAnalyticalIntegral(RooArgSet& allVars,
 }
 
 Double_t CMSHistFuncWrapper::analyticalIntegral(Int_t code,
-                                         const char* rangeName) const {
+                                         const char* /*rangeName*/) const {
   switch (code) {
     case 1: {
       updateCache();

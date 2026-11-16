@@ -43,7 +43,7 @@
 
 //============================================================================================================================================
 ProfiledLikelihoodRatioTestStatOpt::ProfiledLikelihoodRatioTestStatOpt(
-    const RooArgSet & observables,
+    const RooArgSet & /*observables*/,
     RooAbsPdf &pdfNull, RooAbsPdf &pdfAlt,
     const RooArgSet *nuisances,
     const RooArgSet & paramsNull, const RooArgSet & paramsAlt,
@@ -391,7 +391,7 @@ double nllutils::minimizeNLL(RooAbsReal &nll, bool constrained, RooRealVar *poi,
 }
 
 //============================================================ProfiledLikelihoodRatioTestStatExt
-bool nllutils::robustMinimize(RooAbsReal &nll, RooMinimizer &minim, int verbosity, bool zeroPoint) 
+bool nllutils::robustMinimize(RooAbsReal &nll, RooMinimizer &minim, int /*verbosity*/, bool zeroPoint) 
 {
     static bool do_debug = (runtimedef::get("DEBUG_MINIM") || runtimedef::get("DEBUG_PLTSO") > 1);
     // keep the RooMinimizer from doing its own discrete profiling

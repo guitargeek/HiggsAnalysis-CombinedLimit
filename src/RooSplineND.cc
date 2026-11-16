@@ -254,7 +254,7 @@ double RooSplineND::getDistFromSquare(int i) const{
   
 }
 //_____________________________________________________________________________
-double RooSplineND::radialFunc(double d2, double eps, double cutoff) const{
+double RooSplineND::radialFunc(double d2, double eps, double /*cutoff*/) const{
   double expo = (d2/(eps*eps));
   //double retval = 1./(1+(TMath::Power(expo,1.5)));
   //if (cutoff > 0){

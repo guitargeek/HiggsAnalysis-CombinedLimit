@@ -801,7 +801,7 @@ FastVerticalInterpHistPdf2Base::FastVerticalInterpHistPdf2Base(const FastVertica
 }
 
 
-Bool_t FastVerticalInterpHistPdf2Base::importWorkspaceHook(RooWorkspace& ws) {
+Bool_t FastVerticalInterpHistPdf2Base::importWorkspaceHook(RooWorkspace& /*ws*/) {
   _initBase = false;
   _morphParams.clear();
   _sentry.reset();

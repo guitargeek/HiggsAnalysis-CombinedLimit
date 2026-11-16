@@ -38,7 +38,7 @@ SimpleProdPdf::SimpleProdPdf(const char* name, const char* title, RooArgList con
 SimpleProdPdf::SimpleProdPdf(const char* name,
                              const char* title,
                              RooArgList& pdfList,
-                             std::vector<int> const& pdfSettings)
+                             std::vector<int> const& /*pdfSettings*/)
     : RooAbsPdf(name, title), _pdfList("!pdfs", "List of PDFs", this), _cacheMgr(this, 10) {
   int iSetting = -1;
   for (RooAbsArg *arg : pdfList) {

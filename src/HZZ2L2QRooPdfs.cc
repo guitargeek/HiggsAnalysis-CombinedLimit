@@ -162,7 +162,7 @@ double RooCB::evaluate() const
    
  } 
 
- Int_t RooDoubleCB::getAnalyticalIntegral(RooArgSet& allVars, RooArgSet& analVars, const char* range) const 
+ Int_t RooDoubleCB::getAnalyticalIntegral(RooArgSet& allVars, RooArgSet& analVars, const char* /*range*/) const 
  {
    if (_forceNumInt) return 0;
 
@@ -430,13 +430,13 @@ Double_t Triangle::evaluate() const
 }
 
 
-Int_t Triangle::getAnalyticalIntegral(RooArgSet& allVars, RooArgSet& analVars, const char* range) const 
+Int_t Triangle::getAnalyticalIntegral(RooArgSet& allVars, RooArgSet& analVars, const char* /*range*/) const 
 {
   if (matchArgs(allVars,analVars,m)) return 1;
   return 0;
 }
 
-Double_t Triangle::analyticalIntegral(Int_t code, const char* rangeName) const 
+Double_t Triangle::analyticalIntegral(Int_t code, const char* /*rangeName*/) const 
 {
 
   // WARNING, ASSUMES TURN TO BE IN INTERVAL

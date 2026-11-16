@@ -108,7 +108,7 @@ Significance::MinimizerSentry::~MinimizerSentry()
   ROOT::Math::MinimizerOptions::SetDefaultMinimizer(minimizerTypeBackup.c_str(),minimizerAlgoBackup.empty() ? nullptr : minimizerAlgoBackup.c_str());
 }
 
-bool Significance::run(RooWorkspace *w, RooStats::ModelConfig *mc_s, RooStats::ModelConfig *mc_b, RooAbsData &data, double &limit, double &limitErr, const double *hint) { 
+bool Significance::run(RooWorkspace *w, RooStats::ModelConfig *mc_s, RooStats::ModelConfig * /*mc_b*/, RooAbsData &data, double &limit, double &limitErr, const double * /*hint*/) { 
   //MinimizerSentry minimizerConfig(minimizerAlgo_, minimizerTolerance_);
   CloseCoutSentry sentry(verbose < 0);
  
@@ -186,7 +186,7 @@ bool Significance::run(RooWorkspace *w, RooStats::ModelConfig *mc_s, RooStats::M
   return success;
 }
 
-bool Significance::runLimit(RooWorkspace *w, RooStats::ModelConfig *mc_s, RooAbsData &data, double &limit, double &limitErr) {
+bool Significance::runLimit(RooWorkspace * /*w*/, RooStats::ModelConfig *mc_s, RooAbsData &data, double &limit, double &limitErr) {
   RooArgSet  poi(*mc_s->GetParametersOfInterest());
   RooRealVar *r = dynamic_cast<RooRealVar *>(poi.first());
   double rMax = r->getMax();
@@ -247,7 +247,7 @@ bool Significance::runLimit(RooWorkspace *w, RooStats::ModelConfig *mc_s, RooAbs
   return success;
 }
 
-bool Significance::runSignificance(RooWorkspace *w, RooStats::ModelConfig *mc_s, RooAbsData &data, double &limit, double &limitErr) {
+bool Significance::runSignificance(RooWorkspace * /*w*/, RooStats::ModelConfig *mc_s, RooAbsData &data, double &limit, double & /*limitErr*/) {
   RooArgSet  poi(*mc_s->GetParametersOfInterest());
   RooRealVar *r = dynamic_cast<RooRealVar *>(poi.first());
 
@@ -299,7 +299,7 @@ bool Significance::runSignificance(RooWorkspace *w, RooStats::ModelConfig *mc_s,
 }
 
 
-double Significance::upperLimitWithMinos(RooAbsPdf &pdf, RooAbsData &data, RooRealVar &poi, const RooArgSet *nuisances, double tolerance, double cl) const {
+double Significance::upperLimitWithMinos(RooAbsPdf &pdf, RooAbsData &data, RooRealVar &poi, const RooArgSet *nuisances, double /*tolerance*/, double cl) const {
     auto nll = combineCreateNLL(pdf, data, nuisances, /*offset=*/false);
     // keep the RooMinimizer from doing its own discrete profiling
     utils::ConstantCategoriesGuard constantCategories(*nll);
@@ -488,7 +488,7 @@ double Significance::significanceBruteForce(RooAbsPdf &pdf, RooAbsData &data, Ro
    return std::copysign(thisnll - minnll, rbest);
 }
 
-double Significance::significanceFromScan(RooAbsPdf &pdf, RooAbsData &data, RooRealVar &poi, const RooArgSet *nuisances, double tolerance, int steps) const {
+double Significance::significanceFromScan(RooAbsPdf &pdf, RooAbsData &data, RooRealVar &poi, const RooArgSet *nuisances, double /*tolerance*/, int steps) const {
     auto nll = combineCreateNLL(pdf, data, nuisances, /*offset=*/false);
     double maxScan = poi.getMax()*0.7;
     bool stepDown = (bfAlgo_.find("stepDown") != std::string::npos);

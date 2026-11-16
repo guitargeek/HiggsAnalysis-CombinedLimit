@@ -62,7 +62,7 @@ ToyMCSamplerOpt::~ToyMCSamplerOpt()
 }
 
 
-toymcoptutils::SinglePdfGenInfo::SinglePdfGenInfo(RooAbsPdf &pdf, const RooArgSet& observables, bool preferBinned, const RooDataSet* protoData, int forceEvents, bool canUseSpec) :
+toymcoptutils::SinglePdfGenInfo::SinglePdfGenInfo(RooAbsPdf &pdf, const RooArgSet& observables, bool preferBinned, const RooDataSet* /*protoData*/, int /*forceEvents*/, bool canUseSpec) :
    mode_(pdf.canBeExtended() ? (preferBinned ? Binned : Unbinned) : Counting),
    pdf_(&pdf),
    canUseSpec_(canUseSpec)

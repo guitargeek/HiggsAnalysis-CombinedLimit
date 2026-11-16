@@ -128,7 +128,7 @@ Int_t HZZ4L_RooCTauPdf_2D::getAnalyticalIntegral(RooArgSet& allVars, RooArgSet& 
   if (matchArgs(allVars,analVars,kd, ksmd)) return 1;
   return 0 ;
 }
-Double_t HZZ4L_RooCTauPdf_2D::analyticalIntegral(Int_t code, const char* rangeName) const
+Double_t HZZ4L_RooCTauPdf_2D::analyticalIntegral(Int_t code, const char* /*rangeName*/) const
 {
   R__ASSERT(code == 1);
 

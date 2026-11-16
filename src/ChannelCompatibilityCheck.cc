@@ -56,7 +56,7 @@ void ChannelCompatibilityCheck::applyOptions(const boost::program_options::varia
     }
 }
 
-bool ChannelCompatibilityCheck::runSpecific(RooWorkspace *w, RooStats::ModelConfig *mc_s, RooStats::ModelConfig *mc_b, RooAbsData &data, double &limit, double &limitErr, const double *hint) { 
+bool ChannelCompatibilityCheck::runSpecific(RooWorkspace *w, RooStats::ModelConfig *mc_s, RooStats::ModelConfig * /*mc_b*/, RooAbsData &data, double &limit, double & /*limitErr*/, const double * /*hint*/) { 
 
   RooRealVar *r = dynamic_cast<RooRealVar *>(mc_s->GetParametersOfInterest()->first());
   if (fixedMu_) { r->setVal(mu_); r->setConstant(true); }

@@ -121,7 +121,7 @@ void GoodnessOfFit::initKSandAD(RooStats::ModelConfig *mc_s) {
   }
 }
 
-bool GoodnessOfFit::runSaturatedModel(RooWorkspace *w, RooStats::ModelConfig *mc_s, RooStats::ModelConfig *mc_b, RooAbsData &data, double &limit, double &limitErr, const double *hint) { 
+bool GoodnessOfFit::runSaturatedModel(RooWorkspace *w, RooStats::ModelConfig *mc_s, RooStats::ModelConfig * /*mc_b*/, RooAbsData &data, double &limit, double & /*limitErr*/, const double * /*hint*/) { 
   RooAbsPdf *pdf_nominal = mc_s->GetPdf();
   // now I need to make the saturated pdf
   std::unique_ptr<RooAbsPdf> saturated;
@@ -239,7 +239,7 @@ bool GoodnessOfFit::runSaturatedModel(RooWorkspace *w, RooStats::ModelConfig *mc
 }
 
 // Code for the Anderson-Darling test originates from https://gist.github.com/neggert/4586791
-bool GoodnessOfFit::runKSandAD(RooWorkspace *w, RooStats::ModelConfig *mc_s, RooStats::ModelConfig *mc_b, RooAbsData &data, double &limit, double &limitErr, const double *hint, bool kolmo) { 
+bool GoodnessOfFit::runKSandAD(RooWorkspace * /*w*/, RooStats::ModelConfig *mc_s, RooStats::ModelConfig * /*mc_b*/, RooAbsData &data, double &limit, double & /*limitErr*/, const double * /*hint*/, bool kolmo) { 
   RooAbsPdf *pdf = mc_s->GetPdf();
 
   // Don't want the constraints here

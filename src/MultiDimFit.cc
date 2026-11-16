@@ -167,7 +167,7 @@ void MultiDimFit::applyOptions(const boost::program_options::variables_map &vm)
     saveFitResult_ = (vm.count("saveFitResult") > 0);
 }
 
-bool MultiDimFit::runSpecific(RooWorkspace *w, RooStats::ModelConfig *mc_s, RooStats::ModelConfig *mc_b, RooAbsData &data, double &limit, double &limitErr, const double *hint) { 
+bool MultiDimFit::runSpecific(RooWorkspace *w, RooStats::ModelConfig *mc_s, RooStats::ModelConfig * /*mc_b*/, RooAbsData &data, double & /*limit*/, double & /*limitErr*/, const double * /*hint*/) { 
     // one-time initialization of POI variables, TTree branches, ...
     Combine::toggleGlobalFillTree(true);
 
@@ -1091,7 +1091,7 @@ void MultiDimFit::doContour2D(RooWorkspace *, RooAbsReal &nll)
     verbose++; // restore verbosity
 }
 
-void MultiDimFit::doStitch2D(RooWorkspace *, RooAbsReal &nll)
+void MultiDimFit::doStitch2D(RooWorkspace *, RooAbsReal & /*nll*/)
 {
     if (poi_.size() != 2) throw std::logic_error("Contour2D works only in 2 dimensions");
     //RooRealVar *xv = poiVars_[0]; double x0 = poiVals_[0]; float &x = poiVals_[0];

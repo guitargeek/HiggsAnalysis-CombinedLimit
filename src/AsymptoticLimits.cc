@@ -142,7 +142,7 @@ bool AsymptoticLimits::run(RooWorkspace *w, RooStats::ModelConfig *mc_s, RooStat
     return ret;
 }
 
-bool AsymptoticLimits::runLimit(RooWorkspace *w, RooStats::ModelConfig *mc_s, RooStats::ModelConfig *mc_b, RooAbsData &data, double &limit, double &limitErr, const double *hint) {
+bool AsymptoticLimits::runLimit(RooWorkspace *w, RooStats::ModelConfig *mc_s, RooStats::ModelConfig *mc_b, RooAbsData &data, double &limit, double &limitErr, const double * /*hint*/) {
   RooRealVar *r = dynamic_cast<RooRealVar *>(mc_s->GetParametersOfInterest()->first());
 
   // If getting result from grid, can just do that and return
@@ -366,7 +366,7 @@ double AsymptoticLimits::getCLs(RooRealVar &r, double rVal, bool getAlsoExpected
   return doCLs_ ? CLs : Pmu ; 
 }   
 
-std::vector<std::pair<float,float> > AsymptoticLimits::runLimitExpected(RooWorkspace *w, RooStats::ModelConfig *mc_s, RooStats::ModelConfig *mc_b, RooAbsData &data, double &limit, double &limitErr, const double *hint) {
+std::vector<std::pair<float,float> > AsymptoticLimits::runLimitExpected(RooWorkspace *w, RooStats::ModelConfig *mc_s, RooStats::ModelConfig *mc_b, RooAbsData &data, double &limit, double &limitErr, const double * /*hint*/) {
     // See equation 35-38 of AN 2011/298 and references cited therein
     //
     //   (35)  sigma^2   = mu^2 / q_mu(Asimov)
@@ -776,7 +776,7 @@ float AsymptoticLimits::calculateLimitFromGrid(RooRealVar *r , double quantile, 
 	return rlim;
 } 
 
-RooAbsData * AsymptoticLimits::asimovDataset(RooWorkspace *w, RooStats::ModelConfig *mc_s, RooStats::ModelConfig *mc_b, RooAbsData &data, bool overwrite) {
+RooAbsData * AsymptoticLimits::asimovDataset(RooWorkspace * /*w*/, RooStats::ModelConfig *mc_s, RooStats::ModelConfig * /*mc_b*/, RooAbsData &data, bool overwrite) {
     // Do this only once
     // if (w->data("_Asymptotic_asimovDataset_") != 0) {
     //     return w->data("_Asymptotic_asimovDataset_");

@@ -783,7 +783,7 @@ Double_t RooGaussStepBernstein::evaluate() const
 //_____________________________________________________________________________
 Int_t RooGaussStepBernstein::getAnalyticalIntegral(RooArgSet& allVars,
 						   RooArgSet& analVars,
-						   const char* rangeName) const
+						   const char* /*rangeName*/) const
 {  
   if (matchArgs(allVars, analVars, _x) && _coefList.getSize() <= 5) return 1;
   

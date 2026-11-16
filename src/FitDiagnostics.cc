@@ -141,7 +141,7 @@ void FitDiagnostics::applyOptions(const boost::program_options::variables_map &v
     if (justFit_) { out_ = "none"; makePlots_ = false; savePredictionsPerToy_ = false; saveNormalizations_ = false; reuseParams_ = false, skipBOnlyFit_ = true; skipSBFit_ = false; }
 }
 
-bool FitDiagnostics::runSpecific(RooWorkspace *w, RooStats::ModelConfig *mc_s, RooStats::ModelConfig *mc_b, RooAbsData &data, double &limit, double &limitErr, const double *hint) {
+bool FitDiagnostics::runSpecific(RooWorkspace *w, RooStats::ModelConfig *mc_s, RooStats::ModelConfig *mc_b, RooAbsData &data, double &limit, double &limitErr, const double * /*hint*/) {
 
   if (reuseParams_ && minos_!="none"){
 	std::cout << "Cannot reuse b-only fit parameters when running minos. Parameters will be reset when running S+B fit"<<std::endl;
@@ -1324,7 +1324,7 @@ void FitDiagnostics::setShapesFitResultTrees(std::map<std::string,ShapeAndNorm> 
     }
 	 return;
 }
-void FitDiagnostics::resetFitResultTrees(bool withSys){
+void FitDiagnostics::resetFitResultTrees(bool /*withSys*/){
 	
 	 for (int count = 0; count < overallNorms_; count ++){
 	     processNormalizations_[count] = -999;

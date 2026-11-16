@@ -26,7 +26,7 @@ BayesianFlatPrior::BayesianFlatPrior() :
         ;
 }
 
-bool BayesianFlatPrior::run(RooWorkspace *w, RooStats::ModelConfig *mc_s, RooStats::ModelConfig *mc_b, RooAbsData &data, double &limit, double &limitErr, const double *hint) {
+bool BayesianFlatPrior::run(RooWorkspace *w, RooStats::ModelConfig *mc_s, RooStats::ModelConfig * /*mc_b*/, RooAbsData &data, double &limit, double & /*limitErr*/, const double * /*hint*/) {
   RooArgSet  poi(*mc_s->GetParametersOfInterest());
 
   int dim = poi.getSize();

@@ -41,7 +41,7 @@ BayesianToyMC::BayesianToyMC() :
         ;
 }
 
-void BayesianToyMC::applyOptions(const boost::program_options::variables_map &vm) {
+void BayesianToyMC::applyOptions(const boost::program_options::variables_map & /*vm*/) {
     if (!withSystematics) {
         std::cout << "BayesianToyMC: when running with no systematics, BayesianToyMC is identical to BayesianSimple." << std::endl;
         tries_    = 1;
@@ -119,7 +119,7 @@ bool BayesianToyMC::run(RooWorkspace *w, RooStats::ModelConfig *mc_s, RooStats::
   return true;
 }
 
-bool BayesianToyMC::runBayesFactor(RooWorkspace *w, RooStats::ModelConfig *mc_s, RooStats::ModelConfig *mc_b, RooAbsData &data, double &limit, double &limitErr, const double *hint) {
+bool BayesianToyMC::runBayesFactor(RooWorkspace * /*w*/, RooStats::ModelConfig *mc_s, RooStats::ModelConfig *mc_b, RooAbsData &data, double &limit, double &limitErr, const double * /*hint*/) {
     std::pair<double,double> ppS;
     std::pair<double,double> ppB;
     double offset = std::numeric_limits<double>::quiet_NaN();

@@ -979,7 +979,7 @@ double RooDoubleCrystalBall::evaluate() const {
    
 } 
 
-Int_t RooDoubleCrystalBall::getAnalyticalIntegral(RooArgSet& allVars, RooArgSet& analVars, const char* range) const {
+Int_t RooDoubleCrystalBall::getAnalyticalIntegral(RooArgSet& allVars, RooArgSet& analVars, const char* /*range*/) const {
   if (matchArgs(allVars,analVars,x)) return 1;
   return 0;
 }

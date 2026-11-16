@@ -64,7 +64,7 @@ public:
     Double_t value=tpl.GetAt(x);
     return value;
   }
-  Int_t getAnalyticalIntegral(RooArgSet& allVars, RooArgSet& analVars, const char* rangeName=nullptr) const override {
+  Int_t getAnalyticalIntegral(RooArgSet& allVars, RooArgSet& analVars, const char* /*rangeName*/=nullptr) const override {
     Int_t code=1;
     const Int_t code_prime[1]={ 2 };
     for (int ic=0; ic<(this->obsList).getSize(); ic++){
@@ -126,7 +126,7 @@ public:
     Double_t value=tpl.GetAt(x, y);
     return value;
   }
-  Int_t getAnalyticalIntegral(RooArgSet& allVars, RooArgSet& analVars, const char* rangeName=nullptr) const override {
+  Int_t getAnalyticalIntegral(RooArgSet& allVars, RooArgSet& analVars, const char* /*rangeName*/=nullptr) const override {
     Int_t code=1;
     const Int_t code_prime[2]={ 2, 3 };
     for (int ic=0; ic<(this->obsList).getSize(); ic++){
@@ -222,7 +222,7 @@ public:
     Double_t value=tpl.GetAt(x, y, z);
     return value;
   }
-  Int_t getAnalyticalIntegral(RooArgSet& allVars, RooArgSet& analVars, const char* rangeName=nullptr) const override {
+  Int_t getAnalyticalIntegral(RooArgSet& allVars, RooArgSet& analVars, const char* /*rangeName*/=nullptr) const override {
     Int_t code=1;
     const Int_t code_prime[3]={ 2, 3, 5 };
     for (int ic=0; ic<(this->obsList).getSize(); ic++){

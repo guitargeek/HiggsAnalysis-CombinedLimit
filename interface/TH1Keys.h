@@ -27,13 +27,13 @@ class TH1Keys : public TH1 {
        virtual void     Add(const TH1 *h, const TH1 *h2, Double_t c1=1, Double_t c2=1) { dont("Add with two arguments"); } 
 #else
        Bool_t   Add(const TH1 *h1, Double_t c1=1) override;
-       Bool_t   Add(const TH1 *h, const TH1 *h2, Double_t c1=1, Double_t c2=1) override { dont("Add with two arguments"); return false;} 
+       Bool_t   Add(const TH1 * /*h*/, const TH1 * /*h2*/, Double_t /*c1*/=1, Double_t /*c2*/=1) override { dont("Add with two arguments"); return false;} 
 #endif
        void     AddBinContent(Int_t bin) override { AddBinContent(bin, 1.0); }
-       void     AddBinContent(Int_t bin, Double_t w) override { dont("AddBinContent"); }
-       void     Copy(TObject &hnew) const override { dont("Copy"); }
+       void     AddBinContent(Int_t /*bin*/, Double_t /*w*/) override { dont("AddBinContent"); }
+       void     Copy(TObject & /*hnew*/) const override { dont("Copy"); }
 
-       virtual TH1     *DrawCopy(Option_t *option="") const { dont("DrawCopy"); return nullptr; }
+       virtual TH1     *DrawCopy(Option_t * /*option*/="") const { dont("DrawCopy"); return nullptr; }
 
        Double_t GetBinContent(Int_t bin) const override { return GetHisto()->GetBinContent(bin); }
        Double_t GetBinContent(Int_t bin, Int_t) const override { return GetHisto()->GetBinContent(bin); }
@@ -42,10 +42,10 @@ class TH1Keys : public TH1 {
        Double_t GetEntries() const override { return dataset_->numEntries(); }
 
        void     Reset(Option_t *option="") override ; 
-       void     SetBinContent(Int_t bin, Double_t content) override { dont("SetBinContent"); }
+       void     SetBinContent(Int_t /*bin*/, Double_t /*content*/) override { dont("SetBinContent"); }
        void     SetBinContent(Int_t bin, Int_t, Double_t content) override        { SetBinContent(bin,content); }
        void     SetBinContent(Int_t bin, Int_t, Int_t, Double_t content) override { SetBinContent(bin,content); }
-       void     SetBinsLength(Int_t n=-1) override { dont("SetBinLength"); }
+       void     SetBinsLength(Int_t /*n*/=-1) override { dont("SetBinLength"); }
        void     Scale(Double_t c1=1, Option_t *option="") override;
 
        ClassDefOverride(TH1Keys,1)  //

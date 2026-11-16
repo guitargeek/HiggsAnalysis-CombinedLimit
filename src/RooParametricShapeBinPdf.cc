@@ -147,7 +147,7 @@ Double_t RooParametricShapeBinPdf::evaluate() const
 }
 
 // //---------------------------------------------------------------------------
-Int_t RooParametricShapeBinPdf::getAnalyticalIntegral(RooArgSet& allVars, RooArgSet& analVars, const char* rangeName) const{
+Int_t RooParametricShapeBinPdf::getAnalyticalIntegral(RooArgSet& allVars, RooArgSet& analVars, const char* /*rangeName*/) const{
   if (matchArgs(allVars, analVars, x)) return 1;
   return 0;
 }

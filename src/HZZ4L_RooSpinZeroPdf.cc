@@ -88,7 +88,7 @@ Int_t HZZ4L_RooSpinZeroPdf::getAnalyticalIntegral(RooArgSet& allVars, RooArgSet&
 
 }
 
-Double_t HZZ4L_RooSpinZeroPdf::analyticalIntegral(Int_t code, const char* rangeName) const
+Double_t HZZ4L_RooSpinZeroPdf::analyticalIntegral(Int_t code, const char* /*rangeName*/) const
 {
    switch(code)
      {

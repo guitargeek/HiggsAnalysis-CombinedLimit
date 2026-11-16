@@ -212,7 +212,7 @@ double VectorizedCBShape::getIntegral() const {
     return left + central + right;
 }
 
-void VectorizedCBShape::cbGauss(double* __restrict__ t, unsigned int n, double norm, double* __restrict__ out,  double* __restrict__ work2) const {
+void VectorizedCBShape::cbGauss(double* __restrict__ t, unsigned int n, double norm, double* __restrict__ out,  [[maybe_unused]] double* __restrict__ work2) const {
 // The fast code code path is only available when VDT is available
 #ifndef COMBINE_NO_VDT
     if (!hasFast()) {
@@ -233,7 +233,7 @@ void VectorizedCBShape::cbGauss(double* __restrict__ t, unsigned int n, double n
 #endif
 }
 
-void VectorizedCBShape::cbCB(double* __restrict__ t, unsigned int n, double norm, double* __restrict__ out,  double* __restrict__ work2) const {
+void VectorizedCBShape::cbCB(double* __restrict__ t, unsigned int n, double norm, double* __restrict__ out,  [[maybe_unused]] double* __restrict__ work2) const {
     // val = norm * std::exp(-0.5*alpha1*alpha1) * pow(1. - alpha1/n1 * (alpha1+t), -n1);
     double alpha1 = alpha_->getVal();
     double n1 = n_->getVal();

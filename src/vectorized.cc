@@ -27,7 +27,7 @@ void vectorized::sqrt(const uint32_t size, double const * __restrict__ iarray, d
 }
 
 
-double vectorized::nll_reduce(const uint32_t size, double* __restrict__ pdfvals, double const * __restrict__ weights, double sumcoeff,  double *  __restrict__ workingArea) {
+double vectorized::nll_reduce(const uint32_t size, double* __restrict__ pdfvals, double const * __restrict__ weights, double sumcoeff,  [[maybe_unused]] double *  __restrict__ workingArea) {
     double invsum = 1.0/sumcoeff;
 #ifndef COMBINE_NO_VDT
     for (uint32_t i = 0; i < size; ++i) {
@@ -54,7 +54,7 @@ double vectorized::nll_reduce(const uint32_t size, double* __restrict__ pdfvals,
     return ret.sum();
 }
 
-void vectorized::gaussians(const uint32_t size, double mean, double sigma, double norm, const double* __restrict__ xvals, double * __restrict__ out, double * __restrict__ workingArea, double * __restrict__ workingArea2)
+void vectorized::gaussians(const uint32_t size, double mean, double sigma, double norm, const double* __restrict__ xvals, double * __restrict__ out, [[maybe_unused]] double * __restrict__ workingArea, [[maybe_unused]] double * __restrict__ workingArea2)
 {
     double xscale = -0.5/(sigma*sigma);
     const double inorm = 1.0/norm;
@@ -75,7 +75,7 @@ void vectorized::gaussians(const uint32_t size, double mean, double sigma, doubl
 #endif
 }
 
-void vectorized::exponentials(const uint32_t size, double lambda, double norm, const double* __restrict__ xvals, double * __restrict__ out, double * __restrict__ workingArea)
+void vectorized::exponentials(const uint32_t size, double lambda, double norm, const double* __restrict__ xvals, double * __restrict__ out, [[maybe_unused]] double * __restrict__ workingArea)
 {
     //out[i] = std::exp(xvals[i]*lambda) * nfact; nfact = 1.0/norm
     double lognfact = -std::log(norm);
@@ -91,7 +91,7 @@ void vectorized::exponentials(const uint32_t size, double lambda, double norm, c
 #endif
 }
 
-void vectorized::powers(const uint32_t size, double exponent, double norm, const double* __restrict__ xvals, double * __restrict__ out, double * __restrict__ workingArea)
+void vectorized::powers(const uint32_t size, double exponent, double norm, const double* __restrict__ xvals, double * __restrict__ out, [[maybe_unused]] double * __restrict__ workingArea)
 {
     //out[i] = std::pow(xvals[i],exponent) * nfact; // nfact = 1.0/norm
     double lognfact = -std::log(norm);

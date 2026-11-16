@@ -490,7 +490,7 @@ Int_t CMSHistErrorPropagator::getAnalyticalIntegral(RooArgSet& allVars,
 }
 
 Double_t CMSHistErrorPropagator::analyticalIntegral(Int_t code,
-                                         const char* rangeName) const {
+                                         const char* /*rangeName*/) const {
   // TODO: check how RooHistFunc handles ranges that splice bins
   switch (code) {
     case 1: {

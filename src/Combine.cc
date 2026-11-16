@@ -1121,7 +1121,7 @@ void Combine::toggleGlobalFillTree(bool flag){
 
 void Combine::setPickToy(int pickToy) { pickToy_ = pickToy; }
 
-void Combine::commitPoint(bool expected, float quantile) {
+void Combine::commitPoint(bool /*expected*/, float quantile) {
     Float_t saveQuantile =  g_quantileExpected_;
     g_quantileExpected_ = quantile;
 

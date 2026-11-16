@@ -720,7 +720,7 @@ void FitterAlgoBase::optimizeBounds(const RooWorkspace *w, const RooStats::Model
         } 
     } 
 }
-void FitterAlgoBase::restoreBounds(const RooWorkspace *w, const RooStats::ModelConfig *mc) {
+void FitterAlgoBase::restoreBounds(const RooWorkspace * /*w*/, const RooStats::ModelConfig *mc) {
     if (runtimedef::get("OPTIMIZE_BOUNDS") && mc->GetNuisanceParameters() != nullptr) {
         for (RooAbsArg *a : *mc->GetNuisanceParameters()) {
             RooRealVar *rrv = dynamic_cast<RooRealVar *>(a);

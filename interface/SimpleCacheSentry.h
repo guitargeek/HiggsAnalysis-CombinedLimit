@@ -23,8 +23,8 @@ class SimpleCacheSentry : public RooAbsArg {
         void reset() { clearValueDirty(); } 
         // base class methods to be implemented
         TObject* clone(const char* newname) const override { return new SimpleCacheSentry(*this, newname); }
-        RooAbsArg *createFundamental(const char* newname=nullptr) const override { return nullptr; }
-        Bool_t readFromStream(std::istream& is, Bool_t compact, Bool_t verbose=kFALSE) override { return false; }
+        RooAbsArg *createFundamental(const char* /*newname*/=nullptr) const override { return nullptr; }
+        Bool_t readFromStream(std::istream& /*is*/, Bool_t /*compact*/, Bool_t /*verbose*/=kFALSE) override { return false; }
         void writeToStream(std::ostream& os, Bool_t compact) const override { }
         Bool_t operator==(const RooAbsArg& other) const override { return this == &other; }
         void syncCache(const RooArgSet* nset=nullptr) override {}

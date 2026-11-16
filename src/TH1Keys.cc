@@ -155,13 +155,13 @@ Bool_t TH1Keys::Add(const TH1 *h1, Double_t c1)
 #endif
 }
 
-void TH1Keys::Scale(Double_t c1, Option_t *option)
+void TH1Keys::Scale(Double_t c1, Option_t * /*option*/)
 {
     globalScale_ *= c1;
     if (cache_) cache_->Scale(c1);
 }
 
-void TH1Keys::Reset(Option_t *option) {
+void TH1Keys::Reset(Option_t * /*option*/) {
     dataset_->reset();
     overflow_ = underflow_ = 0.0;
     globalScale_ = 1.0;

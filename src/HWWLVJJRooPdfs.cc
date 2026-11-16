@@ -407,7 +407,7 @@ ClassImp(RooPowerFunction)
 
 
 
- Int_t RooPowerFunction::getAnalyticalIntegral(RooArgSet& allVars, RooArgSet& analVars, const char* /*rangeName*/) const  
+ Int_t RooPowerFunction::getAnalyticalIntegral(RooArgSet& /*allVars*/, RooArgSet& /*analVars*/, const char* /*rangeName*/) const  
  { 
    // LIST HERE OVER WHICH VARIABLES ANALYTICAL INTEGRATION IS SUPPORTED, 
    // ASSIGN A NUMERIC CODE FOR EACH SUPPORTED (SET OF) PARAMETERS 
@@ -421,7 +421,7 @@ ClassImp(RooPowerFunction)
 
 
 
- Double_t RooPowerFunction::analyticalIntegral(Int_t code, const char* rangeName) const  
+ Double_t RooPowerFunction::analyticalIntegral(Int_t /*code*/, const char* /*rangeName*/) const  
  { 
    // RETURN ANALYTICAL INTEGRAL DEFINED BY RETURN CODE ASSIGNED BY getAnalyticalIntegral
    // THE MEMBER FUNCTION x.min(rangeName) AND x.max(rangeName) WILL RETURN THE INTEGRATION

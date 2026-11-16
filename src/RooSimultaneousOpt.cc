@@ -9,7 +9,7 @@ RooAbsReal*
 RooSimultaneousOpt::createNLL(RooAbsData& data, const RooLinkedList& cmdList) 
 #else
 std::unique_ptr<RooAbsReal>
-RooSimultaneousOpt::createNLLImpl(RooAbsData& data, const RooLinkedList& cmdList) 
+RooSimultaneousOpt::createNLLImpl(RooAbsData& data, const RooLinkedList& /*cmdList*/) 
 #endif
 {
 #if ROOT_VERSION_CODE >= ROOT_VERSION(6, 36, 0)

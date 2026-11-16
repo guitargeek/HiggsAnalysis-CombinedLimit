@@ -385,7 +385,7 @@ bool HybridNew::run(RooWorkspace *w, RooStats::ModelConfig *mc_s, RooStats::Mode
     return false;
 }
 
-bool HybridNew::runSignificance(RooWorkspace *w, RooStats::ModelConfig *mc_s, RooStats::ModelConfig *mc_b, RooAbsData &data, double &limit, double &limitErr, const double *hint) {
+bool HybridNew::runSignificance(RooWorkspace *w, RooStats::ModelConfig *mc_s, RooStats::ModelConfig *mc_b, RooAbsData &data, double &limit, double &limitErr, const double * /*hint*/) {
     HybridNew::Setup setup;
     std::unique_ptr<RooStats::HybridCalculator> hc(create(w, mc_s, mc_b, data, rValues_, setup));
     std::unique_ptr<HypoTestResult> hcResult;
@@ -779,7 +779,7 @@ bool HybridNew::runLimit(RooWorkspace *w, RooStats::ModelConfig *mc_s, RooStats:
   return true;
 }
 
-bool HybridNew::runSinglePoint(RooWorkspace *w, RooStats::ModelConfig *mc_s, RooStats::ModelConfig *mc_b, RooAbsData &data, double &limit, double &limitErr, const double *hint) {
+bool HybridNew::runSinglePoint(RooWorkspace *w, RooStats::ModelConfig *mc_s, RooStats::ModelConfig *mc_b, RooAbsData &data, double &limit, double &limitErr, const double * /*hint*/) {
     std::pair<double, double> result = eval(w, mc_s, mc_b, data, rValues_, clsAccuracy_ != 0);
     std::cout << "\n -- Hybrid New -- \n";
     std::cout << (CLs_ ? "CLs = " : "Pmu = ") << result.first << " +/- " << result.second << std::endl;
@@ -789,7 +789,7 @@ bool HybridNew::runSinglePoint(RooWorkspace *w, RooStats::ModelConfig *mc_s, Roo
     return true;
 }
 
-bool HybridNew::runTestStatistics(RooWorkspace *w, RooStats::ModelConfig *mc_s, RooStats::ModelConfig *mc_b, RooAbsData &data, double &limit, double &limitErr, const double *hint) {
+bool HybridNew::runTestStatistics(RooWorkspace *w, RooStats::ModelConfig *mc_s, RooStats::ModelConfig *mc_b, RooAbsData &data, double &limit, double & /*limitErr*/, const double * /*hint*/) {
     bool isProfile = (testStat_ == "LHC" || testStat_ == "LHCFC"  || testStat_ == "Profile");
     if (readHybridResults_ && expectedFromGrid_) {
         std::unique_ptr<RooStats::HypoTestResult> result(readToysFromFile(rValues_));
@@ -1767,7 +1767,7 @@ void HybridNew::updateGridData(RooWorkspace *w, RooStats::ModelConfig *mc_s, Roo
         }
     }
 }
-void HybridNew::updateGridDataFC(RooWorkspace *w, RooStats::ModelConfig *mc_s, RooStats::ModelConfig *mc_b, RooAbsData &data, bool smart, double clsTarget_) {
+void HybridNew::updateGridDataFC(RooWorkspace *w, RooStats::ModelConfig *mc_s, RooStats::ModelConfig *mc_b, RooAbsData &data, bool /*smart*/, double /*clsTarget_*/) {
     typedef std::map<double, RooStats::HypoTestResult *>::iterator point;
     std::vector<Double_t> rToUpdate; std::vector<point> pointToUpdate;
     double minimizerTolerance_  = ROOT::Math::MinimizerOptions::DefaultTolerance();

@@ -201,7 +201,7 @@ RooAbsPdf *utils::factorizePdf(const RooArgSet &observables, RooAbsPdf &pdf, Roo
 void utils::factorizePdf(RooStats::ModelConfig &model, RooAbsPdf &pdf, RooArgList &obsTerms, RooArgList &constraints, bool debug) {
     return factorizePdf(*model.GetObservables(), pdf, obsTerms, constraints, debug);
 }
-void utils::factorizePdf(const RooArgSet &observables, RooAbsPdf &pdf, RooArgList &obsTerms, RooArgList &constraints, bool debug) {
+void utils::factorizePdf(const RooArgSet &observables, RooAbsPdf &pdf, RooArgList &obsTerms, RooArgList &constraints, bool /*debug*/) {
     //assert(&pdf); should be safe
     const std::type_info & id = typeid(pdf);
     if (id == typeid(RooProdPdf)) {

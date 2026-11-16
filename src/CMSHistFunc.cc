@@ -1192,7 +1192,7 @@ Int_t CMSHistFunc::getAnalyticalIntegral(RooArgSet& allVars,
 }
 
 Double_t CMSHistFunc::analyticalIntegral(Int_t code,
-                                         const char* rangeName) const {
+                                         const char* /*rangeName*/) const {
   switch (code) {
     case 1: {
       updateCache();
