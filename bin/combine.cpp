@@ -149,7 +149,7 @@ int main(int argc, char **argv) {
     cout << desc;
     map<string, LimitAlgo *>::const_iterator i;
     for(i = methods.begin(); i != methods.end(); ++i) {
-        if ( (!vm0["method"].defaulted()) && whichMethod.compare(i->second->name())!=0 ) continue;
+        if ( (!vm0["method"].defaulted()) && whichMethod != i->second->name() ) continue;
         cout << i->second->options() << "\n";
     }
     return 0;
