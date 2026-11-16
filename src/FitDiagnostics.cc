@@ -152,11 +152,12 @@ bool FitDiagnostics::runSpecific(RooWorkspace *w, RooStats::ModelConfig *mc_s, R
 	if (currentToy_ < 1){
 		const bool longName = runtimedef::get(std::string("longName"));
 		std::string fdname(out_+"/fitDiagnostics"+name_);
-		if (longName)
+		if (longName) {
 			fdname += "."+massName_+toyName_+"root";
-		else
-			fdname += ".root";
-		fitOut.reset(TFile::Open(fdname.c_str(), "RECREATE")); 
+                } else {
+                  fdname += ".root";
+                }
+                fitOut.reset(TFile::Open(fdname.c_str(), "RECREATE")); 
 		createFitResultTrees(*mc_s,withSystematics,savePredictionsPerToy_);
 	}
   }
@@ -782,11 +783,13 @@ void FitDiagnostics::getNormalizations(RooAbsPdf *pdf, const RooArgSet &obs, Roo
 		vals[i] = pair->second.norm->getVal();
 		channel_names.push_back(pair->second.channel);
 		norm_tot.find(pair->second.channel) == norm_tot.end() ? norm_tot[pair->second.channel] = vals[i] : norm_tot[pair->second.channel] += vals[i];
-		if (pair->second.signal)
+		if (pair->second.signal) {
 			norm_sig.find(pair->second.channel) == norm_sig.end() ? norm_sig[pair->second.channel] = vals[i] : norm_sig[pair->second.channel] += vals[i];
-		else
-			norm_bkg.find(pair->second.channel) == norm_bkg.end() ? norm_bkg[pair->second.channel] = vals[i] : norm_bkg[pair->second.channel] += vals[i];
-		// out.addOwned(*(new RooConstVar(pair->first.c_str(), "", pair->second.norm->getVal())));
+                } else {
+                  norm_bkg.find(pair->second.channel) == norm_bkg.end() ? norm_bkg[pair->second.channel] = vals[i]
+                                                                        : norm_bkg[pair->second.channel] += vals[i];
+                }
+                // out.addOwned(*(new RooConstVar(pair->first.c_str(), "", pair->second.norm->getVal())));
 		if (fOut != nullptr && saveShapes_ && pair->second.obs.getSize() == 1)
 		{
 			RooRealVar *x = (RooRealVar *)pair->second.obs.at(0);

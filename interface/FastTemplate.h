@@ -191,16 +191,18 @@ public:
             this->size_ = other.size_;
             this->values_ = other.values_;
             axis_ = other.axis_;
+          } else {
+            this->CopyValues(other);
           }
-          else this->CopyValues(other);
           return *this;
         }
         FastHisto_t<T,U>& operator=(const TH1 &other) override {
           if ((int)this->size() != other.GetNbinsX()) {
             FastHisto_t<T,U> fh(other);
             swap(fh);
+          } else {
+            this->CopyValues(other);
           }
-          else this->CopyValues(other);
           return *this;
         }
         ~FastHisto_t() override {}
@@ -277,8 +279,9 @@ public:
             this->values_    = other.values_;
             axisX_ = other.axisX_;
             axisY_ = other.axisY_;
+          } else {
+            this->CopyValues(other);
           }
-          else this->CopyValues(other);
           return *this;
         }
         FastHisto2D_t& operator=(const TH1 &other) override {
@@ -288,8 +291,9 @@ public:
           if (int(GetNbinsX()) != other.GetNbinsX() || int(GetNbinsY()) != other.GetNbinsY()) {
             FastHisto2D_t<T,U> fh(static_cast<TH2 const&>(other));
             swap(fh);
+          } else {
+            this->CopyValues(other);
           }
-          else this->CopyValues(other);
           return *this;
         }
         ~FastHisto2D_t() override {}
@@ -376,8 +380,9 @@ public:
             axisX_ = other.axisX_;
             axisY_ = other.axisY_;
             axisZ_ = other.axisZ_;
+          } else {
+            this->CopyValues(other);
           }
-          else this->CopyValues(other);
           return *this;
         }
         FastHisto3D_t<T,U>& operator=(const TH1 &other) override {
@@ -387,8 +392,9 @@ public:
           if (int(GetNbinsX()) != other.GetNbinsX() || int(GetNbinsY()) != other.GetNbinsY() || int(GetNbinsZ()) != other.GetNbinsZ()) {
             FastHisto3D_t<T,U> fh(static_cast<TH3 const&>(other));
             swap(fh);
+          } else {
+            this->CopyValues(other);
           }
-          else this->CopyValues(other);
           return *this;
         }
         ~FastHisto3D_t() override {}

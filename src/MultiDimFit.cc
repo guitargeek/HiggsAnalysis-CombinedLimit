@@ -147,7 +147,9 @@ void MultiDimFit::applyOptions(const boost::program_options::variables_map &vm)
         algo_ = Impact;
         if (vm["floatOtherPOIs"].defaulted()) floatOtherPOIs_ = true;
         if (vm["saveInactivePOI"].defaulted()) saveInactivePOI_ = true;
-    } else throw std::invalid_argument(std::string("Unknown algorithm: "+algo));
+    } else {
+      throw std::invalid_argument(std::string("Unknown algorithm: " + algo));
+    }
     if (pointsRandProf_ > 0) {
         // Probably not the best way of doing this
         // But right now the pointsRandProf_ option relies on saveInactivePOI_ being true to include the profiled POIs in specifiedVars_
@@ -231,8 +233,9 @@ bool MultiDimFit::runSpecific(RooWorkspace *w, RooStats::ModelConfig *mc_s, RooS
                 }
                 RooRealVar *rf = dynamic_cast<RooRealVar*>(rfloat);
                 poiVals_[i] = rf->getVal();//for Singles we store the RooFitResults values
+            } else {
+              poiVals_[i] = poiVars_[i]->getVal();
             }
-            else poiVals_[i] = poiVars_[i]->getVal();
         }
         //if (algo_ != None) {
 	for(unsigned int j=0; j<specifiedNuis_.size(); j++){
@@ -1199,10 +1202,11 @@ void MultiDimFit::saveResult(RooFitResult &res) {
     if (out_ == "none") return;
     const bool longName = runtimedef::get(std::string("longName"));
     std::string mdname(out_+"/multidimfit"+name_);
-    if (longName)
+    if (longName) {
         mdname += "."+massName_+toyName_+"root";
-    else
-        mdname += ".root";
+    } else {
+      mdname += ".root";
+    }
     fitOut.reset(TFile::Open(mdname.c_str(), "RECREATE"));
     fitOut->WriteTObject(&res,"fit_mdf");
     fitOut->cd();

@@ -273,7 +273,9 @@ toymcoptutils::SinglePdfGenInfo::generateCountingAsimov()
         setToExpected(*prod, observables_);
     } else if ((pois = dynamic_cast<RooPoisson *>(pdf_)) != nullptr) {
         setToExpected(*pois, observables_);
-    } else throw std::logic_error("A counting model pdf must be either a RooProdPdf or a RooPoisson");
+    } else {
+      throw std::logic_error("A counting model pdf must be either a RooProdPdf or a RooPoisson");
+    }
     RooDataSet *ret = new RooDataSet(TString::Format("%sData", pdf_->GetName()), "", obs);
     ret->add(obs);
     return ret;
@@ -408,7 +410,9 @@ toymcoptutils::SimPdfGenInfo::generate(RooRealVar *&weightVar, const RooDataSet*
             // toy over-writes the memory of the previous one.
             ret = new RooDataSet(retName, "", observables_, RooFit::Index((RooCategory&)*cat_), RooFit::Link(datasetPieces_) /*, RooFit::OwnLinked()*/);
         }
-    } else ret = pdfs_[0]->generate(protoData, forceEvents);
+    } else {
+      ret = pdfs_[0]->generate(protoData, forceEvents);
+    }
     //std::cout << "Dataset generated from sim pdf (weighted? " << ret->isWeighted() << ")" << std::endl; utils::printRAD(ret);
     return ret;
 }
@@ -445,7 +449,9 @@ toymcoptutils::SimPdfGenInfo::generateAsimov(RooRealVar *&weightVar, int verbose
             // toy over-writes the memory of the previous one.
             ret = new RooDataSet(retName, "", observables_, RooFit::Index((RooCategory&)*cat_), RooFit::Link(datasetPieces_) /*, RooFit::OwnLinked()*/);
         }
-    } else ret = pdfs_[0]->generateAsimov(weightVar,1.,verbose);
+    } else {
+      ret = pdfs_[0]->generateAsimov(weightVar, 1., verbose);
+    }
     //std::cout << "Asimov dataset generated from sim pdf " << pdf_->GetName() << " (sumw? " << ret->sumEntries() << ")" << std::endl; 
     //utils::printRAD(ret);
     return ret;
@@ -482,7 +488,9 @@ toymcoptutils::SimPdfGenInfo::generateEpsilon(RooRealVar *&weightVar)
             // toy over-writes the memory of the previous one.
             ret = new RooDataSet(retName, "", observables_, RooFit::Index((RooCategory&)*cat_), RooFit::Link(datasetPieces_) /*, RooFit::OwnLinked()*/);
         }
-    } else ret = pdfs_[0]->generateAsimov(weightVar, 1e-9);
+    } else {
+      ret = pdfs_[0]->generateAsimov(weightVar, 1e-9);
+    }
     //std::cout << "Asimov dataset generated from sim pdf " << pdf_->GetName() << " (sumw? " << ret->sumEntries() << ")" << std::endl; 
     //utils::printRAD(ret);
     return ret;

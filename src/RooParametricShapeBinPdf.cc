@@ -141,8 +141,9 @@ Double_t RooParametricShapeBinPdf::evaluate() const
   
   if (integral>0.0) {
     return integral;
-  } else return 0;
-
+  } else {
+    return 0;
+  }
 }
 
 // //---------------------------------------------------------------------------

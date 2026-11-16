@@ -94,10 +94,11 @@ void RooMorphingPdf::Init() const {
   for (unsigned i = 0; i < masses_.size(); ++i) {
     FastVerticalInterpHistPdf2* tpdf =
         dynamic_cast<FastVerticalInterpHistPdf2*>(pdfs_.at(i));
-    if (!tpdf)
+    if (!tpdf) {
       throw std::runtime_error(
           "RooMorphingPdf: Supplied pdf is not of type "
           "FastVerticalInterpHistPdf2");
+    }
     tpdf->evaluate();
     if (tpdf->cache().size() != unsigned(morph_axis_.GetNbins())) {
       throw std::runtime_error(
@@ -245,9 +246,9 @@ FastTemplate RooMorphingPdf::morph(FastTemplate const& hist1,
   if (idebug >= 1)
     std::cout << "th1morph - Weights: " << wt1 << " " << wt2 << std::endl;
 
-  if (idebug >= 1)
-    std::cout << "New hist: " << mc_.nbn << " " << mc_.xminn << " " << mc_.xmaxn
-              << std::endl;
+  if (idebug >= 1) {
+    std::cout << "New hist: " << mc_.nbn << " " << mc_.xminn << " " << mc_.xmaxn << std::endl;
+  }
 
   // Treatment for empty histograms: Return an empty histogram
   // with interpolated bins.
@@ -257,9 +258,9 @@ FastTemplate RooMorphingPdf::morph(FastTemplate const& hist1,
             "interpolated histogram returned: " << std::endl;
     return (TH1F("morphed", "morphed", mc_.nbn, mc_.xminn, mc_.xmaxn));
   }
-  if (idebug >= 1)
-    std::cout << "Input histogram content sums: " << hist1.Integral() << " "
-         << hist2.Integral() << std::endl;
+  if (idebug >= 1) {
+    std::cout << "Input histogram content sums: " << hist1.Integral() << " " << hist2.Integral() << std::endl;
+  }
   // *
   // *......Extract the single precision histograms into double precision arrays
   // *      for the interpolation computation. The offset is because sigdis(i)
@@ -395,9 +396,10 @@ FastTemplate RooMorphingPdf::morph(FastTemplate const& hist1,
   // get updated and used in the loop.
   Double_t y = 0;
   while ((ix1 < ix1l) | (ix2 < ix2l)) {
-    if (idebug >= 1)
-      std::cout << "----Top of while with ix1=" << ix1 << ", ix1l=" << ix1l
-           << ", ix2=" << ix2 << ", ix2l=" << ix2l << std::endl;
+    if (idebug >= 1) {
+      std::cout << "----Top of while with ix1=" << ix1 << ", ix1l=" << ix1l << ", ix2=" << ix2 << ", ix2l=" << ix2l
+                << std::endl;
+    }
 
     // .....Increment to the next lowest point. Step up to the next
     //      kink in case there are several empty (flat in the integral)
@@ -488,11 +490,11 @@ FastTemplate RooMorphingPdf::morph(FastTemplate const& hist1,
       }
     }
   }
-  if (idebug >= 3)
+  if (idebug >= 3) {
     for (Int_t i = 0; i < nx3; i++) {
-      std::cout << " nx " << i << " " << xdisn[i] << " " << sigdisn[i]
-                << std::endl;
+      std::cout << " nx " << i << " " << xdisn[i] << " " << sigdisn[i] << std::endl;
     }
+  }
 
   // *......Now we loop over the edges of the bins of the interpolated
   // *      histogram and find out where the interpolated cdf 3
@@ -506,14 +508,14 @@ FastTemplate RooMorphingPdf::morph(FastTemplate const& hist1,
   x = mc_.xmaxn;
   Int_t ix = mc_.nbn;
 
-  if (idebug >= 1)
-    std::cout << "------> Any final bins to set? " << x << " " << xdisn[nx3]
-              << std::endl;
+  if (idebug >= 1) {
+    std::cout << "------> Any final bins to set? " << x << " " << xdisn[nx3] << std::endl;
+  }
   while (x >= xdisn[nx3]) {
     sigdisf[ix] = sigdisn[nx3];
-    if (idebug >= 2)
-      std::cout << "   Setting final bins" << ix << " " << x << " "
-                << sigdisf[ix] << std::endl;
+    if (idebug >= 2) {
+      std::cout << "   Setting final bins" << ix << " " << x << " " << sigdisf[ix] << std::endl;
+    }
     ix = ix - 1;
     x = (*bedgesn)[ix];
   }
@@ -534,9 +536,9 @@ FastTemplate RooMorphingPdf::morph(FastTemplate const& hist1,
     std::cout << "Start setting initial bins at x=" << x << std::endl;
   while (x <= xdisn[0]) {
     sigdisf[ix] = sigdisn[0];
-    if (idebug >= 1)
-      std::cout << "   Setting initial bins " << ix << " " << x << " "
-                << xdisn[1] << " " << sigdisf[ix] << std::endl;
+    if (idebug >= 1) {
+      std::cout << "   Setting initial bins " << ix << " " << x << " " << xdisn[1] << " " << sigdisf[ix] << std::endl;
+    }
     ix = ix + 1;
     x = (*bedgesn)[ix + 1];
   }

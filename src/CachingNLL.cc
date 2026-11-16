@@ -139,16 +139,20 @@ bool cacheutils::ArgSetChecker::changed(bool updateIfChanged) {
         double val = vars_[i]->getVal();
         if (val != vals_[i]) {
             changed = true;
-            if (updateIfChanged) { vals_[i] = val; }
-            else break;
+            if (updateIfChanged) { vals_[i] = val;
+            } else {
+              break;
+            }
         }
     }
     for (std::size_t i = 0; i < cats_.size(); ++i) {
         int val = cats_[i]->getIndex();
         if (val != states_[i]) {
             changed = true;
-            if (updateIfChanged) { states_[i] = val; }
-            else break;
+            if (updateIfChanged) { states_[i] = val;
+            } else {
+              break;
+            }
         }
     }
 

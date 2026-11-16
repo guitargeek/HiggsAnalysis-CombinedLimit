@@ -285,9 +285,9 @@ TH1_t *th1fmorph_(const char *chname,
                        //get updated and used in the loop.
   Double_t y = 0;
   while((ix1 < ix1l) | (ix2 < ix2l)) {
-    if (idebug >= 1 ) cout << "----Top of while with ix1=" << ix1 
-                           << ", ix1l=" << ix1l << ", ix2=" << ix2 
-                           << ", ix2l=" << ix2l << endl;
+    if (idebug >= 1) {
+      cout << "----Top of while with ix1=" << ix1 << ", ix1l=" << ix1l << ", ix2=" << ix2 << ", ix2l=" << ix2l << endl;
+    }
 
     //......Increment to the next lowest point. Step up to the next
     //      kink in case there are several empty (flat in the integral)
@@ -378,8 +378,10 @@ TH1_t *th1fmorph_(const char *chname,
       }
     }
   }
-  if (idebug >=3) for (Int_t i=0;i<nx3;i++) {
-    cout << " nx " << i << " " << xdisn[i] << " " << sigdisn[i] << endl;
+  if (idebug >= 3) {
+    for (Int_t i = 0; i < nx3; i++) {
+      cout << " nx " << i << " " << xdisn[i] << " " << sigdisn[i] << endl;
+    }
   }
 
   // *......Now we loop over the edges of the bins of the interpolated

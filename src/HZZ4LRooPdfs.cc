@@ -2444,11 +2444,15 @@ double RooaDoubleCBxBW::evaluatePowerLaw(double lim, unsigned power, bool isLeft
   double d2 = (isLeft ? BL*sigma + shift - x : -BR*sigma + shift - x)/width;
   double expr1 = (d1-d2)*(d1-d2)  +  1.0;
 
-  if      (power ==  0) return -(atan2(d1 - lim, 1.));
+  if      (power ==  0) { return -(atan2(d1 - lim, 1.));
 
-  else if (power ==  1) return ((2*d2*atan2((d1 - lim),1.) + 2*d1*atan2((-d1 + lim),1.) + 2*log(fabs(-d2 + lim)) - log(d1*d1 + 1.0 - 2*d1*lim + lim*lim))/ (2*expr1));
+  } else if (power ==  1) { return ((2*d2*atan2((d1 - lim),1.) + 2*d1*atan2((-d1 + lim),1.) + 2*log(fabs(-d2 + lim)) - log(d1*d1 + 1.0 - 2*d1*lim + lim*lim))/ (2*expr1));
 
-  else return ( -evaluatePowerLaw(lim, power-2, isLeft) + 2*(d1-d2)*evaluatePowerLaw(lim, power-1, isLeft) - 1.0/((power-1)*pow(lim-d2,power-1)) )  /  expr1;
+  } else {
+    return (-evaluatePowerLaw(lim, power - 2, isLeft) + 2 * (d1 - d2) * evaluatePowerLaw(lim, power - 1, isLeft) -
+            1.0 / ((power - 1) * pow(lim - d2, power - 1))) /
+           expr1;
+  }
 }
 
 double RooaDoubleCBxBW::evaluateVoigtian() const
@@ -2806,9 +2810,13 @@ Double_t RooCPSHighMassGGH::Spline(Double_t xx) const{
        int khig=fNp-1;
        int khalf;
        // Non equidistant knots, binary search
-       while(khig-klow>1)
-         if(xx>fX[khalf=(klow+khig)/2]) klow=khalf;
-         else khig=khalf;
+       while (khig - klow > 1) {
+         if (xx > fX[khalf = (klow + khig) / 2]) {
+           klow = khalf;
+         } else {
+           khig = khalf;
+         }
+       }
      }
    }
    // Evaluate now
@@ -3265,9 +3273,13 @@ Double_t RooCPSHighMassGGHNoInterf::Spline(Double_t xx) const{
        int khig=fNp-1;
        int khalf;
        // Non equidistant knots, binary search
-       while(khig-klow>1)
-         if(xx>fX[khalf=(klow+khig)/2]) klow=khalf;
-         else khig=khalf;
+       while (khig - klow > 1) {
+         if (xx > fX[khalf = (klow + khig) / 2]) {
+           klow = khalf;
+         } else {
+           khig = khalf;
+         }
+       }
      }
    }
    // Evaluate now
@@ -3553,9 +3565,13 @@ Double_t RooCPSHighMassVBF::Spline(Double_t xx) const{
 	int khig=fNp-1;
 	int khalf;
 	// Non equidistant knots, binary search
-	while(khig-klow>1)
-	  if(xx>fX[khalf=(klow+khig)/2]) klow=khalf;
-	  else khig=khalf;
+        while (khig - klow > 1) {
+          if (xx > fX[khalf = (klow + khig) / 2]) {
+            klow = khalf;
+          } else {
+            khig = khalf;
+          }
+        }
       }
     }
     // Evaluate now
@@ -3589,9 +3605,13 @@ Double_t RooCPSHighMassVBF::Spline(Double_t xx) const{
 	int khig=fNp-1;
 	int khalf;
 	// Non equidistant knots, binary search
-	while(khig-klow>1)
-	  if(xx>fX[khalf=(klow+khig)/2]) klow=khalf;
-	  else khig=khalf;
+        while (khig - klow > 1) {
+          if (xx > fX[khalf = (klow + khig) / 2]) {
+            klow = khalf;
+          } else {
+            khig = khalf;
+          }
+        }
       }
     }
     // Evaluate now
@@ -3811,9 +3831,13 @@ Double_t RooCPSHighMassVBFNoInterf::Spline(Double_t xx) const{
 	int khig=fNp-1;
 	int khalf;
 	// Non equidistant knots, binary search
-	while(khig-klow>1)
-	  if(xx>fX[khalf=(klow+khig)/2]) klow=khalf;
-	  else khig=khalf;
+        while (khig - klow > 1) {
+          if (xx > fX[khalf = (klow + khig) / 2]) {
+            klow = khalf;
+          } else {
+            khig = khalf;
+          }
+        }
       }
     }
     // Evaluate now
@@ -3847,9 +3871,13 @@ Double_t RooCPSHighMassVBFNoInterf::Spline(Double_t xx) const{
 	int khig=fNp-1;
 	int khalf;
 	// Non equidistant knots, binary search
-	while(khig-klow>1)
-	  if(xx>fX[khalf=(klow+khig)/2]) klow=khalf;
-	  else khig=khalf;
+        while (khig - klow > 1) {
+          if (xx > fX[khalf = (klow + khig) / 2]) {
+            klow = khalf;
+          } else {
+            khig = khalf;
+          }
+        }
       }
     }
     // Evaluate now
@@ -3965,9 +3993,13 @@ Double_t RooSigPlusInt::Spline(Double_t xx) const{
        int khig=fNp-1;
        int khalf;
        // Non equidistant knots, binary search
-       while(khig-klow>1)
-         if(xx>fX[khalf=(klow+khig)/2]) klow=khalf;
-         else khig=khalf;
+       while (khig - klow > 1) {
+         if (xx > fX[khalf = (klow + khig) / 2]) {
+           klow = khalf;
+         } else {
+           khig = khalf;
+         }
+       }
      }
    }
    // Evaluate now

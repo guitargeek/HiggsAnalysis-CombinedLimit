@@ -1008,10 +1008,11 @@ Double_t RooDoubleCrystalBall::analyticalIntegral(Int_t code, const char* rangeN
   double left_low=x.min(rangeName);
   double left_high=min(x.max(rangeName),mean - alpha1*width);
   if(left_low < left_high){ //is the left tail in range?
-    if(fabs(n1-1.0)>1.e-5)
+    if(fabs(n1-1.0)>1.e-5) {
       left = A1/(-n1+1.0)*width*(pow(B1-(left_low-mean)/width,-n1+1.)-pow(B1-(left_high-mean)/width,-n1+1.));
-    else
-      left = A1*width*(log(B1-(left_low-mean)/width) - log(B1-(left_high-mean)/width) );
+    } else {
+      left = A1 * width * (log(B1 - (left_low - mean) / width) - log(B1 - (left_high - mean) / width));
+    }
   }
  
   //compute right tail;
@@ -1021,10 +1022,11 @@ Double_t RooDoubleCrystalBall::analyticalIntegral(Int_t code, const char* rangeN
   double right_low=max(x.min(rangeName),mean + alpha2*width);
   double right_high=x.max(rangeName);
   if(right_low < right_high){ //is the right tail in range?
-    if(fabs(n2-1.0)>1.e-5)
+    if(fabs(n2-1.0)>1.e-5) {
       right = A2/(-n2+1.0)*width*(pow(B2+(right_high-mean)/width,-n2+1.)-pow(B2+(right_low-mean)/width,-n2+1.));
-    else
-      right = A2*width*(log(B2+(right_high-mean)/width) - log(B2+(right_low-mean)/width) );
+    } else {
+      right = A2 * width * (log(B2 + (right_high - mean) / width) - log(B2 + (right_low - mean) / width));
+    }
   }
      
   return left+central+right;

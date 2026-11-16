@@ -109,7 +109,10 @@ void FitterAlgoBase::applyOptionsBase(const boost::program_options::variables_ma
     std::set<std::string> allowed_nll_options{"combine", "legacy", "cpu", "codegen"};
     if (allowed_nll_options.find(nllbackend) != allowed_nll_options.end()) {
         Combine::nllBackend() = nllbackend;
-    } else throw std::invalid_argument("option 'nllbackend' can only take as values 'combine', 'legacy', 'cpu' and 'codegen' (at least for now)\n");
+    } else {
+      throw std::invalid_argument(
+          "option 'nllbackend' can only take as values 'combine', 'legacy', 'cpu' and 'codegen' (at least for now)\n");
+    }
 
     if (!vm.count("setRobustFitAlgo") || vm["setRobustFitAlgo"].defaulted())  {
        minimizerAlgoForMinos_ = Form("%s,%s",ROOT::Math::MinimizerOptions::DefaultMinimizerType().c_str(), ROOT::Math::MinimizerOptions::DefaultMinimizerAlgo().c_str()); 
@@ -461,7 +464,9 @@ double FitterAlgoBase::findCrossing(CascadeMinimizer &minim, RooAbsReal &nll, Ro
             *allpars = oldparams;
             rStart -= rInc; rInc *= 0.5; 
             continue;
-        } else nfail = 0;
+        } else {
+          nfail = 0;
+        }
         double there = here;
         here = nll.getVal();
         if (verbose > 0) { 

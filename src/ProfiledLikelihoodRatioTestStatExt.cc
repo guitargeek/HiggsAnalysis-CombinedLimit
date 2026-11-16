@@ -372,10 +372,11 @@ bool nllutils::createOrReuseNLL(RooAbsPdf &pdf,
                                 const RooArgSet &nuisances,
                                 std::unique_ptr<RooAbsReal> &nll) {
   if (typeid(pdf) == typeid(RooSimultaneousOpt)) {
-    if (!nll)
+    if (!nll) {
       nll = combineCreateNLL(pdf, data, &nuisances, /*offset=*/false);
-    else
+    } else {
       nll->setData(data, /*cloneData=*/false);
+    }
     return true;
   }
   nll = combineCreateNLL(pdf, data, &nuisances, /*offset=*/false);

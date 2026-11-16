@@ -105,10 +105,11 @@ RooErfPdf::RooErfPdf(const char *name, const char *title,
   width("width","width",this,_width),
   onOff(_onOff)
 { 
-  if (_onOff < 0)
+  if (_onOff < 0) {
     onOff = -1;
-  else
+  } else {
     onOff = 1;
+  }
 } 
 
 
@@ -295,10 +296,11 @@ RooTH1DPdf::RooTH1DPdf(const RooTH1DPdf& other, const char* name) :
 
 Double_t RooTH1DPdf::evaluate() const 
 { 
-  if (interpolate)
+  if (interpolate) {
     return TMath::Max(hist.Interpolate(x), 0.);
-  else
+  } else {
     return TMath::Max(hist.GetBinContent(hist.FindBin(x)), 0.);
+  }
 }
 
 Int_t RooTH1DPdf::getAnalyticalIntegral(RooArgSet& allVars, RooArgSet& analVars, const char* /*rangeName*/) const  
@@ -494,9 +496,9 @@ Double_t RooExpPoly::analyticalIntegral(Int_t code,
   Double_t val(x.max(rangeName) - x.min(rangeName));
   if (coefs.getSize() > 0) {
     coef1 = dynamic_cast<RooAbsReal *>(coefs.at(0))->getVal();
-    if (coef1 != 0.)
-      val = (TMath::Exp(coef1*x.max(rangeName)) -
-	     TMath::Exp(coef1*x.min(rangeName)))/coef1;
+    if (coef1 != 0.) {
+      val = (TMath::Exp(coef1 * x.max(rangeName)) - TMath::Exp(coef1 * x.min(rangeName))) / coef1;
+    }
     if (coefs.getSize() > 1) {
       coef2 = dynamic_cast<RooAbsReal *>(coefs.at(1))->getVal();
       double absrootc2(TMath::Sqrt(TMath::Abs(coef2)));
@@ -542,11 +544,11 @@ RooExpPoly::DoubleComplex_t RooExpPoly::erfi(DoubleComplex_t z) {
   DoubleComplex_t zsq(z*z);
   DoubleComplex_t ret(1,0);
   // std::cout << "z: "; z.Print();
-  if (z.imag() > 5.)
+  if (z.imag() > 5.) {
     ret =  DoubleComplex_t(0., 1.);
-  else if (z.imag() < -5.)
+  } else if (z.imag() < -5.) {
     ret =  DoubleComplex_t(0.,-1.);
-  else {
+  } else {
     // For some reason the replacement function is as follows
     // "[#0] WARN: RooMath::ComplexErrFunc is deprecated, please use RooMath::faddeeva instead."
     DoubleComplex_t w(RooMath::faddeeva(z));

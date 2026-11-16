@@ -156,7 +156,8 @@ std::pair<double,double> BayesianToyMC::priorPredictiveDistribution(RooStats::Mo
     if (constraints.getSize() > 0) {
         nuisancePdf.reset(new RooProdPdf("nuis","",constraints));
         pdf = nonNuisancePdf.get();
-    } else nonNuisancePdf.release();
+    } else { nonNuisancePdf.release();
+}
   }
   std::cout << "Factorized PDF, now creating NLL" << std::endl;
   // create NLL

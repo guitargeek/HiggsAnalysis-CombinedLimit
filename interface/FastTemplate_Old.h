@@ -91,14 +91,18 @@ class FastHisto : public FastTemplate {
                 values_    = other.values_;
                 binWidths_ = other.binWidths_;
                 binEdges_  = other.binEdges_;
-            } else CopyValues(other); 
+            } else {
+              CopyValues(other);
+            }
             return *this; 
         }
         FastHisto & operator=(const TH1 &other) { 
             if (size() != unsigned(other.GetNbinsX())) { 
                 FastHisto fh(other);
                 swap(fh);
-            } else CopyValues(other); 
+            } else {
+              CopyValues(other);
+            }
             return *this;  
         }
         ~FastHisto() {  }
@@ -143,7 +147,9 @@ class FastHisto2D : public FastTemplate {
                 binEdgesY_ = other.binEdgesY_;
                 binX_      = other.binX_;
                 binY_      = other.binY_;
-            } else CopyValues(other); 
+            } else {
+              CopyValues(other);
+            }
             return *this; 
         }
         ~FastHisto2D() {  }
@@ -199,7 +205,9 @@ class FastHisto3D : public FastTemplate {
                 binX_      = other.binX_;
                 binY_      = other.binY_;
                 binZ_      = other.binZ_;
-            } else CopyValues(other); 
+            } else {
+              CopyValues(other);
+            }
             return *this; 
         }
         ~FastHisto3D() {  }

@@ -349,11 +349,19 @@ int RobustHesse::hesse() {
     if (cVars_[i].stencil.size() == 3) {
       cVars_[i].d1coeffs = getFdCoeffs(1, cVars_[i].stencil);
       cVars_[i].d2coeffs = getFdCoeffs(2, cVars_[i].stencil);
-      if (verbosity_ > 0) printf("%-80s %-10.3f %-10.3f %-10.3f | %-10.3f %-10.3f %-10.3f | %-10.3f %-10.3f %-10.3f\n",
-        cVars_[i].v->GetName(), cVars_[i].stencil[0], cVars_[i].stencil[1], cVars_[i].stencil[2],
-        cVars_[i].d1coeffs[0], cVars_[i].d1coeffs[1], cVars_[i].d1coeffs[2],
-        cVars_[i].d2coeffs[0], cVars_[i].d2coeffs[1], cVars_[i].d2coeffs[2]
-        );
+      if (verbosity_ > 0) {
+        printf("%-80s %-10.3f %-10.3f %-10.3f | %-10.3f %-10.3f %-10.3f | %-10.3f %-10.3f %-10.3f\n",
+               cVars_[i].v->GetName(),
+               cVars_[i].stencil[0],
+               cVars_[i].stencil[1],
+               cVars_[i].stencil[2],
+               cVars_[i].d1coeffs[0],
+               cVars_[i].d1coeffs[1],
+               cVars_[i].d1coeffs[2],
+               cVars_[i].d2coeffs[0],
+               cVars_[i].d2coeffs[1],
+               cVars_[i].d2coeffs[2]);
+      }
     }
   }
 

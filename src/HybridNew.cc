@@ -347,10 +347,11 @@ void HybridNew::validateOptions() {
     if (reportPVal_ && workingMode_ != MakeSignificance) throw std::invalid_argument("HybridNew: option --pvalue must go together with --significance");
     if (rAbsAccuracy_ < 0 || rRelAccuracy_ < 0)
       throw std::invalid_argument("HybridNew: rAbsAcc and rRelAcc must not be negative");
-    if (rAbsAccuracy_ == 0 && rRelAccuracy_ == 0)
+    if (rAbsAccuracy_ == 0 && rRelAccuracy_ == 0) {
       throw std::invalid_argument(
           "HybridNew: rAbsAcc and rRelAcc cannot both be zero, since a zero switches off that accuracy requirement and "
           "the search would have nothing left to converge to");
+    }
 }
 
 void HybridNew::setupPOI(RooStats::ModelConfig *mc_s) {
@@ -497,7 +498,10 @@ bool HybridNew::runLimit(RooWorkspace *w, RooStats::ModelConfig *mc_s, RooStats:
         } else {
             updateGridData(w, mc_s, mc_b, data, !fullGrid_, clsTarget);
         }
-      } else throw std::logic_error("When setting a limit reading results from file, a grid file must be specified with option --grid");
+      } else {
+        throw std::logic_error(
+            "When setting a limit reading results from file, a grid file must be specified with option --grid");
+      }
       if (grid_.size() <= 1) throw std::logic_error("The grid must contain at least 2 points.");
 
       useGrid();
@@ -523,12 +527,13 @@ bool HybridNew::runLimit(RooWorkspace *w, RooStats::ModelConfig *mc_s, RooStats:
       expoFit.SetRange(rMin,rMax);
 
       if (limitErr < limitAccuracy(limit) && (!doFC_)) {  // need to look for intervals for FC
-        if (verbose > 1)
+        if (verbose > 1) {
           CombineLogger::instance().log(
               "HybridNew.cc",
               __LINE__,
               std::string(Form("  reached accuracy %6.4f below %6.4f ", limitErr, limitAccuracy(limit))),
               __func__);
+        }
         done = true;
       }
   } else {
@@ -587,12 +592,13 @@ bool HybridNew::runLimit(RooWorkspace *w, RooStats::ModelConfig *mc_s, RooStats:
 
           // exit if reached accuracy on r
           if (limitErr < limitAccuracy(limit)) {
-            if (verbose > 1)
+            if (verbose > 1) {
               CombineLogger::instance().log(
                   "HybridNew.cc",
                   __LINE__,
                   std::string(Form("Reached accuracy %6.4f below %6.4f.", limitErr, limitAccuracy(limit))),
                   __func__);
+            }
             done = true;
             break;
           }
@@ -653,18 +659,29 @@ bool HybridNew::runLimit(RooWorkspace *w, RooStats::ModelConfig *mc_s, RooStats:
 		CombineLogger::instance().log("HybridNew.cc",__LINE__,std::string(Form("found %g %% confidence regions",100*cl)),__func__);
 		for (unsigned int ib=0;ib<=points.size()-2;ib+=2){
 			
-			if ( ib==0 && points[ib].second < 0 ) // in this case, we are on a 1-sided limit to the left 
+			if ( ib==0 && points[ib].second < 0 ) { // in this case, we are on a 1-sided limit to the left 
 				CombineLogger::instance().log("HybridNew.cc",__LINE__,std::string(Form(" %s < %g (+/- %g) ",r->GetName(), points[ib+1].first,points[ib+1].second)),__func__);
-			else if ( ib==points.size()-2 && points[ib+1].second < 0 ) // in this case, we are on a 1-sided limit to the right
+			} else if ( ib==points.size()-2 && points[ib+1].second < 0 ) { // in this case, we are on a 1-sided limit to the right
 				CombineLogger::instance().log("HybridNew.cc",__LINE__,std::string(Form(" %s > %g (+/- %g) ",r->GetName(), points[ib].first,points[ib].second)),__func__);
 
-			else CombineLogger::instance().log("HybridNew.cc",__LINE__,std::string(Form("  %g (+/- %g) < %s < %g (+/- %g) ",points[ib].first,points[ib].second,r->GetName(),points[ib+1].first, points[ib+1].second)),__func__);
+                        } else {
+                          CombineLogger::instance().log("HybridNew.cc",
+                                                        __LINE__,
+                                                        std::string(Form("  %g (+/- %g) < %s < %g (+/- %g) ",
+                                                                         points[ib].first,
+                                                                         points[ib].second,
+                                                                         r->GetName(),
+                                                                         points[ib + 1].first,
+                                                                         points[ib + 1].second)),
+                                                        __func__);
+                        }
 
-			// Commit points to limit tree
+                        // Commit points to limit tree
 			if (points[ib].second>0) {
 				limit = points[ib].first; limitErr = points[ib].second; Combine::commitPoint(false, clsTarget);
 				limit = points[ib+1].first; limitErr = points[ib+1].second; Combine::commitPoint(false, clsTarget);
-			} else limit = points[ib+1].first; limitErr = points[ib+1].second; Combine::commitPoint(false, clsTarget);
+			} else { limit = points[ib+1].first; 
+}limitErr = points[ib+1].second; Combine::commitPoint(false, clsTarget);
 		}
 	}
       } else {
@@ -1660,7 +1677,9 @@ void HybridNew::readGrid(TDirectory *toyDir, double rMin, double rMax) {
             //std::cout << "HybridNew::readGrid: HypoTestResult with non-conformant name " << name << " will be skipped" << std::endl;
     	    CombineLogger::instance().log("HybridNew.cc",__LINE__,std::string(Form("[WARNING] HypoTestResult with non-conformant name %s found when reading grid, it will be skipped",k->GetName())),__func__);
             continue;
-        } else continue;
+        } else {
+          continue;
+        }
         double rVal = atof(name.Data());
         if (rVal < rMin || rVal > rMax) continue;
         if (verbose > 2) std::cout << "  Do " << k->GetName() << " -> " << name << " --> " << rVal << std::endl;
@@ -1735,8 +1754,10 @@ void HybridNew::updateGridData(RooWorkspace *w, RooStats::ModelConfig *mc_s, Roo
             if (values[i].first < -2) {
                 if (verbose > 1) std::cout << "   Updating point " << i << " (r " << points[i]->first << ")" << std::endl;
                 updateGridPoint(w, mc_s, mc_b, data, points[i]);
+            } else if (verbose > 1) {
+              std::cout << "   Point " << i << " (r " << points[i]->first << ") was already updated during search."
+                        << std::endl;
             }
-            else if (verbose > 1) std::cout << "   Point " << i << " (r " << points[i]->first << ") was already updated during search." << std::endl;
         }
         for (int i = iMax+1, n = points.size(); i < n; ++i) {
             points[i]->second->SetBit(1);
@@ -1881,8 +1902,10 @@ std::vector<std::pair<double,double> > HybridNew::findIntervalsFromSplines(TGrap
 			previousCross = pti+1;
 			//points.push_back(std::pair<double,double>(val,0));
 
-		} else previousCross=pti;
-	}
+                } else {
+                  previousCross = pti;
+                }
+        }
 
 	if (limitPlot_->GetY()[0] > clsTarget) 		     points.push_back(std::pair<double,double>(limitPlot_->GetX()[0],-1));
 	if (limitPlot_->GetY()[npoints_plot-1] > clsTarget)  points.push_back(std::pair<double,double>(limitPlot_->GetX()[npoints_plot-1],-1));

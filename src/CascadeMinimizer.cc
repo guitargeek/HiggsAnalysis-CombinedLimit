@@ -939,8 +939,10 @@ void CascadeMinimizer::applyOptions(const boost::program_options::variables_map 
 		    std::map<std::string,std::vector<std::string> >::const_iterator ft = minimizerAlgoMap_.find(type);
 		    if (ft!=minimizerAlgoMap_.end()){
 		      algo     = (ft->second)[0];
-		    } else algo = std::string(defaultMinimizerAlgo_);
-		    
+                    } else {
+                      algo = std::string(defaultMinimizerAlgo_);
+                    }
+
                 } else {
                     // otherwise, it could be Name,subname,strategy
 		    std::vector<std::string> configs = Utils::split(algo,",");

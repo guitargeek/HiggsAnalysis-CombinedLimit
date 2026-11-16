@@ -24,17 +24,17 @@ inline double my_inv(double x) { return 1. / x; }
 namespace gbrmath {
 
   inline double fast_pow(double base, double exponent) {
-    if (base == 0. && exponent > 0.)
+    if (base == 0. && exponent > 0.) {
       return 0.;
+    }
+    if (base > 0.) {
 #ifdef COMBINE_NO_VDT
-    else if (base > 0.)
       return std::exp(exponent * std::log(base));
 #else
-    else if (base > 0.)
       return vdt::fast_exp(exponent * vdt::fast_log(base));
 #endif
-    else
-      return std::nan("");
+    }
+    return std::nan("");
   }
 
   //   inline float fast_powf(float base, float exponent) {
