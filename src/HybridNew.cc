@@ -1177,6 +1177,7 @@ std::unique_ptr<RooStats::HybridCalculator> HybridNew::create(RooWorkspace *w, R
 
 	std::vector<float>scaleAndConfidences;
   	std::vector<std::string> scaleAndConfidencesList = Utils::split(scaleAndConfidenceSelection_ , ",");
+	scaleAndConfidences.reserve(scaleAndConfidencesList.size());
 
   	for (UInt_t p = 0; p < scaleAndConfidencesList.size(); ++p) {
 

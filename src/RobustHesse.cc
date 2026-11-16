@@ -282,6 +282,7 @@ std::vector<double> RobustHesse::getFdCoeffs(unsigned n, std::vector<double> con
   TMatrixD smatrix2 = smatrix;
   smatrix2.Invert();
   TVectorD res = (smatrix2 * dvec);
+  result.reserve(N);
   for (unsigned i = 0; i < N; ++i) {
     result.push_back(res[i]);
   }
